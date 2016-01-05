@@ -9,7 +9,7 @@ import org.objectweb.asm.util.TraceClassVisitor;
 
 public class FirstASM {
 	public static String myField = "Hello World!";
-	public static void main(String args) throws IOException{
+	public static void main(String[] args) throws IOException{
 		ClassReader reader = new ClassReader("java.lang.String");
 		
 		ClassVisitor visitor = new TraceClassVisitor(
