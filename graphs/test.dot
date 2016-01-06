@@ -1,26 +1,37 @@
-digraph G {
+digraph G{
+fontname = "Bitstream Vera Sans"
+fontsize = 8
+node [
         fontname = "Bitstream Vera Sans"
         fontsize = 8
+        shape = "record"
+]
+edge [
+        fontname = "Bitstream Vera Sans"
+        fontsize = 8
+]
+ClassFieldVisitor [ 
+    label="{ClassFieldVisitor| | +\<init\>: void\l+visitField: org.objectweb.asm.FieldVisitor\l}"]
 
-        node [
-                fontname = "Bitstream Vera Sans"
-                fontsize = 8
-                shape = "record"
-        ]
+ClassMethodVisitor [ 
+    label="{ClassMethodVisitor| | +\<init\>: void\l+\<init\>: void\l+visitMethod: org.objectweb.asm.MethodVisitor\l}"]
 
-        edge [
-                fontname = "Bitstream Vera Sans"
-                fontsize = 8
-        ]
+ClassPrototype [ 
+    label="{ClassPrototype|-name: Ljava/lang/String; \l -accessModifiers: [Ljava/lang/String; \l  | +\<init\>: void\l}"]
 
-        Animal [
-                label = "{Animal|+ name : string\l+ age : int\l|+ die() : void\l}"
-        ]
-        
-        Animal2 [
-                label = "{Animal2|+ name : string\l+ age : int\l|+ die() : void\l}"
-        ]
-        
-        Animal -> Animal2
-        Animal -> Animal3 [label = "{lololol|oolollo}"]
+ClassVisitorBuffered [ 
+    label="{ClassVisitorBuffered|buf: Ljava/lang/StringBuffer; \l  | +\<init\>: void\l+\<init\>: void\l+\<init\>: void\l+getAccessModifier: java.lang.String\l}"]
+
+FirstASM [ 
+    label="{FirstASM|+myField: Ljava/lang/String; \l  | \<clinit\>: void\l+\<init\>: void\l+main: void\l+getClassDetails: void\l+listClaases: java.util.HashMap\l}"]
+
+ClassDeclarationVisitor [ 
+    label="{ClassDeclarationVisitor| | +\<init\>: void\l+\<init\>: void\l+visit: void\l}"]
+
+DesignParser [ 
+    label="{DesignParser| | +\<init\>: void\l+main: void\l}"]
+
+UMLMaker [ 
+    label="{UMLMaker| | +\<init\>: void\l+main: void\l}"]
+
 }

@@ -19,29 +19,46 @@ public class FirstASM {
 //		ClassVisitor visitor = new TraceClassVisitor(
 //				new PrintWriter(System.out));
 //		reader.accept(visitor, ClassReader.EXPAND_FRAMES);
-		
+		StringBuffer buf = new StringBuffer();
+		buf.append("digraph G{\n" +
+				"fontname = \"Bitstream Vera Sans\"\n"+
+        "fontsize = 8\n" +
+        "node [\n"+
+        "        fontname = \"Bitstream Vera Sans\"\n"+
+        "        fontsize = 8\n"+
+        "        shape = \"record\"\n"+
+        "]\n"+
+        "edge [\n"+
+        "        fontname = \"Bitstream Vera Sans\"\n"+
+        "        fontsize = 8\n"+
+        "]\n");
 		File packageToUML = new File("./src/src");
 		HashMap<String, Boolean> listOfClasses = listClaases(packageToUML);
 		Iterator iter = listOfClasses.entrySet().iterator();
 		while(iter.hasNext()){
-			getClassDetails(iter.next().toString().split("=")[0]);
-			iter.remove();
+			getClassDetails(iter.next().toString().split("=")[0], buf);
 		}
+		buf.append("}");
+		System.out.println(buf.toString());
 	}
 	
-	public static void getClassDetails(String className) throws IOException{
+	public static void getClassDetails(String className, StringBuffer buf) throws IOException{
 		ClassReader reader = new ClassReader("src." + className);
-		StringBuffer buf = new StringBuffer();
+		
+		
 		
 		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, buf);
 		
 		ClassVisitorBuffered fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor);
+		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
+		buf.append(" | ");
 		
-		ClassVisitorBuffered methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor);
+		ClassVisitorBuffered methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, buf);
 		
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+		buf.append("}\"]");
+		buf.append("\n\n");
 		
-		System.out.println(buf.toString());
 	}
 	
 	public static HashMap<String, Boolean> listClaases(final File folder){

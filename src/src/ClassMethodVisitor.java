@@ -15,6 +15,10 @@ public class ClassMethodVisitor extends ClassVisitorBuffered {
 		super(arg0, arg1);
 		this.buf = arg1.buf;
 	}
+	public ClassMethodVisitor(int arg0, StringBuffer buf){
+		super(arg0);
+		this.buf = buf;
+	}
 	
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, 
 			String[] exceptions){
@@ -27,7 +31,7 @@ public class ClassMethodVisitor extends ClassVisitorBuffered {
 		
 		String symbol= getAccessModifier(access);
 		
-		this.buf.append("   method    "+symbol+name+"  "+Arrays.toString(classNames)+ " "+ Type.getReturnType(desc).getClassName() + "\n" );
+		this.buf.append(symbol + name.replace("<", "\\<").replace(">", "\\>") + "(): " + Type.getReturnType(desc).getClassName() + '\\' + 'l' );
 		
 		return toDecorate;
 	}
