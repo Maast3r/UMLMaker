@@ -1,3 +1,4 @@
+package src;
 
 
 import java.io.IOException;
@@ -11,11 +12,11 @@ public class DesignParser {
 		for(String className: args){
 			ClassReader reader = new ClassReader(className);
 			
-			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5);
+			ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5);
 			
-			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor);
+			ClassVisitorBuffered fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor);
 			
-			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor);
+			ClassVisitorBuffered methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor);
 			
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		}

@@ -1,3 +1,4 @@
+package src;
 
 
 import java.util.Arrays;
@@ -8,10 +9,11 @@ import org.objectweb.asm.Type;
 
 import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
-public class ClassMethodVisitor extends ClassVisitor {
+public class ClassMethodVisitor extends ClassVisitorBuffered {
 
-	public ClassMethodVisitor(int arg0, ClassVisitor arg1) {
+	public ClassMethodVisitor(int arg0, ClassVisitorBuffered arg1) {
 		super(arg0, arg1);
+		this.buf = arg1.buf;
 	}
 	
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, 
@@ -22,12 +24,19 @@ public class ClassMethodVisitor extends ClassVisitor {
 		for(int i=0; i<argTypes.length; i++){
 			classNames[i] = argTypes[i].getClassName();
 		}
+		
 		String symbol="";
 		if((access & Opcodes.ACC_PUBLIC) !=0){
 			symbol="+";
 		}
+		if((access & Opcodes.ACC_PRIVATE) !=0){
+			symbol="-";
+		}
+		if((access & Opcodes.ACC_PROTECTED) !=0){
+			symbol="#";
+		}
 		
-		System.out.println("   method    "+symbol+name+"  "+Arrays.toString(classNames)+ " "+ Type.getReturnType(desc).getClassName());
+		this.buf.append("   method    "+symbol+name+"  "+Arrays.toString(classNames)+ " "+ Type.getReturnType(desc).getClassName() + "\n" );
 		
 		return toDecorate;
 	}

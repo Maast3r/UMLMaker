@@ -1,3 +1,4 @@
+package src;
 
 public class UMLMaker {
 	public static void main(String[] args) {
