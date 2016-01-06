@@ -15,9 +15,22 @@ import org.objectweb.asm.Opcodes;
 public class FirstASM {
 	public static String myField = "Hello World!";
 	public static void main(String[] args) throws IOException{
-		ClassReader reader = new ClassReader("testPackage.TestClass");
 		
-		HashMap<String, Boolean> classNames = new HashMap<String, Boolean>();
+//		ClassVisitor visitor = new TraceClassVisitor(
+//				new PrintWriter(System.out));
+//		reader.accept(visitor, ClassReader.EXPAND_FRAMES);
+		
+		File packageToUML = new File("./src/src");
+		HashMap<String, Boolean> listOfClasses = listClaases(packageToUML);
+		Iterator iter = listOfClasses.entrySet().iterator();
+		while(iter.hasNext()){
+			getClassDetails(iter.next().toString().split("=")[0]);
+			iter.remove();
+		}
+	}
+	
+	public static void getClassDetails(String className) throws IOException{
+		ClassReader reader = new ClassReader("src." + className);
 		StringBuffer buf = new StringBuffer();
 		
 		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, buf);
@@ -27,21 +40,8 @@ public class FirstASM {
 		ClassVisitorBuffered methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor);
 		
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+		
 		System.out.println(buf.toString());
-
-		
-//		ClassVisitor visitor = new TraceClassVisitor(
-//				new PrintWriter(System.out));
-//		reader.accept(visitor, ClassReader.EXPAND_FRAMES);
-		
-		File packageToUML = new File("./src/testPackage");
-		HashMap<String, Boolean> listOfClasses = listClaases(packageToUML);
-		Iterator iter = listOfClasses.entrySet().iterator();
-		while(iter.hasNext()){
-			System.out.println("why: " + iter.next().toString());
-			iter.remove();
-		}
-		System.out.println("test " + listOfClasses.toString());
 	}
 	
 	public static HashMap<String, Boolean> listClaases(final File folder){

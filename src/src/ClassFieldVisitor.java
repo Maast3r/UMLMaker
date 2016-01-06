@@ -22,7 +22,7 @@ public class ClassFieldVisitor extends ClassVisitorBuffered {
 		
 		String symbol= getAccessModifier(access);
 		
-		buf.append("    " + symbol + " " + desc +" "+ name + "\n");
+		buf.append("   field  " + symbol + " " + desc +" "+ name + "\n");
 		return toDecorate;
 	}
 }
