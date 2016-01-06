@@ -2,6 +2,8 @@ package src;
 
 import org.objectweb.asm.ClassVisitor;
 
+import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
+
 public class ClassVisitorBuffered extends ClassVisitor{
 
 	StringBuffer buf;
@@ -15,6 +17,20 @@ public class ClassVisitorBuffered extends ClassVisitor{
 	}
 	public ClassVisitorBuffered(int arg0, ClassVisitor cv){
 		super(arg0, cv);
+	}
+	
+	public String getAccessModifier(int access){
+		String accessModifier = "";
+		if((access & Opcodes.ACC_PUBLIC) !=0){
+			accessModifier="+";
+		}
+		if((access & Opcodes.ACC_PRIVATE) !=0){
+			accessModifier="-";
+		}
+		if((access & Opcodes.ACC_PROTECTED) !=0){
+			accessModifier="#";
+		}
+		return accessModifier;
 	}
 	
 }

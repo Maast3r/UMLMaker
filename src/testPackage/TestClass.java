@@ -4,6 +4,7 @@ import src.ClassFieldVisitor;
 
 
 public class TestClass extends ClassFieldVisitor{
+	private int nathanHatesFields;
 	public TestClass(int api, ClassVisitor cv){
 		super(api, cv);
 	}

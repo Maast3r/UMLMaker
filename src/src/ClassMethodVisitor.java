@@ -25,16 +25,7 @@ public class ClassMethodVisitor extends ClassVisitorBuffered {
 			classNames[i] = argTypes[i].getClassName();
 		}
 		
-		String symbol="";
-		if((access & Opcodes.ACC_PUBLIC) !=0){
-			symbol="+";
-		}
-		if((access & Opcodes.ACC_PRIVATE) !=0){
-			symbol="-";
-		}
-		if((access & Opcodes.ACC_PROTECTED) !=0){
-			symbol="#";
-		}
+		String symbol= getAccessModifier(access);
 		
 		this.buf.append("   method    "+symbol+name+"  "+Arrays.toString(classNames)+ " "+ Type.getReturnType(desc).getClassName() + "\n" );
 		

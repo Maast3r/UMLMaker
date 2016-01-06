@@ -6,6 +6,7 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Type;
 
 import com.sun.org.glassfish.gmbal.Description;
+import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
 public class ClassFieldVisitor extends ClassVisitorBuffered {
 
@@ -18,7 +19,10 @@ public class ClassFieldVisitor extends ClassVisitorBuffered {
 			Object value){
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		String type = Type.getType(desc).getClassName();
-		buf.append("    "+desc+" "+name + "\n");
+		
+		String symbol= getAccessModifier(access);
+		
+		buf.append("    " + symbol + " " + desc +" "+ name + "\n");
 		return toDecorate;
 	}
 }
