@@ -27,6 +27,7 @@ Nathan:
 - Helped with edge generation
 - Hand tested formatting of GraphViz
 - Lots of debugging of GraphViz formatting
+
 Sean:
 - Created UML diagrams for 1-3 and UMLMaker code
 - Added formatting for edges
