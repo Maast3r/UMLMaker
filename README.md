@@ -22,10 +22,9 @@ Sean:
 
 
 #INSTRUCTIONS:
-FirstASM.java is the main class, so to use our UMLMaker, you need to set the path and package of your code in main(String[] args). Once the path and package variables are set, simply just run our project to create a .dot file, named "output.dot". This is the file that will generate the UML diagram. Now, cd to the UMLMaker folder (using PowerShell, Terminal, Command Line, etc.) and run "dot -T png -o [package name].png [package name].dot". This will generate a .png file called "output.png", and simply open [package name].png to view your UML Diagram.
+FirstASM.java is the main class, so to use our UMLMaker, you need to set the path and package of your code in main(String[] args). Once the path and package variables are set, simply just run our project. This will generate a .png file called "[package name].png", and simply open [package name].png to view your UML Diagram.
 <br /><br />
 INSTRUCTIONS AS A LIST
 - Set the path and package variables in FirstASM.java's main method
 - Run the Java Project
-- cd to UMLMaker using PowerShell(or equivalent) and run "dot -T png -o [package name].png [package name].dot"
-- Open [package name].png
+- Open [package name].png that was generated
