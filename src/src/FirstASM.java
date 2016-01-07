@@ -20,8 +20,8 @@ public class FirstASM {
 	public static void main(String[] args) throws IOException {
 		// ////////////////////////////////////////////////////////
 		// Set these two variables to generate UML for an arbitrary project
-		String path = "./src/src";
-		String pkg = "src.";
+		String path = "./src/target";
+		String pkg = "target.";
 		// ////////////////////////////////////////////////////////
 
 		StringBuffer buf = new StringBuffer();
@@ -32,6 +32,7 @@ public class FirstASM {
 				+ font + "]\n");
 
 		File packageToUML = new File(path);
+		System.out.println(packageToUML.getAbsolutePath());
 		HashMap<String, Boolean> listOfClasses = listClasses(packageToUML);
 		ArrayList<String> inheritancePairs = new ArrayList<String>();
 		Iterator iter = listOfClasses.entrySet().iterator();
@@ -62,6 +63,7 @@ public class FirstASM {
 
 	public static void getClassDetails(String pkg, String className,
 			StringBuffer buf) throws IOException {
+		
 		ClassReader reader = new ClassReader(pkg + className);
 
 		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(
