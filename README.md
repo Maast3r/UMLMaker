@@ -27,7 +27,7 @@ Nathan:
 - Helped with edge generation
 - Hand tested formatting of GraphViz
 - Lots of debugging of GraphViz formatting
-
+<br />
 Sean:
 - Created UML diagrams for 1-3 and UMLMaker code
 - Added formatting for edges
@@ -36,9 +36,10 @@ Sean:
 
 
 #INSTRUCTIONS:
-FirstASM.java is the main class, so to use our UMLMaker, you need to set the path and package of your code in main(String[] args). Once the path and package variables are set, simply just run our project. This will generate a .png file called "[package name].png", and simply open [package name].png to view your UML Diagram.
+FirstASM.java is the main class, so to use our UMLMaker, you need to set the path and package of your code in main(String[] args). Once the path and package variables are set, simply just run our project. This will generate a .png file called "target.png", and simply open target.png to view your UML Diagram.
 <br /><br />
 INSTRUCTIONS AS A LIST
-- Set the path and package variables in FirstASM.java's main method
+- Remove all files (if there are any) in the "target" package
+- Copy and Paste all files you want a UML Diagram of into the "target" package
 - Run the Java Project
-- Open [package name].png that was generated
+- Open target.png that was generated
