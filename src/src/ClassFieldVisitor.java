@@ -19,10 +19,13 @@ public class ClassFieldVisitor extends ClassVisitorBuffered {
 			Object value){
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		String type = Type.getType(desc).getClassName();
-		
+		if(type.contains(".")){
+			String[] temparray = type.split("\\.");
+			type = temparray[temparray.length - 1];
+		}
 		String symbol= getAccessModifier(access);
 		
-		buf.append(symbol + name + ": "+ desc + " \\l ");
+		buf.append(symbol + name + ": "+ type + " \\l");
 		return toDecorate;
 	}
 }
