@@ -47,6 +47,7 @@ Sean:
 - Automated execution of dot program, may implement automated opening later
 - Added unit tests for each of the Visitor methods
 - Updated README for Milestone 1 and 2
+- Created unit tests for uses, inheritance, and assocations visitors
 
 
 #INSTRUCTIONS:
