@@ -42,7 +42,7 @@ public class TestClassInheritanceVisitor {
 		while (iter.hasNext()) {
 			String temp = iter.next().toString().split("=")[0];
 //			FirstASM.getClassDetails(pkg, temp, buf);
-			inheritancePairs.addAll(FirstASM.getInheritance(pkg, temp));
+			inheritancePairs.addAll(FirstASM.getAssociation(pkg, temp, "inheritance"));
 		}
 
 		for (int i = 0; i < inheritancePairs.size(); i++) {

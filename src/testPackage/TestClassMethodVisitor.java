@@ -9,8 +9,8 @@ import org.objectweb.asm.Opcodes;
 
 import src.ClassDeclarationVisitor;
 import src.ClassFieldVisitor;
-import src.ClassMethodVisitor;
 import src.ClassVisitorBuffered;
+import src.DotMethodVisitor;
 
 public class TestClassMethodVisitor {
 
@@ -32,7 +32,7 @@ public class TestClassMethodVisitor {
 //		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
 //		buf.append(" | ");
 
-		ClassVisitorBuffered methodVisitor = new ClassMethodVisitor(
+		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
 				Opcodes.ASM5, buf);
 
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
