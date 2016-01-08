@@ -17,6 +17,8 @@ One design choice that we consciously made was to keep pointers(extends, impleme
 Milestone 2
 <br /><br />
 After careful consideration, we decided to add the Strategy Pattern to our design. This will promote better scalability so that our project can process files other than .dot files. Our visitors all inherent from a super class, and using the Strategy Pattern we simply point to the superclass of each visitor. Doing this also allowed us create specialized reference arrows between classes in our UML diagrams, such as "uses", "implements", and "association". 
+<br /><br />
+We realized after further evaluation that the design choice we made in Milestone 1 (keeping pointers to built-in Java classes) was not a good idea once the scale of the package got too large. Therefore, we removed them from the UML document builder.
 
 #Who Did What
 Andrew:
