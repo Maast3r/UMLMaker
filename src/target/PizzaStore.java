@@ -1,8 +1,8 @@
-package headfirst.factory.pizzaaf;
+package headfirst.factory.pizzafm;
 
 public abstract class PizzaStore {
  
-	protected abstract Pizza createPizza(String item);
+	abstract Pizza createPizza(String item);
  
 	public Pizza orderPizza(String type) {
 		Pizza pizza = createPizza(type);

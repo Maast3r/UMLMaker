@@ -18,7 +18,7 @@ import org.objectweb.asm.Opcodes;
 public class FirstASM {
 	private static String font = "\tfontname = \"Comic Sans\"\n"
 								+"\tfontsize = 16\n";
-	private static String[] associationTypes = {"Inheritance", "Uses"};//,"Association"};
+	private static String[] associationTypes = {"Inheritance", "Uses", "Association"};//,"Association"};
 	private static HashMap<String, Boolean> listOfClasses;
 	public static void main(String[] args) throws IOException {
 		// ////////////////////////////////////////////////////////
@@ -128,12 +128,12 @@ public class FirstASM {
 			e.printStackTrace();
 		}
     	
-    	if(association == "association"){
-    		result = dotInheritanceHandler(buf);
+    	if(association.equals("association")){
+    		result = dotAssociationHandler(className, buf);
     	} else if(association.equals("inheritance")){
-    		
+    		result = dotInheritanceHandler(buf);
     	} else if(association.equals("uses")){
-    		result = dotUsesHandler(buf);
+    		result = dotUsesHandler(className, buf);
     	}
     	
     	return result;
@@ -154,47 +154,82 @@ public class FirstASM {
 				int len = s.split("/").length;
 				s = s.split("/")[len -1 ];
 			}
-			if(!s.equals(""))result.add(name + "@" + s);
+			if(listOfClasses.get(s) != null){
+				if(!s.equals(""))result.add(name + "@" + s);
+		
+			}
 		}
 		if(extendName.contains("/")){
 			int len = extendName.split("/").length;
 			extendName = extendName.split("/")[len -1 ];
 		}
-		result.add(name + "!" + extendName);
+		if(listOfClasses.get(extendName) != null){
+			result.add(name + "!" + extendName);
+		}
 		return result;
 		
 	}
 	
-	public static ArrayList<String> dotUsesHandler(StringBuffer buf){
-		System.out.println("This is getting called");
+	public static ArrayList<String> dotAssociationHandler(String className, StringBuffer buf){
 		ArrayList<String> result = new ArrayList<String>();
-		String name = buf.toString().split(":")[0];
-		String argStuff = buf.toString().split(":")[1];
-//		String implementStuff = argStuff.split("#")[1].replace("[","").replace("]","");
-		String[] args= argStuff.split(", ");
+		String name = className;
+		String[] lines = buf.toString().split("\n");
+		
+		
 		if(name.contains("/")){
 			int len = name.split("/").length;
 			name = name.split("/")[len -1 ];
 		}
 		
-		// TODO: Implement hash map of class stuff
-		
-		for(String s : args){
-			System.out.println("      " + s);
-			if(s.equals("")){
-				continue;
-			}
-			if(listOfClasses.get(s) != null){
-				System.out.println("YAY " + s );
-			}
+		for(String s : lines){
+//		System.out.println(name + ":" + s);
 			if(s.contains("/")){
 				int len = s.split("/").length;
 				s = s.split("/")[len -1 ];
 			}
-			if(!s.equals("")) result.add(name + "@" + s);
+			if(listOfClasses.get(s) != null){
+				if(!s.equals(""))result.add(name + "$" + s);
+		
+			}
 		}
+		return result;
 		
+	}
+	
+	public static ArrayList<String> dotUsesHandler(String className, StringBuffer buf){
+//		System.out.println("This is getting called");
+		ArrayList<String> result = new ArrayList<String>();
+		String name = className;
 		
+		String[] lines = buf.toString().split("\n");
+//		System.out.println("Name: " + name);
+		for(String line: lines){
+			
+			String argStuff = line.split(":")[1];
+		//		String implementStuff = argStuff.split("#")[1].replace("[","").replace("]","");
+			String[] args= argStuff.split(", ");
+			if(name.contains("/")){
+				int len = name.split("/").length;
+				name = name.split("/")[len -1 ];
+			}
+			// TODO: Implement hash map of class stuff
+		//		System.out.println(listOfClasses.toString());
+			for(String s : args){
+//				System.out.println("Arg:      " + s);
+				if(s.equals("")){
+					continue;
+				}
+//				System.out.println("Map result for " + s + "# " + listOfClasses.get(s));
+				if(s.contains("/")){
+					int len = s.split("/").length;
+					s = s.split("/")[len -1 ];
+				}
+				if(listOfClasses.get(s) != null){
+//					System.out.println("YAY " + s );
+					if(!s.equals("")) result.add(name + "#" + s);
+				}
+			}
+		}
 		
 		
 		return result;
@@ -203,14 +238,14 @@ public class FirstASM {
 	public static String pairToViz(String pair){
 		//String edgeDefinition = "edge [\n" + font;
 		String result = "";
-//		System.out.println(pair);
 		// extends
-		if(pair.contains("!"))result = pair.split("!")[0] + " -> " + pair.split("!")[1] + " [shape = onormal]";
+		if(pair.equals("")) return result;
+		if(pair.contains("!"))result = pair.split("!")[0] + " -> " + pair.split("!")[1] + " [arrowhead = onormal]";
 		//implements
-		if(pair.contains("@"))result = pair.split("@")[0] + " -> " + pair.split("@")[1] + "[shape = onormal,style = dotted]";
+		if(pair.contains("@"))result = pair.split("@")[0] + " -> " + pair.split("@")[1] + "[arrowhead = onormal,style = dotted]";
 		// Uses
-		if(pair.contains("#"))result = pair.split("#")[0] + " -> " + pair.split("#")[1] + "";
-		if(pair.contains("$"))result = pair.split("$")[0] + " -> " + pair.split("$")[1] + "";
+		if(pair.contains("#"))result = pair.split("#")[0] + " -> " + pair.split("#")[1] + "[arrowhead = vee, style = dotted]";
+		if(pair.contains("$"))result = pair.split("\\$")[0] + " -> " + pair.split("\\$")[1] + "[arrowhead = vee]";
 		result = result + "\n";
 		return result;
 		

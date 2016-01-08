@@ -44,9 +44,9 @@ public class DotUsesVisitor extends ClassVisitorBuffered implements IMethodVisit
 			String[] temparray = returnName.split("\\.");
 			returnName = temparray[temparray.length - 1];
 		}
-		this.buf.append(name.replace("<", "\\<").replace(">", "\\>") + ":"+ args + ", " + returnName);
+		this.buf.append(name.replace("<", "\\<").replace(">", "\\>") + ":"+ args + ", " + returnName + "\n");
 		
-		System.out.println(name.replace("<", "\\<").replace(">", "\\>") + ":"+ args +", "+ returnName);
+//		System.out.println(name.replace("<", "\\<").replace(">", "\\>") + ":"+ args +", "+ returnName + "\n");
 		
 		
 		return toDecorate;
