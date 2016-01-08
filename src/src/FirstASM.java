@@ -259,7 +259,7 @@ public class FirstASM {
 				if (ext.equals("java")) {
 					listOfJavaFiles.put(
 							fileEntry.getName().split(Pattern.quote("."))[0],
-							true);
+							true); 
 				}
 			}
 		}

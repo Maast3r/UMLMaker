@@ -12,61 +12,38 @@ edge [
 	fontname = "Comic Sans"
 	fontsize = 16
 ]
-DependentPizzaStore [ 
-    label="{DependentPizzaStore| | +\<init\>(): void\l+createPizza(String, String): Pizza\l}"]
+TxtLauncher [ 
+    label="{TxtLauncher| | +\<init\>(): void\l+launch(String, AppLauncher): void\l+update(String): void\l}"]
 
-PizzaStore [ 
-    label="{PizzaStore| | +\<init\>(): void\lcreatePizza(String): Pizza\l+orderPizza(String): Pizza\l}"]
+Observer [ 
+    label="{Observer| | +update(String): void\l}"]
 
-NYStyleCheesePizza [ 
-    label="{NYStyleCheesePizza| | +\<init\>(): void\l}"]
+PdfLauncher [ 
+    label="{PdfLauncher| | +\<init\>(): void\l+launch(String, AppLauncher): void\l+update(String): void\l}"]
 
-ChicagoStylePepperoniPizza [ 
-    label="{ChicagoStylePepperoniPizza| | +\<init\>(): void\lcut(): void\l}"]
+FileLauncher [ 
+    label="{FileLauncher| | +launch(String, AppLauncher): void\l+update(String): void\l}"]
 
-NYStyleClamPizza [ 
-    label="{NYStyleClamPizza| | +\<init\>(): void\l}"]
+AppLauncher [ 
+    label="{AppLauncher|-watcher: WatchService \l-dir: Path \l-stop: boolean \l-processes: List \l | \<init\>(Path): void\l+run(): void\l#clearEverything(): void\l+stopGracefully(): void\l+isRunning(): boolean\l+getApplicationsCount(): int\l+handleDirectoryEvent(String, Path): void\l+main(String[]): void\l+notifyChanges(FileLauncher, String): void\l+getProcesses(): List\l+setProcesses(List): void\l}"]
 
-NYStylePepperoniPizza [ 
-    label="{NYStylePepperoniPizza| | +\<init\>(): void\l}"]
+Subject [ 
+    label="{Subject| | +notifyChanges(FileLauncher, String): void\l}"]
 
-NYStyleVeggiePizza [ 
-    label="{NYStyleVeggiePizza| | +\<init\>(): void\l}"]
+HtmlLauncher [ 
+    label="{HtmlLauncher| | +\<init\>(): void\l+launch(String, AppLauncher): void\l+update(String): void\l}"]
 
-Pizza [ 
-    label="{Pizza|name: String \ldough: String \lsauce: String \ltoppings: ArrayList \l | +\<init\>(): void\lprepare(): void\lbake(): void\lcut(): void\lbox(): void\l+getName(): String\l+toString(): String\l}"]
-
-ChicagoStyleCheesePizza [ 
-    label="{ChicagoStyleCheesePizza| | +\<init\>(): void\lcut(): void\l}"]
-
-ChicagoStyleVeggiePizza [ 
-    label="{ChicagoStyleVeggiePizza| | +\<init\>(): void\lcut(): void\l}"]
-
-PizzaTestDrive [ 
-    label="{PizzaTestDrive| | +\<init\>(): void\l+main(String[]): void\l}"]
-
-ChicagoStyleClamPizza [ 
-    label="{ChicagoStyleClamPizza| | +\<init\>(): void\lcut(): void\l}"]
-
-NYPizzaStore [ 
-    label="{NYPizzaStore| | +\<init\>(): void\lcreatePizza(String): Pizza\l}"]
-
-ChicagoPizzaStore [ 
-    label="{ChicagoPizzaStore| | +\<init\>(): void\lcreatePizza(String): Pizza\l}"]
-
-DependentPizzaStore -> Pizza[arrowhead = vee, style = dotted]
-PizzaStore -> Pizza[arrowhead = vee, style = dotted]
-PizzaStore -> Pizza[arrowhead = vee, style = dotted]
-NYStyleCheesePizza -> Pizza [arrowhead = onormal]
-ChicagoStylePepperoniPizza -> Pizza [arrowhead = onormal]
-NYStyleClamPizza -> Pizza [arrowhead = onormal]
-NYStylePepperoniPizza -> Pizza [arrowhead = onormal]
-NYStyleVeggiePizza -> Pizza [arrowhead = onormal]
-ChicagoStyleCheesePizza -> Pizza [arrowhead = onormal]
-ChicagoStyleVeggiePizza -> Pizza [arrowhead = onormal]
-ChicagoStyleClamPizza -> Pizza [arrowhead = onormal]
-NYPizzaStore -> PizzaStore [arrowhead = onormal]
-NYPizzaStore -> Pizza[arrowhead = vee, style = dotted]
-ChicagoPizzaStore -> PizzaStore [arrowhead = onormal]
-ChicagoPizzaStore -> Pizza[arrowhead = vee, style = dotted]
+TxtLauncher -> FileLauncher[arrowhead = onormal,style = dotted]
+TxtLauncher -> Observer[arrowhead = onormal,style = dotted]
+TxtLauncher -> AppLauncher[arrowhead = vee, style = dotted]
+PdfLauncher -> FileLauncher[arrowhead = onormal,style = dotted]
+PdfLauncher -> Observer[arrowhead = onormal,style = dotted]
+PdfLauncher -> AppLauncher[arrowhead = vee, style = dotted]
+FileLauncher -> AppLauncher[arrowhead = vee, style = dotted]
+AppLauncher -> Subject[arrowhead = onormal,style = dotted]
+AppLauncher -> FileLauncher[arrowhead = vee, style = dotted]
+Subject -> FileLauncher[arrowhead = vee, style = dotted]
+HtmlLauncher -> FileLauncher[arrowhead = onormal,style = dotted]
+HtmlLauncher -> Observer[arrowhead = onormal,style = dotted]
+HtmlLauncher -> AppLauncher[arrowhead = vee, style = dotted]
 }
