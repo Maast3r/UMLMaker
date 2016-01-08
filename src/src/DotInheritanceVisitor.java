@@ -4,13 +4,13 @@ import java.util.Arrays;
 
 import org.objectweb.asm.ClassVisitor;
 
-public class ClassInheritanceVisitor extends ClassVisitorBuffered {
+public class DotInheritanceVisitor extends ClassVisitorBuffered implements IAssociationVisitor{
 
-	public ClassInheritanceVisitor(int arg0) {
+	public DotInheritanceVisitor(int arg0) {
 		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
-	public ClassInheritanceVisitor(int arg0, StringBuffer buf) {
+	public DotInheritanceVisitor(int arg0, StringBuffer buf) {
 		super(arg0);
 		this.buf = buf;
 	}
@@ -21,4 +21,5 @@ public class ClassInheritanceVisitor extends ClassVisitorBuffered {
 		buf.append(name + ":"+superName+"#"+Arrays.toString(interfaces));
 		super.visit(version, access, name, signature, superName, interfaces);
 	}
+	
 }

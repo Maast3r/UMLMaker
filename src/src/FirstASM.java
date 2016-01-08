@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,14 +18,15 @@ import org.objectweb.asm.Opcodes;
 public class FirstASM {
 	private static String font = "\tfontname = \"Comic Sans\"\n"
 								+"\tfontsize = 16\n";
-
+	private static String[] associationTypes = {"Inheritance", "Uses"};//,"Association"};
+	private static HashMap<String, Boolean> listOfClasses;
 	public static void main(String[] args) throws IOException {
 		// ////////////////////////////////////////////////////////
 		// Set these two variables to generate UML for an arbitrary project
 		String path = "./src/target";
 		String pkg = "target.";
 		// ////////////////////////////////////////////////////////
-
+		
 		StringBuffer buf = new StringBuffer();
 		buf.append("digraph G{\n" + font + "\n"
 				+ "node [\n" 
@@ -33,13 +36,15 @@ public class FirstASM {
 
 		File packageToUML = new File(path);
 		System.out.println(packageToUML.getAbsolutePath());
-		HashMap<String, Boolean> listOfClasses = listClasses(packageToUML);
+		listOfClasses = listClasses(packageToUML);
 		ArrayList<String> inheritancePairs = new ArrayList<String>();
 		Iterator iter = listOfClasses.entrySet().iterator();
 		while (iter.hasNext()) {
 			String temp = iter.next().toString().split("=")[0];
 			getClassDetails(pkg, temp, buf);
-			inheritancePairs.addAll(getInheritance(pkg, temp));
+			for(String type : associationTypes){
+				inheritancePairs.addAll(getAssociation(pkg, temp, type));
+			}
 		}
 
 		for (int i = 0; i < inheritancePairs.size(); i++) {
@@ -74,7 +79,7 @@ public class FirstASM {
 		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
 		buf.append(" | ");
 
-		ClassVisitorBuffered methodVisitor = new ClassMethodVisitor(
+		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
 				Opcodes.ASM5, buf);
 
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
@@ -82,15 +87,59 @@ public class FirstASM {
 		buf.append("\n\n");
 
 	}
-
-	public static ArrayList<String> getInheritance(String pkg, String className)
-			throws IOException {
+	
+	public static ArrayList<String> getAssociation(String pkg, String className, String association)
+		throws IOException {
 		ClassReader reader = new ClassReader(pkg + className);
 		ArrayList<String> result = new ArrayList<String>();
 		StringBuffer buf = new StringBuffer();
-		ClassVisitorBuffered inheritVisitor = new ClassInheritanceVisitor(
-				Opcodes.ASM5, buf);
-		reader.accept(inheritVisitor, ClassReader.EXPAND_FRAMES);
+		association = association.toLowerCase();
+    	try {
+    		Class[] cArg = new Class[2];
+    		cArg[0] = int.class;
+    		cArg[1] = StringBuffer.class;
+			Constructor assocVisitor = Class.forName("src.Dot"
+					+  association.substring(0, 1).toUpperCase() + association.substring(1) 
+					+ "Visitor").getConstructor(cArg);
+					
+			ClassVisitorBuffered test = (ClassVisitorBuffered) assocVisitor.newInstance(Opcodes.ASM5, buf);
+			reader.accept(test, ClassReader.EXPAND_FRAMES);
+    	} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Dot visitor association class doesn't exist\n");
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	if(association == "association"){
+    		result = dotInheritanceHandler(buf);
+    	} else if(association.equals("inheritance")){
+    		
+    	} else if(association.equals("uses")){
+    		result = dotUsesHandler(buf);
+    	}
+    	
+    	return result;
+	}
+	public static ArrayList<String> dotInheritanceHandler(StringBuffer buf){
+		ArrayList<String> result = new ArrayList<String>();
 		String name = buf.toString().split(":")[0];
 		String extendStuff = buf.toString().split(":")[1];
 		String extendName = extendStuff.split("#")[0];
@@ -113,8 +162,44 @@ public class FirstASM {
 		}
 		result.add(name + "!" + extendName);
 		return result;
+		
 	}
-
+	
+	public static ArrayList<String> dotUsesHandler(StringBuffer buf){
+		System.out.println("This is getting called");
+		ArrayList<String> result = new ArrayList<String>();
+		String name = buf.toString().split(":")[0];
+		String argStuff = buf.toString().split(":")[1];
+//		String implementStuff = argStuff.split("#")[1].replace("[","").replace("]","");
+		String[] args= argStuff.split(", ");
+		if(name.contains("/")){
+			int len = name.split("/").length;
+			name = name.split("/")[len -1 ];
+		}
+		
+		// TODO: Implement hash map of class stuff
+		
+		for(String s : args){
+			System.out.println("      " + s);
+			if(s.equals("")){
+				continue;
+			}
+			if(listOfClasses.get(s) != null){
+				System.out.println("YAY " + s );
+			}
+			if(s.contains("/")){
+				int len = s.split("/").length;
+				s = s.split("/")[len -1 ];
+			}
+			if(!s.equals("")) result.add(name + "@" + s);
+		}
+		
+		
+		
+		
+		return result;
+	}
+	
 	public static String pairToViz(String pair){
 		//String edgeDefinition = "edge [\n" + font;
 		String result = "";
@@ -123,6 +208,7 @@ public class FirstASM {
 		if(pair.contains("!"))result = pair.split("!")[0] + " -> " + pair.split("!")[1] + " [shape = onormal]";
 		//implements
 		if(pair.contains("@"))result = pair.split("@")[0] + " -> " + pair.split("@")[1] + "[shape = onormal,style = dotted]";
+		// Uses
 		if(pair.contains("#"))result = pair.split("#")[0] + " -> " + pair.split("#")[1] + "";
 		if(pair.contains("$"))result = pair.split("$")[0] + " -> " + pair.split("$")[1] + "";
 		result = result + "\n";
@@ -138,7 +224,7 @@ public class FirstASM {
 				if (ext.equals("java")) {
 					listOfJavaFiles.put(
 							fileEntry.getName().split(Pattern.quote("."))[0],
-							false);
+							true);
 				}
 			}
 		}

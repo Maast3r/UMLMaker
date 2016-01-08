@@ -12,35 +12,148 @@ edge [
 	fontname = "Comic Sans"
 	fontsize = 16
 ]
-TxtBehavior [ 
-    label="{TxtBehavior|-extension: String \l | +\<init\>(): void\l+handleDirectoryEvent(String): void\l+cleanUp(): void\l}"]
+PizzaStore [ 
+    label="{PizzaStore| | +\<init\>(): void\l#createPizza(String): Pizza\l+orderPizza(String): Pizza\l}"]
 
-Observer [ 
-    label="{Observer| | +cleanUp(): void\l}"]
+Veggies [ 
+    label="{Veggies| | \<clinit\>(): void\l+toString(): String\l}"]
 
-HtmlBehavior [ 
-    label="{HtmlBehavior| | +\<init\>(): void\l+handleDirectoryEvent(String): void\l+cleanUp(): void\l}"]
+MarinaraSauce [ 
+    label="{MarinaraSauce| | +\<init\>(): void\l+toString(): String\l}"]
 
-FileBehavior [ 
-    label="{FileBehavior| | +handleDirectoryEvent(String): void\l}"]
+Cheese [ 
+    label="{Cheese| | \<clinit\>(): void\l+toString(): String\l}"]
 
-AppLauncher [ 
-    label="{AppLauncher|-watcher: WatchService \l-dir: Path \l-stop: boolean \l-processes: List \l | \<init\>(Path): void\l+run(): void\l#clearEverything(): void\l+stopGracefully(): void\l+isRunning(): boolean\l+getApplicationsCount(): int\l-registerProcess(FileBehavior): void\l+handleDirectoryEvent(String, Path): void\l+main(String[]): void\l}"]
+PizzaIngredientFactory [ 
+    label="{PizzaIngredientFactory| | \<clinit\>(): void\l+createDough(): Dough\l+createSauce(): Sauce\l+createCheese(): Cheese\l+createVeggies(): Veggies[]\l+createPepperoni(): Pepperoni\l+createClam(): Clams\l}"]
 
-PyBehavior [ 
-    label="{PyBehavior| | +\<init\>(): void\l+handleDirectoryEvent(String): void\l+cleanUp(): void\l}"]
+RedPepper [ 
+    label="{RedPepper| | +\<init\>(): void\l+toString(): String\l}"]
 
-TxtBehavior -> FileBehavior[shape = onormal,style = dotted]
-TxtBehavior -> Observer[shape = onormal,style = dotted]
-TxtBehavior -> Object [shape = onormal]
-Observer -> Object [shape = onormal]
-HtmlBehavior -> FileBehavior[shape = onormal,style = dotted]
-HtmlBehavior -> Observer[shape = onormal,style = dotted]
-HtmlBehavior -> Object [shape = onormal]
-FileBehavior -> Observer[shape = onormal,style = dotted]
-FileBehavior -> Object [shape = onormal]
-AppLauncher -> Thread [shape = onormal]
-PyBehavior -> FileBehavior[shape = onormal,style = dotted]
-PyBehavior -> Observer[shape = onormal,style = dotted]
-PyBehavior -> Object [shape = onormal]
+ThickCrustDough [ 
+    label="{ThickCrustDough| | +\<init\>(): void\l+toString(): String\l}"]
+
+NYPizzaIngredientFactory [ 
+    label="{NYPizzaIngredientFactory| | +\<init\>(): void\l+createDough(): Dough\l+createSauce(): Sauce\l+createCheese(): Cheese\l+createVeggies(): Veggies[]\l+createPepperoni(): Pepperoni\l+createClam(): Clams\l}"]
+
+PepperoniPizza [ 
+    label="{PepperoniPizza|ingredientFactory: PizzaIngredientFactory \l | +\<init\>(PizzaIngredientFactory): void\lprepare(): void\l}"]
+
+SlicedPepperoni [ 
+    label="{SlicedPepperoni| | +\<init\>(): void\l+toString(): String\l}"]
+
+Eggplant [ 
+    label="{Eggplant| | +\<init\>(): void\l+toString(): String\l}"]
+
+BlackOlives [ 
+    label="{BlackOlives| | +\<init\>(): void\l+toString(): String\l}"]
+
+Sauce [ 
+    label="{Sauce| | \<clinit\>(): void\l+toString(): String\l}"]
+
+MozzarellaCheese [ 
+    label="{MozzarellaCheese| | +\<init\>(): void\l+toString(): String\l}"]
+
+NYPizzaStore [ 
+    label="{NYPizzaStore| | +\<init\>(): void\l#createPizza(String): Pizza\l}"]
+
+ReggianoCheese [ 
+    label="{ReggianoCheese| | +\<init\>(): void\l+toString(): String\l}"]
+
+Spinach [ 
+    label="{Spinach| | +\<init\>(): void\l+toString(): String\l}"]
+
+Onion [ 
+    label="{Onion| | +\<init\>(): void\l+toString(): String\l}"]
+
+Mushroom [ 
+    label="{Mushroom| | +\<init\>(): void\l+toString(): String\l}"]
+
+VeggiePizza [ 
+    label="{VeggiePizza|ingredientFactory: PizzaIngredientFactory \l | +\<init\>(PizzaIngredientFactory): void\lprepare(): void\l}"]
+
+ClamPizza [ 
+    label="{ClamPizza|ingredientFactory: PizzaIngredientFactory \l | +\<init\>(PizzaIngredientFactory): void\lprepare(): void\l}"]
+
+Pizza [ 
+    label="{Pizza|name: String \ldough: Dough \lsauce: Sauce \lveggies: Veggies[] \lcheese: Cheese \lpepperoni: Pepperoni \lclam: Clams \l | +\<init\>(): void\lprepare(): void\lbake(): void\lcut(): void\lbox(): void\lsetName(String): void\lgetName(): String\l+toString(): String\l}"]
+
+PlumTomatoSauce [ 
+    label="{PlumTomatoSauce| | +\<init\>(): void\l+toString(): String\l}"]
+
+ThinCrustDough [ 
+    label="{ThinCrustDough| | +\<init\>(): void\l+toString(): String\l}"]
+
+ChicagoPizzaIngredientFactory [ 
+    label="{ChicagoPizzaIngredientFactory| | +\<init\>(): void\l+createDough(): Dough\l+createSauce(): Sauce\l+createCheese(): Cheese\l+createVeggies(): Veggies[]\l+createPepperoni(): Pepperoni\l+createClam(): Clams\l}"]
+
+PizzaTestDrive [ 
+    label="{PizzaTestDrive| | +\<init\>(): void\l+main(String[]): void\l}"]
+
+CheesePizza [ 
+    label="{CheesePizza|ingredientFactory: PizzaIngredientFactory \l | +\<init\>(PizzaIngredientFactory): void\lprepare(): void\l}"]
+
+Dough [ 
+    label="{Dough| | \<clinit\>(): void\l+toString(): String\l}"]
+
+Garlic [ 
+    label="{Garlic| | +\<init\>(): void\l+toString(): String\l}"]
+
+ParmesanCheese [ 
+    label="{ParmesanCheese| | +\<init\>(): void\l+toString(): String\l}"]
+
+FrozenClams [ 
+    label="{FrozenClams| | +\<init\>(): void\l+toString(): String\l}"]
+
+Clams [ 
+    label="{Clams| | \<clinit\>(): void\l+toString(): String\l}"]
+
+FreshClams [ 
+    label="{FreshClams| | +\<init\>(): void\l+toString(): String\l}"]
+
+ChicagoPizzaStore [ 
+    label="{ChicagoPizzaStore| | +\<init\>(): void\l#createPizza(String): Pizza\l}"]
+
+Pepperoni [ 
+    label="{Pepperoni| | \<clinit\>(): void\l+toString(): String\l}"]
+
+\<init\> -> voidcreatePizza[shape = onormal,style = dotted]
+\<clinit\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<clinit\> -> voidtoString[shape = onormal,style = dotted]
+\<clinit\> -> voidcreateDough[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidcreateDough[shape = onormal,style = dotted]
+\<init\> -> PizzaIngredientFactory[shape = onormal,style = dotted]
+\<init\> -> voidprepare[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<clinit\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidcreatePizza[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> PizzaIngredientFactory[shape = onormal,style = dotted]
+\<init\> -> voidprepare[shape = onormal,style = dotted]
+\<init\> -> PizzaIngredientFactory[shape = onormal,style = dotted]
+\<init\> -> voidprepare[shape = onormal,style = dotted]
+\<init\> -> voidprepare[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidcreateDough[shape = onormal,style = dotted]
+\<init\> -> voidmain[shape = onormal,style = dotted]
+\<init\> -> PizzaIngredientFactory[shape = onormal,style = dotted]
+\<init\> -> voidprepare[shape = onormal,style = dotted]
+\<clinit\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<clinit\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidtoString[shape = onormal,style = dotted]
+\<init\> -> voidcreatePizza[shape = onormal,style = dotted]
+\<clinit\> -> voidtoString[shape = onormal,style = dotted]
 }

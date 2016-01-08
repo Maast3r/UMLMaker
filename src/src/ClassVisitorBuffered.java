@@ -15,6 +15,13 @@ public class ClassVisitorBuffered extends ClassVisitor{
 	public ClassVisitorBuffered(int arg0){
 		super(arg0);
 	}
+	
+	public ClassVisitorBuffered(int arg0, StringBuffer buf) {
+		super(arg0);
+		this.buf = buf;
+	}
+
+	
 	public ClassVisitorBuffered(int arg0, ClassVisitor cv){
 		super(arg0, cv);
 	}

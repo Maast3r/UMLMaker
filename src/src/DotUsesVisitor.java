@@ -1,27 +1,26 @@
 package src;
 
-
 import java.util.Arrays;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 
-import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
+public class DotUsesVisitor extends ClassVisitorBuffered implements IMethodVisitor{
 
-public class ClassMethodVisitor extends ClassVisitorBuffered {
-
-	public ClassMethodVisitor(int arg0, ClassVisitorBuffered arg1) {
-		super(arg0, arg1);
-		this.buf = arg1.buf;
+	public DotUsesVisitor(int arg0) {
+		super(arg0);
+		// TODO Auto-generated constructor stub
 	}
-	public ClassMethodVisitor(int arg0, StringBuffer buf){
+	public DotUsesVisitor(int arg0, StringBuffer buf) {
 		super(arg0);
 		this.buf = buf;
 	}
-	
+
+	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, 
 			String[] exceptions){
+		
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		String[] classNames = new String[argTypes.length];
@@ -33,6 +32,7 @@ public class ClassMethodVisitor extends ClassVisitorBuffered {
 			if(temp.contains(".")){
 				String[] temparray = temp.split("\\.");
 				temp = temparray[temparray.length - 1];
+				
 			}
 			args += temp + ", ";
 		}
@@ -44,7 +44,10 @@ public class ClassMethodVisitor extends ClassVisitorBuffered {
 			String[] temparray = returnName.split("\\.");
 			returnName = temparray[temparray.length - 1];
 		}
-		this.buf.append(symbol + name.replace("<", "\\<").replace(">", "\\>") + "("+ args + "): " + returnName + '\\' + 'l' );
+		this.buf.append(name.replace("<", "\\<").replace(">", "\\>") + ":"+ args + ", " + returnName);
+		
+		System.out.println(name.replace("<", "\\<").replace(">", "\\>") + ":"+ args +", "+ returnName);
+		
 		
 		return toDecorate;
 	}
