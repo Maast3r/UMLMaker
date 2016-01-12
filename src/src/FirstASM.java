@@ -101,7 +101,8 @@ public class FirstASM {
 			Constructor assocVisitor = Class.forName("src.Dot"
 					+  association.substring(0, 1).toUpperCase() + association.substring(1) 
 					+ "Visitor").getConstructor(cArg);
-					
+			System.out.println("test");
+			System.out.println(assocVisitor.toString());
 			ClassVisitorBuffered test = (ClassVisitorBuffered) assocVisitor.newInstance(Opcodes.ASM5, buf);
 			reader.accept(test, ClassReader.EXPAND_FRAMES);
     	} catch (ClassNotFoundException e) {

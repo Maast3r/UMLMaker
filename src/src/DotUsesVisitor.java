@@ -1,13 +1,17 @@
 package src;
 
+import java.io.IOException;
 import java.util.Arrays;
 
+import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-public class DotUsesVisitor extends ClassVisitorBuffered implements IMethodVisitor{
-
+public class DotUsesVisitor extends ClassVisitorBuffered{
+	public String pkg = "target.";
+	public String className;
 	public DotUsesVisitor(int arg0) {
 		super(arg0);
 		// TODO Auto-generated constructor stub
@@ -18,37 +22,27 @@ public class DotUsesVisitor extends ClassVisitorBuffered implements IMethodVisit
 	}
 
 	@Override
-	public MethodVisitor visitMethod(int access, String name, String desc, String signature, 
-			String[] exceptions){
-		
-		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		Type[] argTypes = Type.getArgumentTypes(desc);
-		String[] classNames = new String[argTypes.length];
-		String args = "";
-		for(int i=0; i<argTypes.length; i++){
-			classNames[i] = argTypes[i].getClassName();
-			String temp = argTypes[i].getClassName();
-			
-			if(temp.contains(".")){
-				String[] temparray = temp.split("\\.");
-				temp = temparray[temparray.length - 1];
-				
-			}
-			args += temp + ", ";
+	public void visit(int version, int access, String name, String signature, String superName,
+			String[] interfaces){
+		System.out.println("DOT USES VISITOR");
+		String realname = name;
+		if(realname.contains("/")){
+			realname = name.split("/")[1];
 		}
-		if(args.length()>=2)args = args.substring(0, args.length() -2);
+
+		buf.append(realname + " [ \n    label=\"{"+realname+"|");
 		
-		String symbol= getAccessModifier(access);
-		String returnName = Type.getReturnType(desc).getClassName();
-		if(returnName.contains(".")){
-			String[] temparray = returnName.split("\\.");
-			returnName = temparray[temparray.length - 1];
+		try {
+			this.className = name;
+			System.out.println(pkg + realname);
+			ClassReader reader = new ClassReader(pkg + realname);
+			ClassVisitorBuffered methodVisitor = new DotUsesMethodVisitor(Opcodes.ASM5, buf, realname);
+			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		this.buf.append(name.replace("<", "\\<").replace(">", "\\>") + ":"+ args + ", " + returnName + "\n");
-		
-//		System.out.println(name.replace("<", "\\<").replace(">", "\\>") + ":"+ args +", "+ returnName + "\n");
-		
-		
-		return toDecorate;
+		super.visit(version, access, name, signature, superName, interfaces);
 	}
+
 }
