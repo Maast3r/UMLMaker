@@ -76,11 +76,11 @@ public class FirstASM {
 
 		ClassVisitorBuffered fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
 				declVisitor);
-		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
+//		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
 		buf.append(" | ");
 
 		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
-				Opcodes.ASM5, buf);
+				Opcodes.ASM5, fieldVisitor, buf);
 
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		buf.append("}\"]");

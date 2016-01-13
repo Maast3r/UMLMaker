@@ -1,8 +1,9 @@
 package src;
 
 import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
-import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
 public class ClassVisitorBuffered extends ClassVisitor{
 
@@ -20,7 +21,6 @@ public class ClassVisitorBuffered extends ClassVisitor{
 		super(arg0);
 		this.buf = buf;
 	}
-
 	
 	public ClassVisitorBuffered(int arg0, ClassVisitor cv){
 		super(arg0, cv);

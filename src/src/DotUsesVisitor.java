@@ -7,21 +7,24 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 
 public class DotUsesVisitor extends ClassVisitorBuffered implements IMethodVisitor{
-
+	public int arg0;
 	public DotUsesVisitor(int arg0) {
 		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
 	public DotUsesVisitor(int arg0, StringBuffer buf) {
 		super(arg0);
+		this.arg0 = arg0;
 		this.buf = buf;
 	}
 
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, 
 			String[] exceptions){
-		
-		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
+//		System.out.println(access);
+		MethodVisitor toDecorate = new MethodBodyVisitor(this.arg0, super.visitMethod(access, name, desc, signature, exceptions));
+//		System.out.println("name : " + name);
+//		System.out.println(Type.getReturnType(desc).getClassName());
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		String[] classNames = new String[argTypes.length];
 		String args = "";
