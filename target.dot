@@ -12,166 +12,38 @@ edge [
 	fontname = "Comic Sans"
 	fontsize = 16
 ]
-PizzaStore [ 
-    label="{PizzaStore| | +\<init\>(): void\l#createPizza(String): Pizza\l+orderPizza(String): Pizza\l}"]
+TxtLauncher [ 
+    label="{TxtLauncher| | +\<init\>(): void\l+launch(String, AppLauncher): void\l+update(String): void\l}"]
 
-Veggies [ 
-    label="{Veggies| | \<clinit\>(): void\l+toString(): String\l}"]
+Observer [ 
+    label="{Observer| | +update(String): void\l}"]
 
-MarinaraSauce [ 
-    label="{MarinaraSauce| | +\<init\>(): void\l+toString(): String\l}"]
+PdfLauncher [ 
+    label="{PdfLauncher| | +\<init\>(): void\l+launch(String, AppLauncher): void\l+update(String): void\l}"]
 
-Cheese [ 
-    label="{Cheese| | \<clinit\>(): void\l+toString(): String\l}"]
+FileLauncher [ 
+    label="{FileLauncher| | +launch(String, AppLauncher): void\l+update(String): void\l}"]
 
-PizzaIngredientFactory [ 
-    label="{PizzaIngredientFactory| | \<clinit\>(): void\l+createDough(): Dough\l+createSauce(): Sauce\l+createCheese(): Cheese\l+createVeggies(): Veggies[]\l+createPepperoni(): Pepperoni\l+createClam(): Clams\l}"]
+AppLauncher [ 
+    label="{AppLauncher|-watcher: WatchService \l-dir: Path \l-stop: boolean \l-processes: List \l | \<init\>(Path): void\l+run(): void\l#clearEverything(): void\l+stopGracefully(): void\l+isRunning(): boolean\l+getApplicationsCount(): int\l+handleDirectoryEvent(String, Path): void\l+main(String[]): void\l+notifyChanges(FileLauncher, String): void\l+getProcesses(): List\l+setProcesses(List): void\l}"]
 
-RedPepper [ 
-    label="{RedPepper| | +\<init\>(): void\l+toString(): String\l}"]
+Subject [ 
+    label="{Subject| | +notifyChanges(FileLauncher, String): void\l}"]
 
-ThickCrustDough [ 
-    label="{ThickCrustDough| | +\<init\>(): void\l+toString(): String\l}"]
+HtmlLauncher [ 
+    label="{HtmlLauncher| | +\<init\>(): void\l+launch(String, AppLauncher): void\l+update(String): void\l}"]
 
-NYPizzaIngredientFactory [ 
-    label="{NYPizzaIngredientFactory| | +\<init\>(): void\l+createDough(): Dough\l+createSauce(): Sauce\l+createCheese(): Cheese\l+createVeggies(): Veggies[]\l+createPepperoni(): Pepperoni\l+createClam(): Clams\l}"]
-
-PepperoniPizza [ 
-    label="{PepperoniPizza|ingredientFactory: PizzaIngredientFactory \l | +\<init\>(PizzaIngredientFactory): void\lprepare(): void\l}"]
-
-SlicedPepperoni [ 
-    label="{SlicedPepperoni| | +\<init\>(): void\l+toString(): String\l}"]
-
-Eggplant [ 
-    label="{Eggplant| | +\<init\>(): void\l+toString(): String\l}"]
-
-BlackOlives [ 
-    label="{BlackOlives| | +\<init\>(): void\l+toString(): String\l}"]
-
-Sauce [ 
-    label="{Sauce| | \<clinit\>(): void\l+toString(): String\l}"]
-
-MozzarellaCheese [ 
-    label="{MozzarellaCheese| | +\<init\>(): void\l+toString(): String\l}"]
-
-NYPizzaStore [ 
-    label="{NYPizzaStore| | +\<init\>(): void\l#createPizza(String): Pizza\l}"]
-
-ReggianoCheese [ 
-    label="{ReggianoCheese| | +\<init\>(): void\l+toString(): String\l}"]
-
-Spinach [ 
-    label="{Spinach| | +\<init\>(): void\l+toString(): String\l}"]
-
-Onion [ 
-    label="{Onion| | +\<init\>(): void\l+toString(): String\l}"]
-
-Mushroom [ 
-    label="{Mushroom| | +\<init\>(): void\l+toString(): String\l}"]
-
-VeggiePizza [ 
-    label="{VeggiePizza|ingredientFactory: PizzaIngredientFactory \l | +\<init\>(PizzaIngredientFactory): void\lprepare(): void\l}"]
-
-ClamPizza [ 
-    label="{ClamPizza|ingredientFactory: PizzaIngredientFactory \l | +\<init\>(PizzaIngredientFactory): void\lprepare(): void\l}"]
-
-Pizza [ 
-    label="{Pizza|name: String \ldough: Dough \lsauce: Sauce \lveggies: Veggies[] \lcheese: Cheese \lpepperoni: Pepperoni \lclam: Clams \l | +\<init\>(): void\lprepare(): void\lbake(): void\lcut(): void\lbox(): void\lsetName(String): void\lgetName(): String\l+toString(): String\l}"]
-
-PlumTomatoSauce [ 
-    label="{PlumTomatoSauce| | +\<init\>(): void\l+toString(): String\l}"]
-
-ThinCrustDough [ 
-    label="{ThinCrustDough| | +\<init\>(): void\l+toString(): String\l}"]
-
-ChicagoPizzaIngredientFactory [ 
-    label="{ChicagoPizzaIngredientFactory| | +\<init\>(): void\l+createDough(): Dough\l+createSauce(): Sauce\l+createCheese(): Cheese\l+createVeggies(): Veggies[]\l+createPepperoni(): Pepperoni\l+createClam(): Clams\l}"]
-
-PizzaTestDrive [ 
-    label="{PizzaTestDrive| | +\<init\>(): void\l+main(String[]): void\l}"]
-
-CheesePizza [ 
-    label="{CheesePizza|ingredientFactory: PizzaIngredientFactory \l | +\<init\>(PizzaIngredientFactory): void\lprepare(): void\l}"]
-
-Dough [ 
-    label="{Dough| | \<clinit\>(): void\l+toString(): String\l}"]
-
-Garlic [ 
-    label="{Garlic| | +\<init\>(): void\l+toString(): String\l}"]
-
-ParmesanCheese [ 
-    label="{ParmesanCheese| | +\<init\>(): void\l+toString(): String\l}"]
-
-FrozenClams [ 
-    label="{FrozenClams| | +\<init\>(): void\l+toString(): String\l}"]
-
-Clams [ 
-    label="{Clams| | \<clinit\>(): void\l+toString(): String\l}"]
-
-FreshClams [ 
-    label="{FreshClams| | +\<init\>(): void\l+toString(): String\l}"]
-
-ChicagoPizzaStore [ 
-    label="{ChicagoPizzaStore| | +\<init\>(): void\l#createPizza(String): Pizza\l}"]
-
-Pepperoni [ 
-    label="{Pepperoni| | \<clinit\>(): void\l+toString(): String\l}"]
-
-PizzaStore -> Pizza[arrowhead = vee, style = dotted]
-PizzaStore -> Pizza[arrowhead = vee, style = dotted]
-MarinaraSauce -> Sauce[arrowhead = onormal,style = dotted]
-PizzaIngredientFactory -> Dough[arrowhead = vee, style = dotted]
-PizzaIngredientFactory -> Sauce[arrowhead = vee, style = dotted]
-PizzaIngredientFactory -> Cheese[arrowhead = vee, style = dotted]
-PizzaIngredientFactory -> Pepperoni[arrowhead = vee, style = dotted]
-PizzaIngredientFactory -> Clams[arrowhead = vee, style = dotted]
-RedPepper -> Veggies[arrowhead = onormal,style = dotted]
-ThickCrustDough -> Dough[arrowhead = onormal,style = dotted]
-NYPizzaIngredientFactory -> PizzaIngredientFactory[arrowhead = onormal,style = dotted]
-NYPizzaIngredientFactory -> Dough[arrowhead = vee, style = dotted]
-NYPizzaIngredientFactory -> Sauce[arrowhead = vee, style = dotted]
-NYPizzaIngredientFactory -> Cheese[arrowhead = vee, style = dotted]
-NYPizzaIngredientFactory -> Pepperoni[arrowhead = vee, style = dotted]
-NYPizzaIngredientFactory -> Clams[arrowhead = vee, style = dotted]
-PepperoniPizza -> Pizza [arrowhead = onormal]
-PepperoniPizza -> PizzaIngredientFactory[arrowhead = vee, style = dotted]
-PepperoniPizza -> PizzaIngredientFactory[arrowhead = vee]
-SlicedPepperoni -> Pepperoni[arrowhead = onormal,style = dotted]
-Eggplant -> Veggies[arrowhead = onormal,style = dotted]
-BlackOlives -> Veggies[arrowhead = onormal,style = dotted]
-MozzarellaCheese -> Cheese[arrowhead = onormal,style = dotted]
-NYPizzaStore -> PizzaStore [arrowhead = onormal]
-NYPizzaStore -> Pizza[arrowhead = vee, style = dotted]
-ReggianoCheese -> Cheese[arrowhead = onormal,style = dotted]
-Spinach -> Veggies[arrowhead = onormal,style = dotted]
-Onion -> Veggies[arrowhead = onormal,style = dotted]
-Mushroom -> Veggies[arrowhead = onormal,style = dotted]
-VeggiePizza -> Pizza [arrowhead = onormal]
-VeggiePizza -> PizzaIngredientFactory[arrowhead = vee, style = dotted]
-VeggiePizza -> PizzaIngredientFactory[arrowhead = vee]
-ClamPizza -> Pizza [arrowhead = onormal]
-ClamPizza -> PizzaIngredientFactory[arrowhead = vee, style = dotted]
-ClamPizza -> PizzaIngredientFactory[arrowhead = vee]
-Pizza -> Dough[arrowhead = vee]
-Pizza -> Sauce[arrowhead = vee]
-Pizza -> Cheese[arrowhead = vee]
-Pizza -> Pepperoni[arrowhead = vee]
-Pizza -> Clams[arrowhead = vee]
-PlumTomatoSauce -> Sauce[arrowhead = onormal,style = dotted]
-ThinCrustDough -> Dough[arrowhead = onormal,style = dotted]
-ChicagoPizzaIngredientFactory -> PizzaIngredientFactory[arrowhead = onormal,style = dotted]
-ChicagoPizzaIngredientFactory -> Dough[arrowhead = vee, style = dotted]
-ChicagoPizzaIngredientFactory -> Sauce[arrowhead = vee, style = dotted]
-ChicagoPizzaIngredientFactory -> Cheese[arrowhead = vee, style = dotted]
-ChicagoPizzaIngredientFactory -> Pepperoni[arrowhead = vee, style = dotted]
-ChicagoPizzaIngredientFactory -> Clams[arrowhead = vee, style = dotted]
-CheesePizza -> Pizza [arrowhead = onormal]
-CheesePizza -> PizzaIngredientFactory[arrowhead = vee, style = dotted]
-CheesePizza -> PizzaIngredientFactory[arrowhead = vee]
-Garlic -> Veggies[arrowhead = onormal,style = dotted]
-ParmesanCheese -> Cheese[arrowhead = onormal,style = dotted]
-FrozenClams -> Clams[arrowhead = onormal,style = dotted]
-FreshClams -> Clams[arrowhead = onormal,style = dotted]
-ChicagoPizzaStore -> PizzaStore [arrowhead = onormal]
-ChicagoPizzaStore -> Pizza[arrowhead = vee, style = dotted]
+TxtLauncher -> FileLauncher[arrowhead = onormal,style = dotted]
+TxtLauncher -> Observer[arrowhead = onormal,style = dotted]
+TxtLauncher -> AppLauncher[arrowhead = vee, style = dotted]
+PdfLauncher -> FileLauncher[arrowhead = onormal,style = dotted]
+PdfLauncher -> Observer[arrowhead = onormal,style = dotted]
+PdfLauncher -> AppLauncher[arrowhead = vee, style = dotted]
+FileLauncher -> AppLauncher[arrowhead = vee, style = dotted]
+AppLauncher -> Subject[arrowhead = onormal,style = dotted]
+AppLauncher -> FileLauncher[arrowhead = vee, style = dotted]
+Subject -> FileLauncher[arrowhead = vee, style = dotted]
+HtmlLauncher -> FileLauncher[arrowhead = onormal,style = dotted]
+HtmlLauncher -> Observer[arrowhead = onormal,style = dotted]
+HtmlLauncher -> AppLauncher[arrowhead = vee, style = dotted]
 }
