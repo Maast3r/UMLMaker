@@ -35,7 +35,7 @@ public class ClassDeclarationVisitor extends ClassVisitorBuffered {
 			this.name = this.name.split("/")[1];
 		}
 //		buf.append("Class: " + name + " extends "+superName+" implements "+Arrays.toString(interfaces) + "\n");
-		ark.getBoat().put(realname, new ClassPrototype(realname));
+		ark.addClass(realname, new ClassPrototype(realname));
 		buf.append(realname + " [ \n    label=\"{"+realname+"|");
 		super.visit(version, access, name, signature, superName, interfaces);
 	}

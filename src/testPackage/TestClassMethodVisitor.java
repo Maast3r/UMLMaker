@@ -11,29 +11,38 @@ import src.ClassDeclarationVisitor;
 import src.ClassFieldVisitor;
 import src.ClassVisitorBuffered;
 import src.DotMethodVisitor;
+import src.NoahsArk;
 
 public class TestClassMethodVisitor {
 
 	@Test
 	public void test() throws IOException {
+		NoahsArk ark = new NoahsArk();
 		StringBuffer expected = new StringBuffer();
-		expected.append("\\<init\\>(Path): void\\l+run(): void\\l#clearEverything(): void\\l+stopGracefully(): void\\l+isRunning(): boolean\\l+getApplicationsCount(): int\\l-registerProcess(FileBehavior): void\\l+handleDirectoryEvent(String, Path): void\\l+main(String[]): void\\l}\" ]");
+		expected.append("ClassVisitorBuffered [ \n"
+				+ "    label=\"{ClassVisitorBuffered|ClassVisitorBuffered [ \n"
+				+ "    label=\"{ClassVisitorBuffered|+name: String \\lbuf: StringBuffer \\lClassVisitorBuffered [ \n"
+				+ "    label=\"{ClassVisitorBuffered|+name: String \\lbuf: StringBuffer \\l+\\<init\\>(int, ClassVisitor, StringBuffer): void\\l+\\<init\\>(int): void\\l+\\<init\\>(int, StringBuffer): void\\l+\\<init\\>(int, ClassVisitor): void\\l+getAccessModifier(int): String\\l+getName(): String\\l}\" ]");
 		
-		String pkg = "target.";
+		String pkg = "src.";
 		StringBuffer buf = new StringBuffer();
-		ClassReader reader = new ClassReader(pkg + "AppLauncher");
+		ClassReader reader = new ClassReader(pkg + "ClassVisitorBuffered");
 
 		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(
-				Opcodes.ASM5, buf);
+				Opcodes.ASM5, buf, ark);
 
-		ClassVisitorBuffered fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
-				declVisitor);
 		
-//		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
+		reader.accept(declVisitor, ClassReader.EXPAND_FRAMES);
+		
+		ClassVisitorBuffered fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
+				declVisitor, ark.getBoat().get(declVisitor.getName()));
+	
+		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
+
 //		buf.append(" | ");
 
 		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
-				Opcodes.ASM5, buf);
+				Opcodes.ASM5, fieldVisitor, buf, ark.getBoat().get(declVisitor.getName()));
 
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		buf.append("}\" ]");
