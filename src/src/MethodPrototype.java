@@ -19,7 +19,7 @@ public class MethodPrototype {
 	}
 	
 	public String prepareUML(){
-		return access + name.replace("<", "\\<").replace(">", "\\>") + "("+ args + "): " + returnType + '\\' + 'l' ;
+		return this.access + this.name.replace("<", "\\<").replace(">", "\\>") + "("+ this.args + "): " + this.returnType + '\\' + 'l' ;
 	}
 	
 	

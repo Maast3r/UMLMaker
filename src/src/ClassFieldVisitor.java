@@ -9,12 +9,14 @@ import com.sun.org.glassfish.gmbal.Description;
 import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
 public class ClassFieldVisitor extends ClassVisitorBuffered {
-	public ClassPrototype pro;
+	public NoahsArk ark;
+	public String className;
 	
-	public ClassFieldVisitor(int arg0, ClassVisitorBuffered arg1, ClassPrototype pro) {
+	public ClassFieldVisitor(int arg0, ClassVisitorBuffered arg1, NoahsArk ark, String className) {
 		super(arg0, arg1);
 		this.buf = arg1.buf;
-		this.pro = pro;
+		this.ark = ark;
+		this.className = className;
 	}
 
 	public FieldVisitor visitField(int access, String name, String desc, String signature, 
@@ -26,8 +28,9 @@ public class ClassFieldVisitor extends ClassVisitorBuffered {
 			type = temparray[temparray.length - 1];
 		}
 		String symbol= getAccessModifier(access);
-		this.pro.addField(name, new FieldPrototype(symbol, name, type));
-		buf.append(symbol + name + ": "+ type + " \\l");
+		this.ark.getBoat().get(this.className).addField(name, new FieldPrototype(symbol, name, type));
+//		this.pro.addField(name, new FieldPrototype(symbol, name, type));
+//		buf.append(symbol + name + ": "+ type + " \\l");
 		return toDecorate;
 	}
 }

@@ -19,6 +19,11 @@ public class FirstASM {
 	private static String font = "\tfontname = \"Comic Sans\"\n"
 								+"\tfontsize = 16\n";
 	private static String[] associationTypes = {"Inheritance", "Uses", "Association"};//,"Association"};
+	
+	private static String methodSeparatorString = " | ";
+	private static String classEndString = "}\"]\n";
+	
+	
 	private static HashMap<String, Boolean> listOfClasses;
 	public static void main(String[] args) throws IOException {
 		// ////////////////////////////////////////////////////////
@@ -28,31 +33,25 @@ public class FirstASM {
 		// ////////////////////////////////////////////////////////
 		
 		StringBuffer buf = new StringBuffer();
-		buf.append("digraph G{\n" + font + "\n"
-				+ "node [\n" 
-				+ font + "\n"
-				+ "        shape = \"record\"\n" + "]\n" + "edge [\n"
-				+ font + "]\n");
-
 		File packageToUML = new File(path);
 		System.out.println(packageToUML.getAbsolutePath());
+		
+		NoahsArk ark = new NoahsArk();
+		
+		// Generate the ark
 		listOfClasses = listClasses(packageToUML);
-		ArrayList<String> inheritancePairs = new ArrayList<String>();
 		Iterator iter = listOfClasses.entrySet().iterator();
 		while (iter.hasNext()) {
 			String temp = iter.next().toString().split("=")[0];
-			getClassDetails(pkg, temp, buf);
-			for(String type : associationTypes){
-				inheritancePairs.addAll(getAssociation(pkg, temp, type));
-			}
+			getClassDetails(pkg, temp, ark);
+			
 		}
 
-		for (int i = 0; i < inheritancePairs.size(); i++) {
-			buf.append(pairToViz(inheritancePairs.get(i)));
-		}
-
-		buf.append("}");
-
+		
+		//Decide which image to generate
+		buf = generateDotUML(pkg, buf, ark);
+		
+		
 		// Write the buffer to file
 		if (path.contains("/")) {
 			path = path.split("/")[path.split("/").length - 1];
@@ -67,35 +66,95 @@ public class FirstASM {
 	}
 
 	public static void getClassDetails(String pkg, String className,
-			StringBuffer buf) throws IOException {
-		NoahsArk ark = new NoahsArk();
+			NoahsArk ark) throws IOException {
 		ClassReader reader = new ClassReader(pkg + className);
 		
 		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(
-				Opcodes.ASM5, buf, ark);
+				Opcodes.ASM5, ark);
 		reader.accept(declVisitor, ClassReader.EXPAND_FRAMES);
 		ClassVisitorBuffered fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
-				declVisitor, ark.getBoat().get(declVisitor.getName()));
+				declVisitor, ark, declVisitor.getName());
 		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
 
 		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
-				Opcodes.ASM5, fieldVisitor, buf, ark.getBoat().get(declVisitor.getName()));
+				Opcodes.ASM5, fieldVisitor, ark, declVisitor.getName());
 
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
-
+		
+		ArrayList<String> inheritancePairs = new ArrayList<String>();
+	 
+		
+		for(String type : associationTypes){
+			inheritancePairs.addAll(getAssociation(pkg, className, type));
+		}
+		for (int i = 0; i < inheritancePairs.size(); i++) {
+			if(inheritancePairs.get(i).contains("!"))ark.addPair(inheritancePairs.get(i).split("!")[0],
+					inheritancePairs.get(i).split("!")[1]);
+			if(inheritancePairs.get(i).contains("@"))ark.addPair(inheritancePairs.get(i).split("@")[0],
+					inheritancePairs.get(i).split("@")[1]);
+			if(inheritancePairs.get(i).contains("#"))ark.addPair(inheritancePairs.get(i).split("#")[0],
+					inheritancePairs.get(i).split("#")[1]);
+			if(inheritancePairs.get(i).contains("$"))ark.addPair(inheritancePairs.get(i).split("$")[0],
+					inheritancePairs.get(i).split("$")[1]);
+			
+		}
+		
 	}
-	public static void generateDotUML(String pkg, StringBuffer buf) throws IOException {
+	
+	public static StringBuffer generateDotUML(String pkg, StringBuffer buf, NoahsArk ark) throws IOException {
 	 	// Generate a dot file, stored in the Stringbuffer buf
+		// Setup header of dot file
+		buf.append("digraph G{\n" + font + "\n"
+				+ "node [\n" 
+				+ font + "\n"
+				+ "        shape = \"record\"\n" + "]\n" + "edge [\n"
+				+ font + "]\n");
 
+		// Do the real work
+		String result = "";
+		HashMap<String, ClassPrototype> boat = ark.getBoat();
+		for(ClassPrototype c : boat.values()){
+			String className = c.getName();	
+			result += c.prepareUML();
+//			System.out.println(c.getName());
+			Iterator fIterator = c.getFields().keySet().iterator();
+//			System.out.println(c.getFields().keySet().toString());
+			while(fIterator.hasNext()){
+//				System.out.println("getting field   -- " + c.getFields().get(fIterator.next()).prepareUML());
+				result += c.getFields().get(fIterator.next()).prepareUML();
+			}
+			
+			result+= methodSeparatorString;
+			Iterator mIterator = c.getMethods().keySet().iterator();
+			while(mIterator.hasNext()){
+				result += c.getMethods().get(mIterator.next()).prepareUML();
+			}
+			result+=classEndString;
+		}
+		buf.append(result);
+		System.out.println(ark.pairs);
+		for(String origin: ark.pairs.keySet() ){
+			for(String target : ark.pairs.get(origin)){
+				// Check for inheritance removals
+				for(String checkTarget: ark.pairs.get(origin)){
+					// compare target and see if target inherits from checkTarget 
+					String tempTarget = target.substring(1);
+					String tempCheckTarget = target.substring(1);
+					if(target.charAt(0) == '$'){
+					}
+				}
+				
+				
+				buf.append(pairToViz(target));
+			}
+		}
 		
-		
-		//asdfl;kjasdfl;kjasdf
-		buf.append(" | ");
-		//formatting
-		
-		buf.append("}\"]");
+		// formatting end of document
 		buf.append("\n\n");
+		buf.append("}");
+		return buf;
 	}
+	
 	
 	public static ArrayList<String> getAssociation(String pkg, String className, String association)
 		throws IOException {
@@ -276,6 +335,7 @@ public class FirstASM {
 	}
 	
 	public static void visualize(String pkg){
+		System.out.println("visualize");
 		Runtime rt = Runtime.getRuntime();
 		StringBuffer sb = new StringBuffer();
 		try {

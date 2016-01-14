@@ -13,13 +13,15 @@ import jdk.internal.org.objectweb.asm.commons.InstructionAdapter;
 
 public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVisitor{
 	public int arg0;
-	public ClassPrototype pro;
+	public NoahsArk ark;
+	public String className;
 	
-	public DotMethodVisitor(int arg0, ClassVisitorBuffered arg1, StringBuffer buf, ClassPrototype pro) {
+	public DotMethodVisitor(int arg0, ClassVisitorBuffered arg1, NoahsArk ark, String className) {
 		super(arg0, arg1);
 		this.arg0 = arg0;
-		this.buf = arg1.buf;
-		this.pro = pro;
+//		this.buf = arg1.buf;
+		this.ark = ark;
+		this.className = className;
 	}
 	public DotMethodVisitor(int arg0, StringBuffer buf){
 		super(arg0);
@@ -30,7 +32,8 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, 
 			String[] exceptions){
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		MethodVisitor test = new MethodBodyVisitor(Opcodes.ASM5, toDecorate);
+		MethodVisitor test = new MethodBodyVisitor(Opcodes.ASM5, toDecorate, this.className, this.ark);
+//		System.out.println("consolelog " + test.o);
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		String[] classNames = new String[argTypes.length];
 		String args = "";
@@ -53,9 +56,9 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 			String[] temparray = returnName.split("\\.");
 			returnName = temparray[temparray.length - 1];
 		}
-		
-		this.pro.addMethod(name, new MethodPrototype(symbol, name, args, returnName));
-		this.buf.append(symbol + name.replace("<", "\\<").replace(">", "\\>") + "("+ args + "): " + returnName + '\\' + 'l' );
+		this.ark.getBoat().get(this.className).addMethod(name, new MethodPrototype(symbol, name, args, returnName));
+//		this.pro.addMethod(name, new MethodPrototype(symbol, name, args, returnName));
+//		this.buf.append(symbol + name.replace("<", "\\<").replace(">", "\\>") + "("+ args + "): " + returnName + '\\' + 'l' );
 		
 		return test;
 	}

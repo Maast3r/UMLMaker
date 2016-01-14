@@ -13,9 +13,9 @@ public class ClassDeclarationVisitor extends ClassVisitorBuffered {
 		super(arg0);
 	}
 	
-	public ClassDeclarationVisitor(int arg0, StringBuffer buf) {
+	public ClassDeclarationVisitor(int arg0, NoahsArk ark2) {
 		super(arg0);
-		this.buf = buf;
+		this.ark= ark2;
 	}
 	
 	public ClassDeclarationVisitor(int arg0, StringBuffer buf, NoahsArk ark) {
@@ -35,8 +35,8 @@ public class ClassDeclarationVisitor extends ClassVisitorBuffered {
 			this.name = this.name.split("/")[1];
 		}
 //		buf.append("Class: " + name + " extends "+superName+" implements "+Arrays.toString(interfaces) + "\n");
-		ark.getBoat().put(realname, new ClassPrototype(realname));
-		buf.append(realname + " [ \n    label=\"{"+realname+"|");
+		this.ark.getBoat().put(realname, new ClassPrototype(realname));
+//		System.out.println("CLASSNAME: " + name);
 		super.visit(version, access, name, signature, superName, interfaces);
 	}
 	

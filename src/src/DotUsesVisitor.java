@@ -22,7 +22,7 @@ public class DotUsesVisitor extends ClassVisitorBuffered implements IMethodVisit
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, 
 			String[] exceptions){
 //		System.out.println(access);
-		MethodVisitor toDecorate = new MethodBodyVisitor(this.arg0, super.visitMethod(access, name, desc, signature, exceptions));
+		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 //		System.out.println("name : " + name);
 //		System.out.println(Type.getReturnType(desc).getClassName());
 		Type[] argTypes = Type.getArgumentTypes(desc);
