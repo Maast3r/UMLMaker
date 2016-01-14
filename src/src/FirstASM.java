@@ -18,7 +18,7 @@ import org.objectweb.asm.Opcodes;
 public class FirstASM {
 	private static String font = "\tfontname = \"Comic Sans\"\n"
 								+"\tfontsize = 16\n";
-	private static String[] associationTypes = {"Inheritance", "Uses", "Association"};//,"Association"};
+	private static String[] associationTypes = {"Inheritance", "Association"};//,"Association"};
 	
 	private static String methodSeparatorString = " | ";
 	private static String classEndString = "}\"]\n";
@@ -36,10 +36,10 @@ public class FirstASM {
 		File packageToUML = new File(path);
 		System.out.println(packageToUML.getAbsolutePath());
 		
-		NoahsArk ark = new NoahsArk();
 		
 		// Generate the ark
 		listOfClasses = listClasses(packageToUML);
+		NoahsArk ark = new NoahsArk(listOfClasses);
 		Iterator iter = listOfClasses.entrySet().iterator();
 		while (iter.hasNext()) {
 			String temp = iter.next().toString().split("=")[0];
@@ -88,15 +88,14 @@ public class FirstASM {
 			inheritancePairs.addAll(getAssociation(pkg, className, type));
 		}
 		for (int i = 0; i < inheritancePairs.size(); i++) {
-			if(inheritancePairs.get(i).contains("!"))ark.addPair(inheritancePairs.get(i).split("!")[0],
-					inheritancePairs.get(i).split("!")[1]);
-			if(inheritancePairs.get(i).contains("@"))ark.addPair(inheritancePairs.get(i).split("@")[0],
-					inheritancePairs.get(i).split("@")[1]);
-			if(inheritancePairs.get(i).contains("#"))ark.addPair(inheritancePairs.get(i).split("#")[0],
-					inheritancePairs.get(i).split("#")[1]);
-			if(inheritancePairs.get(i).contains("$"))ark.addPair(inheritancePairs.get(i).split("$")[0],
-					inheritancePairs.get(i).split("$")[1]);
-			
+			if(inheritancePairs.get(i).contains("!"))ark.addPair(inheritancePairs.get(i).split("!")[0],"!" +
+				inheritancePairs.get(i).split("!")[1]);
+			if(inheritancePairs.get(i).contains("@"))ark.addPair(inheritancePairs.get(i).split("@")[0], "@" +
+				inheritancePairs.get(i).split("@")[1]);
+			if(inheritancePairs.get(i).contains("#"))ark.addPair(inheritancePairs.get(i).split("#")[0],"#"+
+				inheritancePairs.get(i).split("#")[1]);
+			if(inheritancePairs.get(i).contains("$"))ark.addPair(inheritancePairs.get(i).split("\\$")[0],"$"+
+				inheritancePairs.get(i).split("\\$")[1]);
 		}
 		
 	}
@@ -141,11 +140,15 @@ public class FirstASM {
 					String tempTarget = target.substring(1);
 					String tempCheckTarget = target.substring(1);
 					if(target.charAt(0) == '$'){
+						System.out.println("doin the thing");
+//						if((temp)){
+//							
+//						}
 					}
 				}
 				
 				
-				buf.append(pairToViz(target));
+				buf.append(pairToViz(origin + target));
 			}
 		}
 		
@@ -306,6 +309,7 @@ public class FirstASM {
 	public static String pairToViz(String pair){
 		//String edgeDefinition = "edge [\n" + font;
 		String result = "";
+		System.out.println(pair);
 		// extends
 		if(pair.equals("")) return result;
 		if(pair.contains("!"))result = pair.split("!")[0] + " -> " + pair.split("!")[1] + " [arrowhead = onormal]";

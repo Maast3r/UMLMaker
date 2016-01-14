@@ -11,29 +11,34 @@ import org.objectweb.asm.Opcodes;
 import src.ClassDeclarationVisitor;
 import src.ClassFieldVisitor;
 import src.ClassVisitorBuffered;
+import src.NoahsArk;
 
 public class TestClassFieldVisitor {
 
 	@Test
 	public void test() throws IOException {
-		
+		NoahsArk ark = new NoahsArk();
 		StringBuffer expected = new StringBuffer();
-		expected.append("AppLauncher [ " + "\n" + "    label=\"{AppLauncher|-watcher: WatchService"
-				+ " \\l-dir: Path \\l-stop: boolean \\l-processes: List \\l}\" ]");
+		expected.append("ClassPrototype [ \n"
+				+ "    label=\"{ClassPrototype|ClassPrototype [ \n"
+				+ "    label=\"{ClassPrototype|+name: String \\l+fields: HashMap \\l+methods: HashMap \\l}\" ]");
 		
-		String pkg = "target.";
+		String pkg = "src.";
 		StringBuffer buf = new StringBuffer();
-		ClassReader reader = new ClassReader(pkg + "AppLauncher");
+		ClassReader reader = new ClassReader(pkg + "ClassPrototype");
 
 		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(
-				Opcodes.ASM5, buf);
+				Opcodes.ASM5, buf, ark);
+		
+		reader.accept(declVisitor, ClassReader.EXPAND_FRAMES);
 
 		ClassVisitorBuffered fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
-				declVisitor);
+				declVisitor, ark.getBoat().get(declVisitor.getName()));
+		
 		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
 		buf.append("}\" ]");
-//		System.out.println(expected.toString());
-//		System.out.println(buf.toString());
+		System.out.println(expected.toString());
+		System.out.println(buf.toString());
 		
 		Assert.assertTrue(buf.toString().equals(expected.toString()));
 		

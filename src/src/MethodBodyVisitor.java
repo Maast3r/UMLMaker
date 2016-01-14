@@ -26,7 +26,7 @@ public class MethodBodyVisitor extends MethodVisitor{
 			owner = owner.split("/")[len -1 ];
 		}
 		this.owner = owner;
-		System.out.println("-------------------------------- " + this.className + "   " + this.owner);
+//		System.out.println("-------------------------------- " + this.className + "   " + this.owner);
 		this.ark.addPair(this.className, "$" + this.owner);
 //		System.out.println("Name: " + name + " OWNER : " + owner);		
 //		System.out.println("access " + access + "  owner " + owner + " name "  + name + " desc " + desc + " isIn " + isIn);
