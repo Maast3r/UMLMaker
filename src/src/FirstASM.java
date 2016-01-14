@@ -77,16 +77,24 @@ public class FirstASM {
 		ClassVisitorBuffered fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
 				declVisitor, ark.getBoat().get(declVisitor.getName()));
 		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
-		buf.append(" | ");
 
 		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
 				Opcodes.ASM5, fieldVisitor, buf, ark.getBoat().get(declVisitor.getName()));
 
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+
+	}
+	public static void generateDotUML(String pkg, StringBuffer buf) throws IOException {
+	 	// Generate a dot file, stored in the Stringbuffer buf
+
+		
+		
+		//asdfl;kjasdfl;kjasdf
+		buf.append(" | ");
+		//formatting
+		
 		buf.append("}\"]");
 		buf.append("\n\n");
-		
-
 	}
 	
 	public static ArrayList<String> getAssociation(String pkg, String className, String association)
