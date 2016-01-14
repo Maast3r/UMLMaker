@@ -1,15 +1,15 @@
 digraph G{
-	fontname = "Comic Sans"
+	fontname = "Times New Roman"
 	fontsize = 16
 
 node [
-	fontname = "Comic Sans"
+	fontname = "Times New Roman"
 	fontsize = 16
 
         shape = "record"
 ]
 edge [
-	fontname = "Comic Sans"
+	fontname = "Times New Roman"
 	fontsize = 16
 ]
 PizzaStore [ 

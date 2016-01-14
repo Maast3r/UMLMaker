@@ -16,20 +16,34 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
 public class FirstASM {
-	private static String font = "\tfontname = \"Comic Sans\"\n"
+	private static String font = "\tfontname = \"Times New Roman\"\n"
 								+"\tfontsize = 16\n";
 	private static String[] associationTypes = {"Inheritance", "Association"};//,"Association"};
 	
 	private static String methodSeparatorString = " | ";
 	private static String classEndString = "}\"]\n";
-	
+	private static String pizzaf = "C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\pizzafactory\\factory\\pizzaaf";
+	private static String testerino = "C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
 	
 	private static HashMap<String, Boolean> listOfClasses;
 	public static void main(String[] args) throws IOException {
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		String line = "";
+		System.out.print("UMLMaker>");
+		line = in.readLine();
+		if(line == null || line.length() == 0 || !line.contains(" ")) throw new IOException("FORMAT ERROR: Empty command is not supported!");
+		String command = line.split(" ")[0];
+		String path2 = line.split(" ")[1];
+		if(!path2.contains("\\\\"))throw new IOException("FORMAT ERROR: Empty command is not supported!");
+		String[] path2Parts = path2.split("\\\\");
+		String pkg2 = path2Parts[path2Parts.length-1] + ".";
+		path2 = path2.replace("\\\\", "\\");
 		// ////////////////////////////////////////////////////////
 		// Set these two variables to generate UML for an arbitrary project
-		String path = "./src/target";
-		String pkg = "target.";
+//		String path = "./src/target";
+//		String pkg = "target.";
+		String path = path2;
+		String pkg = pkg2;
 		// ////////////////////////////////////////////////////////
 		
 		StringBuffer buf = new StringBuffer();
@@ -49,7 +63,14 @@ public class FirstASM {
 
 		
 		//Decide which image to generate
-		buf = generateDotUML(pkg, buf, ark);
+		if(command.equals("uml")){
+			buf = generateDotUML(pkg, buf, ark);
+		} else if(command.equals("sequence")){
+			System.out.println("make a sequence diagram");
+		} else {
+			System.out.println("THIS COMMMANDS IS NOT SUPPORTED");
+		}
+//		buf = generateDotUML(pkg, buf, ark);
 		
 		
 		// Write the buffer to file
@@ -57,12 +78,15 @@ public class FirstASM {
 			path = path.split("/")[path.split("/").length - 1];
 		}
 		path = path + ".dot";
+//		path = path + "\\.\\" + pkg + "dot";
+//		path = path.replace("\\\\", "\\");
+//		System.out.println("path : " + path);
 		FileOutputStream base = new FileOutputStream(path);
 		base.write(buf.toString().getBytes());
 		base.close();
 		
 		System.out.println("trying to run program");
-		visualize(pkg);
+		visualize(command, pkg);
 	}
 
 	public static void getClassDetails(String pkg, String className,
@@ -115,11 +139,8 @@ public class FirstASM {
 		for(ClassPrototype c : boat.values()){
 			String className = c.getName();	
 			result += c.prepareUML();
-//			System.out.println(c.getName());
 			Iterator fIterator = c.getFields().keySet().iterator();
-//			System.out.println(c.getFields().keySet().toString());
 			while(fIterator.hasNext()){
-//				System.out.println("getting field   -- " + c.getFields().get(fIterator.next()).prepareUML());
 				result += c.getFields().get(fIterator.next()).prepareUML();
 			}
 			
@@ -131,7 +152,6 @@ public class FirstASM {
 			result+=classEndString;
 		}
 		buf.append(result);
-		System.out.println(ark.pairs);
 		for(String origin: ark.pairs.keySet() ){
 			for(String target : ark.pairs.get(origin)){
 				// Check for inheritance removals
@@ -140,7 +160,6 @@ public class FirstASM {
 					String tempTarget = target.substring(1);
 					String tempCheckTarget = target.substring(1);
 					if(target.charAt(0) == '$'){
-						System.out.println("doin the thing");
 //						if((temp)){
 //							
 //						}
@@ -268,12 +287,10 @@ public class FirstASM {
 	}
 	
 	public static ArrayList<String> dotUsesHandler(String className, StringBuffer buf){
-//		System.out.println("This is getting called");
 		ArrayList<String> result = new ArrayList<String>();
 		String name = className;
 		
 		String[] lines = buf.toString().split("\n");
-//		System.out.println("Name: " + name);
 		for(String line: lines){
 			
 			String argStuff = line.split(":")[1];
@@ -284,19 +301,15 @@ public class FirstASM {
 				name = name.split("/")[len -1 ];
 			}
 			// TODO: Implement hash map of class stuff
-		//		System.out.println(listOfClasses.toString());
 			for(String s : args){
-//				System.out.println("Arg:      " + s);
 				if(s.equals("")){
 					continue;
 				}
-//				System.out.println("Map result for " + s + "# " + listOfClasses.get(s));
 				if(s.contains("/")){
 					int len = s.split("/").length;
 					s = s.split("/")[len -1 ];
 				}
 				if(listOfClasses.get(s) != null){
-//					System.out.println("YAY " + s );
 					if(!s.equals("")) result.add(name + "#" + s);
 				}
 			}
@@ -309,7 +322,6 @@ public class FirstASM {
 	public static String pairToViz(String pair){
 		//String edgeDefinition = "edge [\n" + font;
 		String result = "";
-		System.out.println(pair);
 		// extends
 		if(pair.equals("")) return result;
 		if(pair.contains("!"))result = pair.split("!")[0] + " -> " + pair.split("!")[1] + " [arrowhead = onormal]";
@@ -338,14 +350,20 @@ public class FirstASM {
 		return listOfJavaFiles;
 	}
 	
-	public static void visualize(String pkg){
-		System.out.println("visualize");
+	public static void visualize(String command, String path){
+		System.out.println("visualize " + path + "png");
 		Runtime rt = Runtime.getRuntime();
 		StringBuffer sb = new StringBuffer();
 		try {
-			pkg = pkg.substring(0,pkg.length()-1);
-			System.out.println(pkg);
-			Process pr = rt.exec("dot -T png -o "+pkg+".png " + pkg+".dot");
+			path = path.substring(0,path.length()-1);
+			Process pr = null;;
+			if(command.equals("uml")){
+				pr = rt.exec("dot -T png -o "+path+".png " + path+".dot");
+			} else if(command.equals("sequence")){
+				System.out.println("sequence");
+			} else {
+				System.out.println("Not a valid command!");
+			}
 			pr.waitFor();
 			BufferedReader reader = 
 			         new BufferedReader(new InputStreamReader(pr.getInputStream()));
@@ -356,10 +374,9 @@ public class FirstASM {
 			    }
 			    System.out.println(sb.toString());
 		} catch (IOException e) {
+			e.printStackTrace();
 			System.out.println("Could not visualize!");
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			
 			e.printStackTrace();
 			System.out.println("Could not visualize!");
 		}

@@ -34,8 +34,6 @@ public class ClassDeclarationVisitor extends ClassVisitorBuffered {
 		if(this.name.contains("/")){
 			this.name = this.name.split("/")[1];
 		}
-//		buf.append("Class: " + name + " extends "+superName+" implements "+Arrays.toString(interfaces) + "\n");
-//		System.out.println("CLASSNAME: " + name);
 		this.ark.addClass(realname, new ClassPrototype(realname));
 		super.visit(version, access, name, signature, superName, interfaces);
 	}

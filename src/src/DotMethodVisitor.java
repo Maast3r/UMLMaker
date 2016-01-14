@@ -33,7 +33,6 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 			String[] exceptions){
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		MethodVisitor test = new MethodBodyVisitor(Opcodes.ASM5, toDecorate, this.className, this.ark);
-//		System.out.println("consolelog " + test.o);
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		String[] classNames = new String[argTypes.length];
 		String args = "";
@@ -57,8 +56,6 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 			returnName = temparray[temparray.length - 1];
 		}
 		this.ark.getBoat().get(this.className).addMethod(name, new MethodPrototype(symbol, name, args, returnName));
-//		this.pro.addMethod(name, new MethodPrototype(symbol, name, args, returnName));
-//		this.buf.append(symbol + name.replace("<", "\\<").replace(">", "\\>") + "("+ args + "): " + returnName + '\\' + 'l' );
 		
 		return test;
 	}
