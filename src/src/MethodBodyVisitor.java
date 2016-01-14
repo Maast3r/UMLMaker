@@ -16,8 +16,8 @@ public class MethodBodyVisitor extends MethodVisitor{
 	@Override
 	public void visitMethodInsn(int access, String owner, String name, String desc, boolean isIn){
 		owner = owner.replaceAll("/", ".");
-		System.out.println("OWNER : " + owner);
-		System.out.println("access " + access + "  owner " + owner + " name "  + name + " desc " + desc + " isIn " + isIn);
+//		System.out.println("OWNER : " + owner);
+//		System.out.println("access " + access + "  owner " + owner + " name "  + name + " desc " + desc + " isIn " + isIn);
 	}
 
 }

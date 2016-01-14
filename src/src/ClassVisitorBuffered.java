@@ -6,7 +6,7 @@ import org.objectweb.asm.Opcodes;
 
 
 public class ClassVisitorBuffered extends ClassVisitor{
-
+	public String name;
 	StringBuffer buf;
 	public ClassVisitorBuffered(int arg0, ClassVisitor arg1, StringBuffer buf) {
 		super(arg0, arg1);
@@ -40,4 +40,7 @@ public class ClassVisitorBuffered extends ClassVisitor{
 		return accessModifier;
 	}
 	
+	public String getName(){
+		return this.name;
+	}
 }

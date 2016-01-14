@@ -12,109 +12,179 @@ edge [
 	fontname = "Comic Sans"
 	fontsize = 16
 ]
- | PizzaStore [ 
+PizzaStore [ 
+    label="{PizzaStore|PizzaStore [ 
+    label="{PizzaStore| | PizzaStore [ 
     label="{PizzaStore|+\<init\>(): void\l#createPizza(String): Pizza\l+orderPizza(String): Pizza\l}"]
 
- | Veggies [ 
+Veggies [ 
+    label="{Veggies|Veggies [ 
+    label="{Veggies| | Veggies [ 
     label="{Veggies|+toString(): String\l}"]
 
- | MarinaraSauce [ 
+MarinaraSauce [ 
+    label="{MarinaraSauce|MarinaraSauce [ 
+    label="{MarinaraSauce| | MarinaraSauce [ 
     label="{MarinaraSauce|+\<init\>(): void\l+toString(): String\l}"]
 
- | Cheese [ 
+Cheese [ 
+    label="{Cheese|Cheese [ 
+    label="{Cheese| | Cheese [ 
     label="{Cheese|+toString(): String\l}"]
 
- | PizzaIngredientFactory [ 
+PizzaIngredientFactory [ 
+    label="{PizzaIngredientFactory|PizzaIngredientFactory [ 
+    label="{PizzaIngredientFactory| | PizzaIngredientFactory [ 
     label="{PizzaIngredientFactory|+createDough(): Dough\l+createSauce(): Sauce\l+createCheese(): Cheese\l+createVeggies(): Veggies[]\l+createPepperoni(): Pepperoni\l+createClam(): Clams\l}"]
 
- | RedPepper [ 
+RedPepper [ 
+    label="{RedPepper|RedPepper [ 
+    label="{RedPepper| | RedPepper [ 
     label="{RedPepper|+\<init\>(): void\l+toString(): String\l}"]
 
- | ThickCrustDough [ 
+ThickCrustDough [ 
+    label="{ThickCrustDough|ThickCrustDough [ 
+    label="{ThickCrustDough| | ThickCrustDough [ 
     label="{ThickCrustDough|+\<init\>(): void\l+toString(): String\l}"]
 
- | NYPizzaIngredientFactory [ 
+NYPizzaIngredientFactory [ 
+    label="{NYPizzaIngredientFactory|NYPizzaIngredientFactory [ 
+    label="{NYPizzaIngredientFactory| | NYPizzaIngredientFactory [ 
     label="{NYPizzaIngredientFactory|+\<init\>(): void\l+createDough(): Dough\l+createSauce(): Sauce\l+createCheese(): Cheese\l+createVeggies(): Veggies[]\l+createPepperoni(): Pepperoni\l+createClam(): Clams\l}"]
 
- | PepperoniPizza [ 
+PepperoniPizza [ 
+    label="{PepperoniPizza|PepperoniPizza [ 
+    label="{PepperoniPizza|ingredientFactory: PizzaIngredientFactory \l | PepperoniPizza [ 
     label="{PepperoniPizza|ingredientFactory: PizzaIngredientFactory \l+\<init\>(PizzaIngredientFactory): void\lprepare(): void\l}"]
 
- | SlicedPepperoni [ 
+SlicedPepperoni [ 
+    label="{SlicedPepperoni|SlicedPepperoni [ 
+    label="{SlicedPepperoni| | SlicedPepperoni [ 
     label="{SlicedPepperoni|+\<init\>(): void\l+toString(): String\l}"]
 
- | Eggplant [ 
+Eggplant [ 
+    label="{Eggplant|Eggplant [ 
+    label="{Eggplant| | Eggplant [ 
     label="{Eggplant|+\<init\>(): void\l+toString(): String\l}"]
 
- | BlackOlives [ 
+BlackOlives [ 
+    label="{BlackOlives|BlackOlives [ 
+    label="{BlackOlives| | BlackOlives [ 
     label="{BlackOlives|+\<init\>(): void\l+toString(): String\l}"]
 
- | Sauce [ 
+Sauce [ 
+    label="{Sauce|Sauce [ 
+    label="{Sauce| | Sauce [ 
     label="{Sauce|+toString(): String\l}"]
 
- | MozzarellaCheese [ 
+MozzarellaCheese [ 
+    label="{MozzarellaCheese|MozzarellaCheese [ 
+    label="{MozzarellaCheese| | MozzarellaCheese [ 
     label="{MozzarellaCheese|+\<init\>(): void\l+toString(): String\l}"]
 
- | NYPizzaStore [ 
+NYPizzaStore [ 
+    label="{NYPizzaStore|NYPizzaStore [ 
+    label="{NYPizzaStore| | NYPizzaStore [ 
     label="{NYPizzaStore|+\<init\>(): void\l#createPizza(String): Pizza\l}"]
 
- | ReggianoCheese [ 
+ReggianoCheese [ 
+    label="{ReggianoCheese|ReggianoCheese [ 
+    label="{ReggianoCheese| | ReggianoCheese [ 
     label="{ReggianoCheese|+\<init\>(): void\l+toString(): String\l}"]
 
- | Spinach [ 
+Spinach [ 
+    label="{Spinach|Spinach [ 
+    label="{Spinach| | Spinach [ 
     label="{Spinach|+\<init\>(): void\l+toString(): String\l}"]
 
- | Onion [ 
+Onion [ 
+    label="{Onion|Onion [ 
+    label="{Onion| | Onion [ 
     label="{Onion|+\<init\>(): void\l+toString(): String\l}"]
 
- | Mushroom [ 
+Mushroom [ 
+    label="{Mushroom|Mushroom [ 
+    label="{Mushroom| | Mushroom [ 
     label="{Mushroom|+\<init\>(): void\l+toString(): String\l}"]
 
- | VeggiePizza [ 
+VeggiePizza [ 
+    label="{VeggiePizza|VeggiePizza [ 
+    label="{VeggiePizza|ingredientFactory: PizzaIngredientFactory \l | VeggiePizza [ 
     label="{VeggiePizza|ingredientFactory: PizzaIngredientFactory \l+\<init\>(PizzaIngredientFactory): void\lprepare(): void\l}"]
 
- | ClamPizza [ 
+ClamPizza [ 
+    label="{ClamPizza|ClamPizza [ 
+    label="{ClamPizza|ingredientFactory: PizzaIngredientFactory \l | ClamPizza [ 
     label="{ClamPizza|ingredientFactory: PizzaIngredientFactory \l+\<init\>(PizzaIngredientFactory): void\lprepare(): void\l}"]
 
- | Pizza [ 
+Pizza [ 
+    label="{Pizza|Pizza [ 
+    label="{Pizza|name: String \ldough: Dough \lsauce: Sauce \lveggies: Veggies[] \lcheese: Cheese \lpepperoni: Pepperoni \lclam: Clams \l | Pizza [ 
     label="{Pizza|name: String \ldough: Dough \lsauce: Sauce \lveggies: Veggies[] \lcheese: Cheese \lpepperoni: Pepperoni \lclam: Clams \l+\<init\>(): void\lprepare(): void\lbake(): void\lcut(): void\lbox(): void\lsetName(String): void\lgetName(): String\l+toString(): String\l}"]
 
- | PlumTomatoSauce [ 
+PlumTomatoSauce [ 
+    label="{PlumTomatoSauce|PlumTomatoSauce [ 
+    label="{PlumTomatoSauce| | PlumTomatoSauce [ 
     label="{PlumTomatoSauce|+\<init\>(): void\l+toString(): String\l}"]
 
- | ThinCrustDough [ 
+ThinCrustDough [ 
+    label="{ThinCrustDough|ThinCrustDough [ 
+    label="{ThinCrustDough| | ThinCrustDough [ 
     label="{ThinCrustDough|+\<init\>(): void\l+toString(): String\l}"]
 
- | ChicagoPizzaIngredientFactory [ 
+ChicagoPizzaIngredientFactory [ 
+    label="{ChicagoPizzaIngredientFactory|ChicagoPizzaIngredientFactory [ 
+    label="{ChicagoPizzaIngredientFactory| | ChicagoPizzaIngredientFactory [ 
     label="{ChicagoPizzaIngredientFactory|+\<init\>(): void\l+createDough(): Dough\l+createSauce(): Sauce\l+createCheese(): Cheese\l+createVeggies(): Veggies[]\l+createPepperoni(): Pepperoni\l+createClam(): Clams\l}"]
 
- | PizzaTestDrive [ 
+PizzaTestDrive [ 
+    label="{PizzaTestDrive|PizzaTestDrive [ 
+    label="{PizzaTestDrive| | PizzaTestDrive [ 
     label="{PizzaTestDrive|+\<init\>(): void\l+main(String[]): void\l}"]
 
- | CheesePizza [ 
+CheesePizza [ 
+    label="{CheesePizza|CheesePizza [ 
+    label="{CheesePizza|ingredientFactory: PizzaIngredientFactory \l | CheesePizza [ 
     label="{CheesePizza|ingredientFactory: PizzaIngredientFactory \l+\<init\>(PizzaIngredientFactory): void\lprepare(): void\l}"]
 
- | Dough [ 
+Dough [ 
+    label="{Dough|Dough [ 
+    label="{Dough| | Dough [ 
     label="{Dough|+toString(): String\l}"]
 
- | Garlic [ 
+Garlic [ 
+    label="{Garlic|Garlic [ 
+    label="{Garlic| | Garlic [ 
     label="{Garlic|+\<init\>(): void\l+toString(): String\l}"]
 
- | ParmesanCheese [ 
+ParmesanCheese [ 
+    label="{ParmesanCheese|ParmesanCheese [ 
+    label="{ParmesanCheese| | ParmesanCheese [ 
     label="{ParmesanCheese|+\<init\>(): void\l+toString(): String\l}"]
 
- | FrozenClams [ 
+FrozenClams [ 
+    label="{FrozenClams|FrozenClams [ 
+    label="{FrozenClams| | FrozenClams [ 
     label="{FrozenClams|+\<init\>(): void\l+toString(): String\l}"]
 
- | Clams [ 
+Clams [ 
+    label="{Clams|Clams [ 
+    label="{Clams| | Clams [ 
     label="{Clams|+toString(): String\l}"]
 
- | FreshClams [ 
+FreshClams [ 
+    label="{FreshClams|FreshClams [ 
+    label="{FreshClams| | FreshClams [ 
     label="{FreshClams|+\<init\>(): void\l+toString(): String\l}"]
 
- | ChicagoPizzaStore [ 
+ChicagoPizzaStore [ 
+    label="{ChicagoPizzaStore|ChicagoPizzaStore [ 
+    label="{ChicagoPizzaStore| | ChicagoPizzaStore [ 
     label="{ChicagoPizzaStore|+\<init\>(): void\l#createPizza(String): Pizza\l}"]
 
- | Pepperoni [ 
+Pepperoni [ 
+    label="{Pepperoni|Pepperoni [ 
+    label="{Pepperoni| | Pepperoni [ 
     label="{Pepperoni|+toString(): String\l}"]
 
 PizzaStore -> Pizza[arrowhead = vee, style = dotted]

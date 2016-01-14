@@ -68,23 +68,24 @@ public class FirstASM {
 
 	public static void getClassDetails(String pkg, String className,
 			StringBuffer buf) throws IOException {
-		
+		NoahsArk ark = new NoahsArk();
 		ClassReader reader = new ClassReader(pkg + className);
-
+		
 		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(
-				Opcodes.ASM5, buf);
-
+				Opcodes.ASM5, buf, ark);
+		reader.accept(declVisitor, ClassReader.EXPAND_FRAMES);
 		ClassVisitorBuffered fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
-				declVisitor);
-//		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
+				declVisitor, ark.getBoat().get(declVisitor.getName()));
+		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
 		buf.append(" | ");
 
 		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
-				Opcodes.ASM5, fieldVisitor, buf);
+				Opcodes.ASM5, fieldVisitor, buf, ark.getBoat().get(declVisitor.getName()));
 
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		buf.append("}\"]");
 		buf.append("\n\n");
+		
 
 	}
 	
