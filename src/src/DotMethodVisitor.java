@@ -19,7 +19,6 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 	public DotMethodVisitor(int arg0, ClassVisitorBuffered arg1, NoahsArk ark, String className) {
 		super(arg0, arg1);
 		this.arg0 = arg0;
-//		this.buf = arg1.buf;
 		this.ark = ark;
 		this.className = className;
 	}
@@ -27,6 +26,13 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 		super(arg0);
 		this.buf = buf;
 		this.arg0 = arg0;
+	}
+	
+	public DotMethodVisitor(int asm5, NoahsArk ark, String inputClass) {
+		super(asm5);
+		this.arg0 = asm5;
+		this.ark = ark;
+		this.className = inputClass;
 	}
 	
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, 
@@ -55,7 +61,7 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 			String[] temparray = returnName.split("\\.");
 			returnName = temparray[temparray.length - 1];
 		}
-		this.ark.getBoat().get(this.className).addMethod(name, new MethodPrototype(symbol, name, args, returnName));
+		if(this.ark.getBoat().get(this.className) != null)this.ark.getBoat().get(this.className).addMethod(name, new MethodPrototype(symbol, name, args, returnName));
 		
 		return test;
 	}

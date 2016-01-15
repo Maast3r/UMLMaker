@@ -16,14 +16,14 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
 public class FirstASM {
-	private static String font = "\tfontname = \"Times New Roman\"\n"
+	private static String font = "\tfontname = \"Bitstream Vera Sans\"\n"
 								+"\tfontsize = 16\n";
-	private static String[] associationTypes = {"Inheritance", "Association"};//,"Association"};
+	private static String[] associationTypes = {"Inheritance", "Association"};
 	
 	private static String methodSeparatorString = " | ";
 	private static String classEndString = "}\"]\n";
-	private static String pizzaf = "C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\pizzafactory\\factory\\pizzaaf";
 	private static String testerino = "C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
+	private static String terterino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take arg2,arg3 2";
 	
 	private static HashMap<String, Boolean> listOfClasses;
 	public static void main(String[] args) throws IOException {
@@ -33,60 +33,73 @@ public class FirstASM {
 		line = in.readLine();
 		if(line == null || line.length() == 0 || !line.contains(" ")) throw new IOException("FORMAT ERROR: Empty command is not supported!");
 		String command = line.split(" ")[0];
-		String path2 = line.split(" ")[1];
-		if(!path2.contains("\\\\"))throw new IOException("FORMAT ERROR: Empty command is not supported!");
-		String[] path2Parts = path2.split("\\\\");
-		String pkg2 = path2Parts[path2Parts.length-1] + ".";
-		path2 = path2.replace("\\\\", "\\");
-		// ////////////////////////////////////////////////////////
-		// Set these two variables to generate UML for an arbitrary project
-//		String path = "./src/target";
-//		String pkg = "target.";
-		String path = path2;
-		String pkg = pkg2;
-		// ////////////////////////////////////////////////////////
+		String path = line.split(" ")[1];
+		if(!path.contains("\\\\"))throw new IOException("FORMAT ERROR: Empty command is not supported!");
+		String[] pathParts = path.split("\\\\");
+		String pkg = pathParts[pathParts.length-1] + ".";
+		path = path.replace("\\\\", "\\");
+		String inputClass = "";
+		String inputMethod = "";
+		String inputArgs = "";
+		String maxDepth = "";
 		
 		StringBuffer buf = new StringBuffer();
 		File packageToUML = new File(path);
 		System.out.println(packageToUML.getAbsolutePath());
 		
-		
 		// Generate the ark
 		listOfClasses = listClasses(packageToUML);
 		NoahsArk ark = new NoahsArk(listOfClasses);
+		ark.setPackage(pkg);
+		if(command.equals("uml")){
+			umlHandler(command, pkg, path, buf, ark);
+		} else if(command.equals("sequence")){
+			inputClass = line.split(" ")[2];
+			inputMethod = line.split(" ")[3];
+			inputArgs = line.split(" ")[4];
+			maxDepth = line.split(" ")[5];
+			sequenceHandler(command, pkg, path, buf, ark, inputClass, inputMethod, inputArgs, Integer.parseInt(maxDepth));
+		} else {
+			System.out.println("THIS COMMMANDS IS NOT SUPPORTED");
+		}	
+	}
+
+	public static void umlHandler(String command, String pkg, String path, StringBuffer buf, 
+			NoahsArk ark) throws IOException{
 		Iterator iter = listOfClasses.entrySet().iterator();
 		while (iter.hasNext()) {
 			String temp = iter.next().toString().split("=")[0];
 			getClassDetails(pkg, temp, ark);
 			
 		}
-
 		
-		//Decide which image to generate
-		if(command.equals("uml")){
-			buf = generateDotUML(pkg, buf, ark);
-		} else if(command.equals("sequence")){
-			System.out.println("make a sequence diagram");
-		} else {
-			System.out.println("THIS COMMMANDS IS NOT SUPPORTED");
-		}
-//		buf = generateDotUML(pkg, buf, ark);
-		
+		buf = generateDotUML(pkg, buf, ark);
 		
 		// Write the buffer to file
 		if (path.contains("/")) {
 			path = path.split("/")[path.split("/").length - 1];
 		}
 		path = path + ".dot";
-//		path = path + "\\.\\" + pkg + "dot";
-//		path = path.replace("\\\\", "\\");
-//		System.out.println("path : " + path);
-		FileOutputStream base = new FileOutputStream(path);
-		base.write(buf.toString().getBytes());
-		base.close();
+		FileOutputStream output = new FileOutputStream(path);
+		output.write(buf.toString().getBytes());
+		output.close();
 		
 		System.out.println("trying to run program");
 		visualize(command, pkg);
+	}
+	
+	public static void sequenceHandler(String command, String pkg, String path, StringBuffer buf, NoahsArk ark,
+			String inputClass, String inputMethod, String inputArgs, int maxDepth) throws IOException {
+		ark.setDepthMax(maxDepth);
+		methodEval(pkg, inputClass, inputMethod, inputArgs, ark);
+//		visualize(command, pkg);
+	}
+	
+	public static void methodEval(String pkg, String inputClass, String inputMethod, String inputArgs, NoahsArk ark) throws IOException{
+		ClassReader reader = new ClassReader(pkg + inputClass);
+		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
+				Opcodes.ASM5, ark, inputClass);
+		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 	}
 
 	public static void getClassDetails(String pkg, String className,
@@ -99,7 +112,7 @@ public class FirstASM {
 		ClassVisitorBuffered fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
 				declVisitor, ark, declVisitor.getName());
 		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
-
+		
 		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
 				Opcodes.ASM5, fieldVisitor, ark, declVisitor.getName());
 
@@ -350,6 +363,11 @@ public class FirstASM {
 		return listOfJavaFiles;
 	}
 	
+	public static StringBuffer generateSequenceDiagram(String pkg, StringBuffer buf, NoahsArk ark){
+		return buf;
+		
+	}
+	
 	public static void visualize(String command, String path){
 		System.out.println("visualize " + path + "png");
 		Runtime rt = Runtime.getRuntime();
@@ -358,6 +376,7 @@ public class FirstASM {
 			path = path.substring(0,path.length()-1);
 			Process pr = null;;
 			if(command.equals("uml")){
+				System.out.println("uml diagram " + path);
 				pr = rt.exec("dot -T png -o "+path+".png " + path+".dot");
 			} else if(command.equals("sequence")){
 				System.out.println("sequence");

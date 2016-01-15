@@ -8,6 +8,8 @@ public class NoahsArk {
 	public HashMap<String, ClassPrototype> boat;
 	public HashMap<String,HashSet<String>> pairs;
 	private static HashMap<String, Boolean> listOfClasses;
+	public int depth;
+	public String pkg;
 	
 	public NoahsArk(HashMap<String, Boolean> listOfClasses) {
 		this.boat = new HashMap<String, ClassPrototype>();
@@ -32,6 +34,26 @@ public class NoahsArk {
 			}
 			this.pairs.get(origin).add(target);
 		}
+	}
+	
+	public void setDepthMax(int depth){
+		this.depth = depth;
+	}
+	
+	public int getDepthMax(){
+		return this.depth;
+	}
+	
+	public HashMap<String, Boolean> getListOfClass(){
+		return this.listOfClasses;
+	}
+	
+	public String getPackage(){
+		return this.pkg;
+	}
+	
+	public void setPackage(String pkg){
+		this.pkg = pkg;
 	}
 
 }

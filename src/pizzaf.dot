@@ -1,15 +1,15 @@
 digraph G{
-	fontname = "Times New Roman"
+	fontname = "Bitstream Vera Sans"
 	fontsize = 16
 
 node [
-	fontname = "Times New Roman"
+	fontname = "Bitstream Vera Sans"
 	fontsize = 16
 
         shape = "record"
 ]
 edge [
-	fontname = "Times New Roman"
+	fontname = "Bitstream Vera Sans"
 	fontsize = 16
 ]
 PizzaStore [ 
