@@ -27,7 +27,7 @@ public class FirstASM {
 	private static String testerino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 5";
 	private static String testerino3 = "sequence java.util Collections shuffle List<T> 5";
 	
-	private static HashMap<String, Boolean> listOfClasses;
+	public static HashMap<String, Boolean> listOfClasses;
 	public static void main(String[] args) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String line = "";
