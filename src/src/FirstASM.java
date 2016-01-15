@@ -23,6 +23,7 @@ public class FirstASM {
 	
 	private static String methodSeparatorString = " | ";
 	private static String classEndString = "}\"]\n";
+	private static String ourPKG = "C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
 	private static String testerino = "C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
 	private static String testerino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 5";
 	private static String testerino3 = "sequence java.util Collections shuffle List<T> 5";
@@ -415,6 +416,7 @@ public class FirstASM {
 	}
 
 	public static HashMap<String, Boolean> listClasses(final File folder) {
+		System.out.println("folder " + folder.getAbsolutePath());
 		HashMap<String, Boolean> listOfJavaFiles = new HashMap<String, Boolean>();
 		for (final File fileEntry : folder.listFiles()) {
 			if (fileEntry.getName().contains(".")) {
@@ -440,10 +442,10 @@ public class FirstASM {
 		StringBuffer sb = new StringBuffer();
 		try {
 			path = path.substring(0,path.length()-1);
-			Process pr = null;;
+			Process pr = null;
 			if(command.equals("uml")){
 				System.out.println("uml diagram " + path);
-				pr = rt.exec("dot -T png -o "+path+".png " + path+".dot");
+				pr = rt.exec("dot -T png -o src/"+path+".png src/" + path+".dot");
 			} else if(command.equals("sequence")){
 				System.out.println("sequence");
 			} else {
