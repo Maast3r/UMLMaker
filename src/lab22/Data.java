@@ -12,6 +12,10 @@ public class Data {
 	
 	public int getMask() {
 		this.test = "test";
+		DumbClass dumb = new DumbClass(this.test);
+		DumbClass dum2 = new DumbClass(this.test);
+		this.test = dumb.getTest();
+		this.test = dum2.getTest();
 		return mask;
 	}
 	

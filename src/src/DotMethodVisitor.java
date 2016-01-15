@@ -16,6 +16,7 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 	public int arg0;
 	public NoahsArk ark;
 	public String className;
+	public String inputMethodName;
 	
 	public DotMethodVisitor(int arg0, ClassVisitorBuffered arg1, NoahsArk ark, String className) {
 		super(arg0, arg1);
@@ -29,18 +30,19 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 		this.arg0 = arg0;
 	}
 	
-	public DotMethodVisitor(int asm5, NoahsArk ark, String inputClass) {
+	public DotMethodVisitor(int asm5, NoahsArk ark, String inputClass, String inputMethodName) {
 		super(asm5);
 		this.arg0 = asm5;
 		this.ark = ark;
 		this.className = inputClass;
+		this.inputMethodName = inputMethodName;
 	}
 	
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, 
 			String[] exceptions){
 		System.out.println("NEW FUCKING METHOD : " + name);
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		MethodVisitor test = new MethodBodyVisitor(Opcodes.ASM5, toDecorate, this.className, this.ark);
+		MethodVisitor test = new MethodBodyVisitor(Opcodes.ASM5, toDecorate, this.className, this.ark, this.inputMethodName);
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		String[] classNames = new String[argTypes.length];
 		String args = "";

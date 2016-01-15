@@ -1,0 +1,11 @@
+DataLine:DataLine
+/Data:Data
+/DumbClass:DumbClass
+
+DataLine:Data.new
+Data:DumbClass.new
+Data:DumbClass.init
+
+DataLine:Data.getMask()
+Data:DumbClass.getTest()
+Data:DumbClass.getTest()

@@ -9,6 +9,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
@@ -23,7 +24,8 @@ public class FirstASM {
 	private static String methodSeparatorString = " | ";
 	private static String classEndString = "}\"]\n";
 	private static String testerino = "C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
-	private static String terterino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 2";
+	private static String testerino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 5";
+	private static String testerino3 = "sequence java.util Collections shuffle List<T> 5";
 	
 	private static HashMap<String, Boolean> listOfClasses;
 	public static void main(String[] args) throws IOException {
@@ -34,7 +36,7 @@ public class FirstASM {
 		if(line == null || line.length() == 0 || !line.contains(" ")) throw new IOException("FORMAT ERROR: Empty command is not supported!");
 		String command = line.split(" ")[0];
 		String path = line.split(" ")[1];
-		if(!path.contains("\\\\"))throw new IOException("FORMAT ERROR: Empty command is not supported!");
+//		if(!path.contains("\\\\"))throw new IOException("FORMAT ERROR: Empty command is not supported!");
 		String[] pathParts = path.split("\\\\");
 		String pkg = pathParts[pathParts.length-1] + ".";
 		path = path.replace("\\\\", "\\");
@@ -43,9 +45,10 @@ public class FirstASM {
 		String inputArgs = "";
 		String maxDepth = "";
 		
+		System.out.println("PATH : " + path);
 		StringBuffer buf = new StringBuffer();
 		File packageToUML = new File(path);
-		System.out.println(packageToUML.getAbsolutePath());
+		System.out.println("test: " + packageToUML.getAbsolutePath());
 		
 		// Generate the ark
 		listOfClasses = listClasses(packageToUML);
@@ -92,13 +95,25 @@ public class FirstASM {
 			String inputClass, String inputMethod, String inputArgs, int maxDepth) throws IOException {
 		ark.setDepthMax(maxDepth);
 		methodEval(pkg, inputClass, inputMethod, inputArgs, ark);
+		buf = generateSequence(pkg, inputClass, inputMethod, inputArgs, buf, ark);
+		
+		// Write the buffer to file
+		if (path.contains("/")) {
+			path = path.split("/")[path.split("/").length - 1];
+		}
+		path = path + ".sd";
+		FileOutputStream output = new FileOutputStream(path);
+		output.write(buf.toString().getBytes());
+		output.close();
+		
+		System.out.println("trying to run program");
 //		visualize(command, pkg);
 	}
 	
 	public static void methodEval(String pkg, String inputClass, String inputMethod, String inputArgs, NoahsArk ark) throws IOException{
 		ClassReader reader = new ClassReader(pkg + inputClass);
 		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
-				Opcodes.ASM5, ark, inputClass);
+				Opcodes.ASM5, ark, inputClass, inputMethod);
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 	}
 
@@ -185,8 +200,59 @@ public class FirstASM {
 		}
 		
 		// formatting end of document
-		buf.append("\n\n");
+		for(int i =0; i< 2; i++){
+			buf.append("\n");
+		}
 		buf.append("}");
+		return buf;
+	}
+	
+	public static StringBuffer generateSequence(String pkg, String inputClass, String inputMethod, 
+			String inputArgs, StringBuffer buf, NoahsArk ark){
+		String nl = "\n";
+		// Generate the first Node
+		String firstNode =  inputClass + ":" + inputClass + nl;
+		buf.append(firstNode);
+		// iterate of the initialized nodes 
+		
+		HashSet<String> seen = new HashSet<String>();
+		String newBuffer = "";
+		
+		
+		for(String node : ark.newNodes){
+			String temp[] = node.split(":");
+			if(seen.contains(temp[0].substring(1))){
+				newBuffer += temp[0].substring(1) + ":" + temp[1] + ".init" + nl;
+			} else{
+				seen.add(temp[0].substring(1));
+				newBuffer += temp[0].substring(1) + ":" + temp[1] + ".new" + nl;
+				buf.append( "/" + temp[1] +  ":" + temp[1] + nl);
+			}
+		}
+		
+		buf.append(nl);
+		buf.append(newBuffer);
+		buf.append(nl);
+		// iterate over ark.sequenceNodes
+		int currentLevel = 0;
+		while(!ark.sequenceNodes.isEmpty()){
+			String temp = ark.sequenceNodes.get(0);
+			ark.sequenceNodes.remove(0);
+			
+			
+			if(temp.equals("GO DEEPER")){
+				currentLevel++;
+			} else if(temp.equals("GO UPPER")){
+				currentLevel--;
+			} else {
+				//uncomment for future control flow blocks
+//				for(int i =0; i < currentLevel; i++){
+//					temp = "  " + temp;
+//				}
+				
+				buf.append(temp + nl);
+			}
+		}
 		return buf;
 	}
 	

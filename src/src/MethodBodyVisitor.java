@@ -16,15 +16,17 @@ public class MethodBodyVisitor extends MethodVisitor{
 	public String owner;
 	public String className;
 	public NoahsArk ark;
+	public String inputMethodName;
 	
 	public MethodBodyVisitor(int arg0){
 		super(arg0);
 	}
 
-	public MethodBodyVisitor(int arg0, MethodVisitor arg1, String className, NoahsArk ark) {
+	public MethodBodyVisitor(int arg0, MethodVisitor arg1, String className, NoahsArk ark, String inputMethodName) {
 		super(arg0, arg1);
 		this.className = className;
 		this.ark = ark;
+		this.inputMethodName = inputMethodName;
 	}
 	
 	@Override
@@ -54,22 +56,24 @@ public class MethodBodyVisitor extends MethodVisitor{
 		
 		System.out.println("a;slkdfja   " +   " " + owner + " " + name + " " + desc + " " + isIn + " " + this.ark.getPackage());
 
-		if(this.ark.getListOfClass().get(this.owner) != null){
+		if(this.ark.getListOfClass().get(this.owner) != null && !isIn){
 			if(name.equals("<init>")){
+				System.out.println(ark.sequenceNodes);
 				System.out.println("add new");
 				// Create a new node
-				String node =  "t/:" + className;
-				ark.sequenceNodes.add(node);
-				
+				String node =  "/" + className + ":" + owner;
+				ark.newNodes.add(node);
+	
 				System.out.println(ark.sequenceNodes);
 			} else {
 				// Add Method call to diagram
 				String args = "";
 				for(Type t : Type.getArgumentTypes(desc)){
 					String temp = t.getClassName();
-					if(temp.contains("/")){
-						int len = temp.split("/").length;
-						temp = temp.split("/")[len -1 ];
+					System.out.println("ARGS ARE: " + temp);
+					if(temp.contains(".")){
+						int len = temp.split("\\.").length;
+						temp = temp.split("\\.")[len -1];
 					}
 					
 					args += temp + ", ";
@@ -81,13 +85,16 @@ public class MethodBodyVisitor extends MethodVisitor{
 				// Goes deeper if class in package
 				if(this.ark.getDepthMax() > 0){
 					ark.sequenceNodes.add("GO DEEPER");
+					System.out.println(ark.sequenceNodes);
 					try {
-						repeat();
+						repeat(name);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					ark.sequenceNodes.add("GO UPPER");
 					//Iterate on the next level down
+					System.out.println(ark.sequenceNodes);
 					System.out.println("gooby, deeper pls");
 				}
 			}
@@ -98,11 +105,11 @@ public class MethodBodyVisitor extends MethodVisitor{
 		
 	}
 	
-	public void repeat() throws IOException{
+	public void repeat(String targetMethod) throws IOException{
 		this.ark.deeper();
 		ClassReader reader = new ClassReader(this.ark.getPackage() + this.owner);
 		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
-				Opcodes.ASM5, this.ark, this.owner);
+				Opcodes.ASM5, this.ark, this.owner, targetMethod);
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		this.ark.goUp();
 	}
