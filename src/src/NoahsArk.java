@@ -1,8 +1,8 @@
 package src;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 public class NoahsArk {
 	public HashMap<String, ClassPrototype> boat;
@@ -10,11 +10,13 @@ public class NoahsArk {
 	private static HashMap<String, Boolean> listOfClasses;
 	public int depth;
 	public String pkg;
+	public ConcurrentSkipListSet<String> sequenceNodes;
 	
 	public NoahsArk(HashMap<String, Boolean> listOfClasses) {
 		this.boat = new HashMap<String, ClassPrototype>();
 		this.pairs = new HashMap<String,HashSet<String>>();
 		this.listOfClasses = listOfClasses;
+		sequenceNodes = new ConcurrentSkipListSet<String>();
 	}
 	
 	
@@ -54,6 +56,15 @@ public class NoahsArk {
 	
 	public void setPackage(String pkg){
 		this.pkg = pkg;
+	}
+
+	public void goUp(){
+		this.depth = this.depth + 1;
+	}
+
+	public void deeper() {
+		// TODO Auto-generated method stub
+		this.depth = this.depth -1;
 	}
 
 }

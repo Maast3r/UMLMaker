@@ -23,7 +23,7 @@ public class FirstASM {
 	private static String methodSeparatorString = " | ";
 	private static String classEndString = "}\"]\n";
 	private static String testerino = "C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
-	private static String terterino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take arg2,arg3 2";
+	private static String terterino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 2";
 	
 	private static HashMap<String, Boolean> listOfClasses;
 	public static void main(String[] args) throws IOException {

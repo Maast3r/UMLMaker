@@ -2,6 +2,7 @@ package lab22;
 
 public class Data {
 	private int mask;
+	public String test;
 	private char[] content;
 
 	public Data(int mask, char[] content) {
@@ -10,6 +11,7 @@ public class Data {
 	}
 	
 	public int getMask() {
+		this.test = "test";
 		return mask;
 	}
 	

@@ -8,6 +8,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
+import com.sun.xml.internal.ws.wsdl.writer.document.Types;
 
 import jdk.internal.org.objectweb.asm.commons.InstructionAdapter;
 
@@ -37,6 +38,7 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 	
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, 
 			String[] exceptions){
+		System.out.println("NEW FUCKING METHOD : " + name);
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		MethodVisitor test = new MethodBodyVisitor(Opcodes.ASM5, toDecorate, this.className, this.ark);
 		Type[] argTypes = Type.getArgumentTypes(desc);
