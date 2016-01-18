@@ -16,7 +16,8 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 	public int arg0;
 	public NoahsArk ark;
 	public String className;
-	public String inputMethodName;
+	public String inputMethodName = "";
+	public String inputArgs = "";
 	
 	public DotMethodVisitor(int arg0, ClassVisitorBuffered arg1, NoahsArk ark, String className) {
 		super(arg0, arg1);
@@ -30,19 +31,18 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 		this.arg0 = arg0;
 	}
 	
-	public DotMethodVisitor(int asm5, NoahsArk ark, String inputClass, String inputMethodName) {
+	public DotMethodVisitor(int asm5, NoahsArk ark, String inputClass, String inputMethodName, String inputArgs) {
 		super(asm5);
 		this.arg0 = asm5;
 		this.ark = ark;
 		this.className = inputClass;
 		this.inputMethodName = inputMethodName;
+		this.inputArgs = inputArgs;
 	}
 	
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, 
 			String[] exceptions){
-		System.out.println("NEW FUCKING METHOD : " + name);
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		MethodVisitor test = new MethodBodyVisitor(Opcodes.ASM5, toDecorate, this.className, this.ark, this.inputMethodName);
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		String[] classNames = new String[argTypes.length];
 		String args = "";
@@ -57,6 +57,17 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 			}
 			args += temp + ", ";
 		}
+		if(args.length() > 2)args = args.substring(0, args.length()-2);
+//		System.out.println("ARG COMPARISONNNNN : " + this.inputMethodName + "  " + name + " --- " +  this.inputArgs + "  " + args);
+		MethodVisitor test = null;
+		if((this.ark.getCmd().equals("sequence") && this.inputMethodName.equals(name) && this.inputArgs.equals(args))
+				|| this.ark.getCmd().equals("uml")){
+//			System.out.println("LETS GO INNNNNNNNNNNNNNNNNNNNNNNNNNN   " + this.inputMethodName + "  " + name + " --- " +  this.inputArgs + "  " + args);
+			test = new MethodBodyVisitor(Opcodes.ASM5, toDecorate, this.className, this.ark, this.inputMethodName, this.inputArgs);
+		}
+		
+		
+		
 		if(args.length()>=2)args = args.substring(0, args.length() -2);
 		
 		String symbol= getAccessModifier(access);

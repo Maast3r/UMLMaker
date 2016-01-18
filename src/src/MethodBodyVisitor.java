@@ -1,13 +1,9 @@
 package src;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.List;
-
-import javax.lang.model.util.Types;
+import java.util.ArrayList;
 
 import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -17,16 +13,18 @@ public class MethodBodyVisitor extends MethodVisitor{
 	public String className;
 	public NoahsArk ark;
 	public String inputMethodName;
+	public String inputArgs;
 	
 	public MethodBodyVisitor(int arg0){
 		super(arg0);
 	}
 
-	public MethodBodyVisitor(int arg0, MethodVisitor arg1, String className, NoahsArk ark, String inputMethodName) {
+	public MethodBodyVisitor(int arg0, MethodVisitor arg1, String className, NoahsArk ark, String inputMethodName, String inputArgs) {
 		super(arg0, arg1);
 		this.className = className;
 		this.ark = ark;
 		this.inputMethodName = inputMethodName;
+		this.inputArgs = inputArgs;
 	}
 	
 	@Override
@@ -36,41 +34,38 @@ public class MethodBodyVisitor extends MethodVisitor{
 			owner = owner.split("/")[len -1 ];
 		}
 		this.owner = owner;
-		this.ark.addPair(this.className, "#" + this.owner);
-		System.out.println("depth " + this.ark.getDepthMax());
+		if(this.ark.getCmd().equals(("uml")))this.ark.addPair(this.className, "#" + this.owner);
 		
+//		System.out.println(this.ark.getDepthMax() + " a;slkdfja   " +   " " + owner + " " + name + " " + isIn + " LOOKING FOR: " + this.inputMethodName);
+//		System.out.println(this.ark.newNodes);
 		
-//		Class c;
-//		try {
-//			System.out.println(this.ark.pkg + owner);
-//			c = (Class) Class.forName(this.ark.pkg + owner);
-//			Method[] ms = c.getDeclaredMethods();
-//			c.get
-//			for(Method t : ms){
-//				System.out.println(t.getName().toString());
-//			}
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-		System.out.println("a;slkdfja   " +   " " + owner + " " + name + " " + desc + " " + isIn + " " + this.ark.getPackage());
-
-		if(this.ark.getListOfClass().get(this.owner) != null && !isIn){
+		if(!isIn && !this.owner.equals("Object") && this.ark.getCmd().equals(("sequence"))){
+//			System.out.println("DEEPER");
 			if(name.equals("<init>")){
-				System.out.println(ark.sequenceNodes);
-				System.out.println("add new");
+//				System.out.println(ark.sequenceNodes);
+//				System.out.println("add new");
 				// Create a new node
-				String node =  "/" + className + ":" + owner;
+//				System.out.println("add new node");
+				String node =  "";
+				if(owner.contains("$")) {
+					owner = owner.split("\\$")[1];
+				}
+				node = "/" + className + ":" + owner;
 				ark.newNodes.add(node);
 	
-				System.out.println(ark.sequenceNodes);
+//				System.out.println(ark.newNodes);
 			} else {
 				// Add Method call to diagram
+				String test = "/" + className + ":" + owner;
+				String test2 = className + ":" + owner;
+//				System.out.println("-------------------    " + test + " " + test2 + !this.ark.newNodes.contains(test) 
+//						+ " " + !this.ark.newNodes.contains(test2));
+				if(!this.ark.newNodes.contains(test) 
+						&& !this.ark.newNodes.contains(test2)) this.ark.newNodes.add(test);
 				String args = "";
 				for(Type t : Type.getArgumentTypes(desc)){
 					String temp = t.getClassName();
-					System.out.println("ARGS ARE: " + temp);
+//					System.out.println("ARGS ARE: " + temp);
 					if(temp.contains(".")){
 						int len = temp.split("\\.").length;
 						temp = temp.split("\\.")[len -1];
@@ -81,36 +76,44 @@ public class MethodBodyVisitor extends MethodVisitor{
 				}
 				if(args.length() >= 2)args = args.substring(0,args.length()-2);
 				ark.sequenceNodes.add(className + ":" + owner + "." + name + "(" + args + ")");
-				System.out.println(ark.sequenceNodes);
+//				System.out.println(ark.sequenceNodes);
 				// Goes deeper if class in package
 				if(this.ark.getDepthMax() > 0){
 					ark.sequenceNodes.add("GO DEEPER");
-					System.out.println(ark.sequenceNodes);
+//					System.out.println(ark.sequenceNodes);
 					try {
-						repeat(name);
+						repeat(name, args);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					ark.sequenceNodes.add("GO UPPER");
 					//Iterate on the next level down
-					System.out.println(ark.sequenceNodes);
-					System.out.println("gooby, deeper pls");
+//					System.out.println(ark.sequenceNodes);
+//					System.out.println("gooby, deeper pls");
 				}
 			}
 		}
 	}
 	
-	public void addToPairs(){
-		
-	}
-	
-	public void repeat(String targetMethod) throws IOException{
+	public void repeat(String targetMethod, String targetArgs) throws IOException{
 		this.ark.deeper();
-		ClassReader reader = new ClassReader(this.ark.getPackage() + this.owner);
-		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
-				Opcodes.ASM5, this.ark, this.owner, targetMethod);
-		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+		System.out.println(targetMethod + "  repeat ark package " + this.ark.getPackage() + this.owner);
+		String test = this.ark.getPackage() + this.owner;
+		if(this.owner.equals("AtomicLong")) {
+			this.ark.setPackage("java.util.concurrent.atomic.");
+		} else {
+			this.ark.setPackage("java.util.");
+		}
+		System.out.println("--- " + this.ark.getPackage());
+		try{
+			ClassReader reader = new ClassReader(this.ark.getPackage() + this.owner);
+			ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
+					Opcodes.ASM5, this.ark, this.owner, targetMethod, targetArgs);
+			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
 		this.ark.goUp();
 	}
 

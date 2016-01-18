@@ -23,10 +23,10 @@ public class FirstASM {
 	
 	private static String methodSeparatorString = " | ";
 	private static String classEndString = "}\"]\n";
-	private static String ourPKG = "C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
-	private static String testerino = "C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
+	private static String ourPKG = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
+	private static String testerino = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
 	private static String testerino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 5";
-	private static String testerino3 = "sequence java.util Collections shuffle List<T> 5";
+	private static String testerino3 = "sequence java.util Collections shuffle List 5";
 	
 	public static HashMap<String, Boolean> listOfClasses;
 	public static void main(String[] args) throws IOException {
@@ -46,18 +46,24 @@ public class FirstASM {
 		String inputArgs = "";
 		String maxDepth = "";
 		
-		System.out.println("PATH : " + path);
 		StringBuffer buf = new StringBuffer();
 		File packageToUML = new File(path);
-		System.out.println("test: " + packageToUML.getAbsolutePath());
 		
 		// Generate the ark
-		listOfClasses = listClasses(packageToUML);
-		NoahsArk ark = new NoahsArk(listOfClasses);
-		ark.setPackage(pkg);
+//		listOfClasses = listClasses(packageToUML);
+//		NoahsArk ark = new NoahsArk(listOfClasses);
+//		ark.setPackage(pkg);
 		if(command.equals("uml")){
+			listOfClasses = listClasses(packageToUML);
+			NoahsArk ark = new NoahsArk(listOfClasses);
+			ark.setPackage(pkg);
+			ark.setCmd(command);
 			umlHandler(command, pkg, path, buf, ark);
 		} else if(command.equals("sequence")){
+			listOfClasses = null;
+			NoahsArk ark = new NoahsArk(listOfClasses);
+			ark.setPackage(pkg);
+			ark.setCmd(command);
 			inputClass = line.split(" ")[2];
 			inputMethod = line.split(" ")[3];
 			inputArgs = line.split(" ")[4];
@@ -94,6 +100,7 @@ public class FirstASM {
 	
 	public static void sequenceHandler(String command, String pkg, String path, StringBuffer buf, NoahsArk ark,
 			String inputClass, String inputMethod, String inputArgs, int maxDepth) throws IOException {
+		ark.newNodes.add(inputClass + ":" + inputClass);
 		ark.setDepthMax(maxDepth);
 		methodEval(pkg, inputClass, inputMethod, inputArgs, ark);
 		buf = generateSequence(pkg, inputClass, inputMethod, inputArgs, buf, ark);
@@ -107,14 +114,15 @@ public class FirstASM {
 		output.write(buf.toString().getBytes());
 		output.close();
 		
-		System.out.println("trying to run program");
+		System.out.println("trying to run program sequence");
 //		visualize(command, pkg);
 	}
 	
 	public static void methodEval(String pkg, String inputClass, String inputMethod, String inputArgs, NoahsArk ark) throws IOException{
+//		System.out.println("PACKAGE: " + pkg);
 		ClassReader reader = new ClassReader(pkg + inputClass);
 		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
-				Opcodes.ASM5, ark, inputClass, inputMethod);
+				Opcodes.ASM5, ark, inputClass, inputMethod, inputArgs);
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 	}
 
@@ -212,25 +220,36 @@ public class FirstASM {
 			String inputArgs, StringBuffer buf, NoahsArk ark){
 		String nl = "\n";
 		// Generate the first Node
-		String firstNode =  inputClass + ":" + inputClass + nl;
-		buf.append(firstNode);
+//		String firstNode =  inputClass + ":" + inputClass + nl;
+//		buf.append(firstNode);
 		// iterate of the initialized nodes 
 		
 		HashSet<String> seen = new HashSet<String>();
 		String newBuffer = "";
-		
-		
+		System.out.println("NEW NODES : " + ark.newNodes);
+//		System.out.println("METHODSSSSS : " + ark.n);
+		int length = ark.newNodes.size();
 		for(String node : ark.newNodes){
 			String temp[] = node.split(":");
-			if(seen.contains(temp[0].substring(1))){
+//			System.out.println(temp[0].substring(1) + "    " + temp[1]);
+			if(seen.contains(temp[1])){
 				newBuffer += temp[0].substring(1) + ":" + temp[1] + ".init" + nl;
 			} else{
-				seen.add(temp[0].substring(1));
-				newBuffer += temp[0].substring(1) + ":" + temp[1] + ".new" + nl;
-				buf.append( "/" + temp[1] +  ":" + temp[1] + nl);
+				if(length == ark.newNodes.size()){
+					seen.add(temp[1]);
+//					newBuffer += temp[0] + ":" + temp[1] + ".new" + nl;
+					System.out.println("BUFFFF -- " + temp[1]);
+					buf.append(temp[1] +  ":" + temp[1] + nl);
+				} else {
+					seen.add(temp[1]);
+					newBuffer += temp[0].substring(1) + ":" + temp[1] + ".new" + nl;
+					buf.append( "/" + temp[1] +  ":" + temp[1] + nl);
+				}
+				length--;
 			}
 		}
-		
+//		System.out.println("newBuffer!!!n");
+//		System.out.println(newBuffer);
 		buf.append(nl);
 		buf.append(newBuffer);
 		buf.append(nl);
@@ -429,11 +448,6 @@ public class FirstASM {
 			}
 		}
 		return listOfJavaFiles;
-	}
-	
-	public static StringBuffer generateSequenceDiagram(String pkg, StringBuffer buf, NoahsArk ark){
-		return buf;
-		
 	}
 	
 	public static void visualize(String command, String path){

@@ -1,11 +1,18 @@
 DataLine:DataLine
+/String:String
+/StringBuffer:StringBuffer
+/ArrayList:ArrayList
 /Data:Data
 /DumbClass:DumbClass
 
+DataLine:String.new
+DataLine:StringBuffer.new
+DataLine:ArrayList.new
 DataLine:Data.new
 Data:DumbClass.new
 Data:DumbClass.init
 
+DataLine:StringBuffer.append(char[])
 DataLine:Data.getMask()
 Data:DumbClass.getTest()
 Data:DumbClass.getTest()

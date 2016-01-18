@@ -1,0 +1,34 @@
+Collections:Collections
+/Random:Random
+/IllegalArgumentException:IllegalArgumentException
+/AtomicLong:AtomicLong
+/Unsafe:Unsafe
+
+Collections:Random.new
+Random:IllegalArgumentException.new
+Random:Random.init
+Random:AtomicLong.new
+AtomicLong:Unsafe.new
+Random:IllegalArgumentException.init
+
+Collections:Collections.shuffle(List, Random)
+Collections:Random.nextInt(int)
+Random:Random.next(int)
+Random:AtomicLong.get()
+Random:AtomicLong.compareAndSet(long, long)
+AtomicLong:Unsafe.compareAndSwapLong(Object, long, long, long)
+Random:Random.next(int)
+Random:AtomicLong.get()
+Random:AtomicLong.compareAndSet(long, long)
+AtomicLong:Unsafe.compareAndSwapLong(Object, long, long, long)
+Collections:Collections.swap(List, int, int)
+Collections:Random.nextInt(int)
+Random:Random.next(int)
+Random:AtomicLong.get()
+Random:AtomicLong.compareAndSet(long, long)
+AtomicLong:Unsafe.compareAndSwapLong(Object, long, long, long)
+Random:Random.next(int)
+Random:AtomicLong.get()
+Random:AtomicLong.compareAndSet(long, long)
+AtomicLong:Unsafe.compareAndSwapLong(Object, long, long, long)
+Collections:Collections.swap(Object[], int, int)

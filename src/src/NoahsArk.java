@@ -10,6 +10,7 @@ public class NoahsArk {
 	private static HashMap<String, Boolean> listOfClasses;
 	public int depth;
 	public String pkg;
+	public String cmd;
 	public ArrayList<String> newNodes;
 	public ArrayList<String> sequenceNodes;
 	
@@ -21,7 +22,13 @@ public class NoahsArk {
 		sequenceNodes = new ArrayList<String>();
 	}
 	
+	public String getCmd(){
+		return this.cmd;
+	}
 	
+	public void setCmd(String cmd){
+		this.cmd = cmd;
+	}
 
 	public HashMap<String, ClassPrototype> getBoat() {
 		return this.boat;
