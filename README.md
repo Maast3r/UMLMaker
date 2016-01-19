@@ -33,6 +33,7 @@ Andrew:
 - Authored the README.md document
 - Helped change the design of the code for scalability (Strategy Pattern)
 - Implemented "uses" and "association" arrows
+- Added Sequence Diagram compatibility
 
 Nathan:
 - Initialized the project

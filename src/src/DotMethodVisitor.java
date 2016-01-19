@@ -55,9 +55,10 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 				temp = temparray[temparray.length - 1];
 				
 			}
-			args += temp + ", ";
+			args += temp + ",";
 		}
-		if(args.length() > 2)args = args.substring(0, args.length()-2);
+		if(args.length() > 1
+				)args = args.substring(0, args.length()-1);
 //		System.out.println("ARG COMPARISONNNNN : " + this.inputMethodName + "  " + name + " --- " +  this.inputArgs + "  " + args);
 		MethodVisitor test = null;
 		if((this.ark.getCmd().equals("sequence") && this.inputMethodName.equals(name) && this.inputArgs.equals(args))
