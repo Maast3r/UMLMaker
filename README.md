@@ -51,6 +51,7 @@ Nathan:
 - Implemented "uses" and "association" arrows
 - Added Sequence Diagram compatibility
 <br />
+
 Sean:
 - Created UML diagrams for 1-3 and UMLMaker code
 - Added formatting for edges
@@ -70,6 +71,7 @@ INSTRUCTIONS TO CREATE A UML DIAGRAM
 - Run the Java Project
 - Open target.png that was generated
 <br /><br />
+
 INSTRUCTIONS TO CREATE A SEQUENCE DIAGRAM
 - Add package that you would like to analyze into the src package.
 - Copy and Paste all files you want a Sequence Diagram of into the "target" package
