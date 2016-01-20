@@ -20,9 +20,13 @@ After careful consideration, we decided to add the Strategy Pattern to our desig
 <br /><br />
 We realized after further evaluation that the design choice we made in Milestone 1 (keeping pointers to built-in Java classes) was not a good idea once the scale of the package got too large. Therefore, we removed them from the UML document builder.
 <br /><br />
-<Milestone 3
+Milestone 3
 <br /><br />
 After our Milestone 2 meeting with Dr. Hays, we realized that we weren't constructing the "uses" arrow correctly. We were pointing to the interface, not the concrete objects. To fix this, we added a MethodBodyVisitor class which just goes into each method and pulls out the return object. This way, we point our arrows at the correct object.
+<br /><br />
+Milestone 4
+<br /><br />
+After our Milestone 3 meeting with Dr. Hays, we realized that we still had a lot of work to accomplish. We started this milestone by cleaning up, fixing, and enhancing the capabilities of our UMLMaker. We finally got sequence diagrams to come out 100% correctly by 1/19.
 <br /><br />
 
 #Who Did What
@@ -45,6 +49,7 @@ Nathan:
 - Lots of debugging of GraphViz formatting
 - Helped change the design of the code for scalability (Strategy Pattern)
 - Implemented "uses" and "association" arrows
+- Added Sequence Diagram compatibility
 <br />
 Sean:
 - Created UML diagrams for 1-3 and UMLMaker code
@@ -57,16 +62,16 @@ Sean:
 
 
 #INSTRUCTIONS:
-FirstASM.java is the main class, so to use our UMLMaker, you need to set the path and package of your code in main(String[] args). Once the path and package variables are set, simply just run our project. This will generate a .png file called "target.png", and simply open target.png to view your UML Diagram.
+FirstASM.java is the main class, so to use our UMLMaker, you need to set the path and package of your code in main(String[] args). Once the path and package variables are set, simply just run our project.
 <br /><br />
-INSTRUCTIONS TO CREATE A UML
-- Remove all files (if there are any) in the "target" package
+INSTRUCTIONS TO CREATE A UML DIAGRAM
+- Add package that you would like to analyze into the src package.
 - Copy and Paste all files you want a UML Diagram of into the "target" package
 - Run the Java Project
 - Open target.png that was generated
 <br /><br />
 INSTRUCTIONS TO CREATE A SEQUENCE DIAGRAM
-- Remove all files (if there are any) in the "target" package
+- Add package that you would like to analyze into the src package.
 - Copy and Paste all files you want a Sequence Diagram of into the "target" package
 - Run the Java Project
 - Open target.png that was generated
