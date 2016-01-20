@@ -27,7 +27,7 @@ public class FirstASM {
 	private static String testerino = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
 	private static String testerino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 5";
 	private static String testerino3 = "sequence java.util Collections shuffle List 5";
-	private static String testerino4 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src FirstASM sequenceHandler String,String,String,StringBuffer,NoahsArk,String,String,String,int 5";
+	private static String t = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src FirstASM sequenceHandler String,String,String,StringBuffer,NoahsArk,String,String,String,int 5";
 				
 	public static HashMap<String, Boolean> listOfClasses;
 	
@@ -102,7 +102,9 @@ public class FirstASM {
 	
 	public static void sequenceHandler(String command, String pkg, String path, StringBuffer buf, NoahsArk ark,
 			String inputClass, String inputMethod, String inputArgs, int maxDepth) throws IOException {
-		ark.newNodes.add(inputClass + ":" + inputClass);
+		ArrayList<String> t = new ArrayList<String>();
+		ark.setDepthMax(maxDepth);
+		ark.newNodes.add(inputClass + "#" + inputClass);
 		ark.setDepthMax(maxDepth);
 		methodEval(pkg, inputClass, inputMethod, inputArgs, ark);
 		buf = generateSequence(pkg, inputClass, inputMethod, inputArgs, buf, ark);
@@ -204,8 +206,6 @@ public class FirstASM {
 //						}
 					}
 				}
-				
-				
 				buf.append(pairToViz(origin + target));
 			}
 		}
@@ -225,17 +225,27 @@ public class FirstASM {
 //		String firstNode =  inputClass + ":" + inputClass + nl;
 //		buf.append(firstNode);
 		// iterate of the initialized nodes 
-		
+//		buf.append(ark.mainNode);
 		HashSet<String> seen = new HashSet<String>();
 		String newBuffer = "";
 		System.out.println("NEW NODES : " + ark.newNodes);
+		System.out.println("SEQUENCE NODES : " + ark.sequenceNodes);
 //		System.out.println("METHODSSSSS : " + ark.n);
+		ArrayList<String> checked = new ArrayList<String>();
 		int length = ark.newNodes.size();
+		
 		for(String node : ark.newNodes){
-			String temp[] = node.split(":");
+			String temp[] = node.split("#");
+			if(node.contains("$")){
+				temp[0] = node.replace("$", "#").split("#")[1];
+				temp[1] = node.replace("$", "#").split("#")[2];
+				System.out.println("HOT CROSS BUNS " + node.replace("\\$", "#") + " " + node.replace("$", "#"));
+				node = "/" + temp[0] + "#" + temp[1];
+			}
+			
 //			System.out.println(temp[0].substring(1) + "    " + temp[1]);
 			if(seen.contains(temp[1])){
-				newBuffer += temp[0].substring(1) + ":" + temp[1] + ".init" + nl;
+//				newBuffer += temp[1] + "#" + temp[1] + ".init" + nl;
 			} else{
 				if(length == ark.newNodes.size()){
 					seen.add(temp[1]);
@@ -244,37 +254,80 @@ public class FirstASM {
 					buf.append(temp[1] +  ":" + temp[1] + nl);
 				} else {
 					seen.add(temp[1]);
-					newBuffer += temp[0].substring(1) + ":" + temp[1] + ".new" + nl;
-					buf.append( "/" + temp[1] +  ":" + temp[1] + nl);
+					
+//					newBuffer += temp[0].substring(1) + "#" + temp[1] + ".new" + nl;
+					
+					// check if it is ever constructed 
+					if(ark.constructedNodes.contains(node)){
+						buf.append( "/" + temp[1] +  ":" + temp[1] + nl);
+						System.out.println("added to checked: +" + temp[1]);
+						checked.add(temp[1]);
+					} else {
+						
+						buf.append(temp[1] +  ":" + temp[1] + nl);
+						
+					}
+					
 				}
 				length--;
 			}
 		}
 //		System.out.println("newBuffer!!!n");
 //		System.out.println(newBuffer);
-		buf.append(nl);
-		buf.append(newBuffer);
+//		buf.append(nl);
+//		buf.append(newBuffer);
 		buf.append(nl);
 		// iterate over ark.sequenceNodes
+		seen = new HashSet<String>();
+		//Add nonConstructed nodes  to the seen
+		System.out.println("CONSTRCUTED SD:JF:KLSDKLFJ : " + ark.constructedNodes);
+		for(String node: ark.newNodes){
+//			checked.add(node.split("#")[1]);
+			if(!checked.contains(node.split("#")[1])){
+				System.out.println("never initialized: " + node);
+				seen.add(node.split("#")[1]);
+			}
+		}
+		System.out.println("CURRENT SEEN: " + seen);
+		
+//		for(String s : ark.sequenceNodes){
+//			if()
+//		}
+		
 		int currentLevel = 0;
 		while(!ark.sequenceNodes.isEmpty()){
 			String temp = ark.sequenceNodes.get(0);
 			ark.sequenceNodes.remove(0);
-			
 			
 			if(temp.equals("GO DEEPER")){
 				currentLevel++;
 			} else if(temp.equals("GO UPPER")){
 				currentLevel--;
 			} else {
-				//uncomment for future control flow blocks
-//				for(int i =0; i < currentLevel; i++){
-//					temp = "  " + temp;
-//				}
-				
+				// Creating a new object
+				if(temp.contains("#")){
+//					if(temp.split("#")[1].equals("ArrayList")){
+//						System.out.println("GOT HER" + temp);
+//					}
+//					check to see if it has been initialized yet
+					if(seen.contains(temp.split("#")[1])){
+//						System.out.println(temp.split("#")[1] + "already seen");
+						//init
+						temp = (temp.split("#")[0].substring(1) + ":" + temp.split("#")[1] + ".init");
+					} else{
+						//new
+//						System.out.println("nigga " + seen + "  " + temp.split("#")[1]);
+						seen.add(temp.split("#")[1]);
+						System.out.println(temp);
+						temp = (temp.split("#")[0].substring(1) + ":" + temp.split("#")[1] + ".new");
+					}
+//					System.out.println("pls1 = " + temp);
+				}
+//				System.out.println("pls2 = " + temp);
 				buf.append(temp + nl);
 			}
 		}
+		System.out.println("SEEN MOTHERFUCKER " + seen);
 		return buf;
 	}
 	

@@ -12,13 +12,16 @@ public class NoahsArk {
 	public String pkg;
 	public String cmd;
 	public ArrayList<String> newNodes;
+	public ArrayList<String> constructedNodes;
 	public ArrayList<String> sequenceNodes;
+	public String mainNode;
 	
 	public NoahsArk(HashMap<String, Boolean> listOfClasses) {
 		this.boat = new HashMap<String, ClassPrototype>();
 		this.pairs = new HashMap<String,HashSet<String>>();
 		this.listOfClasses = listOfClasses;
 		newNodes = new ArrayList<String>();
+		constructedNodes = new ArrayList<String>();
 		sequenceNodes = new ArrayList<String>();
 	}
 	
