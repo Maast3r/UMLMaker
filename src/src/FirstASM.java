@@ -215,7 +215,7 @@ public class FirstASM {
 			String inputArgs, StringBuffer buf, NoahsArk ark){
  		String nl = "\n";
 		// Generate the first Node
-		System.out.println(ark.getBoat());
+//		System.out.println(ark.getBoat());
 		HashSet<String> seen = new HashSet<String>();
 		ArrayList<String> checked = new ArrayList<String>();
 		int length = ark.newNodes.size();

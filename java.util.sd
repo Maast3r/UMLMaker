@@ -1,11 +1,14 @@
 Collections:Collections
 /Random:Random
+List:List
 /IllegalArgumentException:IllegalArgumentException
 AtomicLong:AtomicLong
 Unsafe:Unsafe
+ListIterator:ListIterator
 
 Collections:Random.new
 Collections:void=Collections.shuffle(List,Random)
+Collections:int=List.size()
 Collections:int=Random.nextInt(int)
 Random:IllegalArgumentException.new
 Random:int=Random.next(int)
@@ -17,6 +20,10 @@ Random:long=AtomicLong.get()
 Random:boolean=AtomicLong.compareAndSet(long,long)
 AtomicLong:boolean=Unsafe.compareAndSwapLong(Object,long,long,long)
 Collections:void=Collections.swap(List,int,int)
+Collections:java.lang.Object=List.get(int)
+Collections:java.lang.Object=List.set(int,Object)
+Collections:java.lang.Object=List.set(int,Object)
+Collections:java.lang.Object[]=List.toArray()
 Collections:int=Random.nextInt(int)
 Random:IllegalArgumentException.init
 Random:int=Random.next(int)
@@ -28,3 +35,6 @@ Random:long=AtomicLong.get()
 Random:boolean=AtomicLong.compareAndSet(long,long)
 AtomicLong:boolean=Unsafe.compareAndSwapLong(Object,long,long,long)
 Collections:void=Collections.swap(Object[],int,int)
+Collections:java.util.ListIterator=List.listIterator()
+Collections:java.lang.Object=ListIterator.next()
+Collections:void=ListIterator.set(Object)

@@ -25,6 +25,7 @@ public class NoahsArk {
 		newNodes = new ArrayList<String>();
 		constructedNodes = new ArrayList<String>();
 		sequenceNodes = new ArrayList<String>();
+		this.graphRoot = null;
 	}
 	
 	public String getCmd(){

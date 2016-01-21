@@ -36,8 +36,12 @@ public class MethodBodyVisitor extends MethodVisitor{
 		}
 		this.owner = owner;
 		if(this.ark.getCmd().equals(("uml")))this.ark.addPair(this.className, "#" + this.owner);
-		
-		if(!isIn && !this.owner.equals("Object") && this.ark.getCmd().equals(("sequence"))){
+		if(name.equals("toArray")){
+			System.out.println("found");
+			System.out.println(this.ark.getDepthMax() + " a;slkdfja   " +   " " + owner + " " + name + " " + " " + Type.getReturnType(desc).getClassName() + " " + isIn + " LOOKING FOR: " + this.inputMethodName);
+
+		}
+		if(this.ark.getCmd().equals(("sequence"))){
 //			System.out.println(this.ark.getDepthMax() + " a;slkdfja   " +   " " + owner + " " + name + " " + " " + Type.getReturnType(desc).getClassName() + " " + isIn + " LOOKING FOR: " + this.inputMethodName);
 			ark.newNodes.add("/" + className + "#" + owner);
 			if(name.equals("<init>")){
