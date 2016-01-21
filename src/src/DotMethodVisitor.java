@@ -63,7 +63,6 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 		MethodVisitor test = null;
 		if((this.ark.getCmd().equals("sequence") && this.inputMethodName.equals(name) && this.inputArgs.equals(args))
 				|| this.ark.getCmd().equals("uml")){
-//			System.out.println("LETS GO INNNNNNNNNNNNNNNNNNNNNNNNNNN   " + this.inputMethodName + "  " + name + " --- " +  this.inputArgs + "  " + args);
 			test = new MethodBodyVisitor(Opcodes.ASM5, toDecorate, this.className, this.ark, this.inputMethodName, this.inputArgs);
 		}
 		

@@ -14,7 +14,9 @@ public class NoahsArk {
 	public ArrayList<String> newNodes;
 	public ArrayList<String> constructedNodes;
 	public ArrayList<String> sequenceNodes;
+	public CallNode graphRoot;
 	public String mainNode;
+	public CallNode noe;
 	
 	public NoahsArk(HashMap<String, Boolean> listOfClasses) {
 		this.boat = new HashMap<String, ClassPrototype>();
@@ -39,6 +41,18 @@ public class NoahsArk {
 
 	public void addClass(String name, ClassPrototype toAdd) {
 		this.boat.put(name, toAdd);
+	}
+	
+	public void setRoot(CallNode root){
+		this.graphRoot = root;
+	}
+	
+	public void setActiveNode(CallNode node){
+		this.noe = node;
+	}
+	
+	public CallNode getActiveNode(){
+		return this.noe;
 	}
 
 	public void addPair(String origin, String target) {
@@ -78,5 +92,7 @@ public class NoahsArk {
 		// TODO Auto-generated method stub
 		this.depth = this.depth -1;
 	}
+	
+	
 
 }

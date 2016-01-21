@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MethodPrototype {
-	HashMap<String, InstructionPrototype> instructions;
 	public String access;
 	public String name;
 	public String args;

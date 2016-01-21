@@ -27,7 +27,7 @@ public class FirstASM {
 	private static String testerino = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
 	private static String testerino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 5";
 	private static String testerino3 = "sequence java.util Collections shuffle List 5";
-	private static String t = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src FirstASM sequenceHandler String,String,String,StringBuffer,NoahsArk,String,String,String,int 5";
+	private static String t = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src FirstASM sequenceHandler String,String,String,StringBuffer,NoahsArk,String,String,String,int 2";
 				
 	public static HashMap<String, Boolean> listOfClasses;
 	
@@ -51,10 +51,6 @@ public class FirstASM {
 		StringBuffer buf = new StringBuffer();
 		File packageToUML = new File(path);
 		
-		// Generate the ark
-//		listOfClasses = listClasses(packageToUML);
-//		NoahsArk ark = new NoahsArk(listOfClasses);
-//		ark.setPackage(pkg);
 		if(command.equals("uml")){
 			listOfClasses = listClasses(packageToUML);
 			NoahsArk ark = new NoahsArk(listOfClasses);
@@ -72,7 +68,7 @@ public class FirstASM {
 			maxDepth = line.split(" ")[5];
 			sequenceHandler(command, pkg, path, buf, ark, inputClass, inputMethod, inputArgs, Integer.parseInt(maxDepth));
 		} else {
-			System.out.println("THIS COMMMANDS IS NOT SUPPORTED");
+			System.out.println("THIS COMMMAND IS NOT SUPPORTED");
 		}	
 	}
 
@@ -105,6 +101,8 @@ public class FirstASM {
 		ArrayList<String> t = new ArrayList<String>();
 		ark.setDepthMax(maxDepth);
 		ark.newNodes.add(inputClass + "#" + inputClass);
+		ark.setRoot(new CallNode("ROOT", true));
+		ark.setActiveNode(ark.graphRoot);
 		ark.setDepthMax(maxDepth);
 		methodEval(pkg, inputClass, inputMethod, inputArgs, ark);
 		buf = generateSequence(pkg, inputClass, inputMethod, inputArgs, buf, ark);
@@ -123,7 +121,7 @@ public class FirstASM {
 	}
 	
 	public static void methodEval(String pkg, String inputClass, String inputMethod, String inputArgs, NoahsArk ark) throws IOException{
-//		System.out.println("PACKAGE: " + pkg);
+		ark.getBoat().put(inputClass, new ClassPrototype(inputClass));
 		ClassReader reader = new ClassReader(pkg + inputClass);
 		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
 				Opcodes.ASM5, ark, inputClass, inputMethod, inputArgs);
@@ -166,8 +164,6 @@ public class FirstASM {
 	}
 	
 	public static StringBuffer generateDotUML(String pkg, StringBuffer buf, NoahsArk ark) throws IOException {
-	 	// Generate a dot file, stored in the Stringbuffer buf
-		// Setup header of dot file
 		buf.append("digraph G{\n" + font + "\n"
 				+ "node [\n" 
 				+ font + "\n"
@@ -201,9 +197,6 @@ public class FirstASM {
 					String tempTarget = target.substring(1);
 					String tempCheckTarget = target.substring(1);
 					if(target.charAt(0) == '$'){
-//						if((temp)){
-//							
-//						}
 					}
 				}
 				buf.append(pairToViz(origin + target));
@@ -220,114 +213,96 @@ public class FirstASM {
 	
 	public static StringBuffer generateSequence(String pkg, String inputClass, String inputMethod, 
 			String inputArgs, StringBuffer buf, NoahsArk ark){
-		String nl = "\n";
+ 		String nl = "\n";
 		// Generate the first Node
-//		String firstNode =  inputClass + ":" + inputClass + nl;
-//		buf.append(firstNode);
-		// iterate of the initialized nodes 
-//		buf.append(ark.mainNode);
+		System.out.println(ark.getBoat());
 		HashSet<String> seen = new HashSet<String>();
-		String newBuffer = "";
-		System.out.println("NEW NODES : " + ark.newNodes);
-		System.out.println("SEQUENCE NODES : " + ark.sequenceNodes);
-//		System.out.println("METHODSSSSS : " + ark.n);
 		ArrayList<String> checked = new ArrayList<String>();
 		int length = ark.newNodes.size();
+		
+		
+		
+		
 		
 		for(String node : ark.newNodes){
 			String temp[] = node.split("#");
 			if(node.contains("$")){
 				temp[0] = node.replace("$", "#").split("#")[1];
 				temp[1] = node.replace("$", "#").split("#")[2];
-				System.out.println("HOT CROSS BUNS " + node.replace("\\$", "#") + " " + node.replace("$", "#"));
 				node = "/" + temp[0] + "#" + temp[1];
 			}
 			
-//			System.out.println(temp[0].substring(1) + "    " + temp[1]);
 			if(seen.contains(temp[1])){
-//				newBuffer += temp[1] + "#" + temp[1] + ".init" + nl;
 			} else{
 				if(length == ark.newNodes.size()){
 					seen.add(temp[1]);
-//					newBuffer += temp[0] + ":" + temp[1] + ".new" + nl;
-					System.out.println("BUFFFF -- " + temp[1]);
 					buf.append(temp[1] +  ":" + temp[1] + nl);
 				} else {
 					seen.add(temp[1]);
-					
-//					newBuffer += temp[0].substring(1) + "#" + temp[1] + ".new" + nl;
-					
-					// check if it is ever constructed 
 					if(ark.constructedNodes.contains(node)){
 						buf.append( "/" + temp[1] +  ":" + temp[1] + nl);
-						System.out.println("added to checked: +" + temp[1]);
 						checked.add(temp[1]);
 					} else {
 						
 						buf.append(temp[1] +  ":" + temp[1] + nl);
-						
 					}
-					
 				}
 				length--;
 			}
 		}
-//		System.out.println("newBuffer!!!n");
-//		System.out.println(newBuffer);
-//		buf.append(nl);
-//		buf.append(newBuffer);
 		buf.append(nl);
-		// iterate over ark.sequenceNodes
 		seen = new HashSet<String>();
 		//Add nonConstructed nodes  to the seen
-		System.out.println("CONSTRCUTED SD:JF:KLSDKLFJ : " + ark.constructedNodes);
 		for(String node: ark.newNodes){
-//			checked.add(node.split("#")[1]);
 			if(!checked.contains(node.split("#")[1])){
-				System.out.println("never initialized: " + node);
 				seen.add(node.split("#")[1]);
 			}
 		}
-		System.out.println("CURRENT SEEN: " + seen);
-		
-//		for(String s : ark.sequenceNodes){
-//			if()
-//		}
 		
 		int currentLevel = 0;
+		CallNode callNode = ark.getActiveNode();
 		while(!ark.sequenceNodes.isEmpty()){
 			String temp = ark.sequenceNodes.get(0);
 			ark.sequenceNodes.remove(0);
 			
 			if(temp.equals("GO DEEPER")){
+				//callNode = new CallNode(temp.split("#")[1], true);'
+				try{
+					callNode = callNode.getChildren().get(callNode.getChildren().size()-1);
+				} catch (Exception e){
+					
+				}
+					callNode.parent = ark.getActiveNode();
+					ark.setActiveNode(callNode);
 				currentLevel++;
 			} else if(temp.equals("GO UPPER")){
+				callNode = ark.getActiveNode().getParent();
+				ark.setActiveNode(callNode);
+				
+				
 				currentLevel--;
 			} else {
 				// Creating a new object
 				if(temp.contains("#")){
-//					if(temp.split("#")[1].equals("ArrayList")){
-//						System.out.println("GOT HER" + temp);
-//					}
-//					check to see if it has been initialized yet
 					if(seen.contains(temp.split("#")[1])){
-//						System.out.println(temp.split("#")[1] + "already seen");
 						//init
 						temp = (temp.split("#")[0].substring(1) + ":" + temp.split("#")[1] + ".init");
 					} else{
 						//new
-//						System.out.println("nigga " + seen + "  " + temp.split("#")[1]);
 						seen.add(temp.split("#")[1]);
-						System.out.println(temp);
 						temp = (temp.split("#")[0].substring(1) + ":" + temp.split("#")[1] + ".new");
 					}
-//					System.out.println("pls1 = " + temp);
+					callNode = new CallNode(temp, true);
+					callNode.setParent(ark.getActiveNode());
+				} else {
+					callNode = new CallNode(temp, false);
+					callNode.setParent(ark.getActiveNode());
 				}
-//				System.out.println("pls2 = " + temp);
+				ark.getActiveNode().addChild(callNode);					
 				buf.append(temp + nl);
 			}
 		}
-		System.out.println("SEEN MOTHERFUCKER " + seen);
+//		ark.graphRoot.printCallTree(0);
 		return buf;
 	}
 	
@@ -349,26 +324,19 @@ public class FirstASM {
 			ClassVisitorBuffered test = (ClassVisitorBuffered) assocVisitor.newInstance(Opcodes.ASM5, buf);
 			reader.accept(test, ClassReader.EXPAND_FRAMES);
     	} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Dot visitor association class doesn't exist\n");
 			e.printStackTrace();
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
@@ -426,7 +394,6 @@ public class FirstASM {
 		}
 		
 		for(String s : lines){
-//		System.out.println(name + ":" + s);
 			if(s.contains("/")){
 				int len = s.split("/").length;
 				s = s.split("/")[len -1 ];
@@ -474,7 +441,6 @@ public class FirstASM {
 	}
 	
 	public static String pairToViz(String pair){
-		//String edgeDefinition = "edge [\n" + font;
 		String result = "";
 		// extends
 		if(pair.equals("")) return result;
@@ -483,6 +449,7 @@ public class FirstASM {
 		if(pair.contains("@"))result = pair.split("@")[0] + " -> " + pair.split("@")[1] + "[arrowhead = onormal,style = dotted]";
 		// Uses
 		if(pair.contains("#"))result = pair.split("#")[0] + " -> " + pair.split("#")[1] + "[arrowhead = vee, style = dotted]";
+		// Association
 		if(pair.contains("$"))result = pair.split("\\$")[0] + " -> " + pair.split("\\$")[1] + "[arrowhead = vee]";
 		result = result + "\n";
 		return result;
@@ -490,7 +457,6 @@ public class FirstASM {
 	}
 
 	public static HashMap<String, Boolean> listClasses(final File folder) {
-		System.out.println("folder " + folder.getAbsolutePath());
 		HashMap<String, Boolean> listOfJavaFiles = new HashMap<String, Boolean>();
 		for (final File fileEntry : folder.listFiles()) {
 			if (fileEntry.getName().contains(".")) {
