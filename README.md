@@ -26,8 +26,9 @@ After our Milestone 2 meeting with Dr. Hays, we realized that we weren't constru
 <br /><br />
 Milestone 4
 <br /><br />
-After our Milestone 3 meeting with Dr. Hays, we realized that we still had a lot of work to accomplish. We started this milestone by cleaning up, fixing, and enhancing the capabilities of our UMLMaker. We finally got sequence diagrams to come out 100% correctly by 1/19.
+After our Milestone 3 meeting with Dr. Hays, we realized that we still had a lot of work to accomplish. We started this milestone by cleaning up, fixing, and enhancing the capabilities of our UMLMaker. We finally got sequence diagrams to come out 100% correctly by 1/20.
 <br /><br />
+Adding Singleton detection was fairly easy. The two key identifiers in a Singleton class are that it has itself has a static field, and has a method which returns itself. If a class meets these two requirements, it is a Singleton and we color it blue and add a <<Singleton>> marker. We made sure to test both the lazy and eager singleton initializations.
 
 #Who Did What
 Andrew:
@@ -38,6 +39,7 @@ Andrew:
 - Helped change the design of the code for scalability (Strategy Pattern)
 - Implemented "uses" and "association" arrows
 - Added Sequence Diagram compatibility
+- Added Singleton Detection
 
 Nathan:
 - Initialized the project
@@ -50,6 +52,7 @@ Nathan:
 - Helped change the design of the code for scalability (Strategy Pattern)
 - Implemented "uses" and "association" arrows
 - Added Sequence Diagram compatibility
+- Added Singleton Detection
 <br />
 
 Sean:
