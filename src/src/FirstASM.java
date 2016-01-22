@@ -22,7 +22,8 @@ public class FirstASM {
 	private static String[] associationTypes = {"Inheritance", "Association"};
 	
 	private static String methodSeparatorString = " | ";
-	private static String classEndString = "}\"]\n";
+	private static String classEndString1 = "}\"";
+	private static String classEndString2 = "]\n";
 	private static String ourPKG = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
 	private static String testerino = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
 	private static String testerino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 5";
@@ -165,7 +166,7 @@ public class FirstASM {
 	
 	public static StringBuffer generateDotUML(String pkg, StringBuffer buf, NoahsArk ark) throws IOException {
 		buf.append("digraph G{\n" + font + "\n"
-				+ "node [\n" 
+				+ "node [\n"
 				+ font + "\n"
 				+ "        shape = \"record\"\n" + "]\n" + "edge [\n"
 				+ font + "]\n");
@@ -173,22 +174,46 @@ public class FirstASM {
 		// Do the real work
 		String result = "";
 		HashMap<String, ClassPrototype> boat = ark.getBoat();
+		
+		
+		
 		for(ClassPrototype c : boat.values()){
+			result = "";
+			boolean singletonFlag[] = {false,false};
 			String className = c.getName();	
-			result += c.prepareUML();
+			
+			
 			Iterator fIterator = c.getFields().keySet().iterator();
+			FieldPrototype field;
 			while(fIterator.hasNext()){
-				result += c.getFields().get(fIterator.next()).prepareUML();
+				field = c.getFields().get(fIterator.next());
+				result += field.prepareUML();
+				if(field.getIsStaticAndSame(className)) singletonFlag[0] = true;
 			}
 			
 			result+= methodSeparatorString;
 			Iterator mIterator = c.getMethods().keySet().iterator();
+			MethodPrototype method;
 			while(mIterator.hasNext()){
-				result += c.getMethods().get(mIterator.next()).prepareUML();
+				method = c.getMethods().get(mIterator.next());
+				result += method.prepareUML();
+				if(method.getIsStaticAndSame(className)) singletonFlag[1] = true;
 			}
-			result+=classEndString;
+			result += classEndString1;
+			
+			String temp;
+			if(singletonFlag[0] && singletonFlag[1]){
+				temp = "color = blue\n";
+				
+				result += temp;
+			}
+			result = c.prepareUML() + ((singletonFlag[0]&& singletonFlag[1]) ? "\\l\\<\\<Singleton\\>\\>":"" ) + "|" + result ;
+			result+=classEndString2;
+			buf.append(result);
 		}
-		buf.append(result);
+		
+		
+		
 		for(String origin: ark.pairs.keySet() ){
 			for(String target : ark.pairs.get(origin)){
 				// Check for inheritance removals

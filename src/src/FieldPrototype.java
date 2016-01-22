@@ -15,5 +15,9 @@ public class FieldPrototype {
 //		System.out.println("FIELD PREP : " + this.symbol + this.name + ": " + this.type + " \\l");
 		return this.symbol + this.name + ": "+ this.type + " \\l";
 	}
+	
+	public boolean getIsStaticAndSame(String whateverYouWant){
+		return this.symbol.contains("static") && this.type.equals(whateverYouWant);
+	}
 
 }

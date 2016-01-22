@@ -36,6 +36,6 @@ public class ClassPrototype {
 	}
 	
 	public String prepareUML(){
-		return this.name + " [ \n    label=\"{" + this.name +"|";
+		return this.name + " [ \ncenter=true\n    label=\"{" + this.name;
 	}
 }

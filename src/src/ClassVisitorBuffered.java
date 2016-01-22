@@ -37,6 +37,9 @@ public class ClassVisitorBuffered extends ClassVisitor{
 		if((access & Opcodes.ACC_PROTECTED) !=0){
 			accessModifier="#";
 		}
+		if((access & Opcodes.ACC_STATIC) !=0){
+			accessModifier+="static ";
+		}
 		return accessModifier;
 	}
 	

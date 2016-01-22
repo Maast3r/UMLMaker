@@ -21,5 +21,9 @@ public class MethodPrototype {
 		return this.access + this.name.replace("<", "\\<").replace(">", "\\>") + "("+ this.args + "): " + this.returnType + '\\' + 'l' ;
 	}
 	
+	public boolean getIsStaticAndSame(String whateverYouWant){
+//		System.out.println(this.name + " " + whateverYouWant + " + " + this.access.contains("static"));
+		return this.access.contains("static") && this.returnType.equals(whateverYouWant);
+	}
 	
 }
