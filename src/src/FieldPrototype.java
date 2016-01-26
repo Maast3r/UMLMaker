@@ -16,7 +16,7 @@ public class FieldPrototype {
 		return this.symbol + this.name + ": "+ this.type + " \\l";
 	}
 	
-	public boolean getIsStaticAndSame(String whateverYouWant){
+	public boolean getSingleton(String whateverYouWant, String superName){
 		return this.symbol.contains("static") && this.type.equals(whateverYouWant);
 	}
 

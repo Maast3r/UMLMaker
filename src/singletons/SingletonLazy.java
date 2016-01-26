@@ -1,16 +1,19 @@
-package src;
+package singletons;
 // File Name: Singleton.java
-public class SingletonEager {
+public class SingletonLazy {
 
-   private static SingletonEager singleton = new SingletonEager( );
+   private static SingletonLazy singleton;
    
    /* A private Constructor prevents any other 
     * class from instantiating.
     */
-   private SingletonEager(){ }
+   private SingletonLazy(){ }
    
    /* Static 'instance' method */
-   public static SingletonEager getInstance( ) {
+   public static SingletonLazy getInstance( ) {
+	   if(singleton == null){
+		   singleton = new SingletonLazy();
+	   }
       return singleton;
    }
    /* Other methods protected by singleton-ness */

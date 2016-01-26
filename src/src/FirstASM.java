@@ -25,6 +25,7 @@ public class FirstASM {
 	private static String classEndString1 = "}\"";
 	private static String classEndString2 = "]\n";
 	private static String ourPKG = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
+	private static String single = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\singletons";
 	private static String testerino = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
 	private static String testerino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 5";
 	private static String testerino3 = "sequence java.util Collections shuffle List 5";
@@ -174,21 +175,18 @@ public class FirstASM {
 		// Do the real work
 		String result = "";
 		HashMap<String, ClassPrototype> boat = ark.getBoat();
-		
-		
-		
 		for(ClassPrototype c : boat.values()){
 			result = "";
 			boolean singletonFlag[] = {false,false};
-			String className = c.getName();	
-			
+			String className = c.getName();
+			String superName = c.getSuperName();
 			
 			Iterator fIterator = c.getFields().keySet().iterator();
 			FieldPrototype field;
 			while(fIterator.hasNext()){
 				field = c.getFields().get(fIterator.next());
 				result += field.prepareUML();
-				if(field.getIsStaticAndSame(className)) singletonFlag[0] = true;
+				if(field.getSingleton(className, superName)) singletonFlag[0] = true;
 			}
 			
 			result+= methodSeparatorString;
@@ -201,18 +199,11 @@ public class FirstASM {
 			}
 			result += classEndString1;
 			
-			String temp;
-			if(singletonFlag[0] && singletonFlag[1]){
-				temp = "color = blue\n";
-				
-				result += temp;
-			}
-			result = c.prepareUML() + ((singletonFlag[0]&& singletonFlag[1]) ? "\\l\\<\\<Singleton\\>\\>":"" ) + "|" + result ;
+			result += new ColorDecorator(new TypeDetector(singletonFlag).getType()).getColor();
+			result = c.prepareUML() + new NameDecorator(new TypeDetector(singletonFlag).getType()).getType() + "|" + result;
 			result+=classEndString2;
 			buf.append(result);
 		}
-		
-		
 		
 		for(String origin: ark.pairs.keySet() ){
 			for(String target : ark.pairs.get(origin)){

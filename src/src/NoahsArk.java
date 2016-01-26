@@ -90,7 +90,6 @@ public class NoahsArk {
 	}
 
 	public void deeper() {
-		// TODO Auto-generated method stub
 		this.depth = this.depth -1;
 	}
 	

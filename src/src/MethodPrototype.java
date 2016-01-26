@@ -22,7 +22,6 @@ public class MethodPrototype {
 	}
 	
 	public boolean getIsStaticAndSame(String whateverYouWant){
-//		System.out.println(this.name + " " + whateverYouWant + " + " + this.access.contains("static"));
 		return this.access.contains("static") && this.returnType.equals(whateverYouWant);
 	}
 	
