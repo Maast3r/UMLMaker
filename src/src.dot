@@ -14,61 +14,86 @@ edge [
 ]
 IMethodVisitor [ 
 center=true
-    label="{IMethodVisitor| | +visitMethod(int,String,String,String,String): MethodVisitor\l}"]
+    label="{IMethodVisitor| | +visitMethod(int,String,String,String,String): MethodVisitor\l}"color = null
+]
 MethodPrototype [ 
 center=true
-    label="{MethodPrototype|+args: String \l+access: String \l+name: String \l+returnType: String \l | +prepareUML(): String\l+\<init\>(String,String,String,Stri): void\l+getIsStaticAndSame(Stri): boolean\l}"]
-Calendar [ 
-center=true
-    label="{Calendar|+static MONTH: int \l+static THURSDAY: int \l+static WEEK_OF_MONTH: int \l+static DECEMBER: int \lstatic HOUR_OF_DAY_MASK: int \l+static DAY_OF_WEEK_IN_MONTH: int \l-static MINIMUM_USER_STAMP: int \lstatic WEEK_OF_YEAR_MASK: int \l+static WEDNESDAY: int \lstatic YEAR_MASK: int \l+static YEAR: int \l+static WEEK_OF_YEAR: int \l+static FIELD_COUNT: int \l-zone: TimeZone \l+static SATURDAY: int \l-sharedZone: boolean \l+static MINUTE: int \l-serialVersionOnStream: int \lstatic HOUR_MASK: int \l+static JANUARY: int \lstatic DAY_OF_YEAR_MASK: int \l+static DST_OFFSET: int \l+static SUNDAY: int \l#isSet: boolean[] \l+static TUESDAY: int \l+static SEPTEMBER: int \l+static AM: int \lstatic ERA_MASK: int \lareAllFieldsSet: boolean \l+static DATE: int \lstatic SECOND_MASK: int \l+static ERA: int \l-minimalDaysInFirstWeek: int \lstatic MINUTE_MASK: int \lstatic MILLISECOND_MASK: int \l+static AUGUST: int \l+static JULY: int \l+static DAY_OF_WEEK: int \l#fields: int[] \lstatic DST_OFFSET_MASK: int \l+static DAY_OF_YEAR: int \l+static MAY: int \l+static DAY_OF_MONTH: int \l+static HOUR: int \l+static FRIDAY: int \l+static AM_PM: int \l+static FEBRUARY: int \l-stamp: int[] \l+static ALL_STYLES: int \lstatic currentSerialVersion: int \l-lenient: boolean \l+static ZONE_OFFSET: int \lstatic serialVersionUID: long \l+static HOUR_OF_DAY: int \l+static UNDECIMBER: int \lstatic AM_PM_MASK: int \l-static cachedLocaleData: Hashtable \l-static UNSET: int \l-static FIELD_NAME: String[] \l+static APRIL: int \l+static LONG: int \lstatic DATE_MASK: int \l+static JUNE: int \l-static COMPUTED: int \lstatic DAY_OF_WEEK_IN_MONTH_MASK: int \l+static OCTOBER: int \lstatic DAY_OF_MONTH_MASK: int \lstatic $assertionsDisabled: boolean \l+static NOVEMBER: int \l#isTimeSet: boolean \l+static SHORT: int \lstatic ALL_FIELDS: int \l+static MONDAY: int \lstatic MONTH_MASK: int \l-nextStamp: int \lstatic WEEK_OF_MONTH_MASK: int \lstatic DAY_OF_WEEK_MASK: int \l-firstDayOfWeek: int \lstatic ZONE_OFFSET_MASK: int \l+static MARCH: int \l+static SECOND: int \l+static MILLISECOND: int \l#time: long \l+static PM: int \l#areFieldsSet: boolean \l | selectFields(): int\lsetZoneShared(boole): void\lstatic isFieldSet(int,i): boolean\l+before(Obje): boolean\l+getTimeZone(): TimeZone\l-static createCalendar(TimeZone,Loca): Calendar\l+setMinimalDaysInFirstWeek(i): void\l+compareTo(Obje): int\l#computeFields(): void\l+getActualMaximum(i): int\l+getMinimum(i): int\linternalSet(int,i): void\lisExternallySet(i): boolean\l+static getAvailableLocales(): Locale[]\l-static aggregateStamp(int,i): int\l-setWeekCountData(Loca): void\l+setTime(Da): void\l#internalGet(i): int\l+add(int,i): void\l-static getMillisOf(Calend): long\l+isSet(i): boolean\lsetFieldsComputed(i): void\l+getLeastMaximum(i): int\l-writeObject(ObjectOutputStre): void\l+getTimeInMillis(): long\lgetZone(): TimeZone\l#\<init\>(TimeZone,Loca): void\l-readObject(ObjectInputStre): void\lsetUnnormalized(): void\lisFullyNormalized(): boolean\l+getDisplayName(int,int,Loca): String\lstatic getFieldName(i): String\lstatic \<clinit\>(): void\l+getMinimalDaysInFirstWeek(): int\l+getGreatestMinimum(i): int\l-getDisplayNamesImpl(int,int,Loca): Map\l-invalidateWeekFields(): void\l+getTime(): Date\l+isLenient(): boolean\l+roll(int,i): void\l-adjustStamp(): void\lcheckDisplayNameParams(int,int,int,int,Locale,i): boolean\l+getMaximum(i): int\l+setLenient(boole): void\lsetFieldsNormalized(i): void\lgetSetStateFields(): int\lisPartiallyNormalized(): boolean\l+hashCode(): int\l+get(i): int\l+setTimeZone(TimeZo): void\l+after(Obje): boolean\l+getDisplayNames(int,int,Loca): Map\l+set(int,int,int,int,int,i): void\l+clear(i): void\l+getActualMinimum(i): int\l+setFirstDayOfWeek(i): void\l-updateTime(): void\l+getFirstDayOfWeek(): int\l+setTimeInMillis(lo): void\l#computeTime(): void\l+equals(Obje): boolean\l+clone(): Object\l-getFieldStrings(int,int,DateFormatSymbo): String[]\l+toString(): String\l+static getInstance(TimeZone,Loca): Calendar\l-static appendValue(StringBuilder,String,boolean,lo): void\l#complete(): void\l}"]
+    label="{MethodPrototype|+args: String \l+access: String \l+name: String \l+returnType: String \l | +prepareUML(): String\l+\<init\>(String,String,String,Stri): void\l+getIsStaticAndSame(Stri): boolean\l}"color = null
+]
 ClassVisitorBuffered [ 
 center=true
-    label="{ClassVisitorBuffered|buf: StringBuffer \l+name: String \l | +getAccessModifier(i): String\l+getName(): String\l+\<init\>(int,ClassVisit): void\l}"]
+    label="{ClassVisitorBuffered|buf: StringBuffer \l+name: String \l | +getAccessModifier(i): String\l+getName(): String\l+\<init\>(int,ClassVisit): void\l}"color = null
+]
 DotMethodVisitor [ 
 center=true
-    label="{DotMethodVisitor|+inputMethodName: String \l+inputArgs: String \l+arg0: int \l+className: String \l+ark: NoahsArk \l | +\<init\>(int,NoahsArk,String,String,Stri): void\l+visitMethod(int,String,String,String,String): MethodVisitor\l}"]
-SingletonEager [ 
-center=true
-    label="{SingletonEager\l\<\<Singleton\>\>|-static singleton: SingletonEager \l | #static demoMethod(): void\l+static getInstance(): SingletonEager\l-\<init\>(): void\lstatic \<clinit\>(): void\l}"color = blue
+    label="{DotMethodVisitor|+inputMethodName: String \l+inputArgs: String \l+arg0: int \l+className: String \l+ark: NoahsArk \l | +\<init\>(int,NoahsArk,String,String,Stri): void\l+visitMethod(int,String,String,String,String): MethodVisitor\l}"color = null
 ]
 MethodBodyVisitor [ 
 center=true
-    label="{MethodBodyVisitor|+owner: String \l+inputMethodName: String \l+inputArgs: String \l+className: String \l+ark: NoahsArk \l | +visitMethodInsn(int,String,String,String,boole): void\l+repeat(String,Stri): void\l+\<init\>(int,MethodVisitor,String,NoahsArk,String,Stri): void\l}"]
+    label="{MethodBodyVisitor|+owner: String \l+inputMethodName: String \l+inputArgs: String \l+className: String \l+ark: NoahsArk \l | +visitMethodInsn(int,String,String,String,boole): void\l+repeat(String,Stri): void\l+\<init\>(int,MethodVisitor,String,NoahsArk,String,Stri): void\l}"color = null
+]
 NoahsArk [ 
 center=true
-    label="{NoahsArk|+depth: int \l+noe: CallNode \l-static listOfClasses: HashMap \l+newNodes: ArrayList \l+mainNode: String \l+sequenceNodes: ArrayList \l+graphRoot: CallNode \l+cmd: String \l+pkg: String \l+boat: HashMap \l+pairs: HashMap \l+constructedNodes: ArrayList \l | +getDepthMax(): int\l+getPackage(): String\l+setPackage(Stri): void\l+getBoat(): HashMap\l+setRoot(CallNo): void\l+\<init\>(HashM): void\l+getCmd(): String\l+getActiveNode(): CallNode\l+setDepthMax(i): void\l+addPair(String,Stri): void\l+goUp(): void\l+getListOfClass(): HashMap\l+setCmd(Stri): void\l+deeper(): void\l+setActiveNode(CallNo): void\l+addClass(String,ClassPrototy): void\l}"]
+    label="{NoahsArk|+depth: int \l+noe: CallNode \l-static listOfClasses: HashMap \l+newNodes: ArrayList \l+mainNode: String \l+sequenceNodes: ArrayList \l+graphRoot: CallNode \l+cmd: String \l+pkg: String \l+boat: HashMap \l+pairs: HashMap \l+constructedNodes: ArrayList \l | +getDepthMax(): int\l+getPackage(): String\l+setPackage(Stri): void\l+getBoat(): HashMap\l+setRoot(CallNo): void\l+\<init\>(HashM): void\l+getCmd(): String\l+getActiveNode(): CallNode\l+setDepthMax(i): void\l+addPair(String,Stri): void\l+goUp(): void\l+getListOfClass(): HashMap\l+setCmd(Stri): void\l+deeper(): void\l+setActiveNode(CallNo): void\l+addClass(String,ClassPrototy): void\l}"color = null
+]
 ClassDeclarationVisitor [ 
 center=true
-    label="{ClassDeclarationVisitor|+ark: NoahsArk \l | +getName(): String\l+visit(int,int,String,String,String,String): void\l+\<init\>(int,StringBuffer,NoahsA): void\l}"]
+    label="{ClassDeclarationVisitor|+ark: NoahsArk \l | +getName(): String\l+visit(int,int,String,String,String,String): void\l+\<init\>(int,StringBuffer,NoahsA): void\l}"color = null
+]
 CallNode [ 
 center=true
-    label="{CallNode|+parent: CallNode \l+children: ArrayList \l+methodName: String \l+className: String \l | +getChildren(): ArrayList\l+getParent(): CallNode\l+getMethodName(): String\l+setMethodName(Stri): void\l+printCallTree(i): void\l+isMethod(): boolean\l+getClassName(): String\l+setClassName(Stri): void\l+setParent(CallNo): void\l+\<init\>(String,boole): void\l+addChild(CallNo): void\l+setChildren(ArrayLi): void\l}"]
+    label="{CallNode|+parent: CallNode \l+children: ArrayList \l+methodName: String \l+className: String \l | +getChildren(): ArrayList\l+getParent(): CallNode\l+getMethodName(): String\l+setMethodName(Stri): void\l+printCallTree(i): void\l+isMethod(): boolean\l+getClassName(): String\l+setClassName(Stri): void\l+setParent(CallNo): void\l+\<init\>(String,boole): void\l+addChild(CallNo): void\l+setChildren(ArrayLi): void\l}"color = null
+]
 FieldPrototype [ 
 center=true
-    label="{FieldPrototype|+symbol: String \l+name: String \l+type: String \l | +prepareUML(): String\l+\<init\>(String,String,Stri): void\l+getIsStaticAndSame(Stri): boolean\l}"]
+    label="{FieldPrototype|+symbol: String \l+name: String \l+type: String \l | +prepareUML(): String\l+\<init\>(String,String,Stri): void\l+getSingleton(String,Stri): boolean\l}"color = null
+]
+ColorDecorator [ 
+center=true
+    label="{ColorDecorator|-typeToColor: HashMap \l-type: String \l-typeDec: TypeDetector \l | +getColor(): String\l+\<init\>(TypeDetector,boolean): void\l}"color = null
+]
 DotUsesVisitor [ 
 center=true
-    label="{DotUsesVisitor|+arg0: int \l | +\<init\>(int,StringBuff): void\l+visitMethod(int,String,String,String,String): MethodVisitor\l}"]
-SingletonLazy [ 
+    label="{DotUsesVisitor|+arg0: int \l | +\<init\>(int,StringBuff): void\l+visitMethod(int,String,String,String,String): MethodVisitor\l}"color = null
+]
+NameDecorator [ 
 center=true
-    label="{SingletonLazy\l\<\<Singleton\>\>|-static singleton: SingletonLazy \l | #static demoMethod(): void\l+static getInstance(): SingletonLazy\l-\<init\>(): void\l}"color = blue
+    label="{NameDecorator|-types: HashMap \l-type: String \l-typeDec: TypeDetector \l | +getType(): String\l+\<init\>(TypeDetector,boolean): void\l}"color = null
 ]
 ClassFieldVisitor [ 
 center=true
-    label="{ClassFieldVisitor|+className: String \l+ark: NoahsArk \l | +visitField(int,String,String,String,Obje): FieldVisitor\l+\<init\>(int,ClassVisitorBuffered,NoahsArk,Stri): void\l}"]
+    label="{ClassFieldVisitor|+className: String \l+ark: NoahsArk \l | +visitField(int,String,String,String,Obje): FieldVisitor\l+\<init\>(int,ClassVisitorBuffered,NoahsArk,Stri): void\l}"color = null
+]
 ClassPrototype [ 
 center=true
-    label="{ClassPrototype|+methods: HashMap \l+name: String \l+fields: HashMap \l | +getFields(): HashMap\l+getName(): String\l+addField(String,FieldPrototy): void\l+prepareUML(): String\l+\<init\>(Stri): void\l+getMethods(): HashMap\l+addMethod(String,MethodPrototy): void\l}"]
+    label="{ClassPrototype|+superName: String \l+methods: HashMap \l+name: String \l+fields: HashMap \l | +getFields(): HashMap\l+getName(): String\l+getSuperName(): String\l+addField(String,FieldPrototy): void\l+prepareUML(): String\l+\<init\>(String,Stri): void\l+getMethods(): HashMap\l+addMethod(String,MethodPrototy): void\l}"color = null
+]
 DotInheritanceVisitor [ 
 center=true
-    label="{DotInheritanceVisitor| | +visit(int,int,String,String,String,String): void\l+\<init\>(int,StringBuff): void\l}"]
+    label="{DotInheritanceVisitor| | +visit(int,int,String,String,String,String): void\l+\<init\>(int,StringBuff): void\l}"color = null
+]
 FirstASM [ 
 center=true
-    label="{FirstASM|-static associationTypes: String[] \l-static t: String \l-static testerino2: String \l+static listOfClasses: HashMap \l-static testerino: String \l-static testerino3: String \l-static classEndString2: String \l-static methodSeparatorString: String \l-static font: String \l-static classEndString1: String \l-static ourPKG: String \l | +static umlHandler(String,String,String,StringBuffer,NoahsA): void\l+static generateSequence(String,String,String,String,StringBuffer,NoahsA): StringBuffer\l+static main(String): void\l+static getClassDetails(String,String,NoahsA): void\l+\<init\>(): void\l+static listClasses(Fi): HashMap\l+static getAssociation(String,String,Stri): ArrayList\l+static dotAssociationHandler(String,StringBuff): ArrayList\l+static visualize(String,Stri): void\l+static generateDotUML(String,StringBuffer,NoahsA): StringBuffer\l+static sequenceHandler(String,String,String,StringBuffer,NoahsArk,String,String,String,i): void\l+static dotInheritanceHandler(StringBuff): ArrayList\l+static methodEval(String,String,String,String,NoahsA): void\l+static dotUsesHandler(String,StringBuff): ArrayList\l+static pairToViz(Stri): String\lstatic \<clinit\>(): void\l}"]
+    label="{FirstASM|-static single: String \l-static associationTypes: String[] \l-static t: String \l-static testerino2: String \l+static listOfClasses: HashMap \l-static testerino: String \l-static testerino3: String \l-static classEndString2: String \l-static methodSeparatorString: String \l-static font: String \l-static classEndString1: String \l-static ourPKG: String \l | +static umlHandler(String,String,String,StringBuffer,NoahsA): void\l+static generateSequence(String,String,String,String,StringBuffer,NoahsA): StringBuffer\l+static main(String): void\l+static getClassDetails(String,String,NoahsA): void\l+\<init\>(): void\l+static listClasses(Fi): HashMap\l+static getAssociation(String,String,Stri): ArrayList\l+static dotAssociationHandler(String,StringBuff): ArrayList\l+static visualize(String,Stri): void\l+static generateDotUML(String,StringBuffer,NoahsA): StringBuffer\l+static sequenceHandler(String,String,String,StringBuffer,NoahsArk,String,String,String,i): void\l+static dotInheritanceHandler(StringBuff): ArrayList\l+static methodEval(String,String,String,String,NoahsA): void\l+static dotUsesHandler(String,StringBuff): ArrayList\l+static pairToViz(Stri): String\lstatic \<clinit\>(): void\l}"color = null
+]
 DotAssociationVisitor [ 
 center=true
-    label="{DotAssociationVisitor| | +visitField(int,String,String,String,Obje): FieldVisitor\l+\<init\>(int,ClassVisitorBuffer): void\l}"]
-Calendar -> Calendar[arrowhead = vee, style = dotted]
+    label="{DotAssociationVisitor| | +visitField(int,String,String,String,Obje): FieldVisitor\l+\<init\>(int,ClassVisitorBuffer): void\l}"color = null
+]
+TypeDetector [ 
+center=true
+    label="{TypeDetector|-flags: boolean[] \l | +getType(): String\l+\<init\>(boolean): void\l}"color = null
+]
+NameDecorator -> TypeDetector[arrowhead = vee, style = dotted]
+NameDecorator -> TypeDetector[arrowhead = vee]
+NameDecorator -> TypeDetector [arrowhead = onormal]
+ClassFieldVisitor -> ClassPrototype[arrowhead = vee, style = dotted]
+ClassFieldVisitor -> NoahsArk[arrowhead = vee]
+ClassFieldVisitor -> ClassFieldVisitor[arrowhead = vee, style = dotted]
+ClassFieldVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
+ClassFieldVisitor -> ClassVisitorBuffered [arrowhead = onormal]
+ClassFieldVisitor -> NoahsArk[arrowhead = vee, style = dotted]
+ClassFieldVisitor -> FieldPrototype[arrowhead = vee, style = dotted]
 DotMethodVisitor -> ClassPrototype[arrowhead = vee, style = dotted]
 DotMethodVisitor -> NoahsArk[arrowhead = vee]
 DotMethodVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
@@ -78,8 +103,24 @@ DotMethodVisitor -> MethodPrototype[arrowhead = vee, style = dotted]
 DotMethodVisitor -> ClassVisitorBuffered [arrowhead = onormal]
 DotMethodVisitor -> NoahsArk[arrowhead = vee, style = dotted]
 DotMethodVisitor -> IMethodVisitor[arrowhead = onormal,style = dotted]
-SingletonEager -> SingletonEager[arrowhead = vee]
-SingletonEager -> SingletonEager[arrowhead = vee, style = dotted]
+DotInheritanceVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
+DotInheritanceVisitor -> ClassVisitorBuffered [arrowhead = onormal]
+FirstASM -> FirstASM[arrowhead = vee, style = dotted]
+FirstASM -> TypeDetector[arrowhead = vee, style = dotted]
+FirstASM -> ClassFieldVisitor[arrowhead = vee, style = dotted]
+FirstASM -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
+FirstASM -> CallNode[arrowhead = vee, style = dotted]
+FirstASM -> MethodPrototype[arrowhead = vee, style = dotted]
+FirstASM -> NoahsArk[arrowhead = vee, style = dotted]
+FirstASM -> ColorDecorator[arrowhead = vee, style = dotted]
+FirstASM -> FieldPrototype[arrowhead = vee, style = dotted]
+FirstASM -> ClassPrototype[arrowhead = vee, style = dotted]
+FirstASM -> DotMethodVisitor[arrowhead = vee, style = dotted]
+FirstASM -> ClassDeclarationVisitor[arrowhead = vee, style = dotted]
+FirstASM -> NameDecorator[arrowhead = vee, style = dotted]
+DotAssociationVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
+DotAssociationVisitor -> DotAssociationVisitor[arrowhead = vee, style = dotted]
+DotAssociationVisitor -> ClassVisitorBuffered [arrowhead = onormal]
 MethodBodyVisitor -> ClassPrototype[arrowhead = vee, style = dotted]
 MethodBodyVisitor -> NoahsArk[arrowhead = vee]
 MethodBodyVisitor -> DotMethodVisitor[arrowhead = vee, style = dotted]
@@ -93,34 +134,13 @@ ClassDeclarationVisitor -> ClassVisitorBuffered [arrowhead = onormal]
 ClassDeclarationVisitor -> NoahsArk[arrowhead = vee, style = dotted]
 CallNode -> CallNode[arrowhead = vee]
 CallNode -> CallNode[arrowhead = vee, style = dotted]
+ColorDecorator -> TypeDetector[arrowhead = vee, style = dotted]
+ColorDecorator -> TypeDetector[arrowhead = vee]
+ColorDecorator -> TypeDetector [arrowhead = onormal]
 DotUsesVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
 DotUsesVisitor -> DotUsesVisitor[arrowhead = vee, style = dotted]
 DotUsesVisitor -> ClassVisitorBuffered [arrowhead = onormal]
 DotUsesVisitor -> IMethodVisitor[arrowhead = onormal,style = dotted]
-SingletonLazy -> SingletonLazy[arrowhead = vee]
-SingletonLazy -> SingletonLazy[arrowhead = vee, style = dotted]
-ClassFieldVisitor -> ClassPrototype[arrowhead = vee, style = dotted]
-ClassFieldVisitor -> NoahsArk[arrowhead = vee]
-ClassFieldVisitor -> ClassFieldVisitor[arrowhead = vee, style = dotted]
-ClassFieldVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
-ClassFieldVisitor -> ClassVisitorBuffered [arrowhead = onormal]
-ClassFieldVisitor -> NoahsArk[arrowhead = vee, style = dotted]
-ClassFieldVisitor -> FieldPrototype[arrowhead = vee, style = dotted]
-DotInheritanceVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
-DotInheritanceVisitor -> ClassVisitorBuffered [arrowhead = onormal]
-FirstASM -> FirstASM[arrowhead = vee, style = dotted]
-FirstASM -> ClassPrototype[arrowhead = vee, style = dotted]
-FirstASM -> ClassFieldVisitor[arrowhead = vee, style = dotted]
-FirstASM -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
-FirstASM -> DotMethodVisitor[arrowhead = vee, style = dotted]
-FirstASM -> CallNode[arrowhead = vee, style = dotted]
-FirstASM -> MethodPrototype[arrowhead = vee, style = dotted]
-FirstASM -> NoahsArk[arrowhead = vee, style = dotted]
-FirstASM -> ClassDeclarationVisitor[arrowhead = vee, style = dotted]
-FirstASM -> FieldPrototype[arrowhead = vee, style = dotted]
-DotAssociationVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
-DotAssociationVisitor -> DotAssociationVisitor[arrowhead = vee, style = dotted]
-DotAssociationVisitor -> ClassVisitorBuffered [arrowhead = onormal]
 
 
 }
