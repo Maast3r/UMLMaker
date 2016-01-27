@@ -199,8 +199,8 @@ public class FirstASM {
 			}
 			result += classEndString1;
 			
-			result += new ColorDecorator(new TypeDetector(singletonFlag), singletonFlag).getColor();
-			result = c.prepareUML() + new NameDecorator(new TypeDetector(singletonFlag), singletonFlag).getType() + "|" + result;
+			result += new ColorDecorator(singletonFlag).getColor();
+			result = c.prepareUML() + new NameDecorator(singletonFlag).getType() + "|" + result;
 			result+=classEndString2;
 			buf.append(result);
 		}
