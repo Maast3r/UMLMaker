@@ -6,7 +6,7 @@ node [
 	fontname = "Bitstream Vera Sans"
 	fontsize = 16
 
-        shape = "record"
+ shape = "record"
 ]
 edge [
 	fontname = "Bitstream Vera Sans"

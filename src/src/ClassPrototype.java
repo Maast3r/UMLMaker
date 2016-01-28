@@ -8,8 +8,8 @@ public class ClassPrototype {
 	public HashMap<String, MethodPrototype> methods;
 	public String superName;
 	public String interfaces[];
-	public boolean[] type = { false, false };
 	public String arrowDesc;
+	public String type = "";
 	
 	public ClassPrototype(String name){
 		this.name = name;

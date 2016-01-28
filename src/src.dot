@@ -6,35 +6,47 @@ node [
 	fontname = "Bitstream Vera Sans"
 	fontsize = 16
 
-        shape = "record"
+ shape = "record"
 ]
 edge [
 	fontname = "Bitstream Vera Sans"
 	fontsize = 16
 ]
+DecoratorDetector [ 
+center=true
+    label="{DecoratorDetectornull|+ark: NoahsArk \l | +getType(Stri): String\l+\<init\>(NoahsA): void\l}"color = null
+style = filled 
+ fillcolor = null
+]
+AbstractDetector [ 
+center=true
+    label="{AbstractDetectornull|-ark: NoahsArk \l | +getType(Stri): String\l+\<init\>(NoahsA): void\l}"color = null
+style = filled 
+ fillcolor = null
+]
 IMethodVisitor [ 
 center=true
-    label="{IMethodVisitor| | +visitMethod(int,String,String,String,String): MethodVisitor\l}"color = black
+    label="{IMethodVisitor\n\<\<target\>\>| | +visitMethod(int,String,String,String,String): MethodVisitor\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = firebrick
 ]
 MethodPrototype [ 
 center=true
-    label="{MethodPrototype|+args: String \l+access: String \l+name: String \l+returnType: String \l | +prepareUML(): String\l+\<init\>(String,String,String,Stri): void\l+getIsStaticAndSame(Stri): boolean\l}"color = black
+    label="{MethodPrototypenull|+args: String \l+access: String \l+name: String \l+returnType: String \l | +prepareUML(): String\l+\<init\>(String,String,String,Stri): void\l+getIsStaticAndSame(Stri): boolean\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = null
 ]
 ClassVisitorBuffered [ 
 center=true
-    label="{ClassVisitorBuffered|buf: StringBuffer \l+name: String \l | +getAccessModifier(i): String\l+getName(): String\l+\<init\>(int,ClassVisit): void\l}"color = black
+    label="{ClassVisitorBufferednull|buf: StringBuffer \l+name: String \l | +getAccessModifier(i): String\l+getName(): String\l+\<init\>(int,ClassVisit): void\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = null
 ]
 DotMethodVisitor [ 
 center=true
-    label="{DotMethodVisitor|+inputMethodName: String \l+inputArgs: String \l+arg0: int \l+className: String \l+ark: NoahsArk \l | +\<init\>(int,NoahsArk,String,String,Stri): void\l+visitMethod(int,String,String,String,String): MethodVisitor\l}"color = black
+    label="{DotMethodVisitor\n\<\<adapter\>\>|+inputMethodName: String \l+inputArgs: String \l+arg0: int \l+className: String \l+ark: NoahsArk \l | +\<init\>(int,NoahsArk,String,String,Stri): void\l+visitMethod(int,String,String,String,String): MethodVisitor\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = firebrick
 ]
 TypeDecorator [ 
 center=true
@@ -44,90 +56,107 @@ style = filled
 ]
 MethodBodyVisitor [ 
 center=true
-    label="{MethodBodyVisitor|+owner: String \l+inputMethodName: String \l+inputArgs: String \l+className: String \l+ark: NoahsArk \l | +visitMethodInsn(int,String,String,String,boole): void\l+repeat(String,Stri): void\l+\<init\>(int,MethodVisitor,String,NoahsArk,String,Stri): void\l}"color = black
+    label="{MethodBodyVisitornull|+owner: String \l+inputMethodName: String \l+inputArgs: String \l+className: String \l+ark: NoahsArk \l | +visitMethodInsn(int,String,String,String,boole): void\l+repeat(String,Stri): void\l+\<init\>(int,MethodVisitor,String,NoahsArk,String,Stri): void\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = null
 ]
 NoahsArk [ 
 center=true
-    label="{NoahsArk|+depth: int \l+noe: CallNode \l-static listOfClasses: HashMap \l+newNodes: ArrayList \l+mainNode: String \l+sequenceNodes: ArrayList \l+graphRoot: CallNode \l+cmd: String \l+pkg: String \l+boat: HashMap \l+pairs: HashMap \l+constructedNodes: ArrayList \l | +getDepthMax(): int\l+getPackage(): String\l+setPackage(Stri): void\l+getBoat(): HashMap\l+setRoot(CallNo): void\l+\<init\>(HashM): void\l+getCmd(): String\l+getActiveNode(): CallNode\l+setDepthMax(i): void\l+addPair(String,Stri): void\l+goUp(): void\l+getListOfClass(): HashMap\l+setCmd(Stri): void\l+deeper(): void\l+setActiveNode(CallNo): void\l+addClass(String,ClassPrototy): void\l}"color = black
+    label="{NoahsArk\n\<\<adaptee\>\>|+depth: int \l+noe: CallNode \l-static listOfClasses: HashMap \l+newNodes: ArrayList \l+mainNode: String \l+sequenceNodes: ArrayList \l+graphRoot: CallNode \l+cmd: String \l+pkg: String \l+boat: HashMap \l+pairs: HashMap \l+constructedNodes: ArrayList \l | +getDepthMax(): int\l+getPackage(): String\l+setPackage(Stri): void\l+getBoat(): HashMap\l+setRoot(CallNo): void\l+\<init\>(HashM): void\l+getCmd(): String\l+getActiveNode(): CallNode\l+setDepthMax(i): void\l+addPair(String,Stri): void\l+goUp(): void\l+getListOfClass(): HashMap\l+setCmd(Stri): void\l+deeper(): void\l+setActiveNode(CallNo): void\l+addClass(String,ClassPrototy): void\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = firebrick
 ]
 ClassDeclarationVisitor [ 
 center=true
-    label="{ClassDeclarationVisitor|+ark: NoahsArk \l | +getName(): String\l+visit(int,int,String,String,String,String): void\l+\<init\>(int,StringBuffer,NoahsA): void\l}"color = black
+    label="{ClassDeclarationVisitornull|+ark: NoahsArk \l | +getName(): String\l+visit(int,int,String,String,String,String): void\l+\<init\>(int,StringBuffer,NoahsA): void\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = null
+]
+SingletonDetector [ 
+center=true
+    label="{SingletonDetectornull|+ark: NoahsArk \l | +getType(Stri): String\l+\<init\>(NoahsA): void\l}"color = null
+style = filled 
+ fillcolor = null
 ]
 CallNode [ 
 center=true
-    label="{CallNode|+parent: CallNode \l+children: ArrayList \l+methodName: String \l+className: String \l | +getChildren(): ArrayList\l+getParent(): CallNode\l+getMethodName(): String\l+setMethodName(Stri): void\l+printCallTree(i): void\l+isMethod(): boolean\l+getClassName(): String\l+setClassName(Stri): void\l+setParent(CallNo): void\l+\<init\>(String,boole): void\l+addChild(CallNo): void\l+setChildren(ArrayLi): void\l}"color = black
+    label="{CallNodenull|+parent: CallNode \l+children: ArrayList \l+methodName: String \l+className: String \l | +getChildren(): ArrayList\l+getParent(): CallNode\l+getMethodName(): String\l+setMethodName(Stri): void\l+printCallTree(i): void\l+isMethod(): boolean\l+getClassName(): String\l+setClassName(Stri): void\l+setParent(CallNo): void\l+\<init\>(String,boole): void\l+addChild(CallNo): void\l+setChildren(ArrayLi): void\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = null
 ]
 FieldPrototype [ 
 center=true
-    label="{FieldPrototype|+symbol: String \l+name: String \l+type: String \l | +checkDecorator(Stri): boolean\l+checkAdapter(): boolean\l+prepareUML(): String\l+\<init\>(String,String,Stri): void\l+getSingleton(String,Stri): boolean\l}"color = black
+    label="{FieldPrototypenull|+symbol: String \l+name: String \l+type: String \l | +checkDecorator(Stri): boolean\l+checkAdapter(): boolean\l+prepareUML(): String\l+\<init\>(String,String,Stri): void\l+getSingleton(String,Stri): boolean\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = null
 ]
 ColorDecorator [ 
 center=true
-    label="{ColorDecorator\n\<\<decorator\>\>| | +getFillColor(): String\l+getColor(): String\l+\<init\>(TypeDetect): void\l}"color = null
+    label="{ColorDecoratornull| | +getFillColor(): String\l+getColor(): String\l+\<init\>(TypeDetect): void\l}"color = null
 style = filled 
- fillcolor = chartreuse2
+ fillcolor = null
 ]
 DotUsesVisitor [ 
 center=true
-    label="{DotUsesVisitor|+arg0: int \l | +\<init\>(int,StringBuff): void\l+visitMethod(int,String,String,String,String): MethodVisitor\l}"color = black
+    label="{DotUsesVisitornull|+arg0: int \l | +\<init\>(int,StringBuff): void\l+visitMethod(int,String,String,String,String): MethodVisitor\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = null
 ]
 NameDecorator [ 
 center=true
-    label="{NameDecorator\n\<\<decorator\>\>| | +getType(): String\l+\<init\>(TypeDetect): void\l}"color = null
+    label="{NameDecoratornull| | +getType(): String\l+\<init\>(TypeDetect): void\l}"color = null
 style = filled 
- fillcolor = chartreuse2
+ fillcolor = null
 ]
 ClassFieldVisitor [ 
 center=true
-    label="{ClassFieldVisitor|+className: String \l+ark: NoahsArk \l | +visitField(int,String,String,String,Obje): FieldVisitor\l+\<init\>(int,ClassVisitorBuffered,NoahsArk,Stri): void\l}"color = black
+    label="{ClassFieldVisitornull|+className: String \l+ark: NoahsArk \l | +visitField(int,String,String,String,Obje): FieldVisitor\l+\<init\>(int,ClassVisitorBuffered,NoahsArk,Stri): void\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = null
+]
+AdapterDetector [ 
+center=true
+    label="{AdapterDetectornull|+ark: NoahsArk \l | +getType(Stri): String\l+\<init\>(NoahsA): void\l}"color = null
+style = filled 
+ fillcolor = null
 ]
 ClassPrototype [ 
 center=true
-    label="{ClassPrototype|+superName: String \l+interfaces: String[] \l+methods: HashMap \l+name: String \l+arrowDesc: String \l+fields: HashMap \l+type: boolean[] \l | +getFields(): HashMap\l+getName(): String\l+getSuperName(): String\l+addField(String,FieldPrototy): void\l+getInterfaces(): String[]\l+prepareUML(): String\l+\<init\>(String,String,String): void\l+getMethods(): HashMap\l+addMethod(String,MethodPrototy): void\l}"color = black
+    label="{ClassPrototypenull|+superName: String \l+interfaces: String[] \l+methods: HashMap \l+name: String \l+arrowDesc: String \l+fields: HashMap \l+type: String \l | +getFields(): HashMap\l+getName(): String\l+getSuperName(): String\l+addField(String,FieldPrototy): void\l+getInterfaces(): String[]\l+prepareUML(): String\l+\<init\>(String,String,String): void\l+getMethods(): HashMap\l+addMethod(String,MethodPrototy): void\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = null
 ]
 DotInheritanceVisitor [ 
 center=true
-    label="{DotInheritanceVisitor| | +visit(int,int,String,String,String,String): void\l+\<init\>(int,StringBuff): void\l}"color = black
+    label="{DotInheritanceVisitornull| | +visit(int,int,String,String,String,String): void\l+\<init\>(int,StringBuff): void\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = null
 ]
 FirstASM [ 
 center=true
-    label="{FirstASM|-static single: String \l-static associationTypes: String[] \l-static t: String \l-static testerino2: String \l+static listOfClasses: HashMap \l-static testerino: String \l-static testerino3: String \l-static classEndString2: String \l-static methodSeparatorString: String \l-static font: String \l-static classEndString1: String \l-static ourPKG: String \l | +static umlHandler(String,String,String,StringBuffer,NoahsA): void\l+static generateSequence(String,String,String,String,StringBuffer,NoahsA): StringBuffer\l+static main(String): void\l+static getClassDetails(String,String,NoahsA): void\l+\<init\>(): void\l+static listClasses(Fi): HashMap\l+static getAssociation(String,String,Stri): ArrayList\l+static dotAssociationHandler(String,StringBuff): ArrayList\l+static visualize(String,Stri): void\l+static generateDotUML(String,StringBuffer,NoahsA): StringBuffer\l+static sequenceHandler(String,String,String,StringBuffer,NoahsArk,String,String,String,i): void\l+static dotInheritanceHandler(StringBuff): ArrayList\l+static methodEval(String,String,String,String,NoahsA): void\l+static dotUsesHandler(String,StringBuff): ArrayList\l+static pairToViz(String,NoahsA): String\lstatic \<clinit\>(): void\l}"color = black
+    label="{FirstASMnull|-static associationTypes: String[] \l-static lab2one: String \l+static listOfClasses: HashMap \l-static classEndString2: String \l-static classEndString1: String \l-static ourPKG: String \l-static single: String \l-static t: String \l-static testerino2: String \l-static testerino: String \l-static testerino3: String \l-static lab5one: String \l-static methodSeparatorString: String \l-static font: String \l | +static umlHandler(String,String,String,StringBuffer,NoahsA): void\l+static generateSequence(String,String,String,String,StringBuffer,NoahsA): StringBuffer\l+static main(String): void\l+static getClassDetails(String,String,NoahsA): void\l+\<init\>(): void\l+static listClasses(Fi): HashMap\l+static getAssociation(String,String,Stri): ArrayList\l+static dotAssociationHandler(String,StringBuff): ArrayList\l+static visualize(String,Stri): void\l+static generateDotUML(String,StringBuffer,NoahsA): StringBuffer\l+static sequenceHandler(String,String,String,StringBuffer,NoahsArk,String,String,String,i): void\l+static dotInheritanceHandler(StringBuff): ArrayList\l+static methodEval(String,String,String,String,NoahsA): void\l+static dotUsesHandler(String,StringBuff): ArrayList\l+static pairToViz(String,NoahsA): String\lstatic \<clinit\>(): void\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = null
 ]
 DotAssociationVisitor [ 
 center=true
-    label="{DotAssociationVisitor| | +visitField(int,String,String,String,Obje): FieldVisitor\l+\<init\>(int,ClassVisitorBuffer): void\l}"color = black
+    label="{DotAssociationVisitornull| | +visitField(int,String,String,String,Obje): FieldVisitor\l+\<init\>(int,ClassVisitorBuffer): void\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = null
 ]
 TypeDetector [ 
 center=true
-    label="{TypeDetector\n\<\<decorator\>\>|+flags: boolean[] \l | +getType(): String\l+\<init\>(boolean): void\l}"color = null
+    label="{TypeDetector\n\<\component\>\>|+cName: String \l+flags: boolean[] \l+detectors: ArrayList \l+ark: NoahsArk \l | +getType(): String\l+\<init\>(String,NoahsA): void\l}"color = null
 style = filled 
  fillcolor = chartreuse2
 ]
+DecoratorDetector -> NoahsArk[arrowhead = veenull]
+DecoratorDetector -> AbstractDetector[arrowhead = vee, style = dotted]
+DecoratorDetector -> AbstractDetector [arrowhead = onormal]
+DecoratorDetector -> NoahsArk[arrowhead = vee, style = dotted]
+AbstractDetector -> NoahsArk[arrowhead = veenull]
 DotMethodVisitor -> ClassPrototype[arrowhead = vee, style = dotted]
-DotMethodVisitor -> NoahsArk[arrowhead = veenull]
+DotMethodVisitor -> NoahsArk[arrowhead = vee,label="\<\<Adapts\>\>"]
 DotMethodVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
 DotMethodVisitor -> DotMethodVisitor[arrowhead = vee, style = dotted]
 DotMethodVisitor -> MethodBodyVisitor[arrowhead = vee, style = dotted]
@@ -149,6 +178,13 @@ ClassDeclarationVisitor -> NoahsArk[arrowhead = veenull]
 ClassDeclarationVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
 ClassDeclarationVisitor -> ClassVisitorBuffered [arrowhead = onormal]
 ClassDeclarationVisitor -> NoahsArk[arrowhead = vee, style = dotted]
+SingletonDetector -> ClassPrototype[arrowhead = vee, style = dotted]
+SingletonDetector -> NoahsArk[arrowhead = veenull]
+SingletonDetector -> AbstractDetector[arrowhead = vee, style = dotted]
+SingletonDetector -> AbstractDetector [arrowhead = onormal]
+SingletonDetector -> MethodPrototype[arrowhead = vee, style = dotted]
+SingletonDetector -> NoahsArk[arrowhead = vee, style = dotted]
+SingletonDetector -> FieldPrototype[arrowhead = vee, style = dotted]
 CallNode -> CallNode[arrowhead = veenull]
 CallNode -> CallNode[arrowhead = vee, style = dotted]
 ColorDecorator -> TypeDecorator[arrowhead = vee, style = dotted]
@@ -166,6 +202,10 @@ ClassFieldVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
 ClassFieldVisitor -> ClassVisitorBuffered [arrowhead = onormal]
 ClassFieldVisitor -> NoahsArk[arrowhead = vee, style = dotted]
 ClassFieldVisitor -> FieldPrototype[arrowhead = vee, style = dotted]
+AdapterDetector -> NoahsArk[arrowhead = veenull]
+AdapterDetector -> AbstractDetector[arrowhead = vee, style = dotted]
+AdapterDetector -> AbstractDetector [arrowhead = onormal]
+AdapterDetector -> NoahsArk[arrowhead = vee, style = dotted]
 DotInheritanceVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
 DotInheritanceVisitor -> ClassVisitorBuffered [arrowhead = onormal]
 FirstASM -> FirstASM[arrowhead = vee, style = dotted]
@@ -184,6 +224,11 @@ FirstASM -> NameDecorator[arrowhead = vee, style = dotted]
 DotAssociationVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
 DotAssociationVisitor -> DotAssociationVisitor[arrowhead = vee, style = dotted]
 DotAssociationVisitor -> ClassVisitorBuffered [arrowhead = onormal]
+TypeDetector -> NoahsArk[arrowhead = veenull]
+TypeDetector -> SingletonDetector[arrowhead = vee, style = dotted]
+TypeDetector -> AdapterDetector[arrowhead = vee, style = dotted]
+TypeDetector -> AbstractDetector[arrowhead = vee, style = dotted]
+TypeDetector -> DecoratorDetector[arrowhead = vee, style = dotted]
 
 
 }

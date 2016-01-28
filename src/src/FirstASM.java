@@ -26,6 +26,8 @@ public class FirstASM {
 	private static String classEndString2 = "]\n";
 	private static String ourPKG = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
 	private static String single = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\singletons";
+	private static String lab2one = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab2one";
+	private static String lab5one = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab5one";
 	private static String testerino = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
 	private static String testerino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 5";
 	private static String testerino3 = "sequence java.util Collections shuffle List 5";
@@ -167,78 +169,54 @@ public class FirstASM {
 	}
 
 	public static StringBuffer generateDotUML(String pkg, StringBuffer buf, NoahsArk ark) throws IOException {
-		buf.append("digraph G{\n" + font + "\n" + "node [\n" + font + "\n" + "        shape = \"record\"\n" + "]\n"
+		buf.append("digraph G{\n" + font + "\n" + "node [\n" + font + "\n" + 
+				" shape = \"record\"\n" + "]\n"
 				+ "edge [\n" + font + "]\n");
 
 		// Do the real work
 		String result = "";
 		HashMap<String, ClassPrototype> boat = ark.getBoat();
-		for(ClassPrototype c : boat.values()){
-			String className = c.getName();
-			String superName = c.getSuperName();
-			String[] interfaces = c.getInterfaces();
+		for(ClassPrototype cl : boat.values()){
+			String className = cl.getName();
+			String superName = cl.getSuperName();
+			String[] interfaces = cl.getInterfaces();
 			if(ark.pairs.get(className) != null){
 				for (String target : ark.pairs.get(className)) {
+					String targetName = target.substring(1);
 					// Detect Decorator Pattern -------------------------
 					//check for association arrow
 					if(target.charAt(0) == '$'){
 						// check if the target is a super
-						String targetName = target.substring(1);
 						//check if it has a subclass
 						if(targetName.equals(superName)){
-								for(FieldPrototype f : c.fields.values()){
-									if(f.type.equals(superName)){
-										c.type[0] = true;
-										c.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
-										ark.getBoat().get(targetName).type[0] = true;
-									}
-								}
-						}
-						//check if target is an interface
-//						for(String intfc : interfaces){
-//							if(target.equals(intfc)){
-//								for(FieldPrototype f : c.fields.values()){
-//									if(f.type.equals(superName)){
-//										c.type[0] = true;
-//										c.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
-//										ark.getBoat().get(targetName).type[0] = true;
-//									}
-//								}
-//							}
-//						}
-					}
-					
-					// Detect Adapter pattern ------------------------------------
-					// Check for extends or implements
-					// then check association and set as adaptee
-					if(target.charAt(0) == '@' || target.charAt(0) == '!' ){
-						
-						System.out.println("1");
-						// check if the target is a super
-						String targetName = target.substring(1);
-						//check if it has a subclass
-//						if(targetName.equals(superName)){
-//							System.out.println("21");
-//								for(FieldPrototype f : c.fields.values()){
-//									if(f.type.equals(superName)){
-//										c.type[0] = true;
-//										c.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
-//										ark.getBoat().get(targetName).type[0] = true;
-//									}
-//								}
-//						}
-						//check if target is an interface
-						for(String intfc : interfaces){
-							if(target.equals(intfc)){
-								System.out.println("21");
-								for(FieldPrototype f : c.fields.values()){
-									if(f.type.equals(superName)){
-//										c.type[0] = true;
-//										c.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
-//										ark.getBoat().get(targetName).type[0] = true;
-									}
+							for(FieldPrototype f : cl.fields.values()){
+								if(f.type.equals(superName)){
+									cl.type = "decorator";
+									cl.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
+									ark.getBoat().get(targetName).type = "component";
 								}
 							}
+						}
+					}
+					// Detect Adapter pattern ------------------------------------
+					// then check association and set as adaptee
+					if(target.charAt(0) == '#' ){
+						// check if the target is a super
+						//check if target is an interface
+						for(String intfc : interfaces){
+							if(intfc.contains("/")) intfc = intfc.split("/")[1];
+//							if(targetName1.equals(intfc)){
+								for(FieldPrototype f : cl.fields.values()){
+									if(f.type.equals(targetName)){
+										cl.type = "adapter";
+										cl.arrowDesc = ",label=\"\\<\\<Adapts\\>\\>\"";
+										//target
+										if(ark.getBoat().containsKey(intfc))ark.getBoat().get(intfc).type = "target";
+										//adaptee
+										ark.getBoat().get(targetName).type = "adaptee";
+									}
+								}
+//							}
 						}
 					}
 				}
@@ -247,18 +225,15 @@ public class FirstASM {
 		
 		for (ClassPrototype c : boat.values()) {
 			result = "";
-			boolean flag[] = { false, false, false, false };
-			String className = c.getName();
-			String superName = c.getSuperName();
-			String[] interfaces= c.getInterfaces();
+			String cName = c.getName();
+			String sName = c.getSuperName();
+			String[] ifaces= c.getInterfaces();
 
 			Iterator fIterator = c.getFields().keySet().iterator();
 			FieldPrototype field;
 			while (fIterator.hasNext()) {
 				field = c.getFields().get(fIterator.next());
 				result += field.prepareUML();
-				if (field.getSingleton(className, superName))
-					flag[0] = true;
 			}
 
 			result += methodSeparatorString;
@@ -267,51 +242,13 @@ public class FirstASM {
 			while (mIterator.hasNext()) {
 				method = c.getMethods().get(mIterator.next());
 				result += method.prepareUML();
-				if (method.getIsStaticAndSame(className))
-					flag[1] = true;
 			}	
-			
-			for(ClassPrototype cp : ark.getBoat().values()){
-				if(cp.getSuperName().equals(className)){
-					if(c.type[0]){
-						cp.type[0] = true;
-					}
-				}
-//				if(interfaces.length > 0)
-//				{
-//					for(String intfc : interfaces){
-//						if(listOfClasses.containsKey(intfc)){
-//							if(ark.getBoat().get(intfc).type[0]){
-//								c.type[0] = true;
-//							}							
-//						}
-//					}
-//				}
-			}
-			
-			if(c.type[0]){
-				if(!c.superName.equals("null")){
-					if(listOfClasses.containsKey(superName))ark.getBoat().get(superName).type[0] = true;
-				}
-				
-				for(String intfc : interfaces){
-					for(FieldPrototype f : c.fields.values()){
-						if(f.type.equals(intfc)){
-							ark.getBoat().get(intfc).type[0] = true;
-						}
-					}
-				}
-			}
-			
-			flag[2] = c.type[0];
-			flag[3] = c.type[1];
-			
 			
 			result += classEndString1;
 
-			result += new ColorDecorator(new TypeDetector(flag)).getColor();
-			result += new ColorDecorator(new TypeDetector(flag)).getFillColor();
-			result = c.prepareUML() + new NameDecorator(new TypeDetector(flag)).getType() + "|" + result;
+			result += new ColorDecorator(new TypeDetector(cName, ark)).getColor();
+			result += new ColorDecorator(new TypeDetector(cName, ark)).getFillColor();
+			result = c.prepareUML() + new NameDecorator(new TypeDetector(cName, ark)).getType() + "|" + result;
 			result += classEndString2;
 			buf.append(result);
 		}

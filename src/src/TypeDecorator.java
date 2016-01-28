@@ -9,16 +9,26 @@ public class TypeDecorator extends TypeDetector{
 	private TypeDetector typeDetector;
 	
 	public TypeDecorator(TypeDetector t){
-		super(t.flags);
+		super(t.cName, t.ark);
 		this.typeDetector = t;
-		this.typeToColor.put("a", "black");
+		this.typeToColor.put("", "black");
 		this.typeToColor.put("singleton", "blue");
-		this.typeToFill.put("a", "white");
+		
+		this.typeToFill.put("", "white");
 		this.typeToFill.put("singleton", "white");
 		this.typeToFill.put("decorator", "chartreuse2");
-		this.typeToName.put("a", "");
+		this.typeToFill.put("component", "chartreuse2");
+		this.typeToFill.put("adapter", "firebrick");
+		this.typeToFill.put("adaptee", "firebrick");
+		this.typeToFill.put("target", "firebrick");
+		
+		this.typeToName.put("", "");
 		this.typeToName.put("singleton", "\\n\\<\\<Singleton\\>\\>");
 		this.typeToName.put("decorator", "\\n\\<\\<decorator\\>\\>");
+		this.typeToName.put("component", "\\n\\<\\component\\>\\>");
+		this.typeToName.put("adapter", "\\n\\<\\<adapter\\>\\>");
+		this.typeToName.put("adaptee", "\\n\\<\\<adaptee\\>\\>");
+		this.typeToName.put("target", "\\n\\<\\<target\\>\\>");
 	}
 	
 	public String getColor(){

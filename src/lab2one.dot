@@ -6,7 +6,7 @@ node [
 	fontname = "Bitstream Vera Sans"
 	fontsize = 16
 
-        shape = "record"
+ shape = "record"
 ]
 edge [
 	fontname = "Bitstream Vera Sans"
@@ -26,13 +26,13 @@ style = filled
 ]
 InputStream [ 
 center=true
-    label="{InputStream\n\<\<decorator\>\>|-static skipBuffer: byte[] \l-static SKIP_BUFFER_SIZE: int \l | +read(byte[],int,i): int\l+markSupported(): boolean\l+available(): int\l+reset(): void\l+skip(lo): long\l+\<init\>(): void\l+close(): void\l+mark(i): void\l}"color = null
+    label="{InputStream\n\<\component\>\>|-static skipBuffer: byte[] \l-static SKIP_BUFFER_SIZE: int \l | +read(byte[],int,i): int\l+markSupported(): boolean\l+available(): int\l+reset(): void\l+skip(lo): long\l+\<init\>(): void\l+close(): void\l+mark(i): void\l}"color = null
 style = filled 
  fillcolor = chartreuse2
 ]
 OutputStream [ 
 center=true
-    label="{OutputStream\n\<\<decorator\>\>| | +flush(): void\l+\<init\>(): void\l+write(byte[],int,i): void\l+close(): void\l}"color = null
+    label="{OutputStream\n\<\component\>\>| | +flush(): void\l+\<init\>(): void\l+write(byte[],int,i): void\l+close(): void\l}"color = null
 style = filled 
  fillcolor = chartreuse2
 ]
