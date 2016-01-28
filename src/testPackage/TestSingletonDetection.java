@@ -1,5 +1,6 @@
 package testPackage;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,19 +17,23 @@ public class TestSingletonDetection {
 
 	private String dotCode;
 	
-	@Test
+	@Before
 	public void setup() throws IOException {
 		FirstASM fasm = new FirstASM();
 		String[] args = {"10"};
-		Thread t = new Thread(new PrintThread()); 
-		t.start();
+//		Thread t = new Thread(new PrintThread()); 
+//		t.start();
+		String data = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\singletons";
+		ByteArrayInputStream in = new ByteArrayInputStream(data.getBytes());
+		System.setIn(in);
 		fasm.main(args);
-//		System.out.println("uml C:\\Users\\Administrator\\CSSE374-201620\\UMLMaker\\src\\singletons");
+		
+		//		System.out.println("uml C:\\Users\\Administrator\\CSSE374-201620\\UMLMaker\\src\\singletons");
 	}
 	
 	@Before
 	public void readDot() throws IOException {
-		byte[] encoded = Files.readAllBytes(Paths.get("C:\\Users\\Administrator\\CSSE374-201620\\UMLMaker\\src\\singletons.dot"));
+		byte[] encoded = Files.readAllBytes(Paths.get("C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\singletons.dot"));
 		this.dotCode = new String(encoded);
 	}
 	
