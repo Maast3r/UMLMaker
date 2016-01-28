@@ -1,0 +1,75 @@
+digraph G{
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+
+node [
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+
+        shape = "record"
+]
+edge [
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+]
+IEncryption [ 
+center=true
+    label="{IEncryption| | +encrypt(ch): char\l}"color = black
+style = filled 
+ fillcolor = white
+]
+Decrypt [ 
+center=true
+    label="{Decrypt\n\<\<decorator\>\>|+in: InputStream \l-count: int \l | +read(): int\l+\<init\>(InputStre): void\l}"color = null
+style = filled 
+ fillcolor = chartreuse2
+]
+InputStream [ 
+center=true
+    label="{InputStream\n\<\<decorator\>\>|-static skipBuffer: byte[] \l-static SKIP_BUFFER_SIZE: int \l | +read(byte[],int,i): int\l+markSupported(): boolean\l+available(): int\l+reset(): void\l+skip(lo): long\l+\<init\>(): void\l+close(): void\l+mark(i): void\l}"color = null
+style = filled 
+ fillcolor = chartreuse2
+]
+OutputStream [ 
+center=true
+    label="{OutputStream\n\<\<decorator\>\>| | +flush(): void\l+\<init\>(): void\l+write(byte[],int,i): void\l+close(): void\l}"color = null
+style = filled 
+ fillcolor = chartreuse2
+]
+SubstitutionCipher [ 
+center=true
+    label="{SubstitutionCipher|-decryptionKey: char[] \l-encryptionKey: char[] \l | +encrypt(ch): char\l+\<init\>(): void\l+decrypt(ch): char\l}"color = black
+style = filled 
+ fillcolor = white
+]
+IDecryption [ 
+center=true
+    label="{IDecryption| | +decrypt(ch): char\l}"color = black
+style = filled 
+ fillcolor = white
+]
+Encrypt [ 
+center=true
+    label="{Encrypt\n\<\<decorator\>\>|+out: OutputStream \l | +\<init\>(OutputStre): void\l+write(i): void\l}"color = null
+style = filled 
+ fillcolor = chartreuse2
+]
+TextEditorApp [ 
+center=true
+    label="{TextEditorApp| | +static main(String): void\l+\<init\>(): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+Decrypt -> InputStream[arrowhead = vee, style = dotted]
+Decrypt -> InputStream[arrowhead = vee,label="\<\<Decorates\>\>"]
+Decrypt -> SubstitutionCipher[arrowhead = vee, style = dotted]
+Decrypt -> InputStream [arrowhead = onormal]
+SubstitutionCipher -> IDecryption[arrowhead = onormal,style = dotted]
+SubstitutionCipher -> IEncryption[arrowhead = onormal,style = dotted]
+Encrypt -> OutputStream[arrowhead = vee, style = dotted]
+Encrypt -> OutputStream[arrowhead = vee,label="\<\<Decorates\>\>"]
+Encrypt -> SubstitutionCipher[arrowhead = vee, style = dotted]
+Encrypt -> OutputStream [arrowhead = onormal]
+
+
+}

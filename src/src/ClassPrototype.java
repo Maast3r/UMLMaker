@@ -7,18 +7,23 @@ public class ClassPrototype {
 	public HashMap<String, FieldPrototype> fields;
 	public HashMap<String, MethodPrototype> methods;
 	public String superName;
+	public String interfaces[];
+	public boolean[] type = { false, false };
+	public String arrowDesc;
 	
 	public ClassPrototype(String name){
 		this.name = name;
 		this.fields = new HashMap<String, FieldPrototype>();
 		this.methods = new HashMap<String, MethodPrototype>();
+		this.arrowDesc = "";
 	}
 	
-	public ClassPrototype(String name, String superName){
+	public ClassPrototype(String name, String superName, String[] interfaces){
 		this.name = name;
 		this.fields = new HashMap<String, FieldPrototype>();
 		this.methods = new HashMap<String, MethodPrototype>();
 		this.superName = superName;
+		this.interfaces = interfaces;
 	}
 	
 	public HashMap<String, FieldPrototype> getFields(){
@@ -47,5 +52,9 @@ public class ClassPrototype {
 	
 	public String prepareUML(){
 		return this.name + " [ \ncenter=true\n    label=\"{" + this.name;
+	}
+	
+	public String[] getInterfaces(){
+		return this.interfaces;
 	}
 }

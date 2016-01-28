@@ -39,7 +39,7 @@ public class ClassDeclarationVisitor extends ClassVisitorBuffered {
 			superName = temp[temp.length-1];
 		}
 		
-		this.ark.addClass(realname, new ClassPrototype(realname));
+		this.ark.addClass(realname, new ClassPrototype(realname, superName, interfaces));
 		super.visit(version, access, name, signature, superName, interfaces);
 	}
 	

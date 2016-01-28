@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -172,11 +173,84 @@ public class FirstASM {
 		// Do the real work
 		String result = "";
 		HashMap<String, ClassPrototype> boat = ark.getBoat();
-		for (ClassPrototype c : boat.values()) {
-			result = "";
-			boolean singletonFlag[] = { false, false };
+		for(ClassPrototype c : boat.values()){
 			String className = c.getName();
 			String superName = c.getSuperName();
+			String[] interfaces = c.getInterfaces();
+			if(ark.pairs.get(className) != null){
+				for (String target : ark.pairs.get(className)) {
+					// Detect Decorator Pattern -------------------------
+					//check for association arrow
+					if(target.charAt(0) == '$'){
+						// check if the target is a super
+						String targetName = target.substring(1);
+						//check if it has a subclass
+						if(targetName.equals(superName)){
+								for(FieldPrototype f : c.fields.values()){
+									if(f.type.equals(superName)){
+										c.type[0] = true;
+										c.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
+										ark.getBoat().get(targetName).type[0] = true;
+									}
+								}
+						}
+						//check if target is an interface
+//						for(String intfc : interfaces){
+//							if(target.equals(intfc)){
+//								for(FieldPrototype f : c.fields.values()){
+//									if(f.type.equals(superName)){
+//										c.type[0] = true;
+//										c.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
+//										ark.getBoat().get(targetName).type[0] = true;
+//									}
+//								}
+//							}
+//						}
+					}
+					
+					// Detect Adapter pattern ------------------------------------
+					// Check for extends or implements
+					// then check association and set as adaptee
+					if(target.charAt(0) == '@' || target.charAt(0) == '!' ){
+						
+						System.out.println("1");
+						// check if the target is a super
+						String targetName = target.substring(1);
+						//check if it has a subclass
+//						if(targetName.equals(superName)){
+//							System.out.println("21");
+//								for(FieldPrototype f : c.fields.values()){
+//									if(f.type.equals(superName)){
+//										c.type[0] = true;
+//										c.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
+//										ark.getBoat().get(targetName).type[0] = true;
+//									}
+//								}
+//						}
+						//check if target is an interface
+						for(String intfc : interfaces){
+							if(target.equals(intfc)){
+								System.out.println("21");
+								for(FieldPrototype f : c.fields.values()){
+									if(f.type.equals(superName)){
+//										c.type[0] = true;
+//										c.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
+//										ark.getBoat().get(targetName).type[0] = true;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		for (ClassPrototype c : boat.values()) {
+			result = "";
+			boolean flag[] = { false, false, false, false };
+			String className = c.getName();
+			String superName = c.getSuperName();
+			String[] interfaces= c.getInterfaces();
 
 			Iterator fIterator = c.getFields().keySet().iterator();
 			FieldPrototype field;
@@ -184,7 +258,7 @@ public class FirstASM {
 				field = c.getFields().get(fIterator.next());
 				result += field.prepareUML();
 				if (field.getSingleton(className, superName))
-					singletonFlag[0] = true;
+					flag[0] = true;
 			}
 
 			result += methodSeparatorString;
@@ -194,26 +268,57 @@ public class FirstASM {
 				method = c.getMethods().get(mIterator.next());
 				result += method.prepareUML();
 				if (method.getIsStaticAndSame(className))
-					singletonFlag[1] = true;
+					flag[1] = true;
+			}	
+			
+			for(ClassPrototype cp : ark.getBoat().values()){
+				if(cp.getSuperName().equals(className)){
+					if(c.type[0]){
+						cp.type[0] = true;
+					}
+				}
+//				if(interfaces.length > 0)
+//				{
+//					for(String intfc : interfaces){
+//						if(listOfClasses.containsKey(intfc)){
+//							if(ark.getBoat().get(intfc).type[0]){
+//								c.type[0] = true;
+//							}							
+//						}
+//					}
+//				}
 			}
 			
-			if(ark.pairs.get(className) != null){
-				for (String target : ark.pairs.get(className)) {
-					System.out.println(className + " " + target);
+			if(c.type[0]){
+				if(!c.superName.equals("null")){
+					if(listOfClasses.containsKey(superName))ark.getBoat().get(superName).type[0] = true;
+				}
+				
+				for(String intfc : interfaces){
+					for(FieldPrototype f : c.fields.values()){
+						if(f.type.equals(intfc)){
+							ark.getBoat().get(intfc).type[0] = true;
+						}
+					}
 				}
 			}
 			
+			flag[2] = c.type[0];
+			flag[3] = c.type[1];
+			
+			
 			result += classEndString1;
 
-			result += new ColorDecorator(new TypeDetector(singletonFlag)).getColor();
-			result = c.prepareUML() + new NameDecorator(new TypeDetector(singletonFlag)).getType() + "|" + result;
+			result += new ColorDecorator(new TypeDetector(flag)).getColor();
+			result += new ColorDecorator(new TypeDetector(flag)).getFillColor();
+			result = c.prepareUML() + new NameDecorator(new TypeDetector(flag)).getType() + "|" + result;
 			result += classEndString2;
 			buf.append(result);
 		}
 
 		for (String origin : ark.pairs.keySet()) {
 			for (String target : ark.pairs.get(origin)) {
-				buf.append(pairToViz(origin + target));
+				buf.append(pairToViz(origin + target, ark));
 			}
 		}
 
@@ -451,11 +556,11 @@ public class FirstASM {
 		return result;
 	}
 
-	public static String pairToViz(String pair) {
+	public static String pairToViz(String pair, NoahsArk ark) {
 		String result = "";
-		// extends
 		if (pair.equals(""))
 			return result;
+		// extends
 		if (pair.contains("!"))
 			result = pair.split("!")[0] + " -> " + pair.split("!")[1] + " [arrowhead = onormal]";
 		// implements
@@ -465,8 +570,10 @@ public class FirstASM {
 		if (pair.contains("#"))
 			result = pair.split("#")[0] + " -> " + pair.split("#")[1] + "[arrowhead = vee, style = dotted]";
 		// Association
-		if (pair.contains("$"))
-			result = pair.split("\\$")[0] + " -> " + pair.split("\\$")[1] + "[arrowhead = vee]";
+		if (pair.contains("$")){
+			result = pair.split("\\$")[0] + " -> " + pair.split("\\$")[1] + "[arrowhead = vee" + ark.getBoat().get(pair.split("\\$")[0]).arrowDesc + "]";
+			
+		}
 		result = result + "\n";
 		return result;
 
