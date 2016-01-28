@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 public class NoahsArk {
 	public HashMap<String, ClassPrototype> boat;
-	public HashMap<String,HashSet<String>> pairs;
+	public HashMap<String, HashSet<String>> pairs;
 	private static HashMap<String, Boolean> listOfClasses;
 	public int depth;
 	public String pkg;
@@ -17,22 +17,22 @@ public class NoahsArk {
 	public CallNode graphRoot;
 	public String mainNode;
 	public CallNode noe;
-	
+
 	public NoahsArk(HashMap<String, Boolean> listOfClasses) {
 		this.boat = new HashMap<String, ClassPrototype>();
-		this.pairs = new HashMap<String,HashSet<String>>();
+		this.pairs = new HashMap<String, HashSet<String>>();
 		this.listOfClasses = listOfClasses;
 		newNodes = new ArrayList<String>();
 		constructedNodes = new ArrayList<String>();
 		sequenceNodes = new ArrayList<String>();
 		this.graphRoot = null;
 	}
-	
-	public String getCmd(){
+
+	public String getCmd() {
 		return this.cmd;
 	}
-	
-	public void setCmd(String cmd){
+
+	public void setCmd(String cmd) {
 		this.cmd = cmd;
 	}
 
@@ -43,56 +43,54 @@ public class NoahsArk {
 	public void addClass(String name, ClassPrototype toAdd) {
 		this.boat.put(name, toAdd);
 	}
-	
-	public void setRoot(CallNode root){
+
+	public void setRoot(CallNode root) {
 		this.graphRoot = root;
 	}
-	
-	public void setActiveNode(CallNode node){
+
+	public void setActiveNode(CallNode node) {
 		this.noe = node;
 	}
-	
-	public CallNode getActiveNode(){
+
+	public CallNode getActiveNode() {
 		return this.noe;
 	}
 
 	public void addPair(String origin, String target) {
-		if(listOfClasses.get(origin) != null && listOfClasses.get(target.substring(1)) != null){
-			if(this.pairs.get(origin) == null){
+		if (listOfClasses.get(origin) != null && listOfClasses.get(target.substring(1)) != null) {
+			if (this.pairs.get(origin) == null) {
 				this.pairs.put(origin, new HashSet<String>());
 			}
 			this.pairs.get(origin).add(target);
 		}
 	}
-	
-	public void setDepthMax(int depth){
+
+	public void setDepthMax(int depth) {
 		this.depth = depth;
 	}
-	
-	public int getDepthMax(){
+
+	public int getDepthMax() {
 		return this.depth;
 	}
-	
-	public HashMap<String, Boolean> getListOfClass(){
+
+	public HashMap<String, Boolean> getListOfClass() {
 		return this.listOfClasses;
 	}
-	
-	public String getPackage(){
+
+	public String getPackage() {
 		return this.pkg;
 	}
-	
-	public void setPackage(String pkg){
+
+	public void setPackage(String pkg) {
 		this.pkg = pkg;
 	}
 
-	public void goUp(){
+	public void goUp() {
 		this.depth = this.depth + 1;
 	}
 
 	public void deeper() {
-		this.depth = this.depth -1;
+		this.depth = this.depth - 1;
 	}
-	
-	
 
 }

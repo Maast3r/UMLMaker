@@ -28,6 +28,10 @@ DotMethodVisitor [
 center=true
     label="{DotMethodVisitor|+inputMethodName: String \l+inputArgs: String \l+arg0: int \l+className: String \l+ark: NoahsArk \l | +\<init\>(int,NoahsArk,String,String,Stri): void\l+visitMethod(int,String,String,String,String): MethodVisitor\l}"color = null
 ]
+TypeDecorator [ 
+center=true
+    label="{TypeDecorator|-typeToName: HashMap \l-typeToColor: HashMap \l-typeDetector: TypeDetector \l | +getType(): String\l+getColor(): String\l+\<init\>(TypeDetect): void\l}"color = null
+]
 MethodBodyVisitor [ 
 center=true
     label="{MethodBodyVisitor|+owner: String \l+inputMethodName: String \l+inputArgs: String \l+className: String \l+ark: NoahsArk \l | +visitMethodInsn(int,String,String,String,boole): void\l+repeat(String,Stri): void\l+\<init\>(int,MethodVisitor,String,NoahsArk,String,Stri): void\l}"color = null
@@ -46,11 +50,11 @@ center=true
 ]
 FieldPrototype [ 
 center=true
-    label="{FieldPrototype|+symbol: String \l+name: String \l+type: String \l | +prepareUML(): String\l+\<init\>(String,String,Stri): void\l+getSingleton(String,Stri): boolean\l}"color = null
+    label="{FieldPrototype|+symbol: String \l+name: String \l+type: String \l | +checkDecorator(Stri): boolean\l+checkAdapter(): boolean\l+prepareUML(): String\l+\<init\>(String,String,Stri): void\l+getSingleton(String,Stri): boolean\l}"color = null
 ]
 ColorDecorator [ 
 center=true
-    label="{ColorDecorator|-typeToColor: HashMap \l-type: String \l-typeDec: TypeDetector \l | +getColor(): String\l+\<init\>(TypeDetector,boolean): void\l}"color = null
+    label="{ColorDecorator| | +getColor(): String\l+\<init\>(TypeDetect): void\l}"color = null
 ]
 DotUsesVisitor [ 
 center=true
@@ -58,7 +62,7 @@ center=true
 ]
 NameDecorator [ 
 center=true
-    label="{NameDecorator|-types: HashMap \l-type: String \l-typeDec: TypeDetector \l | +getType(): String\l+\<init\>(TypeDetector,boolean): void\l}"color = null
+    label="{NameDecorator| | +getType(): String\l+\<init\>(TypeDetect): void\l}"color = null
 ]
 ClassFieldVisitor [ 
 center=true
@@ -84,16 +88,6 @@ TypeDetector [
 center=true
     label="{TypeDetector|-flags: boolean[] \l | +getType(): String\l+\<init\>(boolean): void\l}"color = null
 ]
-NameDecorator -> TypeDetector[arrowhead = vee, style = dotted]
-NameDecorator -> TypeDetector[arrowhead = vee]
-NameDecorator -> TypeDetector [arrowhead = onormal]
-ClassFieldVisitor -> ClassPrototype[arrowhead = vee, style = dotted]
-ClassFieldVisitor -> NoahsArk[arrowhead = vee]
-ClassFieldVisitor -> ClassFieldVisitor[arrowhead = vee, style = dotted]
-ClassFieldVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
-ClassFieldVisitor -> ClassVisitorBuffered [arrowhead = onormal]
-ClassFieldVisitor -> NoahsArk[arrowhead = vee, style = dotted]
-ClassFieldVisitor -> FieldPrototype[arrowhead = vee, style = dotted]
 DotMethodVisitor -> ClassPrototype[arrowhead = vee, style = dotted]
 DotMethodVisitor -> NoahsArk[arrowhead = vee]
 DotMethodVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
@@ -103,6 +97,36 @@ DotMethodVisitor -> MethodPrototype[arrowhead = vee, style = dotted]
 DotMethodVisitor -> ClassVisitorBuffered [arrowhead = onormal]
 DotMethodVisitor -> NoahsArk[arrowhead = vee, style = dotted]
 DotMethodVisitor -> IMethodVisitor[arrowhead = onormal,style = dotted]
+TypeDecorator -> TypeDetector[arrowhead = vee, style = dotted]
+TypeDecorator -> TypeDetector[arrowhead = vee]
+MethodBodyVisitor -> ClassPrototype[arrowhead = vee, style = dotted]
+MethodBodyVisitor -> NoahsArk[arrowhead = vee]
+MethodBodyVisitor -> DotMethodVisitor[arrowhead = vee, style = dotted]
+MethodBodyVisitor -> MethodBodyVisitor[arrowhead = vee, style = dotted]
+MethodBodyVisitor -> NoahsArk[arrowhead = vee, style = dotted]
+NoahsArk -> CallNode[arrowhead = vee]
+ClassDeclarationVisitor -> ClassPrototype[arrowhead = vee, style = dotted]
+ClassDeclarationVisitor -> NoahsArk[arrowhead = vee]
+ClassDeclarationVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
+ClassDeclarationVisitor -> ClassVisitorBuffered [arrowhead = onormal]
+ClassDeclarationVisitor -> NoahsArk[arrowhead = vee, style = dotted]
+CallNode -> CallNode[arrowhead = vee]
+CallNode -> CallNode[arrowhead = vee, style = dotted]
+ColorDecorator -> TypeDecorator[arrowhead = vee, style = dotted]
+ColorDecorator -> TypeDecorator [arrowhead = onormal]
+DotUsesVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
+DotUsesVisitor -> DotUsesVisitor[arrowhead = vee, style = dotted]
+DotUsesVisitor -> ClassVisitorBuffered [arrowhead = onormal]
+DotUsesVisitor -> IMethodVisitor[arrowhead = onormal,style = dotted]
+NameDecorator -> TypeDecorator[arrowhead = vee, style = dotted]
+NameDecorator -> TypeDecorator [arrowhead = onormal]
+ClassFieldVisitor -> ClassPrototype[arrowhead = vee, style = dotted]
+ClassFieldVisitor -> NoahsArk[arrowhead = vee]
+ClassFieldVisitor -> ClassFieldVisitor[arrowhead = vee, style = dotted]
+ClassFieldVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
+ClassFieldVisitor -> ClassVisitorBuffered [arrowhead = onormal]
+ClassFieldVisitor -> NoahsArk[arrowhead = vee, style = dotted]
+ClassFieldVisitor -> FieldPrototype[arrowhead = vee, style = dotted]
 DotInheritanceVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
 DotInheritanceVisitor -> ClassVisitorBuffered [arrowhead = onormal]
 FirstASM -> FirstASM[arrowhead = vee, style = dotted]
@@ -121,26 +145,6 @@ FirstASM -> NameDecorator[arrowhead = vee, style = dotted]
 DotAssociationVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
 DotAssociationVisitor -> DotAssociationVisitor[arrowhead = vee, style = dotted]
 DotAssociationVisitor -> ClassVisitorBuffered [arrowhead = onormal]
-MethodBodyVisitor -> ClassPrototype[arrowhead = vee, style = dotted]
-MethodBodyVisitor -> NoahsArk[arrowhead = vee]
-MethodBodyVisitor -> DotMethodVisitor[arrowhead = vee, style = dotted]
-MethodBodyVisitor -> MethodBodyVisitor[arrowhead = vee, style = dotted]
-MethodBodyVisitor -> NoahsArk[arrowhead = vee, style = dotted]
-NoahsArk -> CallNode[arrowhead = vee]
-ClassDeclarationVisitor -> ClassPrototype[arrowhead = vee, style = dotted]
-ClassDeclarationVisitor -> NoahsArk[arrowhead = vee]
-ClassDeclarationVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
-ClassDeclarationVisitor -> ClassVisitorBuffered [arrowhead = onormal]
-ClassDeclarationVisitor -> NoahsArk[arrowhead = vee, style = dotted]
-CallNode -> CallNode[arrowhead = vee]
-CallNode -> CallNode[arrowhead = vee, style = dotted]
-ColorDecorator -> TypeDetector[arrowhead = vee, style = dotted]
-ColorDecorator -> TypeDetector[arrowhead = vee]
-ColorDecorator -> TypeDetector [arrowhead = onormal]
-DotUsesVisitor -> ClassVisitorBuffered[arrowhead = vee, style = dotted]
-DotUsesVisitor -> DotUsesVisitor[arrowhead = vee, style = dotted]
-DotUsesVisitor -> ClassVisitorBuffered [arrowhead = onormal]
-DotUsesVisitor -> IMethodVisitor[arrowhead = onormal,style = dotted]
 
 
 }

@@ -19,5 +19,13 @@ public class FieldPrototype {
 	public boolean getSingleton(String whateverYouWant, String superName){
 		return this.symbol.contains("static") && this.type.equals(whateverYouWant);
 	}
+	
+	public boolean checkDecorator(String superName){
+		return this.type.equals(superName);
+	}
+	
+	public boolean checkAdapter(){
+		return true;
+	}
 
 }
