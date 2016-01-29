@@ -48,6 +48,12 @@ center=true
 style = filled 
  fillcolor = white
 ]
+lang [ 
+center=true
+    label="{lang| | +getClass(): Class\l+wait(): void\l+hashCode(): int\l+equals(Obje): boolean\l+notifyAll(): void\l#clone(): Object\l-static registerNatives(): void\l+toString(): String\l#finalize(): void\l+\<init\>(): void\l+notify(): void\lstatic \<clinit\>(): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
 Encrypt [ 
 center=true
     label="{Encrypt\n\<\<decorator\>\>|+out: OutputStream \l | +\<init\>(OutputStre): void\l+write(i): void\l}"color = null
@@ -64,6 +70,10 @@ Decrypt -> InputStream[arrowhead = vee, style = dotted]
 Decrypt -> InputStream[arrowhead = vee,label="\<\<Decorates\>\>"]
 Decrypt -> SubstitutionCipher[arrowhead = vee, style = dotted]
 Decrypt -> InputStream [arrowhead = onormal]
+InputStream -> InputStream[arrowhead = vee, style = dotted]
+InputStream -> Object[arrowhead = vee, style = dotted]
+OutputStream -> OutputStream[arrowhead = vee, style = dotted]
+OutputStream -> Object[arrowhead = vee, style = dotted]
 SubstitutionCipher -> IDecryption[arrowhead = onormal,style = dotted]
 SubstitutionCipher -> IEncryption[arrowhead = onormal,style = dotted]
 Encrypt -> OutputStream[arrowhead = vee, style = dotted]

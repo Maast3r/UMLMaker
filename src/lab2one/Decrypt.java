@@ -1,7 +1,6 @@
 package lab2one;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 public class Decrypt extends InputStream {
 	public InputStream in;

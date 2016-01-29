@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -33,7 +32,7 @@ public class FirstASM {
 	private static String testerino3 = "sequence java.util Collections shuffle List 5";
 	private static String t = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src FirstASM sequenceHandler String,String,String,StringBuffer,NoahsArk,String,String,String,int 2";
 
-	public static HashMap<String, Boolean> listOfClasses;
+	public static HashMap<String, String> listOfClasses;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -58,7 +57,7 @@ public class FirstASM {
 		File packageToUML = new File(path);
 
 		if (command.equals("uml")) {
-			listOfClasses = listClasses(packageToUML);
+			listOfClasses = listClasses(packageToUML, pkg);
 			NoahsArk ark = new NoahsArk(listOfClasses);
 			ark.setPackage(pkg);
 			ark.setCmd(command);
@@ -81,13 +80,21 @@ public class FirstASM {
 
 	public static void umlHandler(String command, String pkg, String path, StringBuffer buf, NoahsArk ark)
 			throws IOException {
-		Iterator iter = listOfClasses.entrySet().iterator();
-		while (iter.hasNext()) {
-			String temp = iter.next().toString().split("=")[0];
-			getClassDetails(pkg, temp, ark);
-
+//		Iterator iter = ark.getListOfClass().entrySet().iterator();
+//		while (iter.hasNext()) {
+//			String temp = iter.next().toString().split("=")[0];
+//			getClassDetails(pkg, temp, ark);
+//		}
+		
+		while(ark.getListOfClass().size() > 0){
+			System.out.println("------------------------------- " + ark.getListOfClass().size());
+			for(String key : ark.getListOfClass().keySet()){
+//				System.out.println("while: " + ark.getListOfClass().get(key) + key);
+				getClassDetails(ark.getListOfClass().get(key), key, ark);
+			}
+			ark.setListOfClasses(ark.getNewList());
+			ark.resetNewList();
 		}
-
 		buf = generateDotUML(pkg, buf, ark);
 
 		// Write the buffer to file
@@ -137,6 +144,7 @@ public class FirstASM {
 	}
 
 	public static void getClassDetails(String pkg, String className, NoahsArk ark) throws IOException {
+		System.out.println("Details " + pkg + className);
 		ClassReader reader = new ClassReader(pkg + className);
 
 		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, ark);
@@ -176,59 +184,10 @@ public class FirstASM {
 		// Do the real work
 		String result = "";
 		HashMap<String, ClassPrototype> boat = ark.getBoat();
-		for(ClassPrototype cl : boat.values()){
-			String className = cl.getName();
-			String superName = cl.getSuperName();
-			String[] interfaces = cl.getInterfaces();
-			if(ark.pairs.get(className) != null){
-				for (String target : ark.pairs.get(className)) {
-					String targetName = target.substring(1);
-					// Detect Decorator Pattern -------------------------
-					//check for association arrow
-					if(target.charAt(0) == '$'){
-						// check if the target is a super
-						//check if it has a subclass
-						if(targetName.equals(superName)){
-							for(FieldPrototype f : cl.fields.values()){
-								if(f.type.equals(superName)){
-									cl.type = "decorator";
-									cl.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
-									ark.getBoat().get(targetName).type = "component";
-								}
-							}
-						}
-					}
-					// Detect Adapter pattern ------------------------------------
-					// then check association and set as adaptee
-					if(target.charAt(0) == '#' ){
-						// check if the target is a super
-						//check if target is an interface
-						for(String intfc : interfaces){
-							if(intfc.contains("/")) intfc = intfc.split("/")[1];
-//							if(targetName1.equals(intfc)){
-								for(FieldPrototype f : cl.fields.values()){
-									if(f.type.equals(targetName)){
-										cl.type = "adapter";
-										cl.arrowDesc = ",label=\"\\<\\<Adapts\\>\\>\"";
-										//target
-										if(ark.getBoat().containsKey(intfc))ark.getBoat().get(intfc).type = "target";
-										//adaptee
-										ark.getBoat().get(targetName).type = "adaptee";
-									}
-								}
-//							}
-						}
-					}
-				}
-			}
-		}
 		
 		for (ClassPrototype c : boat.values()) {
 			result = "";
 			String cName = c.getName();
-			String sName = c.getSuperName();
-			String[] ifaces= c.getInterfaces();
-
 			Iterator fIterator = c.getFields().keySet().iterator();
 			FieldPrototype field;
 			while (fIterator.hasNext()) {
@@ -516,13 +475,14 @@ public class FirstASM {
 
 	}
 
-	public static HashMap<String, Boolean> listClasses(final File folder) {
-		HashMap<String, Boolean> listOfJavaFiles = new HashMap<String, Boolean>();
+	public static HashMap<String, String> listClasses(final File folder, String pkg) {
+//		pkg = pkg.substring(0, pkg.length()-1);
+		HashMap<String, String> listOfJavaFiles = new HashMap<String, String>();
 		for (final File fileEntry : folder.listFiles()) {
 			if (fileEntry.getName().contains(".")) {
 				String ext = fileEntry.getName().split(Pattern.quote("."))[1];
 				if (ext.equals("java")) {
-					listOfJavaFiles.put(fileEntry.getName().split(Pattern.quote("."))[0], true);
+					listOfJavaFiles.put(fileEntry.getName().split(Pattern.quote("."))[0], pkg);
 				}
 			}
 		}

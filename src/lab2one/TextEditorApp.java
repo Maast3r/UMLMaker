@@ -10,7 +10,7 @@ import edu.roshulman.csse374.editor.TextEditor;
 public class TextEditorApp {
 	public static void main(String[] args) throws Exception {
 		InputStream in = new FileInputStream("./input_output/in.txt");
-		OutputStream out = new Encrypt(new FileOutputStream("./input_output/out.txt"));
+		OutputStream out = new FileOutputStream("./input_output/out.txt");
 		
 		TextEditor editor = new TextEditor(in, out);
 		editor.execute();

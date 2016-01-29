@@ -6,7 +6,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 
-public class DotUsesVisitor extends ClassVisitorBuffered implements IMethodVisitor{
+public class DotUsesVisitor extends ClassVisitorBuffered{
 	public int arg0;
 	public DotUsesVisitor(int arg0) {
 		super(arg0);

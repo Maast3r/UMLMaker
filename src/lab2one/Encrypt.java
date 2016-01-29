@@ -1,7 +1,6 @@
 package lab2one;
 
 import java.io.IOException;
-import java.io.OutputStream;
 
 public class Encrypt extends OutputStream {
 	public OutputStream out;

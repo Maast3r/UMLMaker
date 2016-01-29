@@ -25,6 +25,9 @@
 
 package lab2one;
 
+import java.io.Closeable;
+import java.io.IOException;
+
 /**
  * This abstract class is the superclass of all classes representing
  * an input stream of bytes.

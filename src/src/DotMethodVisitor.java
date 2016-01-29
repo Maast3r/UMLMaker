@@ -12,7 +12,7 @@ import com.sun.xml.internal.ws.wsdl.writer.document.Types;
 
 import jdk.internal.org.objectweb.asm.commons.InstructionAdapter;
 
-public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVisitor{
+public class DotMethodVisitor extends ClassVisitorBuffered {
 	public int arg0;
 	public NoahsArk ark;
 	public String className;
@@ -57,9 +57,7 @@ public class DotMethodVisitor extends ClassVisitorBuffered implements IMethodVis
 			}
 			args += temp + ",";
 		}
-		if(args.length() > 1
-				)args = args.substring(0, args.length()-1);
-//		System.out.println("ARG COMPARISONNNNN : " + this.inputMethodName + "  " + name + " --- " +  this.inputArgs + "  " + args);
+		if(args.length() > 1 )args = args.substring(0, args.length()-1);
 		MethodVisitor test = null;
 		if((this.ark.getCmd().equals("sequence") && this.inputMethodName.equals(name) && this.inputArgs.equals(args))
 				|| this.ark.getCmd().equals("uml")){

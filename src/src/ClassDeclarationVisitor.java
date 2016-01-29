@@ -34,9 +34,21 @@ public class ClassDeclarationVisitor extends ClassVisitorBuffered {
 		if(this.name.contains("/")){
 			this.name = this.name.split("/")[1];
 		}
-		if(superName.contains("/")){
-			String[] temp = superName.split("/");
-			superName = temp[temp.length-1];
+		String[] pkgSplit = null;
+		if(realname.equals("Object")){
+			System.out.println(superName);
+		}
+		String pkg = "";
+		if(superName != null){
+			if(superName.contains("/")){
+				pkgSplit = superName.split("/");
+				for(int i=0; i<pkgSplit.length-1; i++){
+					pkg += pkgSplit[i] + ".";
+				}
+				superName = pkgSplit[pkgSplit.length-1];
+				System.out.println("pkg : " + pkg +  "   name " + superName);
+				this.ark.getNewList().put(superName, pkg);
+			}
 		}
 		
 		this.ark.addClass(realname, new ClassPrototype(realname, superName, interfaces));

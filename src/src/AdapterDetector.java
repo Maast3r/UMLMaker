@@ -10,10 +10,31 @@ public class AdapterDetector extends AbstractDetector{
 	
 	@Override
 	public String getType(String cName) {
-		if(this.ark.getListOfClass().containsKey(cName)){
-			ClassPrototype c = this.ark.getBoat().get(cName);
-			return c.type;
+		for(ClassPrototype cl : this.ark.getBoat().values()){
+			String className = cl.getName();
+			String[] interfaces = cl.getInterfaces();
+			if(ark.pairs.get(className) != null){
+				for (String target : ark.pairs.get(className)) {
+					String targetName = target.substring(1);
+					if(target.charAt(0) == '#' ){
+						for(String intfc : interfaces){
+							if(intfc.contains("/")) intfc = intfc.split("/")[1];
+							for(FieldPrototype f : cl.fields.values()){
+								if(f.type.equals(targetName)){
+									cl.type = "adapter";
+									cl.arrowDesc = ",label=\"\\<\\<Adapts\\>\\>\"";
+									// target
+									if(ark.getBoat().containsKey(intfc))ark.getBoat().get(intfc).type = "target";
+									// adaptee
+									ark.getBoat().get(targetName).type = "adaptee";
+								}
+							}
+						}
+					}
+				}
+			}
 		}
-		return "";
+		ClassPrototype c = this.ark.getBoat().get(cName);
+		return c.type;
 	}
 }

@@ -7,7 +7,8 @@ import java.util.HashSet;
 public class NoahsArk {
 	public HashMap<String, ClassPrototype> boat;
 	public HashMap<String, HashSet<String>> pairs;
-	private static HashMap<String, Boolean> listOfClasses;
+	private static HashMap<String, String> listOfClasses;
+	private static HashMap<String, String> newList;
 	public int depth;
 	public String pkg;
 	public String cmd;
@@ -18,10 +19,11 @@ public class NoahsArk {
 	public String mainNode;
 	public CallNode noe;
 
-	public NoahsArk(HashMap<String, Boolean> listOfClasses) {
+	public NoahsArk(HashMap<String, String> listOfClasses) {
 		this.boat = new HashMap<String, ClassPrototype>();
 		this.pairs = new HashMap<String, HashSet<String>>();
 		this.listOfClasses = listOfClasses;
+		this.newList = new HashMap<String, String>();
 		newNodes = new ArrayList<String>();
 		constructedNodes = new ArrayList<String>();
 		sequenceNodes = new ArrayList<String>();
@@ -73,8 +75,20 @@ public class NoahsArk {
 		return this.depth;
 	}
 
-	public HashMap<String, Boolean> getListOfClass() {
+	public HashMap<String, String> getListOfClass() {
 		return this.listOfClasses;
+	}
+	
+	public HashMap<String, String> getNewList() {
+		return this.newList;
+	}
+	
+	public void setListOfClasses(HashMap<String, String> h){
+		this.listOfClasses = h;
+	}
+	
+	public void resetNewList(){
+		this.newList = new HashMap<String, String>();
 	}
 
 	public String getPackage() {
