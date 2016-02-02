@@ -1,12 +1,8 @@
 package src;
 
 
-import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Type;
-
-import com.sun.org.glassfish.gmbal.Description;
-import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
 public class ClassFieldVisitor extends ClassVisitorBuffered {
 	public NoahsArk ark;
@@ -23,14 +19,30 @@ public class ClassFieldVisitor extends ClassVisitorBuffered {
 			Object value){
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		String type = Type.getType(desc).getClassName();
+		String pkg = "";
 		if(type.contains(".")){
 			String[] temparray = type.split("\\.");
 			type = temparray[temparray.length - 1];
+			for(int i=0; i<temparray.length-1; i++){
+				pkg += temparray[i] + ".";
+			}
+			if(!type.equals("")) {
+				String typeClass = type;
+				if(type.contains("[")) typeClass = typeClass.replace("[", "");
+				if(type.contains("]")) typeClass = typeClass.replace("]", "");
+				if(!this.ark.seenClass.containsKey(typeClass)){
+					if(!typeClass.contains("$")){
+						if(!pkg.equals("java.lang.")){
+							this.ark.getNewList().put(typeClass, pkg);
+							this.ark.seenClass.put(typeClass, pkg);
+						}
+					}
+				}
+			}
 		}
 		String symbol= getAccessModifier(access);
+		
 		this.ark.getBoat().get(this.className).addField(name, new FieldPrototype(symbol, name, type));
-//		this.pro.addField(name, new FieldPrototype(symbol, name, type));
-//		buf.append(symbol + name + ": "+ type + " \\l");
 		return toDecorate;
 	}
 }

@@ -18,6 +18,7 @@ public class NoahsArk {
 	public CallNode graphRoot;
 	public String mainNode;
 	public CallNode noe;
+	public HashMap<String, String> seenClass;
 
 	public NoahsArk(HashMap<String, String> listOfClasses) {
 		this.boat = new HashMap<String, ClassPrototype>();
@@ -28,6 +29,7 @@ public class NoahsArk {
 		constructedNodes = new ArrayList<String>();
 		sequenceNodes = new ArrayList<String>();
 		this.graphRoot = null;
+		this.seenClass = new HashMap<String, String>();
 	}
 
 	public String getCmd() {
@@ -59,7 +61,7 @@ public class NoahsArk {
 	}
 
 	public void addPair(String origin, String target) {
-		if (listOfClasses.get(origin) != null && listOfClasses.get(target.substring(1)) != null) {
+		if (seenClass.get(origin) != null && seenClass.get(target.substring(1)) != null) {
 			if (this.pairs.get(origin) == null) {
 				this.pairs.put(origin, new HashSet<String>());
 			}

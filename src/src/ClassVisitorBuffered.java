@@ -1,17 +1,18 @@
 package src;
 
 import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 
 public class ClassVisitorBuffered extends ClassVisitor{
 	public String name;
-	StringBuffer buf;
+	public StringBuffer buf;
+	public NoahsArk ark;
+	public String className;
+	
 	public ClassVisitorBuffered(int arg0, ClassVisitor arg1, StringBuffer buf) {
 		super(arg0, arg1);
 		this.buf = buf;
-		// TODO Auto-generated constructor stub
 	}
 	public ClassVisitorBuffered(int arg0){
 		super(arg0);

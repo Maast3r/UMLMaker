@@ -27,6 +27,10 @@ public class MethodBodyVisitor extends MethodVisitor{
 		this.inputArgs = inputArgs;
 	}
 	
+	public MethodBodyVisitor(int asm5, MethodVisitor toDecorate) {
+		super(asm5, toDecorate);
+	}
+
 	@Override
 	public void visitMethodInsn(int access, String owner, String name, String desc, boolean isIn){
 		String newPkg = owner;
@@ -37,12 +41,9 @@ public class MethodBodyVisitor extends MethodVisitor{
 		this.owner = owner;
 		if(this.ark.getCmd().equals(("uml")))this.ark.addPair(this.className, "#" + this.owner);
 		if(name.equals("toArray")){
-			System.out.println("found");
-			System.out.println(this.ark.getDepthMax() + " a;slkdfja   " +   " " + owner + " " + name + " " + " " + Type.getReturnType(desc).getClassName() + " " + isIn + " LOOKING FOR: " + this.inputMethodName);
 
 		}
 		if(this.ark.getCmd().equals(("sequence"))){
-//			System.out.println(this.ark.getDepthMax() + " a;slkdfja   " +   " " + owner + " " + name + " " + " " + Type.getReturnType(desc).getClassName() + " " + isIn + " LOOKING FOR: " + this.inputMethodName);
 			ark.newNodes.add("/" + className + "#" + owner);
 			if(name.equals("<init>")){
 				// Create a new node

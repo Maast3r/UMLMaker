@@ -12,7 +12,6 @@ public class FieldPrototype {
 	}
 	
 	public String prepareUML(){
-//		System.out.println("FIELD PREP : " + this.symbol + this.name + ": " + this.type + " \\l");
 		return this.symbol + this.name + ": "+ this.type + " \\l";
 	}
 	

@@ -13,7 +13,6 @@ public class DecoratorDetector extends AbstractDetector {
 		for(ClassPrototype cl : this.ark.getBoat().values()){
 			String className = cl.getName();
 			String superName = cl.getSuperName();
-			String[] interfaces = cl.getInterfaces();
 			if (ark.pairs.get(className) != null) {
 				for (String target : ark.pairs.get(className)) {
 					String targetName = target.substring(1);

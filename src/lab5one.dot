@@ -36,6 +36,12 @@ center=true
 style = filled 
  fillcolor = firebrick
 ]
+Object [ 
+center=true
+    label="{Object| | +getClass(): Class\l+wait(): void\l+hashCode(): int\l+equals(Obje): boolean\l+notifyAll(): void\l#clone(): Object\l-static registerNatives(): void\l+toString(): String\l#finalize(): void\l+\<init\>(): void\l+notify(): void\lstatic \<clinit\>(): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
 IteratorToEnumerationAdapter [ 
 center=true
     label="{IteratorToEnumerationAdapter\n\<\<adapter\>\>|-itr: Iterator \l | +hasMoreElements(): boolean\l+\<init\>(Iterat): void\l+nextElement(): Object\l}"color = null
@@ -45,7 +51,7 @@ style = filled
 App -> LinearTransformer[arrowhead = vee, style = dotted]
 App -> IteratorToEnumerationAdapter[arrowhead = vee, style = dotted]
 LinearTransformer -> Enumeration[arrowhead = vee, style = dotted]
-LinearTransformer -> Enumeration[arrowhead = veenull]
+Object -> Object[arrowhead = vee, style = dotted]
 IteratorToEnumerationAdapter -> Iterator[arrowhead = vee, style = dotted]
 IteratorToEnumerationAdapter -> Iterator[arrowhead = vee,label="\<\<Adapts\>\>"]
 IteratorToEnumerationAdapter -> Enumeration[arrowhead = onormal,style = dotted]

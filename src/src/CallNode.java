@@ -58,10 +58,10 @@ public class CallNode {
 	}
 	
 	public void printCallTree(int counter){
-		System.out.print(counter + " " + this.methodName + this.className);
+//		System.out.print(counter + " " + this.methodName + this.className);
 		for(CallNode node : this.children){
 			node.printCallTree(counter + 1);
 		}
-		System.out.print("\n");
+//		System.out.print("\n");
 	}
 }

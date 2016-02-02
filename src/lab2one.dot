@@ -36,6 +36,18 @@ center=true
 style = filled 
  fillcolor = chartreuse2
 ]
+Closeable [ 
+center=true
+    label="{Closeable| | +close(): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+AutoCloseable [ 
+center=true
+    label="{AutoCloseable| | +close(): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
 SubstitutionCipher [ 
 center=true
     label="{SubstitutionCipher|-decryptionKey: char[] \l-encryptionKey: char[] \l | +encrypt(ch): char\l+\<init\>(): void\l+decrypt(ch): char\l}"color = black
@@ -48,9 +60,15 @@ center=true
 style = filled 
  fillcolor = white
 ]
-lang [ 
+Object [ 
 center=true
-    label="{lang| | +getClass(): Class\l+wait(): void\l+hashCode(): int\l+equals(Obje): boolean\l+notifyAll(): void\l#clone(): Object\l-static registerNatives(): void\l+toString(): String\l#finalize(): void\l+\<init\>(): void\l+notify(): void\lstatic \<clinit\>(): void\l}"color = black
+    label="{Object| | +getClass(): Class\l+wait(): void\l+hashCode(): int\l+equals(Obje): boolean\l+notifyAll(): void\l#clone(): Object\l-static registerNatives(): void\l+toString(): String\l#finalize(): void\l+\<init\>(): void\l+notify(): void\lstatic \<clinit\>(): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+Flushable [ 
+center=true
+    label="{Flushable| | +flush(): void\l}"color = black
 style = filled 
  fillcolor = white
 ]
@@ -70,12 +88,17 @@ Decrypt -> InputStream[arrowhead = vee, style = dotted]
 Decrypt -> InputStream[arrowhead = vee,label="\<\<Decorates\>\>"]
 Decrypt -> SubstitutionCipher[arrowhead = vee, style = dotted]
 Decrypt -> InputStream [arrowhead = onormal]
+InputStream -> Closeable[arrowhead = onormal,style = dotted]
 InputStream -> InputStream[arrowhead = vee, style = dotted]
+InputStream -> Object [arrowhead = onormal]
 InputStream -> Object[arrowhead = vee, style = dotted]
 OutputStream -> OutputStream[arrowhead = vee, style = dotted]
-OutputStream -> Object[arrowhead = vee, style = dotted]
+Closeable -> Object [arrowhead = onormal]
 SubstitutionCipher -> IDecryption[arrowhead = onormal,style = dotted]
 SubstitutionCipher -> IEncryption[arrowhead = onormal,style = dotted]
+Object -> Object[arrowhead = vee, style = dotted]
+IDecryption -> Object [arrowhead = onormal]
+Flushable -> Object [arrowhead = onormal]
 Encrypt -> OutputStream[arrowhead = vee, style = dotted]
 Encrypt -> OutputStream[arrowhead = vee,label="\<\<Decorates\>\>"]
 Encrypt -> SubstitutionCipher[arrowhead = vee, style = dotted]

@@ -8,17 +8,27 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
+import org.reflections.Reflections;
+import org.reflections.scanners.ResourcesScanner;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+import org.reflections.util.FilterBuilder;
 
 public class FirstASM {
 	private static String font = "\tfontname = \"Bitstream Vera Sans\"\n" + "\tfontsize = 16\n";
-	private static String[] associationTypes = { "Inheritance", "Association" };
+	private static String[] associationTypes = { "Inheritance", "Association", "Uses" };
 
 	private static String methodSeparatorString = " | ";
 	private static String classEndString1 = "}\"";
@@ -31,8 +41,9 @@ public class FirstASM {
 	private static String testerino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 5";
 	private static String testerino3 = "sequence java.util Collections shuffle List 5";
 	private static String t = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src FirstASM sequenceHandler String,String,String,StringBuffer,NoahsArk,String,String,String,int 2";
-
+	private static boolean isJava = false;
 	public static HashMap<String, String> listOfClasses;
+	public static ArrayList<String> temps = new ArrayList<String>();
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -54,11 +65,43 @@ public class FirstASM {
 		String maxDepth = "";
 
 		StringBuffer buf = new StringBuffer();
-		File packageToUML = new File(path);
+		
 
 		if (command.equals("uml")) {
-			listOfClasses = listClasses(packageToUML, pkg);
+			if(pkg.contains(".")){
+				if(pkg.split("\\.")[0].equals("java")){
+					inputClass = line.split(" ")[2];
+					listOfClasses = new HashMap<String, String>();
+					
+//					List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
+//					classLoadersList.add(ClasspathHelper.contextClassLoader());
+//					classLoadersList.add(ClasspathHelper.staticClassLoader());
+//
+//					Reflections reflections = new Reflections(new ConfigurationBuilder()
+//					    .setScanners(new SubTypesScanner(false /* don't exclude Object.class */), new ResourcesScanner())
+//					    .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
+//					    .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("java.io"))));
+//					
+//					
+////					Set<Class<? extends Object>> classes = reflections.getSubTypesOf(Object.class);
+//					Set<Class<?>> classes = reflections.getSubTypesOf(Object.class);
+					
+//					System.out.println(classes.size());
+					
+//					System.out.println("here " + classes.toString());
+					System.out.println(pkg + " " + inputClass);
+					listOfClasses.put(inputClass, pkg);
+					isJava = true;
+				} else {
+					File packageToUML = new File(path);
+					listOfClasses = listClasses(packageToUML, pkg);
+				}
+			}
 			NoahsArk ark = new NoahsArk(listOfClasses);
+			System.out.println("temp " + temps.toString());
+			for(String s : temps){
+				ark.seenClass.put(s, pkg);
+			}
 			ark.setPackage(pkg);
 			ark.setCmd(command);
 			umlHandler(command, pkg, path, buf, ark);
@@ -80,27 +123,21 @@ public class FirstASM {
 
 	public static void umlHandler(String command, String pkg, String path, StringBuffer buf, NoahsArk ark)
 			throws IOException {
-//		Iterator iter = ark.getListOfClass().entrySet().iterator();
-//		while (iter.hasNext()) {
-//			String temp = iter.next().toString().split("=")[0];
-//			getClassDetails(pkg, temp, ark);
-//		}
-		
 		while(ark.getListOfClass().size() > 0){
-			System.out.println("------------------------------- " + ark.getListOfClass().size());
 			for(String key : ark.getListOfClass().keySet()){
-//				System.out.println("while: " + ark.getListOfClass().get(key) + key);
 				getClassDetails(ark.getListOfClass().get(key), key, ark);
 			}
 			ark.setListOfClasses(ark.getNewList());
 			ark.resetNewList();
 		}
+		getArrows(ark);
 		buf = generateDotUML(pkg, buf, ark);
 
 		// Write the buffer to file
 		if (path.contains("/")) {
 			path = path.split("/")[path.split("/").length - 1];
 		}
+		if(path.contains(".")) path = path.replace(".", "t");
 		path = path + ".dot";
 		FileOutputStream output = new FileOutputStream(path);
 		output.write(buf.toString().getBytes());
@@ -144,7 +181,7 @@ public class FirstASM {
 	}
 
 	public static void getClassDetails(String pkg, String className, NoahsArk ark) throws IOException {
-		System.out.println("Details " + pkg + className);
+//		System.out.println("Details pkg  " + pkg + "  classname  " + className);
 		ClassReader reader = new ClassReader(pkg + className);
 
 		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, ark);
@@ -161,7 +198,7 @@ public class FirstASM {
 		ArrayList<String> inheritancePairs = new ArrayList<String>();
 
 		for (String type : associationTypes) {
-			inheritancePairs.addAll(getAssociation(pkg, className, type));
+			inheritancePairs.addAll(getAssociation(pkg, className, type, ark));
 		}
 		for (int i = 0; i < inheritancePairs.size(); i++) {
 			if (inheritancePairs.get(i).contains("!"))
@@ -174,6 +211,27 @@ public class FirstASM {
 				ark.addPair(inheritancePairs.get(i).split("\\$")[0], "$" + inheritancePairs.get(i).split("\\$")[1]);
 		}
 
+	}
+	
+	public static void getArrows(NoahsArk ark) throws IOException{
+//		System.out.println("----------------- " + ark.seenClass.size());
+//		for(String key : ark.seenClass.keySet()){
+//			ArrayList<String> inheritancePairs = new ArrayList<String>();
+//			for (String type : associationTypes) {
+//				System.out.println("key " + key + " value " + ark.seenClass.get(key));
+//				inheritancePairs.addAll(getAssociation(ark.seenClass.get(key), key, type, ark));
+//			}
+//			for (int i = 0; i < inheritancePairs.size(); i++) {
+//				if (inheritancePairs.get(i).contains("!"))
+//					ark.addPair(inheritancePairs.get(i).split("!")[0], "!" + inheritancePairs.get(i).split("!")[1]);
+//				if (inheritancePairs.get(i).contains("@"))
+//					ark.addPair(inheritancePairs.get(i).split("@")[0], "@" + inheritancePairs.get(i).split("@")[1]);
+//				if (inheritancePairs.get(i).contains("#"))
+//					ark.addPair(inheritancePairs.get(i).split("#")[0], "#" + inheritancePairs.get(i).split("#")[1]);
+//				if (inheritancePairs.get(i).contains("$"))
+//					ark.addPair(inheritancePairs.get(i).split("\\$")[0], "$" + inheritancePairs.get(i).split("\\$")[1]);
+//			}
+//		}
 	}
 
 	public static StringBuffer generateDotUML(String pkg, StringBuffer buf, NoahsArk ark) throws IOException {
@@ -316,7 +374,7 @@ public class FirstASM {
 		return buf;
 	}
 
-	public static ArrayList<String> getAssociation(String pkg, String className, String association)
+	public static ArrayList<String> getAssociation(String pkg, String className, String association, NoahsArk ark)
 			throws IOException {
 		ClassReader reader = new ClassReader(pkg + className);
 		ArrayList<String> result = new ArrayList<String>();
@@ -331,6 +389,8 @@ public class FirstASM {
 					.getConstructor(cArg);
 
 			ClassVisitorBuffered test = (ClassVisitorBuffered) assocVisitor.newInstance(Opcodes.ASM5, buf);
+			test.ark = ark;
+			test.className = className;
 			reader.accept(test, ClassReader.EXPAND_FRAMES);
 		} catch (ClassNotFoundException e) {
 			System.out.println("Dot visitor association class doesn't exist\n");
@@ -350,50 +410,24 @@ public class FirstASM {
 		}
 
 		if (association.equals("association")) {
-			result = dotAssociationHandler(className, buf);
+			result = dotAssociationHandler(className, buf, ark);
 		} else if (association.equals("inheritance")) {
-			result = dotInheritanceHandler(buf);
+			result = dotInheritanceHandler(buf, ark);
 		} else if (association.equals("uses")) {
-			result = dotUsesHandler(className, buf);
+			result = dotUsesHandler(className, buf, ark);
 		}
 
 		return result;
 	}
 
-	public static ArrayList<String> dotInheritanceHandler(StringBuffer buf) {
+	public static ArrayList<String> dotInheritanceHandler(StringBuffer buf, NoahsArk ark) {
 		ArrayList<String> result = new ArrayList<String>();
-		String name = buf.toString().split(":")[0];
-		String extendStuff = buf.toString().split(":")[1];
-		String extendName = extendStuff.split("#")[0];
-		String implementStuff = extendStuff.split("#")[1].replace("[", "").replace("]", "");
-		String[] implementing = implementStuff.split(",");
-		if (name.contains("/")) {
-			int len = name.split("/").length;
-			name = name.split("/")[len - 1];
-		}
-		for (String s : implementing) {
-			if (s.contains("/")) {
-				int len = s.split("/").length;
-				s = s.split("/")[len - 1];
-			}
-			if (listOfClasses.get(s) != null) {
-				if (!s.equals(""))
-					result.add(name + "@" + s);
-
-			}
-		}
-		if (extendName.contains("/")) {
-			int len = extendName.split("/").length;
-			extendName = extendName.split("/")[len - 1];
-		}
-		if (listOfClasses.get(extendName) != null) {
-			result.add(name + "!" + extendName);
-		}
+		
 		return result;
 
 	}
 
-	public static ArrayList<String> dotAssociationHandler(String className, StringBuffer buf) {
+	public static ArrayList<String> dotAssociationHandler(String className, StringBuffer buf, NoahsArk ark) {
 		ArrayList<String> result = new ArrayList<String>();
 		String name = className;
 		String[] lines = buf.toString().split("\n");
@@ -408,7 +442,7 @@ public class FirstASM {
 				int len = s.split("/").length;
 				s = s.split("/")[len - 1];
 			}
-			if (listOfClasses.get(s) != null) {
+			if (ark.seenClass.get(s) != null) {
 				if (!s.equals(""))
 					result.add(name + "$" + s);
 
@@ -418,36 +452,36 @@ public class FirstASM {
 
 	}
 
-	public static ArrayList<String> dotUsesHandler(String className, StringBuffer buf) {
+	public static ArrayList<String> dotUsesHandler(String className, StringBuffer buf, NoahsArk ark) {
 		ArrayList<String> result = new ArrayList<String>();
 		String name = className;
 
-		String[] lines = buf.toString().split("\n");
-		for (String line : lines) {
-
-			String argStuff = line.split(":")[1];
-			// String implementStuff =
-			// argStuff.split("#")[1].replace("[","").replace("]","");
-			String[] args = argStuff.split(", ");
-			if (name.contains("/")) {
-				int len = name.split("/").length;
-				name = name.split("/")[len - 1];
-			}
-			// TODO: Implement hash map of class stuff
-			for (String s : args) {
-				if (s.equals("")) {
-					continue;
-				}
-				if (s.contains("/")) {
-					int len = s.split("/").length;
-					s = s.split("/")[len - 1];
-				}
-				if (listOfClasses.get(s) != null) {
-					if (!s.equals(""))
-						result.add(name + "#" + s);
-				}
-			}
-		}
+		
+//		String[] lines = buf.toString().split("\n");
+//		for (String line : lines) {
+//			System.out.println(line);
+//			String argStuff = line.split(":")[1];
+//			// String implementStuff =
+//			// argStuff.split("#")[1].replace("[","").replace("]","");
+//			String[] args = argStuff.split(", ");
+//			if (name.contains("/")) {
+//				int len = name.split("/").length;
+//				name = name.split("/")[len - 1];
+//			}
+//			for (String s : args) {
+//				if (s.equals("")) {
+//					continue;
+//				}
+//				if (s.contains("/")) {
+//					int len = s.split("/").length;
+//					s = s.split("/")[len - 1];
+//				}
+//				if (ark.seenClass.get(s) != null) {
+//					if (!s.equals(""))
+//						result.add(name + "#" + s);
+//				}
+//			}
+//		}
 
 		return result;
 	}
@@ -476,13 +510,13 @@ public class FirstASM {
 	}
 
 	public static HashMap<String, String> listClasses(final File folder, String pkg) {
-//		pkg = pkg.substring(0, pkg.length()-1);
 		HashMap<String, String> listOfJavaFiles = new HashMap<String, String>();
 		for (final File fileEntry : folder.listFiles()) {
 			if (fileEntry.getName().contains(".")) {
 				String ext = fileEntry.getName().split(Pattern.quote("."))[1];
 				if (ext.equals("java")) {
 					listOfJavaFiles.put(fileEntry.getName().split(Pattern.quote("."))[0], pkg);
+//					temps.add(fileEntry.getName().split(Pattern.quote("."))[0]);
 				}
 			}
 		}
@@ -497,8 +531,10 @@ public class FirstASM {
 			path = path.substring(0, path.length() - 1);
 			Process pr = null;
 			if (command.equals("uml")) {
+				if(path.contains(".")) path = path.replace(".", "t");
 				System.out.println("uml diagram " + path);
-				pr = rt.exec("dot -T png -o src/" + path + ".png src/" + path + ".dot");
+				if(!isJava) pr = rt.exec("dot -T png -o src/" + path + ".png src/" + path + ".dot");
+				else pr = rt.exec("dot -T png -o " + path + ".png " + path + ".dot");
 			} else if (command.equals("sequence")) {
 				System.out.println("sequence");
 			} else {

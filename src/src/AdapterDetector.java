@@ -18,7 +18,7 @@ public class AdapterDetector extends AbstractDetector{
 					String targetName = target.substring(1);
 					if(target.charAt(0) == '#' ){
 						for(String intfc : interfaces){
-							if(intfc.contains("/")) intfc = intfc.split("/")[1];
+							if(intfc.contains("/")) intfc = intfc.split("/")[intfc.split("/").length-1];
 							for(FieldPrototype f : cl.fields.values()){
 								if(f.type.equals(targetName)){
 									cl.type = "adapter";
