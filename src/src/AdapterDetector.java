@@ -31,24 +31,20 @@ public class AdapterDetector extends AbstractDetector{
 						if (!superName.equals("") && superName != null) {
 							if(ark.getBoat().containsKey(superName)){
 								if(!ark.getBoat().get(superName).pkg.equals("java.lang.")){
-									
+									ClassPrototype sup = ark.getBoat().get(superName);
+									for(FieldPrototype f : sup.fields.values()){
+										if(!cl.fields.containsKey(f.name)){
+											cl.addField(f.name, f);
+										}
+									}
 									for (FieldPrototype f : cl.fields.values()) {
-//										System.out.println(className + "  " + superName +  "   " + targetName +  "   " + f.type);
 										if (f.type.equals(targetName) && !f.type.equals(superName) && !superName.equals(targetName) && !ark.getBoat().get(targetName).isInterface) {
-//											System.out.println("ADAPTS " + className +  " "  + f.type + " "  + superName);
 											cl.type.add("adapter");
-//											cl.arrowDesc = ",label=\"\\<\\<Adapts\\>\\>\"";
-//											ark.pairs.get(className);
 											
 											// target
 											if(ark.getBoat().containsKey(superName))ark.getBoat().get(superName).type.add("target");
 											// adaptee
 											ark.getBoat().get(targetName).type.add("adaptee");
-											
-											
-//											ark.pairs.get(className).remove(target);
-//											target += "-";
-//											ark.pairs.get(className).add(target);
 											classNames.add(className);
 											targetNames.add(targetName);
 											break;
@@ -64,16 +60,10 @@ public class AdapterDetector extends AbstractDetector{
 							for(FieldPrototype f : cl.fields.values()){
 								if(f.type.equals(targetName) && checkMethods(cl, ark.getBoat().get(intfc)) && ark.getBoat().get(targetName).isInterface){
 									cl.type.add("adapter");
-//									cl.arrowDesc = ",label=\"\\<\\<Adapts\\>\\>\"";
 									// target
 									if(ark.getBoat().containsKey(intfc))ark.getBoat().get(intfc).type.add("target");
 									// adaptee
 									ark.getBoat().get(targetName).type.add("adaptee");
-									
-//									ark.pairs.get(className).remove(target);
-//									target += "-";
-//									ark.pairs.get(className).add(target);
-									
 									classNames.add(className);
 									targetNames.add(targetName);
 									break;
@@ -86,21 +76,12 @@ public class AdapterDetector extends AbstractDetector{
 		}
 		
 		for(int i=0; i<classNames.size(); i++){
-			System.out.println("before " + ark.pairs.values());
-			System.out.println("removing " + targetNames.get(i));
 			ark.pairs.get(classNames.get(i)).remove("$" + targetNames.get(i));
-			System.out.println(ark.pairs.values());
 			ark.pairs.get(classNames.get(i)).add("$" + targetNames.get(i) + ";");
 		}
-//		return c
+		
 		ClassPrototype c = this.ark.getBoat().get(cName);
 		return c.type;
-//		for(String s : c.type){
-//			if(s.contains("adapt") || s.contains("target")){
-//				return s;
-//			} 
-//		}
-//		return "";
 	}
 	
 	public boolean checkMethods(ClassPrototype c, ClassPrototype intfc){

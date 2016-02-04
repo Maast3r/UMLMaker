@@ -26,28 +26,28 @@ style = filled
 ]
 Enumeration [ 
 center=true
-    label="{Enumeration\n\<\<target\>\>| | +abstract hasMoreElements(): boolean\l+abstract nextElement(): Object\l}"color = null
+    label="{Enumeration\n\<\<target\>\>| | +abstract hasMoreElements(): boolean\l+abstract nextElement(): Object\l}"color = black
 style = filled 
  fillcolor = firebrick
 ]
 Iterator [ 
 center=true
-    label="{Iterator\n\<\<adaptee\>\>| | +abstract next(): Object\l+abstract hasNext(): boolean\l+abstract remove(): void\l}"color = null
+    label="{Iterator\n\<\<adaptee\>\>| | +abstract next(): Object\l+abstract hasNext(): boolean\l+abstract remove(): void\l}"color = black
 style = filled 
  fillcolor = firebrick
 ]
 IteratorToEnumerationAdapter [ 
 center=true
-    label="{IteratorToEnumerationAdapter\n\<\<adapter\>\>|-itr: Iterator \l | +hasMoreElements(): boolean\l+\<init\>(Iterat): void\l+nextElement(): Object\l}"color = null
+    label="{IteratorToEnumerationAdapter\n\<\<adapter\>\>|-itr: Iterator \l | +hasMoreElements(): boolean\l+\<init\>(Iterat): void\l+nextElement(): Object\l}"color = black
 style = filled 
  fillcolor = firebrick
 ]
 App -> LinearTransformer[arrowhead = vee, style = dotted]
 App -> IteratorToEnumerationAdapter[arrowhead = vee, style = dotted]
 LinearTransformer -> Enumeration[arrowhead = vee, style = dotted]
-LinearTransformer -> Enumeration[arrowhead = veenull]
+LinearTransformer -> Enumeration[arrowhead = vee]
 IteratorToEnumerationAdapter -> Iterator[arrowhead = vee, style = dotted]
-IteratorToEnumerationAdapter -> Iterator[arrowhead = vee,label="\<\<Adapts\>\>"]
+IteratorToEnumerationAdapter -> Iterator [arrowhead = vee,label="\<\<Adapts\>\>"]
 IteratorToEnumerationAdapter -> Enumeration[arrowhead = onormal,style = dotted]
 
 

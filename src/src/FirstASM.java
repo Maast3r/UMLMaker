@@ -61,27 +61,9 @@ public class FirstASM {
 
 		if (command.equals("uml")) {
 			if(pkg.contains(".")){
-				if(pkg.split("\\.")[0].equals("java")){
+				if(pkg.split("\\.")[0].equals("java") || pkg.split("\\.")[0].equals("org")){
 					inputClass = line.split(" ")[2];
 					listOfClasses = new HashMap<String, String>();
-					
-//					List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
-//					classLoadersList.add(ClasspathHelper.contextClassLoader());
-//					classLoadersList.add(ClasspathHelper.staticClassLoader());
-//
-//					Reflections reflections = new Reflections(new ConfigurationBuilder()
-//					    .setScanners(new SubTypesScanner(false /* don't exclude Object.class */), new ResourcesScanner())
-//					    .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
-//					    .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("java.io"))));
-//					
-//					
-////					Set<Class<? extends Object>> classes = reflections.getSubTypesOf(Object.class);
-//					Set<Class<?>> classes = reflections.getSubTypesOf(Object.class);
-					
-//					System.out.println(classes.size());
-					
-//					System.out.println("here " + classes.toString());
-					System.out.println(pkg + " " + inputClass);
 					listOfClasses.put(inputClass, pkg);
 					isJava = true;
 				} else {
@@ -172,7 +154,6 @@ public class FirstASM {
 	}
 
 	public static void getClassDetails(String pkg, String className, NoahsArk ark) throws IOException {
-//		System.out.println("Details pkg  " + pkg + "  classname  " + className);
 		ClassReader reader = new ClassReader(pkg + className);
 
 		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, ark);
@@ -185,31 +166,12 @@ public class FirstASM {
 				declVisitor.getName());
 
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
-//
-//		ArrayList<String> inheritancePairs = new ArrayList<String>();
-//
-//		for (String type : associationTypes) {
-//			inheritancePairs.addAll(getAssociation(pkg, className, type, ark));
-//		}
-//		for (int i = 0; i < inheritancePairs.size(); i++) {
-//			if (inheritancePairs.get(i).contains("!"))
-//				ark.addPair(inheritancePairs.get(i).split("!")[0], "!" + inheritancePairs.get(i).split("!")[1]);
-//			if (inheritancePairs.get(i).contains("@"))
-//				ark.addPair(inheritancePairs.get(i).split("@")[0], "@" + inheritancePairs.get(i).split("@")[1]);
-//			if (inheritancePairs.get(i).contains("#"))
-//				ark.addPair(inheritancePairs.get(i).split("#")[0], "#" + inheritancePairs.get(i).split("#")[1]);
-//			if (inheritancePairs.get(i).contains("$"))
-//				ark.addPair(inheritancePairs.get(i).split("\\$")[0], "$" + inheritancePairs.get(i).split("\\$")[1]);
-//		}
-
 	}
 	
 	public static void getArrows(NoahsArk ark) throws IOException{
-		System.out.println("----------------- " + ark.seenClass.size());
 		for(String key : ark.seenClass.keySet()){
 			ArrayList<String> inheritancePairs = new ArrayList<String>();
 			for (String type : associationTypes) {
-//				System.out.println("key " + key + " value " + ark.seenClass.get(key));
 				inheritancePairs.addAll(getAssociation(ark.seenClass.get(key), key, type, ark));
 			}
 			for (int i = 0; i < inheritancePairs.size(); i++) {
@@ -259,7 +221,6 @@ public class FirstASM {
 			result = c.prepareUML() + new NameDecorator(new TypeDetector(cName, ark)).getType().toString().replace("]", "")
 																										.replace(",","")
 																										.replace("[","" )
-					
 					+ "|" + result;
 			result += classEndString2;
 			buf.append(result);
@@ -282,8 +243,6 @@ public class FirstASM {
 	public static StringBuffer generateSequence(String pkg, String inputClass, String inputMethod, String inputArgs,
 			StringBuffer buf, NoahsArk ark) {
 		String nl = "\n";
-		// Generate the first Node
-		// System.out.println(ark.getBoat());
 		HashSet<String> seen = new HashSet<String>();
 		ArrayList<String> checked = new ArrayList<String>();
 		int length = ark.newNodes.size();
@@ -449,34 +408,6 @@ public class FirstASM {
 
 	public static ArrayList<String> dotUsesHandler(String className, StringBuffer buf, NoahsArk ark) {
 		ArrayList<String> result = new ArrayList<String>();
-		String name = className;
-
-		
-//		String[] lines = buf.toString().split("\n");
-//		for (String line : lines) {
-//			System.out.println(line);
-//			String argStuff = line.split(":")[1];
-//			// String implementStuff =
-//			// argStuff.split("#")[1].replace("[","").replace("]","");
-//			String[] args = argStuff.split(", ");
-//			if (name.contains("/")) {
-//				int len = name.split("/").length;
-//				name = name.split("/")[len - 1];
-//			}
-//			for (String s : args) {
-//				if (s.equals("")) {
-//					continue;
-//				}
-//				if (s.contains("/")) {
-//					int len = s.split("/").length;
-//					s = s.split("/")[len - 1];
-//				}
-//				if (ark.seenClass.get(s) != null) {
-//					if (!s.equals(""))
-//						result.add(name + "#" + s);
-//				}
-//			}
-//		}
 
 		return result;
 	}

@@ -19,11 +19,8 @@ public class TypeDetector {
 	public HashSet<String> getType(){
 		HashSet<String> result = new HashSet<String>();
 		for(AbstractDetector ad : this.detectors){
-//			if(!ad.getType(this.cName).equals("")) {
 				result.addAll(ad.getType(this.cName));
-//			}
 		}
-//		System.out.println(result);
 		return result;
 	}
 }

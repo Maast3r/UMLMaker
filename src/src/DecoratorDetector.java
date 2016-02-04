@@ -26,13 +26,31 @@ public class DecoratorDetector extends AbstractDetector {
 					// Detect Decorator Pattern -------------------------
 					// check for association arrow
 					if (target.charAt(0) == '$') {
+						if(targetName.equals(className)){
+							if(cl.isAbstract){
+								for (FieldPrototype f : cl.fields.values()) {
+									if (f.type.equals(className)) {
+										cl.type.add("decorator");
+										ark.getBoat().get(targetName).type.add("component");
+										for (ClassPrototype cp : ark.getBoat().values()) {
+											if(cp.superName != null){	
+												if (cp.superName.equals(className))
+													cp.type.add("decorator");
+											}
+										}
+										classNames.add(className);
+										targetNames.add(targetName);
+									}
+								}
+							}
+						}
+						
 						// check if the target is a super
 						// check if it has a subclass
 						if (targetName.equals(superName)) {
 							for (FieldPrototype f : cl.fields.values()) {
 								if (f.type.equals(superName)) {
 									cl.type.add("decorator");
-//									cl.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
 									ark.getBoat().get(targetName).type.add("component");
 									for (ClassPrototype cp : ark.getBoat().values()) {
 										if(cp.superName != null){	
@@ -40,11 +58,6 @@ public class DecoratorDetector extends AbstractDetector {
 												cp.type.add("decorator");
 										}
 									}
-//									ark.pairs.get(className).remove(target);
-									
-//									target += "+";
-									
-//									ark.pairs.get(className).add(target);
 									classNames.add(className);
 									targetNames.add(targetName);
 								}
@@ -56,7 +69,6 @@ public class DecoratorDetector extends AbstractDetector {
 							for(FieldPrototype f : cl.fields.values()){
 								if(f.type.equals(intfc)){
 									cl.type.add("decorator");
-//									cl.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
 									ark.getBoat().get(intfc).type.add("component");
 									for (ClassPrototype cp : ark.getBoat().values()) {
 										if(cp.superName != null){	
@@ -64,9 +76,6 @@ public class DecoratorDetector extends AbstractDetector {
 												cp.type.add("decorator");
 										}
 									}
-//									ark.pairs.get(className).remove(target);
-//									target += "+";
-//									ark.pairs.get(className).add(target);
 									classNames.add(className);
 									targetNames.add(targetName);
 								}
@@ -86,12 +95,6 @@ public class DecoratorDetector extends AbstractDetector {
 		
 		ClassPrototype c = this.ark.getBoat().get(cName);
 		return c.type;
-//		for(String s : c.type){
-//			if(s.contains("decor") || s.contains("component")){
-//				return s;
-//			} 
-//		}
-//		return "";
 	}
 	
 	
