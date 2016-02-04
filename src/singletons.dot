@@ -12,63 +12,79 @@ edge [
 	fontname = "Bitstream Vera Sans"
 	fontsize = 16
 ]
-FilterInputStream [ 
+Dictionary [ 
 center=true
-    label="{FilterInputStream|#in: InputStream \l | +read(byte[],int,i): int\l+markSupported(): boolean\l+available(): int\l+reset(): void\l+skip(lo): long\l#\<init\>(InputStre): void\l+close(): void\l+mark(i): void\l}"color = black
+    label="{Dictionary| | +abstract size(): int\l+abstract keys(): Enumeration\l+abstract elements(): Enumeration\l+abstract get(Obje): Object\l+abstract isEmpty(): boolean\l+\<init\>(): void\l+abstract put(Object,Obje): Object\l+abstract remove(Obje): Object\l}"color = black
 style = filled 
  fillcolor = white
+]
+FilterInputStream [ 
+center=true
+    label="{FilterInputStream\n\<\<decorator\>\>|#in: InputStream \l | +read(byte[],int,i): int\l+markSupported(): boolean\l+available(): int\l+reset(): void\l+skip(lo): long\l#\<init\>(InputStre): void\l+close(): void\l+mark(i): void\l}"color = black
+style = filled 
+ fillcolor = chartreuse2
 ]
 Serializable [ 
 center=true
-    label="{Serializable| | }"color = black
+    label="{Serializable\n\<\<target\>\>| | }"color = black
 style = filled 
- fillcolor = white
+ fillcolor = firebrick
 ]
-Comparable [ 
+Set [ 
 center=true
-    label="{Comparable| | +compareTo(Obje): int\l}"color = black
+    label="{Set\n\<\<adaptee\>\>| | +abstract add(Obje): boolean\l+spliterator(): Spliterator\l+abstract containsAll(Collecti): boolean\l+abstract isEmpty(): boolean\l+abstract clear(): void\l+abstract remove(Obje): boolean\l+abstract contains(Obje): boolean\l+abstract iterator(): Iterator\l+abstract removeAll(Collecti): boolean\l+abstract size(): int\l+abstract addAll(Collecti): boolean\l+abstract hashCode(): int\l+abstract equals(Obje): boolean\l+abstract toArray(Object): Object[]\l+abstract retainAll(Collecti): boolean\l}"color = black
 style = filled 
- fillcolor = white
+ fillcolor = firebrick
 ]
 InputStream [ 
 center=true
-    label="{InputStream|-static MAX_SKIP_BUFFER_SIZE: int \l | +read(byte[],int,i): int\l+markSupported(): boolean\l+available(): int\l+reset(): void\l+skip(lo): long\l+\<init\>(): void\l+close(): void\l+mark(i): void\l}"color = black
+    label="{InputStream\n\<\component\>\>|-static MAX_SKIP_BUFFER_SIZE: int \l | +read(byte[],int,i): int\l+markSupported(): boolean\l+available(): int\l+reset(): void\l+skip(lo): long\l+\<init\>(): void\l+close(): void\l+mark(i): void\l}"color = black
 style = filled 
- fillcolor = white
+ fillcolor = chartreuse2
+]
+Hashtable [ 
+center=true
+    label="{Hashtable\n\<\<adapter\>\>|-entrySet: Set \l-values: Collection \l-count: int \l-threshold: int \l-modCount: int \l-static serialVersionUID: long \l-static MAX_ARRAY_SIZE: int \l-loadFactor: float \l-static KEYS: int \l-static VALUES: int \l-keySet: Set \l-table: Hashtable$Entry[] \l-static ENTRIES: int \l | +getOrDefault(Object,Obje): Object\l+keys(): Enumeration\lstatic access$210(Hashtab): int\l+values(): Collection\l+computeIfAbsent(Object,Functi): Object\l+replace(Object,Obje): Object\l#rehash(): void\l-reconstitutionPut(Hashtable$Entry[],Object,Obje): void\l+replaceAll(BiFuncti): void\l+containsValue(Obje): boolean\l+put(Object,Obje): Object\l+remove(Object,Obje): boolean\l+compute(Object,BiFuncti): Object\l+hashCode(): int\l+get(Obje): Object\l+putAll(M): void\l+merge(Object,Object,BiFuncti): Object\l+keySet(): Set\l-getEnumeration(i): Enumeration\lstatic access$500(Hashtab): int\lstatic access$400(Hashtab): Hashtable$Entry[]\l+entrySet(): Set\lstatic access$200(Hashtab): int\l+containsKey(Obje): boolean\l+forEach(BiConsum): void\l-writeObject(ObjectOutputStre): void\lstatic access$100(Hashtable,i): Iterator\l+isEmpty(): boolean\l+clear(): void\lstatic access$508(Hashtab): int\l+\<init\>(M): void\l-readObject(ObjectInputStre): void\l+contains(Obje): boolean\l-getIterator(i): Iterator\l+computeIfPresent(Object,BiFuncti): Object\l+size(): int\l-addEntry(int,Object,Object,i): void\l+elements(): Enumeration\l+equals(Obje): boolean\l+clone(): Object\l+toString(): String\l+putIfAbsent(Object,Obje): Object\l}"color = black
+style = filled 
+ fillcolor = firebrick
 ]
 Calendar [ 
 center=true
-    label="{Calendar|+static MONTH: int \l+static THURSDAY: int \l+static WEEK_OF_MONTH: int \l+static DECEMBER: int \lstatic HOUR_OF_DAY_MASK: int \l+static DAY_OF_WEEK_IN_MONTH: int \l-static MINIMUM_USER_STAMP: int \lstatic WEEK_OF_YEAR_MASK: int \l+static WEDNESDAY: int \lstatic YEAR_MASK: int \l+static YEAR: int \l+static WEEK_OF_YEAR: int \l+static FIELD_COUNT: int \l-zone: TimeZone \l+static SATURDAY: int \l-sharedZone: boolean \l+static MINUTE: int \l-serialVersionOnStream: int \lstatic HOUR_MASK: int \l+static JANUARY: int \lstatic DAY_OF_YEAR_MASK: int \l+static DST_OFFSET: int \l+static SUNDAY: int \l#isSet: boolean[] \l+static TUESDAY: int \l+static SEPTEMBER: int \l+static AM: int \lstatic ERA_MASK: int \lareAllFieldsSet: boolean \l+static DATE: int \lstatic SECOND_MASK: int \l+static ERA: int \l-minimalDaysInFirstWeek: int \lstatic MINUTE_MASK: int \lstatic MILLISECOND_MASK: int \l+static AUGUST: int \l+static JULY: int \l+static DAY_OF_WEEK: int \l#fields: int[] \lstatic DST_OFFSET_MASK: int \l+static DAY_OF_YEAR: int \l+static MAY: int \l+static DAY_OF_MONTH: int \l+static HOUR: int \l+static FRIDAY: int \l+static AM_PM: int \l+static FEBRUARY: int \l-stamp: int[] \l+static ALL_STYLES: int \lstatic currentSerialVersion: int \l-lenient: boolean \l+static ZONE_OFFSET: int \lstatic serialVersionUID: long \l+static HOUR_OF_DAY: int \l+static UNDECIMBER: int \lstatic AM_PM_MASK: int \l-static cachedLocaleData: Hashtable \l-static UNSET: int \l-static FIELD_NAME: String[] \l+static APRIL: int \l+static LONG: int \lstatic DATE_MASK: int \l+static JUNE: int \l-static COMPUTED: int \lstatic DAY_OF_WEEK_IN_MONTH_MASK: int \l+static OCTOBER: int \lstatic DAY_OF_MONTH_MASK: int \lstatic $assertionsDisabled: boolean \l+static NOVEMBER: int \l#isTimeSet: boolean \l+static SHORT: int \lstatic ALL_FIELDS: int \l+static MONDAY: int \lstatic MONTH_MASK: int \l-nextStamp: int \lstatic WEEK_OF_MONTH_MASK: int \lstatic DAY_OF_WEEK_MASK: int \l-firstDayOfWeek: int \lstatic ZONE_OFFSET_MASK: int \l+static MARCH: int \l+static SECOND: int \l+static MILLISECOND: int \l#time: long \l+static PM: int \l#areFieldsSet: boolean \l | selectFields(): int\lsetZoneShared(boole): void\lstatic isFieldSet(int,i): boolean\l+before(Obje): boolean\l+getTimeZone(): TimeZone\l-static createCalendar(TimeZone,Loca): Calendar\l+setMinimalDaysInFirstWeek(i): void\l+compareTo(Obje): int\l#computeFields(): void\l+getActualMaximum(i): int\l+getMinimum(i): int\linternalSet(int,i): void\lisExternallySet(i): boolean\l+static getAvailableLocales(): Locale[]\l-static aggregateStamp(int,i): int\l-setWeekCountData(Loca): void\l+setTime(Da): void\l#internalGet(i): int\l+add(int,i): void\l-static getMillisOf(Calend): long\l+isSet(i): boolean\lsetFieldsComputed(i): void\l+getLeastMaximum(i): int\l-writeObject(ObjectOutputStre): void\l+getTimeInMillis(): long\lgetZone(): TimeZone\l#\<init\>(TimeZone,Loca): void\l-readObject(ObjectInputStre): void\lsetUnnormalized(): void\lisFullyNormalized(): boolean\l+getDisplayName(int,int,Loca): String\lstatic getFieldName(i): String\lstatic \<clinit\>(): void\l+getMinimalDaysInFirstWeek(): int\l+getGreatestMinimum(i): int\l-getDisplayNamesImpl(int,int,Loca): Map\l-invalidateWeekFields(): void\l+getTime(): Date\l+isLenient(): boolean\l+roll(int,i): void\l-adjustStamp(): void\lcheckDisplayNameParams(int,int,int,int,Locale,i): boolean\l+getMaximum(i): int\l+setLenient(boole): void\lsetFieldsNormalized(i): void\lgetSetStateFields(): int\lisPartiallyNormalized(): boolean\l+hashCode(): int\l+get(i): int\l+setTimeZone(TimeZo): void\l+after(Obje): boolean\l+getDisplayNames(int,int,Loca): Map\l+set(int,int,int,int,int,i): void\l+clear(i): void\l+getActualMinimum(i): int\l+setFirstDayOfWeek(i): void\l-updateTime(): void\l+getFirstDayOfWeek(): int\l+setTimeInMillis(lo): void\l#computeTime(): void\l+equals(Obje): boolean\l+clone(): Object\l-getFieldStrings(int,int,DateFormatSymbo): String[]\l+toString(): String\l+static getInstance(TimeZone,Loca): Calendar\l-static appendValue(StringBuilder,String,boolean,lo): void\l#complete(): void\l}"color = black
+    label="{Calendar|+static MONTH: int \l+static THURSDAY: int \l+static WEEK_OF_MONTH: int \l+static DECEMBER: int \lstatic HOUR_OF_DAY_MASK: int \l+static DAY_OF_WEEK_IN_MONTH: int \l-static MINIMUM_USER_STAMP: int \lstatic WEEK_OF_YEAR_MASK: int \l+static WEDNESDAY: int \lstatic YEAR_MASK: int \l+static YEAR: int \l+static WEEK_OF_YEAR: int \l+static FIELD_COUNT: int \l-zone: TimeZone \l+static SATURDAY: int \l-sharedZone: boolean \l+static MINUTE: int \l-serialVersionOnStream: int \lstatic HOUR_MASK: int \l+static JANUARY: int \lstatic DAY_OF_YEAR_MASK: int \l+static DST_OFFSET: int \l+static SUNDAY: int \l#isSet: boolean[] \l+static TUESDAY: int \l+static SEPTEMBER: int \l+static AM: int \lstatic ERA_MASK: int \lareAllFieldsSet: boolean \l+static DATE: int \lstatic SECOND_MASK: int \l+static ERA: int \l-minimalDaysInFirstWeek: int \lstatic MINUTE_MASK: int \lstatic MILLISECOND_MASK: int \l+static AUGUST: int \l+static JULY: int \l+static DAY_OF_WEEK: int \l#fields: int[] \lstatic DST_OFFSET_MASK: int \l+static DAY_OF_YEAR: int \l+static MAY: int \l+static DAY_OF_MONTH: int \l+static HOUR: int \l+static FRIDAY: int \l+static AM_PM: int \l+static FEBRUARY: int \l-stamp: int[] \l+static ALL_STYLES: int \lstatic currentSerialVersion: int \l-lenient: boolean \l+static ZONE_OFFSET: int \lstatic serialVersionUID: long \l+static HOUR_OF_DAY: int \l+static UNDECIMBER: int \lstatic AM_PM_MASK: int \l-static cachedLocaleData: Hashtable \l-static UNSET: int \l-static FIELD_NAME: String[] \l+static APRIL: int \l+static LONG: int \lstatic DATE_MASK: int \l+static JUNE: int \l-static COMPUTED: int \lstatic DAY_OF_WEEK_IN_MONTH_MASK: int \l+static OCTOBER: int \lstatic DAY_OF_MONTH_MASK: int \lstatic $assertionsDisabled: boolean \l+static NOVEMBER: int \l#isTimeSet: boolean \l+static SHORT: int \lstatic ALL_FIELDS: int \l+static MONDAY: int \lstatic MONTH_MASK: int \l-nextStamp: int \lstatic WEEK_OF_MONTH_MASK: int \lstatic DAY_OF_WEEK_MASK: int \l-firstDayOfWeek: int \lstatic ZONE_OFFSET_MASK: int \l+static MARCH: int \l+static SECOND: int \l+static MILLISECOND: int \l#time: long \l+static PM: int \l#areFieldsSet: boolean \l | selectFields(): int\lsetZoneShared(boole): void\lstatic isFieldSet(int,i): boolean\l+before(Obje): boolean\l+getTimeZone(): TimeZone\l-static createCalendar(TimeZone,Loca): Calendar\l+setMinimalDaysInFirstWeek(i): void\l+compareTo(Obje): int\l#abstract computeFields(): void\l+getActualMaximum(i): int\l+abstract getMinimum(i): int\linternalSet(int,i): void\lisExternallySet(i): boolean\l+static getAvailableLocales(): Locale[]\l-static aggregateStamp(int,i): int\l-setWeekCountData(Loca): void\l+setTime(Da): void\l#internalGet(i): int\l+abstract add(int,i): void\l-static getMillisOf(Calend): long\l+isSet(i): boolean\lsetFieldsComputed(i): void\l+abstract getLeastMaximum(i): int\l-writeObject(ObjectOutputStre): void\l+getTimeInMillis(): long\lgetZone(): TimeZone\l#\<init\>(TimeZone,Loca): void\l-readObject(ObjectInputStre): void\lsetUnnormalized(): void\lisFullyNormalized(): boolean\l+getDisplayName(int,int,Loca): String\lstatic getFieldName(i): String\lstatic \<clinit\>(): void\l+getMinimalDaysInFirstWeek(): int\l+abstract getGreatestMinimum(i): int\l-getDisplayNamesImpl(int,int,Loca): Map\l-invalidateWeekFields(): void\l+getTime(): Date\l+isLenient(): boolean\l+roll(int,i): void\l-adjustStamp(): void\lcheckDisplayNameParams(int,int,int,int,Locale,i): boolean\l+abstract getMaximum(i): int\l+setLenient(boole): void\lsetFieldsNormalized(i): void\lgetSetStateFields(): int\lisPartiallyNormalized(): boolean\l+hashCode(): int\l+get(i): int\l+setTimeZone(TimeZo): void\l+after(Obje): boolean\l+getDisplayNames(int,int,Loca): Map\l+set(int,int,int,int,int,i): void\l+clear(i): void\l+getActualMinimum(i): int\l+setFirstDayOfWeek(i): void\l-updateTime(): void\l+getFirstDayOfWeek(): int\l+setTimeInMillis(lo): void\l#abstract computeTime(): void\l+equals(Obje): boolean\l+clone(): Object\l-getFieldStrings(int,int,DateFormatSymbo): String[]\l+toString(): String\l+static getInstance(TimeZone,Loca): Calendar\l-static appendValue(StringBuilder,String,boolean,lo): void\l#complete(): void\l}"color = black
 style = filled 
  fillcolor = white
 ]
 Closeable [ 
 center=true
-    label="{Closeable| | +close(): void\l}"color = black
-style = filled 
- fillcolor = white
-]
-AutoCloseable [ 
-center=true
-    label="{AutoCloseable| | +close(): void\l}"color = black
+    label="{Closeable| | +abstract close(): void\l}"color = black
 style = filled 
  fillcolor = white
 ]
 SingletonEager [ 
 center=true
-    label="{SingletonEager\n\<\<Singleton\>\>|-static singleton: SingletonEager \l | #static demoMethod(): void\l+static getInstance(): SingletonEager\l-\<init\>(): void\lstatic \<clinit\>(): void\l}"color = blue
+    label="{SingletonEager\n\<\<Singleton\>\>|-static singleton: SingletonEager \l | #static demoMethod(): void\l+static getInstance(): SingletonEager\l-\<init\>(): void\lstatic \<clinit\>(): void\l}"style = filled 
+ color = blue
 style = filled 
  fillcolor = white
 ]
 Runtime [ 
 center=true
-    label="{Runtime\n\<\<Singleton\>\>|-static currentRuntime: Runtime \l | +traceMethodCalls(boole): void\l+loadLibrary(Stri): void\l+availableProcessors(): int\l+addShutdownHook(Thre): void\l-static runFinalization0(): void\l+static runFinalizersOnExit(boole): void\l+getLocalizedOutputStream(OutputStre): OutputStream\l-\<init\>(): void\l+maxMemory(): long\lload0(Class,Stri): void\l+exit(i): void\l+halt(i): void\l+getLocalizedInputStream(InputStre): InputStream\l+totalMemory(): long\l+load(Stri): void\l+removeShutdownHook(Thre): boolean\lloadLibrary0(Class,Stri): void\l+gc(): void\l+static getRuntime(): Runtime\l+freeMemory(): long\l+traceInstructions(boole): void\l+exec(String[],String[],Fi): Process\lstatic \<clinit\>(): void\l+runFinalization(): void\l}"color = blue
+    label="{Runtime\n\<\<Singleton\>\>|-static currentRuntime: Runtime \l | +traceMethodCalls(boole): void\l+loadLibrary(Stri): void\l+availableProcessors(): int\l+addShutdownHook(Thre): void\l-static runFinalization0(): void\l+static runFinalizersOnExit(boole): void\l+getLocalizedOutputStream(OutputStre): OutputStream\l-\<init\>(): void\l+maxMemory(): long\lload0(Class,Stri): void\l+exit(i): void\l+halt(i): void\l+getLocalizedInputStream(InputStre): InputStream\l+totalMemory(): long\l+load(Stri): void\l+removeShutdownHook(Thre): boolean\lloadLibrary0(Class,Stri): void\l+gc(): void\l+static getRuntime(): Runtime\l+freeMemory(): long\l+traceInstructions(boole): void\l+exec(String[],String[],Fi): Process\lstatic \<clinit\>(): void\l+runFinalization(): void\l}"style = filled 
+ color = blue
 style = filled 
  fillcolor = white
 ]
 SingletonLazy [ 
 center=true
-    label="{SingletonLazy\n\<\<Singleton\>\>|-static singleton: SingletonLazy \l | #static demoMethod(): void\l+static getInstance(): SingletonLazy\l-\<init\>(): void\l}"color = blue
+    label="{SingletonLazy\n\<\<Singleton\>\>|-static singleton: SingletonLazy \l | #static demoMethod(): void\l+static getInstance(): SingletonLazy\l-\<init\>(): void\l}"style = filled 
+ color = blue
+style = filled 
+ fillcolor = white
+]
+TimeZone [ 
+center=true
+    label="{TimeZone\n\<\<Singleton\>\>|-static ONE_HOUR: int \lstatic GMT_ID: String \lstatic $assertionsDisabled: boolean \l-static GMT_ID_LENGTH: int \l+static SHORT: int \lstatic serialVersionUID: long \l-static defaultTimeZone: TimeZone \l-static mainAppContextDefault: TimeZone \lstatic NO_TIMEZONE: TimeZone \l-ID: String \l-static ONE_DAY: int \l-static ONE_MINUTE: int \l+static LONG: int \l | -static getTimeZone(String,boole): TimeZone\l+getOffset(lo): int\lgetOffsets(long,int): int\l+abstract useDaylightTime(): boolean\l+observesDaylightTime(): boolean\l-static parseCustomTimeZone(Stri): TimeZone\l+hasSameRules(TimeZo): boolean\l-static getDisplayNames(String,Loca): String[]\l+abstract inDaylightTime(Da): boolean\l-static getSystemGMTOffsetID(): String\l+getID(): String\l+static getDefault(): TimeZone\l+\<init\>(): void\l+static getAvailableIDs(): String[]\l+static setDefault(TimeZo): void\l+getDisplayName(boolean,int,Loca): String\l+getDSTSavings(): int\l-static getSystemTimeZoneID(Stri): String\l+abstract setRawOffset(i): void\l-static setDefaultZone(): TimeZone\l+clone(): Object\l+setID(Stri): void\lstatic getDefaultRef(): TimeZone\l+toZoneId(): ZoneId\l+abstract getRawOffset(): int\lstatic \<clinit\>(): void\l}"style = filled 
+ color = blue
 style = filled 
  fillcolor = white
 ]
@@ -78,34 +94,65 @@ center=true
 style = filled 
  fillcolor = white
 ]
-Object [ 
+Collection [ 
 center=true
-    label="{Object| | +getClass(): Class\l+wait(): void\l+hashCode(): int\l+equals(Obje): boolean\l+notifyAll(): void\l#clone(): Object\l-static registerNatives(): void\l+toString(): String\l#finalize(): void\l+\<init\>(): void\l+notify(): void\lstatic \<clinit\>(): void\l}"color = black
+    label="{Collection\n\<\<adaptee\>\>| | +abstract add(Obje): boolean\l+spliterator(): Spliterator\l+abstract containsAll(Collecti): boolean\l+abstract isEmpty(): boolean\l+abstract clear(): void\l+abstract remove(Obje): boolean\l+removeIf(Predica): boolean\l+abstract contains(Obje): boolean\l+abstract iterator(): Iterator\l+abstract removeAll(Collecti): boolean\l+abstract size(): int\l+abstract addAll(Collecti): boolean\l+stream(): Stream\l+abstract hashCode(): int\l+abstract equals(Obje): boolean\l+abstract toArray(Object): Object[]\l+parallelStream(): Stream\l+abstract retainAll(Collecti): boolean\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+Map [ 
+center=true
+    label="{Map\n\<\<target\>\>| | +getOrDefault(Object,Obje): Object\l+abstract entrySet(): Set\l+abstract containsKey(Obje): boolean\l+forEach(BiConsum): void\l+abstract values(): Collection\l+computeIfAbsent(Object,Functi): Object\l+abstract isEmpty(): boolean\l+abstract clear(): void\l+replace(Object,Obje): Object\l+replaceAll(BiFuncti): void\l+abstract containsValue(Obje): boolean\l+abstract put(Object,Obje): Object\l+remove(Object,Obje): boolean\l+compute(Object,BiFuncti): Object\l+computeIfPresent(Object,BiFuncti): Object\l+abstract size(): int\l+abstract hashCode(): int\l+abstract get(Obje): Object\l+abstract putAll(M): void\l+abstract equals(Obje): boolean\l+merge(Object,Object,BiFuncti): Object\l+abstract keySet(): Set\l+putIfAbsent(Object,Obje): Object\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+DesktopPeer [ 
+center=true
+    label="{DesktopPeer| | +abstract print(Fi): void\l+abstract mail(U): void\l+abstract edit(Fi): void\l+abstract isSupported(Desktop$Acti): boolean\l+abstract open(Fi): void\l+abstract browse(U): void\l}"color = black
 style = filled 
  fillcolor = white
 ]
-Cloneable [ 
-center=true
-    label="{Cloneable| | }"color = black
-style = filled 
- fillcolor = white
-]
+FilterInputStream -> InputStream[arrowhead = vee, style = dotted]
+FilterInputStream -> InputStream[arrowhead = vee]
+FilterInputStream -> InputStream [arrowhead = vee,label="\<\<Decorates\>\>"]
+FilterInputStream -> InputStream [arrowhead = onormal]
 FilterInputStream -> FilterInputStream[arrowhead = vee, style = dotted]
-Runtime -> Runtime[arrowhead = veenull]
+Runtime -> Runtime[arrowhead = vee]
 Runtime -> Runtime[arrowhead = vee, style = dotted]
-SingletonLazy -> SingletonLazy[arrowhead = veenull]
+SingletonLazy -> SingletonLazy[arrowhead = vee]
 SingletonLazy -> SingletonLazy[arrowhead = vee, style = dotted]
-Serializable -> Object [arrowhead = onormal]
-Comparable -> Object [arrowhead = onormal]
+TimeZone -> Serializable[arrowhead = onormal,style = dotted]
+TimeZone -> TimeZone[arrowhead = vee]
+TimeZone -> TimeZone[arrowhead = vee, style = dotted]
+Set -> Collection[arrowhead = onormal,style = dotted]
+Desktop -> DesktopPeer[arrowhead = vee, style = dotted]
+Desktop -> DesktopPeer[arrowhead = vee]
 Desktop -> Desktop[arrowhead = vee, style = dotted]
+InputStream -> Closeable[arrowhead = onormal,style = dotted]
 InputStream -> InputStream[arrowhead = vee, style = dotted]
-InputStream -> Object [arrowhead = onormal]
-InputStream -> Object[arrowhead = vee, style = dotted]
+Hashtable -> Serializable[arrowhead = onormal,style = dotted]
+Hashtable -> Dictionary[arrowhead = vee, style = dotted]
+Hashtable -> Map[arrowhead = onormal,style = dotted]
+Hashtable -> Collection[arrowhead = vee]
+Hashtable -> Dictionary [arrowhead = onormal]
+Hashtable -> Map[arrowhead = vee, style = dotted]
+Hashtable -> Collection [arrowhead = vee,label="\<\<Adapts\>\>"]
+Hashtable -> Hashtable[arrowhead = vee, style = dotted]
+Hashtable -> Set[arrowhead = vee, style = dotted]
+Hashtable -> Set[arrowhead = vee]
+Hashtable -> Set [arrowhead = vee,label="\<\<Adapts\>\>"]
+Calendar -> Serializable[arrowhead = onormal,style = dotted]
 Calendar -> Calendar[arrowhead = vee, style = dotted]
-SingletonEager -> SingletonEager[arrowhead = veenull]
+Calendar -> Hashtable[arrowhead = vee]
+Calendar -> TimeZone[arrowhead = vee]
+Calendar -> Map[arrowhead = vee, style = dotted]
+Calendar -> TimeZone[arrowhead = vee, style = dotted]
+Calendar -> Hashtable[arrowhead = vee, style = dotted]
+SingletonEager -> SingletonEager[arrowhead = vee]
 SingletonEager -> SingletonEager[arrowhead = vee, style = dotted]
-Object -> Object[arrowhead = vee, style = dotted]
-Cloneable -> Object [arrowhead = onormal]
+Collection -> Collection[arrowhead = vee, style = dotted]
+Map -> Map[arrowhead = vee, style = dotted]
+Map -> Set[arrowhead = vee, style = dotted]
 
 
 }

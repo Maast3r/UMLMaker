@@ -1,6 +1,6 @@
 package src;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
 public class NameDecorator extends TypeDecorator{
 	
@@ -8,7 +8,7 @@ public class NameDecorator extends TypeDecorator{
 		super(t);
 	}
 	
-	public String getType(){
+	public HashSet<String> getType(){
 		return super.getType();
 	}
 }

@@ -41,6 +41,9 @@ public class ClassVisitorBuffered extends ClassVisitor{
 		if((access & Opcodes.ACC_STATIC) !=0){
 			accessModifier+="static ";
 		}
+		if((access & Opcodes.ACC_ABSTRACT) != 0){
+			accessModifier+="abstract ";
+		}
 		return accessModifier;
 	}
 	

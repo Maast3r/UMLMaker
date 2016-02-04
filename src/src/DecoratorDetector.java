@@ -1,5 +1,8 @@
 package src;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class DecoratorDetector extends AbstractDetector {
 	public NoahsArk ark;
 
@@ -9,10 +12,14 @@ public class DecoratorDetector extends AbstractDetector {
 	}
 
 	@Override
-	public String getType(String cName) {
+	public HashSet<String> getType(String cName) {
+		ArrayList<String> classNames = new ArrayList<String>();
+		ArrayList<String> targetNames = new ArrayList<String>();
+		
 		for(ClassPrototype cl : this.ark.getBoat().values()){
 			String className = cl.getName();
 			String superName = cl.getSuperName();
+			String[] interfaces = cl.getInterfaces();
 			if (ark.pairs.get(className) != null) {
 				for (String target : ark.pairs.get(className)) {
 					String targetName = target.substring(1);
@@ -24,15 +31,44 @@ public class DecoratorDetector extends AbstractDetector {
 						if (targetName.equals(superName)) {
 							for (FieldPrototype f : cl.fields.values()) {
 								if (f.type.equals(superName)) {
-									cl.type = "decorator";
-									cl.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
-									ark.getBoat().get(targetName).type = "component";
+									cl.type.add("decorator");
+//									cl.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
+									ark.getBoat().get(targetName).type.add("component");
 									for (ClassPrototype cp : ark.getBoat().values()) {
 										if(cp.superName != null){	
 											if (cp.superName.equals(className))
-												cp.type = "decorator";
+												cp.type.add("decorator");
 										}
 									}
+//									ark.pairs.get(className).remove(target);
+									
+//									target += "+";
+									
+//									ark.pairs.get(className).add(target);
+									classNames.add(className);
+									targetNames.add(targetName);
+								}
+							}
+						}
+						
+						for(String intfc : interfaces){
+							if(intfc.contains("/")) intfc = intfc.split("/")[intfc.split("/").length-1];
+							for(FieldPrototype f : cl.fields.values()){
+								if(f.type.equals(intfc)){
+									cl.type.add("decorator");
+//									cl.arrowDesc = ",label=\"\\<\\<Decorates\\>\\>\"";
+									ark.getBoat().get(intfc).type.add("component");
+									for (ClassPrototype cp : ark.getBoat().values()) {
+										if(cp.superName != null){	
+											if (cp.superName.equals(className))
+												cp.type.add("decorator");
+										}
+									}
+//									ark.pairs.get(className).remove(target);
+//									target += "+";
+//									ark.pairs.get(className).add(target);
+									classNames.add(className);
+									targetNames.add(targetName);
 								}
 							}
 						}
@@ -40,10 +76,23 @@ public class DecoratorDetector extends AbstractDetector {
 				}
 			}
 		}
-		ClassPrototype c = this.ark.getBoat().get(cName);
-		if (!c.type.equals("")){
-			return c.type;
+		
+		
+		for(int i=0; i<classNames.size(); i++){
+			ark.pairs.get(classNames.get(i)).remove("$" + targetNames.get(i));
+			ark.pairs.get(classNames.get(i)).add("$" + targetNames.get(i) + "+");
 		}
-		return "";
+		
+		
+		ClassPrototype c = this.ark.getBoat().get(cName);
+		return c.type;
+//		for(String s : c.type){
+//			if(s.contains("decor") || s.contains("component")){
+//				return s;
+//			} 
+//		}
+//		return "";
 	}
+	
+	
 }

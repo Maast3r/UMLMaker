@@ -1,5 +1,9 @@
 package src;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 public class AdapterDetector extends AbstractDetector{
 	public NoahsArk ark;
 	
@@ -9,24 +13,70 @@ public class AdapterDetector extends AbstractDetector{
 	}
 	
 	@Override
-	public String getType(String cName) {
+	public HashSet<String> getType(String cName) {
+		ArrayList<String> classNames = new ArrayList<String>();
+		ArrayList<String> targetNames = new ArrayList<String>();
+		
 		for(ClassPrototype cl : this.ark.getBoat().values()){
 			String className = cl.getName();
+			String superName = cl.getSuperName();
+			String pkg = cl.pkg;
 			String[] interfaces = cl.getInterfaces();
 			if(ark.pairs.get(className) != null){
 				for (String target : ark.pairs.get(className)) {
 					String targetName = target.substring(1);
-					if(target.charAt(0) == '#' ){
+					if(target.charAt(0) == '$' ){
+						
+						
+						if (!superName.equals("") && superName != null) {
+							if(ark.getBoat().containsKey(superName)){
+								if(!ark.getBoat().get(superName).pkg.equals("java.lang.")){
+									
+									for (FieldPrototype f : cl.fields.values()) {
+//										System.out.println(className + "  " + superName +  "   " + targetName +  "   " + f.type);
+										if (f.type.equals(targetName) && !f.type.equals(superName) && !superName.equals(targetName) && !ark.getBoat().get(targetName).isInterface) {
+//											System.out.println("ADAPTS " + className +  " "  + f.type + " "  + superName);
+											cl.type.add("adapter");
+//											cl.arrowDesc = ",label=\"\\<\\<Adapts\\>\\>\"";
+//											ark.pairs.get(className);
+											
+											// target
+											if(ark.getBoat().containsKey(superName))ark.getBoat().get(superName).type.add("target");
+											// adaptee
+											ark.getBoat().get(targetName).type.add("adaptee");
+											
+											
+//											ark.pairs.get(className).remove(target);
+//											target += "-";
+//											ark.pairs.get(className).add(target);
+											classNames.add(className);
+											targetNames.add(targetName);
+											break;
+										}
+									}
+									
+								}
+							}
+						}
+						
 						for(String intfc : interfaces){
 							if(intfc.contains("/")) intfc = intfc.split("/")[intfc.split("/").length-1];
 							for(FieldPrototype f : cl.fields.values()){
-								if(f.type.equals(targetName)){
-									cl.type = "adapter";
-									cl.arrowDesc = ",label=\"\\<\\<Adapts\\>\\>\"";
+								if(f.type.equals(targetName) && checkMethods(cl, ark.getBoat().get(intfc)) && ark.getBoat().get(targetName).isInterface){
+									cl.type.add("adapter");
+//									cl.arrowDesc = ",label=\"\\<\\<Adapts\\>\\>\"";
 									// target
-									if(ark.getBoat().containsKey(intfc))ark.getBoat().get(intfc).type = "target";
+									if(ark.getBoat().containsKey(intfc))ark.getBoat().get(intfc).type.add("target");
 									// adaptee
-									ark.getBoat().get(targetName).type = "adaptee";
+									ark.getBoat().get(targetName).type.add("adaptee");
+									
+//									ark.pairs.get(className).remove(target);
+//									target += "-";
+//									ark.pairs.get(className).add(target);
+									
+									classNames.add(className);
+									targetNames.add(targetName);
+									break;
 								}
 							}
 						}
@@ -34,7 +84,35 @@ public class AdapterDetector extends AbstractDetector{
 				}
 			}
 		}
+		
+		for(int i=0; i<classNames.size(); i++){
+			System.out.println("before " + ark.pairs.values());
+			System.out.println("removing " + targetNames.get(i));
+			ark.pairs.get(classNames.get(i)).remove("$" + targetNames.get(i));
+			System.out.println(ark.pairs.values());
+			ark.pairs.get(classNames.get(i)).add("$" + targetNames.get(i) + ";");
+		}
+//		return c
 		ClassPrototype c = this.ark.getBoat().get(cName);
 		return c.type;
+//		for(String s : c.type){
+//			if(s.contains("adapt") || s.contains("target")){
+//				return s;
+//			} 
+//		}
+//		return "";
+	}
+	
+	public boolean checkMethods(ClassPrototype c, ClassPrototype intfc){
+		if((c == null) || (intfc == null)) return false;
+		Set<String> intfcMethods = intfc.getMethods().keySet();
+		ArrayList<Boolean> hasMethod = new ArrayList<Boolean>();
+		for(String iMethods : intfcMethods){
+			for(String methods : c.getMethods().keySet()){
+				if(methods.equals(iMethods)) hasMethod.add(true);
+			}
+		}
+		return hasMethod.size() == intfcMethods.size();
+		
 	}
 }

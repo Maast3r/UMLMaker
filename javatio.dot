@@ -12,200 +12,32 @@ edge [
 	fontname = "Bitstream Vera Sans"
 	fontsize = 16
 ]
-Buffer [ 
-center=true
-    label="{Buffer|address: long \l-limit: int \lstatic SPLITERATOR_CHARACTERISTICS: int \l-position: int \l-mark: int \l-capacity: int \l | +hasArray(): boolean\l+hasRemaining(): boolean\l+clear(): Buffer\lcheckIndex(int,i): int\l\<init\>(int,int,int,i): void\l+remaining(): int\l+capacity(): int\l+isReadOnly(): boolean\l+rewind(): Buffer\ltruncate(): void\l+array(): Object\lstatic checkBounds(int,int,i): void\lnextPutIndex(i): int\l+limit(i): Buffer\l+reset(): Buffer\l+arrayOffset(): int\ldiscardMark(): void\l+position(i): Buffer\l+flip(): Buffer\l+isDirect(): boolean\lnextGetIndex(i): int\l+mark(): Buffer\lmarkValue(): int\l}"color = black
-style = filled 
- fillcolor = white
-]
-ReadableByteChannel [ 
-center=true
-    label="{ReadableByteChannel| | +read(ByteBuff): int\l}"color = black
-style = filled 
- fillcolor = white
-]
-Comparable [ 
-center=true
-    label="{Comparable\n\<\<target\>\>| | +compareTo(Obje): int\l}"color = null
-style = filled 
- fillcolor = firebrick
-]
-CharsetDecoder [ 
-center=true
-    label="{CharsetDecoder|-averageCharsPerByte: float \l-static stateNames: String[] \l-charset: Charset \l-maxCharsPerByte: float \l-static ST_FLUSHED: int \lstatic $assertionsDisabled: boolean \l-unmappableCharacterAction: CodingErrorAction \l-static ST_END: int \l-malformedInputAction: CodingErrorAction \l-static ST_CODING: int \l-state: int \l-static ST_RESET: int \l-replacement: String \l | +averageCharsPerByte(): float\l#implFlush(CharBuff): CoderResult\l+charset(): Charset\l+maxCharsPerByte(): float\l#decodeLoop(ByteBuffer,CharBuff): CoderResult\l+onUnmappableCharacter(CodingErrorActi): CharsetDecoder\l#implReset(): void\l-throwIllegalStateException(int,i): void\l#implOnMalformedInput(CodingErrorActi): void\l#\<init\>(Charset,float,flo): void\l+decode(ByteBuff): CharBuffer\l+isCharsetDetected(): boolean\l+isAutoDetecting(): boolean\l+unmappableCharacterAction(): CodingErrorAction\l+malformedInputAction(): CodingErrorAction\l+flush(CharBuff): CoderResult\l+detectedCharset(): Charset\l+onMalformedInput(CodingErrorActi): CharsetDecoder\l+reset(): CharsetDecoder\l#implReplaceWith(Stri): void\l#implOnUnmappableCharacter(CodingErrorActi): void\l+replacement(): String\l+replaceWith(Stri): CharsetDecoder\lstatic \<clinit\>(): void\l}"color = black
-style = filled 
- fillcolor = white
-]
-CodingErrorAction [ 
-center=true
-    label="{CodingErrorAction|-name: String \l+static REPORT: CodingErrorAction \l+static IGNORE: CodingErrorAction \l+static REPLACE: CodingErrorAction \l | +toString(): String\l-\<init\>(Stri): void\lstatic \<clinit\>(): void\l}"color = black
-style = filled 
- fillcolor = white
-]
-CharsetProvider [ 
-center=true
-    label="{CharsetProvider\n\<\<adaptee\>\>| | +charsets(): Iterator\l#\<init\>(): void\l+charsetForName(Stri): Charset\l}"color = null
-style = filled 
- fillcolor = firebrick
-]
-Set [ 
-center=true
-    label="{Set| | +add(Obje): boolean\l+spliterator(): Spliterator\l+containsAll(Collecti): boolean\l+isEmpty(): boolean\l+clear(): void\l+remove(Obje): boolean\l+contains(Obje): boolean\l+iterator(): Iterator\l+removeAll(Collecti): boolean\l+size(): int\l+addAll(Collecti): boolean\l+hashCode(): int\l+equals(Obje): boolean\l+toArray(Object): Object[]\l+retainAll(Collecti): boolean\l}"color = black
-style = filled 
- fillcolor = white
-]
 InputStreamReader [ 
 center=true
-    label="{InputStreamReader\n\<\<decorator\>\>|-sd: StreamDecoder \l | +getEncoding(): String\l+read(char[],int,i): int\l+ready(): boolean\l+\<init\>(InputStream,CharsetDecod): void\l+close(): void\l}"color = null
+    label="{InputStreamReader\n\<\<adapter\>\>|-sd: StreamDecoder \l | +getEncoding(): String\l+read(char[],int,i): int\l+ready(): boolean\l+\<init\>(InputStream,CharsetDecod): void\l+close(): void\l}"color = black
 style = filled 
- fillcolor = chartreuse2
-]
-Iterable [ 
-center=true
-    label="{Iterable| | +iterator(): Iterator\l+spliterator(): Spliterator\l+forEach(Consum): void\l}"color = black
-style = filled 
- fillcolor = white
+ fillcolor = firebrick
 ]
 StreamDecoder [ 
 center=true
-    label="{StreamDecoder\n\<\<decorator\>\>|-cs: Charset \l-bb: ByteBuffer \l-static MIN_BYTE_BUFFER_SIZE: int \l-leftoverChar: char \l-isOpen: boolean \l-in: InputStream \l-ch: ReadableByteChannel \l-haveLeftoverChar: boolean \lstatic $assertionsDisabled: boolean \l-static DEFAULT_BYTE_BUFFER_SIZE: int \l-static channelsAvailable: boolean \l-decoder: CharsetDecoder \l | implClose(): void\l+read(char[],int,i): int\l+static forDecoder(ReadableByteChannel,CharsetDecoder,i): StreamDecoder\l-inReady(): boolean\lencodingName(): String\limplReady(): boolean\l\<init\>(ReadableByteChannel,CharsetDecoder,i): void\limplRead(char[],int,i): int\l-read0(): int\l+getEncoding(): String\l-isOpen(): boolean\l-static getChannel(FileInputStre): FileChannel\l-ensureOpen(): void\l+ready(): boolean\l-readBytes(): int\l+close(): void\l+static forInputStreamReader(InputStream,Object,CharsetDecod): StreamDecoder\lstatic \<clinit\>(): void\l}"color = null
-style = filled 
- fillcolor = chartreuse2
-]
-InputStream [ 
-center=true
-    label="{InputStream|-static MAX_SKIP_BUFFER_SIZE: int \l | +read(byte[],int,i): int\l+markSupported(): boolean\l+available(): int\l+reset(): void\l+skip(lo): long\l+\<init\>(): void\l+close(): void\l+mark(i): void\l}"color = black
-style = filled 
- fillcolor = white
-]
-Closeable [ 
-center=true
-    label="{Closeable\n\<\<target\>\>| | +close(): void\l}"color = null
+    label="{StreamDecoder\n\<\<adaptee\>\>|-cs: Charset \l-bb: ByteBuffer \l-static MIN_BYTE_BUFFER_SIZE: int \l-leftoverChar: char \l-isOpen: boolean \l-in: InputStream \l-ch: ReadableByteChannel \l-haveLeftoverChar: boolean \lstatic $assertionsDisabled: boolean \l-static DEFAULT_BYTE_BUFFER_SIZE: int \l-static channelsAvailable: boolean \l-decoder: CharsetDecoder \l | implClose(): void\l+read(char[],int,i): int\l+static forDecoder(ReadableByteChannel,CharsetDecoder,i): StreamDecoder\l-inReady(): boolean\lencodingName(): String\limplReady(): boolean\l\<init\>(ReadableByteChannel,CharsetDecoder,i): void\limplRead(char[],int,i): int\l-read0(): int\l+getEncoding(): String\l-isOpen(): boolean\l-static getChannel(FileInputStre): FileChannel\l-ensureOpen(): void\l+ready(): boolean\l-readBytes(): int\l+close(): void\l+static forInputStreamReader(InputStream,Object,CharsetDecod): StreamDecoder\lstatic \<clinit\>(): void\l}"color = black
 style = filled 
  fillcolor = firebrick
-]
-Channel [ 
-center=true
-    label="{Channel| | +isOpen(): boolean\l+close(): void\l}"color = black
-style = filled 
- fillcolor = white
-]
-AutoCloseable [ 
-center=true
-    label="{AutoCloseable| | +close(): void\l}"color = black
-style = filled 
- fillcolor = white
 ]
 Reader [ 
 center=true
-    label="{Reader\n\<\<decorator\>\>|-skipBuffer: char[] \l#lock: Object \l-static maxSkipBufferSize: int \l | +read(char[],int,i): int\l+ready(): boolean\l+markSupported(): boolean\l+reset(): void\l+skip(lo): long\l#\<init\>(Obje): void\l+close(): void\l+mark(i): void\l}"color = null
-style = filled 
- fillcolor = chartreuse2
-]
-Charset [ 
-center=true
-    label="{Charset\n\<\<Singleton\>\>|-aliases: String[] \l-static cache2: Object[] \l-name: String \l-static cache1: Object[] \l-static defaultCharset: Charset \l-static gate: ThreadLocal \l-static standardProvider: CharsetProvider \l-static bugLevel: String \l-aliasSet: Set \l | +encode(Stri): ByteBuffer\l+aliases(): Set\l+displayName(Loca): String\l+static defaultCharset(): Charset\l+compareTo(Obje): int\l-static checkName(Stri): void\l+decode(ByteBuff): CharBuffer\l-static put(Iterator,M): void\l+hashCode(): int\l+static availableCharsets(): SortedMap\l-static lookup(Stri): Charset\l-static lookup2(Stri): Charset\l-static cache(String,Chars): void\l+static forName(Stri): Charset\lstatic access$200(Iterator,M): void\l+newDecoder(): CharsetDecoder\lstatic access$100(): CharsetProvider\lstatic access$000(): Iterator\l+static isSupported(Stri): boolean\l#\<init\>(String,String): void\l+contains(Chars): boolean\l+canEncode(): boolean\l+equals(Obje): boolean\l+name(): String\l+newEncoder(): CharsetEncoder\l-static lookupExtendedCharset(Stri): Charset\l-static lookupViaProviders(Stri): Charset\l+isRegistered(): boolean\l+toString(): String\lstatic atBugLevel(Stri): boolean\l-static providers(): Iterator\lstatic \<clinit\>(): void\l}"color = blue
-style = filled 
- fillcolor = white
-]
-ByteBuffer [ 
-center=true
-    label="{ByteBuffer|bigEndian: boolean \lnativeByteOrder: boolean \lisReadOnly: boolean \loffset: int \lhb: byte[] \l | +asIntBuffer(): IntBuffer\l-static compare(byte,by): int\l+compact(): ByteBuffer\l+asLongBuffer(): LongBuffer\l+getDouble(i): double\l+putDouble(int,doub): ByteBuffer\l+compareTo(Obje): int\l+getFloat(i): float\l+putLong(int,lo): ByteBuffer\l+asReadOnlyBuffer(): ByteBuffer\l+put(byte): ByteBuffer\l+slice(): ByteBuffer\l+array(): Object\l+asDoubleBuffer(): DoubleBuffer\l+hashCode(): int\l+get(byte): ByteBuffer\l+arrayOffset(): int\l+putShort(int,sho): ByteBuffer\l+order(ByteOrd): ByteBuffer\l+static allocateDirect(i): ByteBuffer\l+hasArray(): boolean\l+asCharBuffer(): CharBuffer\l+asFloatBuffer(): FloatBuffer\l+getShort(i): short\l+putInt(int,i): ByteBuffer\l+putChar(int,ch): ByteBuffer\l+duplicate(): ByteBuffer\l\<init\>(int,int,int,i): void\l+getLong(i): long\l+getChar(i): char\l+getInt(i): int\l+putFloat(int,flo): ByteBuffer\l+static allocate(i): ByteBuffer\l-static equals(byte,by): boolean\l+toString(): String\l_get(i): byte\l_put(int,by): void\l+static wrap(byte): ByteBuffer\l+isDirect(): boolean\l+asShortBuffer(): ShortBuffer\l}"color = black
-style = filled 
- fillcolor = white
-]
-Collection [ 
-center=true
-    label="{Collection| | +add(Obje): boolean\l+spliterator(): Spliterator\l+containsAll(Collecti): boolean\l+isEmpty(): boolean\l+clear(): void\l+remove(Obje): boolean\l+removeIf(Predica): boolean\l+contains(Obje): boolean\l+iterator(): Iterator\l+removeAll(Collecti): boolean\l+size(): int\l+addAll(Collecti): boolean\l+stream(): Stream\l+hashCode(): int\l+equals(Obje): boolean\l+toArray(Object): Object[]\l+parallelStream(): Stream\l+retainAll(Collecti): boolean\l}"color = black
-style = filled 
- fillcolor = white
-]
-Object [ 
-center=true
-    label="{Object\n\<\component\>\>| | +getClass(): Class\l+wait(): void\l+hashCode(): int\l+equals(Obje): boolean\l+notifyAll(): void\l#clone(): Object\l-static registerNatives(): void\l+toString(): String\l#finalize(): void\l+\<init\>(): void\l+notify(): void\lstatic \<clinit\>(): void\l}"color = null
-style = filled 
- fillcolor = chartreuse2
-]
-Readable [ 
-center=true
-    label="{Readable\n\<\<target\>\>| | +read(CharBuff): int\l}"color = null
+    label="{Reader\n\<\<target\>\>|-skipBuffer: char[] \l#lock: Object \l-static maxSkipBufferSize: int \l | +abstract read(char[],int,i): int\l+ready(): boolean\l+markSupported(): boolean\l+reset(): void\l+skip(lo): long\l#\<init\>(Obje): void\l+abstract close(): void\l+mark(i): void\l}"color = black
 style = filled 
  fillcolor = firebrick
 ]
-Buffer -> Object [arrowhead = onormal]
-Buffer -> Buffer[arrowhead = vee, style = dotted]
-Buffer -> Object[arrowhead = vee, style = dotted]
-ReadableByteChannel -> Object [arrowhead = onormal]
-ReadableByteChannel -> Channel[arrowhead = onormal,style = dotted]
-Comparable -> Object [arrowhead = onormal]
-CharsetDecoder -> CharsetDecoder[arrowhead = vee, style = dotted]
-CharsetDecoder -> ByteBuffer[arrowhead = vee, style = dotted]
-CharsetDecoder -> Object [arrowhead = onormal]
-CharsetDecoder -> Charset[arrowhead = vee, style = dotted]
-CharsetDecoder -> Charset[arrowhead = veenull]
-CharsetDecoder -> CodingErrorAction[arrowhead = veenull]
-CharsetDecoder -> Object[arrowhead = vee, style = dotted]
-CodingErrorAction -> Object [arrowhead = onormal]
-CodingErrorAction -> CodingErrorAction[arrowhead = vee, style = dotted]
-CodingErrorAction -> CodingErrorAction[arrowhead = veenull]
-CodingErrorAction -> Object[arrowhead = vee, style = dotted]
-CharsetProvider -> Object [arrowhead = onormal]
-CharsetProvider -> Object[arrowhead = vee, style = dotted]
-Set -> Object [arrowhead = onormal]
-Set -> Collection[arrowhead = onormal,style = dotted]
 InputStreamReader -> Reader[arrowhead = vee, style = dotted]
-InputStreamReader -> StreamDecoder[arrowhead = veenull]
 InputStreamReader -> Reader [arrowhead = onormal]
+InputStreamReader -> StreamDecoder [arrowhead = vee,label="\<\<Adapts\>\>"]
 InputStreamReader -> StreamDecoder[arrowhead = vee, style = dotted]
-Iterable -> Object [arrowhead = onormal]
-Iterable -> Iterable[arrowhead = vee, style = dotted]
-StreamDecoder -> CharsetDecoder[arrowhead = vee, style = dotted]
-StreamDecoder -> ByteBuffer[arrowhead = vee, style = dotted]
-StreamDecoder -> InputStream[arrowhead = veenull]
 StreamDecoder -> Reader[arrowhead = vee, style = dotted]
-StreamDecoder -> ReadableByteChannel[arrowhead = vee, style = dotted]
-StreamDecoder -> ByteBuffer[arrowhead = veenull]
-StreamDecoder -> Charset[arrowhead = vee, style = dotted]
-StreamDecoder -> CharsetDecoder[arrowhead = veenull]
-StreamDecoder -> ReadableByteChannel[arrowhead = veenull]
-StreamDecoder -> InputStream[arrowhead = vee, style = dotted]
 StreamDecoder -> Reader [arrowhead = onormal]
 StreamDecoder -> StreamDecoder[arrowhead = vee, style = dotted]
-StreamDecoder -> Charset[arrowhead = veenull]
-InputStream -> Closeable[arrowhead = onormal,style = dotted]
-InputStream -> InputStream[arrowhead = vee, style = dotted]
-InputStream -> Object [arrowhead = onormal]
-InputStream -> Object[arrowhead = vee, style = dotted]
-Closeable -> Object [arrowhead = onormal]
-Closeable -> AutoCloseable[arrowhead = onormal,style = dotted]
-Channel -> Closeable[arrowhead = onormal,style = dotted]
-Channel -> Object [arrowhead = onormal]
-AutoCloseable -> Object [arrowhead = onormal]
-Reader -> Closeable[arrowhead = onormal,style = dotted]
 Reader -> Reader[arrowhead = vee, style = dotted]
-Reader -> Object [arrowhead = onormal]
-Reader -> Readable[arrowhead = onormal,style = dotted]
-Reader -> Object[arrowhead = vee,label="\<\<Decorates\>\>"]
-Reader -> Object[arrowhead = vee, style = dotted]
-Charset -> CharsetDecoder[arrowhead = vee, style = dotted]
-Charset -> Object [arrowhead = onormal]
-Charset -> CharsetProvider[arrowhead = vee, style = dotted]
-Charset -> Charset[arrowhead = vee, style = dotted]
-Charset -> CharsetProvider[arrowhead = vee,label="\<\<Adapts\>\>"]
-Charset -> Charset[arrowhead = vee,label="\<\<Adapts\>\>"]
-Charset -> Object[arrowhead = vee, style = dotted]
-Charset -> Comparable[arrowhead = onormal,style = dotted]
-Charset -> Set[arrowhead = vee,label="\<\<Adapts\>\>"]
-ByteBuffer -> ByteBuffer[arrowhead = vee, style = dotted]
-ByteBuffer -> Buffer[arrowhead = vee, style = dotted]
-ByteBuffer -> Object[arrowhead = vee, style = dotted]
-ByteBuffer -> Comparable[arrowhead = onormal,style = dotted]
-ByteBuffer -> Buffer [arrowhead = onormal]
-Collection -> Iterable[arrowhead = onormal,style = dotted]
-Collection -> Object [arrowhead = onormal]
-Collection -> Collection[arrowhead = vee, style = dotted]
-Object -> Object[arrowhead = vee, style = dotted]
-Readable -> Object [arrowhead = onormal]
 
 
 }

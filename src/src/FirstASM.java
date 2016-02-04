@@ -8,23 +8,13 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
-import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-import org.reflections.util.FilterBuilder;
 
 public class FirstASM {
 	private static String font = "\tfontname = \"Bitstream Vera Sans\"\n" + "\tfontsize = 16\n";
@@ -33,6 +23,7 @@ public class FirstASM {
 	private static String methodSeparatorString = " | ";
 	private static String classEndString1 = "}\"";
 	private static String classEndString2 = "]\n";
+	private static String ourPK = "uml C:\\Users\\Maast3r\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
 	private static String ourPKG = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
 	private static String single = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\singletons";
 	private static String lab2one = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab2one";
@@ -50,6 +41,7 @@ public class FirstASM {
 		String line = "";
 		System.out.print("UMLMaker>");
 		line = in.readLine();
+//		line  = single;
 		if (line == null || line.length() == 0 || !line.contains(" "))
 			throw new IOException("FORMAT ERROR: Empty command is not supported!");
 		String command = line.split(" ")[0];
@@ -98,7 +90,6 @@ public class FirstASM {
 				}
 			}
 			NoahsArk ark = new NoahsArk(listOfClasses);
-			System.out.println("temp " + temps.toString());
 			for(String s : temps){
 				ark.seenClass.put(s, pkg);
 			}
@@ -194,44 +185,44 @@ public class FirstASM {
 				declVisitor.getName());
 
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
-
-		ArrayList<String> inheritancePairs = new ArrayList<String>();
-
-		for (String type : associationTypes) {
-			inheritancePairs.addAll(getAssociation(pkg, className, type, ark));
-		}
-		for (int i = 0; i < inheritancePairs.size(); i++) {
-			if (inheritancePairs.get(i).contains("!"))
-				ark.addPair(inheritancePairs.get(i).split("!")[0], "!" + inheritancePairs.get(i).split("!")[1]);
-			if (inheritancePairs.get(i).contains("@"))
-				ark.addPair(inheritancePairs.get(i).split("@")[0], "@" + inheritancePairs.get(i).split("@")[1]);
-			if (inheritancePairs.get(i).contains("#"))
-				ark.addPair(inheritancePairs.get(i).split("#")[0], "#" + inheritancePairs.get(i).split("#")[1]);
-			if (inheritancePairs.get(i).contains("$"))
-				ark.addPair(inheritancePairs.get(i).split("\\$")[0], "$" + inheritancePairs.get(i).split("\\$")[1]);
-		}
+//
+//		ArrayList<String> inheritancePairs = new ArrayList<String>();
+//
+//		for (String type : associationTypes) {
+//			inheritancePairs.addAll(getAssociation(pkg, className, type, ark));
+//		}
+//		for (int i = 0; i < inheritancePairs.size(); i++) {
+//			if (inheritancePairs.get(i).contains("!"))
+//				ark.addPair(inheritancePairs.get(i).split("!")[0], "!" + inheritancePairs.get(i).split("!")[1]);
+//			if (inheritancePairs.get(i).contains("@"))
+//				ark.addPair(inheritancePairs.get(i).split("@")[0], "@" + inheritancePairs.get(i).split("@")[1]);
+//			if (inheritancePairs.get(i).contains("#"))
+//				ark.addPair(inheritancePairs.get(i).split("#")[0], "#" + inheritancePairs.get(i).split("#")[1]);
+//			if (inheritancePairs.get(i).contains("$"))
+//				ark.addPair(inheritancePairs.get(i).split("\\$")[0], "$" + inheritancePairs.get(i).split("\\$")[1]);
+//		}
 
 	}
 	
 	public static void getArrows(NoahsArk ark) throws IOException{
-//		System.out.println("----------------- " + ark.seenClass.size());
-//		for(String key : ark.seenClass.keySet()){
-//			ArrayList<String> inheritancePairs = new ArrayList<String>();
-//			for (String type : associationTypes) {
+		System.out.println("----------------- " + ark.seenClass.size());
+		for(String key : ark.seenClass.keySet()){
+			ArrayList<String> inheritancePairs = new ArrayList<String>();
+			for (String type : associationTypes) {
 //				System.out.println("key " + key + " value " + ark.seenClass.get(key));
-//				inheritancePairs.addAll(getAssociation(ark.seenClass.get(key), key, type, ark));
-//			}
-//			for (int i = 0; i < inheritancePairs.size(); i++) {
-//				if (inheritancePairs.get(i).contains("!"))
-//					ark.addPair(inheritancePairs.get(i).split("!")[0], "!" + inheritancePairs.get(i).split("!")[1]);
-//				if (inheritancePairs.get(i).contains("@"))
-//					ark.addPair(inheritancePairs.get(i).split("@")[0], "@" + inheritancePairs.get(i).split("@")[1]);
-//				if (inheritancePairs.get(i).contains("#"))
-//					ark.addPair(inheritancePairs.get(i).split("#")[0], "#" + inheritancePairs.get(i).split("#")[1]);
-//				if (inheritancePairs.get(i).contains("$"))
-//					ark.addPair(inheritancePairs.get(i).split("\\$")[0], "$" + inheritancePairs.get(i).split("\\$")[1]);
-//			}
-//		}
+				inheritancePairs.addAll(getAssociation(ark.seenClass.get(key), key, type, ark));
+			}
+			for (int i = 0; i < inheritancePairs.size(); i++) {
+				if (inheritancePairs.get(i).contains("!"))
+					ark.addPair(inheritancePairs.get(i).split("!")[0], "!" + inheritancePairs.get(i).split("!")[1]);
+				if (inheritancePairs.get(i).contains("@"))
+					ark.addPair(inheritancePairs.get(i).split("@")[0], "@" + inheritancePairs.get(i).split("@")[1]);
+				if (inheritancePairs.get(i).contains("#"))
+					ark.addPair(inheritancePairs.get(i).split("#")[0], "#" + inheritancePairs.get(i).split("#")[1]);
+				if (inheritancePairs.get(i).contains("$"))
+					ark.addPair(inheritancePairs.get(i).split("\\$")[0], "$" + inheritancePairs.get(i).split("\\$")[1]);
+			}
+		}
 	}
 
 	public static StringBuffer generateDotUML(String pkg, StringBuffer buf, NoahsArk ark) throws IOException {
@@ -265,7 +256,11 @@ public class FirstASM {
 
 			result += new ColorDecorator(new TypeDetector(cName, ark)).getColor();
 			result += new ColorDecorator(new TypeDetector(cName, ark)).getFillColor();
-			result = c.prepareUML() + new NameDecorator(new TypeDetector(cName, ark)).getType() + "|" + result;
+			result = c.prepareUML() + new NameDecorator(new TypeDetector(cName, ark)).getType().toString().replace("]", "")
+																										.replace(",","")
+																										.replace("[","" )
+					
+					+ "|" + result;
 			result += classEndString2;
 			buf.append(result);
 		}
@@ -492,19 +487,29 @@ public class FirstASM {
 			return result;
 		// extends
 		if (pair.contains("!"))
-			result = pair.split("!")[0] + " -> " + pair.split("!")[1] + " [arrowhead = onormal]";
+			result = pair.split("!")[0] + " -> " + pair.split("!")[1] + " [arrowhead = onormal";
 		// implements
 		if (pair.contains("@"))
-			result = pair.split("@")[0] + " -> " + pair.split("@")[1] + "[arrowhead = onormal,style = dotted]";
+			result = pair.split("@")[0] + " -> " + pair.split("@")[1] + "[arrowhead = onormal,style = dotted";
 		// Uses
 		if (pair.contains("#"))
-			result = pair.split("#")[0] + " -> " + pair.split("#")[1] + "[arrowhead = vee, style = dotted]";
+			result = pair.split("#")[0] + " -> " + pair.split("#")[1] + "[arrowhead = vee, style = dotted";
 		// Association
 		if (pair.contains("$")){
-			result = pair.split("\\$")[0] + " -> " + pair.split("\\$")[1] + "[arrowhead = vee" + ark.getBoat().get(pair.split("\\$")[0]).arrowDesc + "]";
+			result = pair.split("\\$")[0] + " -> " + pair.split("\\$")[1] + "[arrowhead = vee" ;//+ ark.getBoat().get(pair.split("\\$")[0]).arrowDesc;
 			
 		}
-		result = result + "\n";
+		
+		if(pair.contains(";")){
+			result += ",label=\"\\<\\<Adapts\\>\\>\"";
+			result = result.replace(";", " ");
+		}
+		if(pair.contains("+")){
+			result += ",label=\"\\<\\<Decorates\\>\\>\"";
+			result = result.replace("+", " ");
+		}
+		
+		result += "]\n";
 		return result;
 
 	}
@@ -555,5 +560,6 @@ public class FirstASM {
 			e.printStackTrace();
 			System.out.println("Could not visualize!");
 		}
+		System.out.println("done");
 	}
 }

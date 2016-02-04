@@ -9,8 +9,11 @@ import edu.roshulman.csse374.editor.TextEditor;
 
 public class TextEditorApp {
 	public static void main(String[] args) throws Exception {
-		InputStream in = new FileInputStream("./input_output/in.txt");
-		OutputStream out = new FileOutputStream("./input_output/out.txt");
+		SubstitutionCipher cipher = new SubstitutionCipher();
+		InputStream fIn = new FileInputStream("./input_output/out.txt");
+		OutputStream fOut = new FileOutputStream("./input_output/out1.txt");		
+		InputStream in = new DecryptionInputStream(fIn, cipher);
+		OutputStream out = new EncryptionOutputStream(fOut, cipher);
 		
 		TextEditor editor = new TextEditor(in, out);
 		editor.execute();

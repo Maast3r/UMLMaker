@@ -12,21 +12,27 @@ edge [
 	fontname = "Bitstream Vera Sans"
 	fontsize = 16
 ]
-IEncryption [ 
+FilterInputStream [ 
 center=true
-    label="{IEncryption| | +encrypt(ch): char\l}"color = black
-style = filled 
- fillcolor = white
-]
-Decrypt [ 
-center=true
-    label="{Decrypt\n\<\<decorator\>\>|+in: InputStream \l-count: int \l | +read(): int\l+\<init\>(InputStre): void\l}"color = null
+    label="{FilterInputStream\n\<\<decorator\>\>|#in: InputStream \l | +read(byte[],int,i): int\l+markSupported(): boolean\l+available(): int\l+reset(): void\l+skip(lo): long\l#\<init\>(InputStre): void\l+close(): void\l+mark(i): void\l}"color = null
 style = filled 
  fillcolor = chartreuse2
 ]
+IEncryption [ 
+center=true
+    label="{IEncryption| | +abstract encrypt(ch): char\l}"color = black
+style = filled 
+ fillcolor = white
+]
 InputStream [ 
 center=true
-    label="{InputStream\n\<\component\>\>|-static skipBuffer: byte[] \l-static SKIP_BUFFER_SIZE: int \l | +read(byte[],int,i): int\l+markSupported(): boolean\l+available(): int\l+reset(): void\l+skip(lo): long\l+\<init\>(): void\l+close(): void\l+mark(i): void\l}"color = null
+    label="{InputStream\n\<\component\>\>|-static MAX_SKIP_BUFFER_SIZE: int \l | +read(byte[],int,i): int\l+markSupported(): boolean\l+available(): int\l+reset(): void\l+skip(lo): long\l+\<init\>(): void\l+close(): void\l+mark(i): void\l}"color = null
+style = filled 
+ fillcolor = chartreuse2
+]
+EncryptionOutputStream [ 
+center=true
+    label="{EncryptionOutputStream\n\<\<decorator\>\>|-encryptor: IEncryption \l | +\<init\>(OutputStream,IEncrypti): void\l+write(i): void\l}"color = null
 style = filled 
  fillcolor = chartreuse2
 ]
@@ -38,13 +44,7 @@ style = filled
 ]
 Closeable [ 
 center=true
-    label="{Closeable| | +close(): void\l}"color = black
-style = filled 
- fillcolor = white
-]
-AutoCloseable [ 
-center=true
-    label="{AutoCloseable| | +close(): void\l}"color = black
+    label="{Closeable| | +abstract close(): void\l}"color = black
 style = filled 
  fillcolor = white
 ]
@@ -54,29 +54,29 @@ center=true
 style = filled 
  fillcolor = white
 ]
+DecryptionInputStream [ 
+center=true
+    label="{DecryptionInputStream\n\<\<decorator\>\>|-decryptor: IDecryption \l | +read(byte[],int,i): int\l+\<init\>(InputStream,IDecrypti): void\l}"color = null
+style = filled 
+ fillcolor = chartreuse2
+]
 IDecryption [ 
 center=true
-    label="{IDecryption| | +decrypt(ch): char\l}"color = black
+    label="{IDecryption| | +abstract decrypt(ch): char\l}"color = black
 style = filled 
  fillcolor = white
 ]
-Object [ 
+FilterOutputStream [ 
 center=true
-    label="{Object| | +getClass(): Class\l+wait(): void\l+hashCode(): int\l+equals(Obje): boolean\l+notifyAll(): void\l#clone(): Object\l-static registerNatives(): void\l+toString(): String\l#finalize(): void\l+\<init\>(): void\l+notify(): void\lstatic \<clinit\>(): void\l}"color = black
+    label="{FilterOutputStream\n\<\<decorator\>\>|#out: OutputStream \l | +flush(): void\l+\<init\>(OutputStre): void\l+write(byte[],int,i): void\l+close(): void\l}"color = null
 style = filled 
- fillcolor = white
+ fillcolor = chartreuse2
 ]
 Flushable [ 
 center=true
-    label="{Flushable| | +flush(): void\l}"color = black
+    label="{Flushable| | +abstract flush(): void\l}"color = black
 style = filled 
  fillcolor = white
-]
-Encrypt [ 
-center=true
-    label="{Encrypt\n\<\<decorator\>\>|+out: OutputStream \l | +\<init\>(OutputStre): void\l+write(i): void\l}"color = null
-style = filled 
- fillcolor = chartreuse2
 ]
 TextEditorApp [ 
 center=true
@@ -84,25 +84,29 @@ center=true
 style = filled 
  fillcolor = white
 ]
-Decrypt -> InputStream[arrowhead = vee, style = dotted]
-Decrypt -> InputStream[arrowhead = vee,label="\<\<Decorates\>\>"]
-Decrypt -> SubstitutionCipher[arrowhead = vee, style = dotted]
-Decrypt -> InputStream [arrowhead = onormal]
+FilterInputStream -> InputStream[arrowhead = vee, style = dotted]
+FilterInputStream -> InputStream[arrowhead = vee,label="\<\<Decorates\>\>"]
+FilterInputStream -> InputStream [arrowhead = onormal]
+FilterInputStream -> FilterInputStream[arrowhead = vee, style = dotted]
 InputStream -> Closeable[arrowhead = onormal,style = dotted]
 InputStream -> InputStream[arrowhead = vee, style = dotted]
-InputStream -> Object [arrowhead = onormal]
-InputStream -> Object[arrowhead = vee, style = dotted]
+EncryptionOutputStream -> IEncryption[arrowhead = vee, style = dotted]
+EncryptionOutputStream -> FilterOutputStream [arrowhead = onormal]
+EncryptionOutputStream -> IEncryption[arrowhead = veenull]
+EncryptionOutputStream -> FilterOutputStream[arrowhead = vee, style = dotted]
+OutputStream -> Closeable[arrowhead = onormal,style = dotted]
+OutputStream -> Flushable[arrowhead = onormal,style = dotted]
 OutputStream -> OutputStream[arrowhead = vee, style = dotted]
-Closeable -> Object [arrowhead = onormal]
 SubstitutionCipher -> IDecryption[arrowhead = onormal,style = dotted]
 SubstitutionCipher -> IEncryption[arrowhead = onormal,style = dotted]
-Object -> Object[arrowhead = vee, style = dotted]
-IDecryption -> Object [arrowhead = onormal]
-Flushable -> Object [arrowhead = onormal]
-Encrypt -> OutputStream[arrowhead = vee, style = dotted]
-Encrypt -> OutputStream[arrowhead = vee,label="\<\<Decorates\>\>"]
-Encrypt -> SubstitutionCipher[arrowhead = vee, style = dotted]
-Encrypt -> OutputStream [arrowhead = onormal]
+DecryptionInputStream -> IDecryption[arrowhead = vee, style = dotted]
+DecryptionInputStream -> IDecryption[arrowhead = veenull]
+DecryptionInputStream -> FilterInputStream[arrowhead = vee, style = dotted]
+DecryptionInputStream -> FilterInputStream [arrowhead = onormal]
+FilterOutputStream -> OutputStream[arrowhead = vee, style = dotted]
+FilterOutputStream -> OutputStream[arrowhead = vee,label="\<\<Decorates\>\>"]
+FilterOutputStream -> OutputStream [arrowhead = onormal]
+FilterOutputStream -> FilterOutputStream[arrowhead = vee, style = dotted]
 
 
 }

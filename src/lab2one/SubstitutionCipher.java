@@ -18,8 +18,8 @@ public class SubstitutionCipher implements IEncryption, IDecryption {
 		}
 
 		for(int i = 97; i < 123; ++i) {
-			encryptionKey[i] = (char)(97 + 123 - i);
-			decryptionKey[97 + 123 - i] = (char)i;
+			encryptionKey[i] = (char)(97 + 122 - i);
+			decryptionKey[97 + 122 - i] = (char)i;
 		}
 	}
 

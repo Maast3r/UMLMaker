@@ -1,5 +1,6 @@
 package src;
 
+import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
 public class ClassDeclarationVisitor extends ClassVisitorBuffered {
 	public NoahsArk ark;
@@ -45,9 +46,11 @@ public class ClassDeclarationVisitor extends ClassVisitorBuffered {
 					pkg += pkgSplit[i] + ".";
 				}
 				superName = pkgSplit[pkgSplit.length-1];
-				if(!this.ark.seenClass.containsKey(superName)){
-					this.ark.getNewList().put(superName, pkg);
-					this.ark.seenClass.put(superName, pkg);
+				if(!this.ark.seenClass.containsKey(superName) && this.ark.seenClass.size() < this.ark.umlNodes){
+					if(!pkg.equals("java.lang.")){
+						this.ark.getNewList().put(superName, pkg);
+						this.ark.seenClass.put(superName, pkg);
+					}
 				}
 			}
 		}
@@ -63,15 +66,20 @@ public class ClassDeclarationVisitor extends ClassVisitorBuffered {
 						pkg += interfSplit[i] + ".";
 					}
 					iface = interfSplit[interfSplit.length - 1];
-					if(!this.ark.seenClass.containsKey(iface)){
-						this.ark.getNewList().put(iface, pkg);
-						this.ark.seenClass.put(iface, pkg);
+					if(!this.ark.seenClass.containsKey(iface) && this.ark.seenClass.size() < this.ark.umlNodes){
+						if(!pkg.equals("java.lang.")) {
+							this.ark.getNewList().put(iface, pkg);
+							this.ark.seenClass.put(iface, pkg);
+						}
 					}
 				}
 			}
 		}
 		this.ark.seenClass.put(realname, classPkg);
 		this.ark.addClass(realname, new ClassPrototype(realname, superName, interfaces));
+		this.ark.getBoat().get(realname).isAbstract = (access & Opcodes.ACC_ABSTRACT) != 0;
+		this.ark.getBoat().get(realname).pkg = classPkg;
+		this.ark.getBoat().get(realname).isInterface = (access & Opcodes.ACC_INTERFACE) != 0;
 		super.visit(version, access, name, signature, superName, interfaces);
 	}
 	

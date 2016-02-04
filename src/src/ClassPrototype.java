@@ -1,6 +1,6 @@
 package src;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class ClassPrototype {
 	public String name;
@@ -9,7 +9,10 @@ public class ClassPrototype {
 	public String superName;
 	public String interfaces[];
 	public String arrowDesc;
-	public String type = "";
+	public HashSet<String> type = new HashSet<String>();
+	public boolean isAbstract = false;
+	public boolean isInterface = false;
+	public String pkg = "";
 	
 	public ClassPrototype(String name){
 		this.name = name;

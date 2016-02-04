@@ -26,21 +26,15 @@ style = filled
 ]
 Enumeration [ 
 center=true
-    label="{Enumeration\n\<\<target\>\>| | +hasMoreElements(): boolean\l+nextElement(): Object\l}"color = null
+    label="{Enumeration\n\<\<target\>\>| | +abstract hasMoreElements(): boolean\l+abstract nextElement(): Object\l}"color = null
 style = filled 
  fillcolor = firebrick
 ]
 Iterator [ 
 center=true
-    label="{Iterator\n\<\<adaptee\>\>| | +next(): Object\l+hasNext(): boolean\l+remove(): void\l}"color = null
+    label="{Iterator\n\<\<adaptee\>\>| | +abstract next(): Object\l+abstract hasNext(): boolean\l+abstract remove(): void\l}"color = null
 style = filled 
  fillcolor = firebrick
-]
-Object [ 
-center=true
-    label="{Object| | +getClass(): Class\l+wait(): void\l+hashCode(): int\l+equals(Obje): boolean\l+notifyAll(): void\l#clone(): Object\l-static registerNatives(): void\l+toString(): String\l#finalize(): void\l+\<init\>(): void\l+notify(): void\lstatic \<clinit\>(): void\l}"color = black
-style = filled 
- fillcolor = white
 ]
 IteratorToEnumerationAdapter [ 
 center=true
@@ -51,7 +45,7 @@ style = filled
 App -> LinearTransformer[arrowhead = vee, style = dotted]
 App -> IteratorToEnumerationAdapter[arrowhead = vee, style = dotted]
 LinearTransformer -> Enumeration[arrowhead = vee, style = dotted]
-Object -> Object[arrowhead = vee, style = dotted]
+LinearTransformer -> Enumeration[arrowhead = veenull]
 IteratorToEnumerationAdapter -> Iterator[arrowhead = vee, style = dotted]
 IteratorToEnumerationAdapter -> Iterator[arrowhead = vee,label="\<\<Adapts\>\>"]
 IteratorToEnumerationAdapter -> Enumeration[arrowhead = onormal,style = dotted]

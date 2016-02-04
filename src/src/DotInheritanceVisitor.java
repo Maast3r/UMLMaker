@@ -46,10 +46,10 @@ public class DotInheritanceVisitor extends ClassVisitorBuffered {
 				int len = extendName.split("/").length;
 				extendName = extendName.split("/")[len - 1];
 			}
-			System.out.println(name + " Should extend " + extendName);
+//			System.out.println(name + " Should extend " + extendName);
 //			if (ark.seenClass.get(extendName) != null) {
 				super.ark.addPair(name,"!" + extendName);
-				System.out.println(super.ark.pairs.keySet());
+//				System.out.println(super.ark.pairs.keySet());
 //			}
 		}
 		

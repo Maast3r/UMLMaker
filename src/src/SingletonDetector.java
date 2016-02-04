@@ -1,5 +1,6 @@
 package src;
 
+import java.util.HashSet;
 import java.util.Iterator;
 
 public class SingletonDetector extends AbstractDetector{
@@ -11,7 +12,7 @@ public class SingletonDetector extends AbstractDetector{
 	}
 
 	@Override
-	public String getType(String cName) {
+	public HashSet<String> getType(String cName) {
 		boolean flag[] = { false, false };
 		ClassPrototype c = this.ark.getBoat().get(cName);
 		String className = c.getName();
@@ -33,7 +34,8 @@ public class SingletonDetector extends AbstractDetector{
 				flag[1] = true;
 				
 			}	
-		if(flag[0] && flag[1]) return "singleton";
-		return "";
+		
+		if(flag[0] && flag[1]) c.type.add("singleton");
+		return c.type;
 	}
 }

@@ -1,5 +1,7 @@
 package src;
 
+import java.util.HashSet;
+
 public abstract class AbstractDetector {
 	public NoahsArk ark;
 	
@@ -7,5 +9,5 @@ public abstract class AbstractDetector {
 		this.ark = ark;
 	}
 	
-	public abstract String getType(String cName);
+	public abstract HashSet<String> getType(String cName);
 }

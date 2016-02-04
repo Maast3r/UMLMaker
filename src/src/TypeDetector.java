@@ -1,6 +1,7 @@
 package src;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class TypeDetector {
 	public String cName;
@@ -15,12 +16,14 @@ public class TypeDetector {
 		this.detectors.add(new AdapterDetector(this.ark));
 	}
 	
-	public String getType(){
+	public HashSet<String> getType(){
+		HashSet<String> result = new HashSet<String>();
 		for(AbstractDetector ad : this.detectors){
-			if(!ad.getType(this.cName).equals("")) {
-				return ad.getType(this.cName);
-			}
+//			if(!ad.getType(this.cName).equals("")) {
+				result.addAll(ad.getType(this.cName));
+//			}
 		}
-		return "";
+//		System.out.println(result);
+		return result;
 	}
 }

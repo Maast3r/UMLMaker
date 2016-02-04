@@ -1,6 +1,7 @@
 package src;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class TypeDecorator extends TypeDetector{
 	private HashMap<String, String> typeToColor = new HashMap<String, String>();
@@ -32,14 +33,25 @@ public class TypeDecorator extends TypeDetector{
 	}
 	
 	public String getColor(){
-		return "color = " + this.typeToColor.get(this.typeDetector.getType()) + "\n";
+		if(this.typeDetector.getType().contains("singleton")){
+			return "style = filled \n color = " + this.typeToColor.get("singleton") + "\n";
+		}
+		return "color = black\n";
 	}
 	
 	public String getFillColor(){
-		return "style = filled \n fillcolor = " + this.typeToFill.get(this.typeDetector.getType()) + "\n";
+		if(this.typeDetector.getType().size() > 0){
+			return "style = filled \n fillcolor = " + this.typeToFill.get(this.typeDetector.getType().toArray()[0]) + "\n";
+		}
+		return "style = filled \n fillcolor = white\n";
 	}
 	
-	public String getType(){
-		return this.typeToName.get(this.typeDetector.getType());
+	public HashSet<String> getType(){
+		HashSet<String> result = new HashSet<String>();
+		for(String s : this.typeDetector.getType()){
+			result.add(this.typeToName.get(s));
+			
+		}
+		return result;
 	}
 }

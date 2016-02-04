@@ -30,7 +30,7 @@ public class ClassFieldVisitor extends ClassVisitorBuffered {
 				String typeClass = type;
 				if(type.contains("[")) typeClass = typeClass.replace("[", "");
 				if(type.contains("]")) typeClass = typeClass.replace("]", "");
-				if(!this.ark.seenClass.containsKey(typeClass)){
+				if(!this.ark.seenClass.containsKey(typeClass) && this.ark.seenClass.size() < this.ark.umlNodes){
 					if(!typeClass.contains("$")){
 						if(!pkg.equals("java.lang.")){
 							this.ark.getNewList().put(typeClass, pkg);
