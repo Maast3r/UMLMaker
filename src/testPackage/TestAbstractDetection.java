@@ -34,7 +34,7 @@ public class TestAbstractDetection {
 	
 	@Test
 	public void testDetection() {
-		Assert.assertTrue(this.dotCode.contains("IteratorToEnumerationAdapter -> Iterator[arrowhead = vee,label=\"\\<\\<Adapts\\>\\>\"]"));
+		Assert.assertTrue(this.dotCode.contains("IteratorToEnumerationAdapter -> Iterator [arrowhead = vee,label=\"\\<\\<Adapts\\>\\>"));
 	}
 
 }
