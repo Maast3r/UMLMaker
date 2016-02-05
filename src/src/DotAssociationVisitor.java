@@ -30,9 +30,13 @@ public class DotAssociationVisitor extends ClassVisitorBuffered {
 		}
 		String symbol= getAccessModifier(access);
 		String sig = "";
-		if(Type.getType(signature).getClassName().contains(".")){
-			String sign[] = Type.getType(signature).getClassName().split("\\.");
-			sig = sign[sign.length-1];
+		if(signature != null && !signature.equals("")){
+			
+			
+			if(Type.getType(signature).getClassName().contains(".")){
+				String sign[] = Type.getType(signature).getClassName().split("\\.");
+				sig = sign[sign.length-1];
+			}
 		}
 		
 		// need to return inside type

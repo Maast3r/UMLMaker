@@ -23,9 +23,18 @@ public class ClassFieldVisitor extends ClassVisitorBuffered {
 		String type = Type.getType(desc).getClassName();
 		String pkg = "";
 		String sig = "";
-		if(Type.getType(signature).getClassName().contains(".")){
-			String sign[] = Type.getType(signature).getClassName().split("\\.");
-			sig = sign[sign.length-1];
+		String temp = "";
+		
+		if(signature != null && !signature.equals("")){
+//			System.out.println(signature.toString());
+			// find if it is a type of list, and store it
+			if(Type.getType(signature).getClassName().contains("<")){
+				temp = Type.getType(signature).getClassName().split("<")[0];
+			}
+			if(Type.getType(signature).getClassName().contains(".")){
+				String sign[] = Type.getType(signature).getClassName().split("\\.");
+				sig = sign[sign.length-1];
+			}
 		}
 		if(type.contains(".")){
 			String[] temparray = type.split("\\.");
@@ -49,7 +58,8 @@ public class ClassFieldVisitor extends ClassVisitorBuffered {
 		}
 		String symbol= getAccessModifier(access);
 		
-		this.ark.getBoat().get(this.className).addField(name, new FieldPrototype(symbol, name, type, sig));
+		this.ark.getBoat().get(this.className).addField(name, new FieldPrototype(symbol, name, type, sig, temp));
+		
 		return toDecorate;
 	}
 }

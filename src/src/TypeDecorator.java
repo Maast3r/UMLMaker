@@ -1,5 +1,6 @@
 package src;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -19,9 +20,9 @@ public class TypeDecorator extends TypeDetector{
 		this.typeToFill.put("singleton", "white");
 		this.typeToFill.put("decorator", "chartreuse2");
 		this.typeToFill.put("component", "chartreuse2");
-		this.typeToFill.put("adapter", "firebrick");
-		this.typeToFill.put("adaptee", "firebrick");
-		this.typeToFill.put("target", "firebrick");
+		this.typeToFill.put("adapter", "firebrick1");
+		this.typeToFill.put("adaptee", "firebrick1");
+		this.typeToFill.put("target", "firebrick1");
 		this.typeToFill.put("composite component", "yellow");
 		this.typeToFill.put("composite", "yellow");
 		this.typeToFill.put("leaf", "yellow");
@@ -29,7 +30,7 @@ public class TypeDecorator extends TypeDetector{
 		this.typeToName.put("", "");
 		this.typeToName.put("singleton", "\\n\\<\\<Singleton\\>\\>");
 		this.typeToName.put("decorator", "\\n\\<\\<decorator\\>\\>");
-		this.typeToName.put("component", "\\n\\<\\component\\>\\>");
+		this.typeToName.put("component", "\\n\\<\\<decorator component\\>\\>");
 		this.typeToName.put("adapter", "\\n\\<\\<adapter\\>\\>");
 		this.typeToName.put("adaptee", "\\n\\<\\<adaptee\\>\\>");
 		this.typeToName.put("target", "\\n\\<\\<target\\>\\>");
@@ -47,20 +48,42 @@ public class TypeDecorator extends TypeDetector{
 	
 	public String getFillColor(){
 		if(this.typeDetector.getType().size() > 0){
-			return "style = filled \n fillcolor = " + this.typeToFill.get(this.typeDetector.getType().toArray()[0]) + "\n";
+			HashSet<String> colors = new HashSet<String>();
+			for(String color : this.typeDetector.getType()){
+				colors.add(this.typeToFill.get(color));
+			}
+			String totalColor = "";
+			if(colors.contains("yellow")){
+				totalColor = "yellow";
+				if(colors.contains("firebrick1")){
+					if(colors.contains("chartreuse2")){
+						totalColor = "darkgoldenrod";
+					} else{
+						totalColor = "orange";
+					}
+				}
+			} else{
+				if(colors.contains("firebrick1")){
+					totalColor = "firebrick1";
+					if(colors.contains("chartreuse2")){
+						totalColor = "yellow3";
+					}
+				}else {
+					totalColor = "chartreuse2";
+				}
+			}
+			return "style = filled \n fillcolor = " + totalColor + "\n";
 		}
 		return "style = filled \n fillcolor = white\n";
 	}
 	
 	public HashSet<String> getType(){
 		HashSet<String> result = new HashSet<String>();
-//		System.out.println("asdlfja;lsdfjk " + this.typeDetector.getType());
 		for(String s : this.typeDetector.getType()){
-//			System.out.println("get type " + s);
-			if(s.equals("composite component")) System.out.println("wtf?!?!?!!??!?!?!?!?!?!?!?!?!?");
 			result.add(this.typeToName.get(s));
 			
 		}
 		return result;
 	}
+	
 }

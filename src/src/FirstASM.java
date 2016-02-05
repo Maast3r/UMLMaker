@@ -19,10 +19,11 @@ import org.objectweb.asm.Opcodes;
 public class FirstASM {
 	private static String font = "\tfontname = \"Bitstream Vera Sans\"\n" + "\tfontsize = 16\n";
 	private static String[] associationTypes = { "Inheritance", "Association", "Uses" };
-
+	// uml java.awt Container, uml javax.swing JFrame
 	private static String methodSeparatorString = " | ";
 	private static String classEndString1 = "}\"";
 	private static String classEndString2 = "]\n";
+	private static String container = "uml java.awt Container";
 	private static String ourPK = "uml C:\\Users\\Maast3r\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
 	private static String ourPKG = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
 	private static String single = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\singletons";
@@ -41,8 +42,8 @@ public class FirstASM {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String line = "";
 		System.out.print("UMLMaker>");
-//		line = in.readLine();
-		line  = comp;
+		line = in.readLine();
+//		line  = container;
 		if (line == null || line.length() == 0 || !line.contains(" "))
 			throw new IOException("FORMAT ERROR: Empty command is not supported!");
 		String command = line.split(" ")[0];
@@ -62,7 +63,8 @@ public class FirstASM {
 
 		if (command.equals("uml")) {
 			if(pkg.contains(".")){
-				if(pkg.split("\\.")[0].equals("java") || pkg.split("\\.")[0].equals("org")){
+				String test = pkg.split("\\.")[0];
+				if(test.equals("java") || test.equals("org") || test.equals("javax")){
 					inputClass = line.split(" ")[2];
 					listOfClasses = new HashMap<String, String>();
 					listOfClasses.put(inputClass, pkg);
@@ -114,7 +116,10 @@ public class FirstASM {
 		if(path.contains(".")) path = path.replace(".", "t");
 		path = path + ".dot";
 		FileOutputStream output = new FileOutputStream(path);
-		output.write(buf.toString().getBytes());
+		String bufCleaner = buf.toString();
+		bufCleaner = bufCleaner.replace("$", "").replace("@", "");
+//		output.write(buf.toString().getBytes());
+		output.write(bufCleaner.getBytes());
 		output.close();
 
 		System.out.println("trying to run program");
@@ -394,7 +399,6 @@ public class FirstASM {
 		}
 
 		for (String s : lines) {
-			System.out.println("Checking for association: " + s);
 			if (s.contains("/")) {
 				int len = s.split("/").length;
 				s = s.split("/")[len - 1];

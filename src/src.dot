@@ -20,13 +20,13 @@ style = filled
 ]
 HashMap [ 
 center=true
-    label="{HashMap\n\<\<adaptee\>\>|static UNTREEIFY_THRESHOLD: int \lstatic TREEIFY_THRESHOLD: int \lentrySet: Set \lstatic DEFAULT_LOAD_FACTOR: float \lthreshold: int \lstatic DEFAULT_INITIAL_CAPACITY: int \lmodCount: int \l-static serialVersionUID: long \lsize: int \lloadFactor: float \lstatic MAXIMUM_CAPACITY: int \lstatic MIN_TREEIFY_CAPACITY: int \ltable: HashMap$Node[] \l | reinitialize(): void\linternalWriteEntries(ObjectOutputStre): void\l+getOrDefault(Object,Obje): Object\lnewTreeNode(int,Object,Object,HashMap$No): HashMap$TreeNode\l+values(): Collection\l+computeIfAbsent(Object,Functi): Object\l+replace(Object,Obje): Object\lputMapEntries(Map,boole): void\l+replaceAll(BiFuncti): void\l+put(Object,Obje): Object\l+remove(Object,Obje): boolean\l+containsValue(Obje): boolean\lcapacity(): int\lreplacementNode(HashMap$Node,HashMap$No): HashMap$Node\l+compute(Object,BiFuncti): Object\l+get(Obje): Object\lputVal(int,Object,Object,boolean,boole): Object\l+putAll(M): void\l+merge(Object,Object,BiFuncti): Object\l+keySet(): Set\lremoveNode(int,Object,Object,boolean,boole): HashMap$Node\l+entrySet(): Set\l+containsKey(Obje): boolean\ltreeifyBin(HashMap$Node[],i): void\l+forEach(BiConsum): void\l-writeObject(ObjectOutputStre): void\l+isEmpty(): boolean\l+clear(): void\lstatic tableSizeFor(i): int\l+\<init\>(M): void\lafterNodeRemoval(HashMap$No): void\lstatic comparableClassFor(Obje): Class\l-readObject(ObjectInputStre): void\lafterNodeAccess(HashMap$No): void\lstatic compareComparables(Class,Object,Obje): int\l+computeIfPresent(Object,BiFuncti): Object\l+size(): int\lloadFactor(): float\l+clone(): Object\lresize(): HashMap$Node[]\lnewNode(int,Object,Object,HashMap$No): HashMap$Node\lreplacementTreeNode(HashMap$Node,HashMap$No): HashMap$TreeNode\lgetNode(int,Obje): HashMap$Node\l+putIfAbsent(Object,Obje): Object\lafterNodeInsertion(boole): void\lstatic hash(Obje): int\l}"color = black
+    label="{HashMap\n\<\<adaptee\>\>|static UNTREEIFY_THRESHOLD: int \lstatic TREEIFY_THRESHOLD: int \lentrySet: Set \lstatic DEFAULT_LOAD_FACTOR: float \lthreshold: int \lstatic DEFAULT_INITIAL_CAPACITY: int \lmodCount: int \l-static serialVersionUID: long \lsize: int \lloadFactor: float \lstatic MAXIMUM_CAPACITY: int \lstatic MIN_TREEIFY_CAPACITY: int \ltable: HashMapNode[] \l | reinitialize(): void\linternalWriteEntries(ObjectOutputStre): void\l+getOrDefault(Object,Obje): Object\lnewTreeNode(int,Object,Object,HashMapNo): HashMapTreeNode\l+values(): Collection\l+computeIfAbsent(Object,Functi): Object\l+replace(Object,Obje): Object\lputMapEntries(Map,boole): void\l+replaceAll(BiFuncti): void\l+put(Object,Obje): Object\l+remove(Object,Obje): boolean\l+containsValue(Obje): boolean\lcapacity(): int\lreplacementNode(HashMapNode,HashMapNo): HashMapNode\l+compute(Object,BiFuncti): Object\l+get(Obje): Object\lputVal(int,Object,Object,boolean,boole): Object\l+putAll(M): void\l+merge(Object,Object,BiFuncti): Object\l+keySet(): Set\lremoveNode(int,Object,Object,boolean,boole): HashMapNode\l+entrySet(): Set\l+containsKey(Obje): boolean\ltreeifyBin(HashMapNode[],i): void\l+forEach(BiConsum): void\l-writeObject(ObjectOutputStre): void\l+isEmpty(): boolean\l+clear(): void\lstatic tableSizeFor(i): int\l+\<init\>(M): void\lafterNodeRemoval(HashMapNo): void\lstatic comparableClassFor(Obje): Class\l-readObject(ObjectInputStre): void\lafterNodeAccess(HashMapNo): void\lstatic compareComparables(Class,Object,Obje): int\l+computeIfPresent(Object,BiFuncti): Object\l+size(): int\lloadFactor(): float\l+clone(): Object\lresize(): HashMapNode[]\lnewNode(int,Object,Object,HashMapNo): HashMapNode\lreplacementTreeNode(HashMapNode,HashMapNo): HashMapTreeNode\lgetNode(int,Obje): HashMapNode\l+putIfAbsent(Object,Obje): Object\lafterNodeInsertion(boole): void\lstatic hash(Obje): int\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = firebrick1
 ]
 ArrayList [ 
 center=true
-    label="{ArrayList|-static serialVersionUID: long \l-static MAX_ARRAY_SIZE: int \l-size: int \lelementData: Object[] \l-static EMPTY_ELEMENTDATA: Object[] \l-static DEFAULTCAPACITY_EMPTY_ELEMENTDATA: Object[] \l-static DEFAULT_CAPACITY: int \l | -static hugeCapacity(i): int\l-outOfBoundsMsg(i): String\l+replaceAll(UnaryOperat): void\l+remove(Obje): boolean\l+removeAll(Collecti): boolean\l+iterator(): Iterator\l+get(i): Object\l+toArray(Object): Object[]\l#removeRange(int,i): void\l-fastRemove(i): void\l+indexOf(Obje): int\l+add(int,Obje): void\l+subList(int,i): List\l+trimToSize(): void\l-grow(i): void\l+set(int,Obje): Object\lstatic subListRangeCheck(int,int,i): void\lelementData(i): Object\l+spliterator(): Spliterator\l-writeObject(ObjectOutputStre): void\l+forEach(Consum): void\lstatic access$100(ArrayLi): int\l+isEmpty(): boolean\l+clear(): void\l+sort(Comparat): void\l+\<init\>(Collecti): void\l-ensureExplicitCapacity(i): void\l-readObject(ObjectInputStre): void\l+removeIf(Predica): boolean\l-batchRemove(Collection,boole): boolean\l+lastIndexOf(Obje): int\l+contains(Obje): boolean\l-ensureCapacityInternal(i): void\l+size(): int\l-rangeCheck(i): void\l+addAll(int,Collecti): boolean\l-rangeCheckForAdd(i): void\l+clone(): Object\l+listIterator(): ListIterator\l+ensureCapacity(i): void\l+retainAll(Collecti): boolean\lstatic \<clinit\>(): void\l}"color = black
+    label="{ArrayList|-static serialVersionUID: long \l-static MAX_ARRAY_SIZE: int \l-size: int \lelementData: Object[] \l-static EMPTY_ELEMENTDATA: Object[] \l-static DEFAULTCAPACITY_EMPTY_ELEMENTDATA: Object[] \l-static DEFAULT_CAPACITY: int \l | -static hugeCapacity(i): int\l-outOfBoundsMsg(i): String\l+replaceAll(UnaryOperat): void\l+remove(Obje): boolean\l+removeAll(Collecti): boolean\l+iterator(): Iterator\l+get(i): Object\l+toArray(Object): Object[]\l#removeRange(int,i): void\l-fastRemove(i): void\l+indexOf(Obje): int\l+add(int,Obje): void\l+subList(int,i): List\l+trimToSize(): void\l-grow(i): void\l+set(int,Obje): Object\lstatic subListRangeCheck(int,int,i): void\lelementData(i): Object\l+spliterator(): Spliterator\l-writeObject(ObjectOutputStre): void\l+forEach(Consum): void\lstatic access100(ArrayLi): int\l+isEmpty(): boolean\l+clear(): void\l+sort(Comparat): void\l+\<init\>(Collecti): void\l-ensureExplicitCapacity(i): void\l-readObject(ObjectInputStre): void\l+removeIf(Predica): boolean\l-batchRemove(Collection,boole): boolean\l+lastIndexOf(Obje): int\l+contains(Obje): boolean\l-ensureCapacityInternal(i): void\l+size(): int\l-rangeCheck(i): void\l+addAll(int,Collecti): boolean\l-rangeCheckForAdd(i): void\l+clone(): Object\l+listIterator(): ListIterator\l+ensureCapacity(i): void\l+retainAll(Collecti): boolean\lstatic \<clinit\>(): void\l}"color = black
 style = filled 
  fillcolor = white
 ]
@@ -34,35 +34,35 @@ MethodBodyUsesVisitor [
 center=true
     label="{MethodBodyUsesVisitor\n\<\<decorator\>\> \n\<\<adapter\>\>|+owner: String \lbuf: StringBuffer \l#mv: MethodVisitor \l+className: String \l+ark: NoahsArk \l#api: int \l | +visitMethodInsn(int,String,String,String,boole): void\l+\<init\>(int,MethodVisitor,NoahsArk,String,StringBuff): void\l}"color = black
 style = filled 
- fillcolor = chartreuse2
+ fillcolor = yellow3
 ]
 MethodBodyVisitor [ 
 center=true
     label="{MethodBodyVisitor\n\<\<decorator\>\> \n\<\<adapter\>\>|+owner: String \l+inputMethodName: String \l+inputArgs: String \l#mv: MethodVisitor \l+className: String \l+ark: NoahsArk \l#api: int \l | +visitMethodInsn(int,String,String,String,boole): void\l+repeat(String,Stri): void\l+\<init\>(int,MethodVisit): void\l}"color = black
 style = filled 
- fillcolor = chartreuse2
+ fillcolor = yellow3
 ]
 NoahsArk [ 
 center=true
     label="{NoahsArk\n\<\<adaptee\>\>|+noe: CallNode \l-static listOfClasses: HashMap \l+umlNodes: int \l+mainNode: String \l+sequenceNodes: ArrayList \l-static newList: HashMap \l+pkg: String \l+boat: HashMap \l+pairs: HashMap \l+constructedNodes: ArrayList \l+depth: int \l+newNodes: ArrayList \l+graphRoot: CallNode \l+cmd: String \l+seenClass: HashMap \l | +getDepthMax(): int\l+setListOfClasses(HashM): void\l+getPackage(): String\l+resetNewList(): void\l+setPackage(Stri): void\l+getBoat(): HashMap\l+setRoot(CallNo): void\l+\<init\>(HashM): void\l+getCmd(): String\l+getActiveNode(): CallNode\l+setDepthMax(i): void\l+getNewList(): HashMap\l+addPair(String,Stri): void\l+goUp(): void\l+getListOfClass(): HashMap\l+setCmd(Stri): void\l+deeper(): void\l+setActiveNode(CallNo): void\l+addClass(String,ClassPrototy): void\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = firebrick1
 ]
 ClassVisitor [ 
 center=true
-    label="{ClassVisitor\n\<\<target\>\> \n\<\component\>\> \n\<\<decorator\>\>|#cv: ClassVisitor \l#api: int \l | +visitField(int,String,String,String,Obje): FieldVisitor\l+visitTypeAnnotation(int,TypePath,String,boole): AnnotationVisitor\l+visitInnerClass(String,String,String,i): void\l+visitEnd(): void\l+visitOuterClass(String,String,Stri): void\l+visitAttribute(Attribu): void\l+visit(int,int,String,String,String,String): void\l+\<init\>(int,ClassVisit): void\l+visitAnnotation(String,boole): AnnotationVisitor\l+visitMethod(int,String,String,String,String): MethodVisitor\l+visitSource(String,Stri): void\l}"color = black
+    label="{ClassVisitor\n\<\<target\>\> \n\<\<decorator component\>\> \n\<\<decorator\>\>|#cv: ClassVisitor \l#api: int \l | +visitField(int,String,String,String,Obje): FieldVisitor\l+visitTypeAnnotation(int,TypePath,String,boole): AnnotationVisitor\l+visitInnerClass(String,String,String,i): void\l+visitEnd(): void\l+visitOuterClass(String,String,Stri): void\l+visitAttribute(Attribu): void\l+visit(int,int,String,String,String,String): void\l+\<init\>(int,ClassVisit): void\l+visitAnnotation(String,boole): AnnotationVisitor\l+visitMethod(int,String,String,String,String): MethodVisitor\l+visitSource(String,Stri): void\l}"color = black
 style = filled 
- fillcolor = chartreuse2
+ fillcolor = yellow3
 ]
 ClassDeclarationVisitor [ 
 center=true
     label="{ClassDeclarationVisitor\n\<\<adapter\>\>|+buf: StringBuffer \l#cv: ClassVisitor \l+name: String \l+className: String \l+ark: NoahsArk \l#api: int \l | +getName(): String\l+visit(int,int,String,String,String,String): void\l+\<init\>(int,StringBuffer,NoahsA): void\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = firebrick1
 ]
 FieldPrototype [ 
 center=true
-    label="{FieldPrototype|+symbol: String \l+name: String \l+type: String \l | +checkDecorator(Stri): boolean\l+checkAdapter(): boolean\l+prepareUML(): String\l+\<init\>(String,String,Stri): void\l+getSingleton(String,Stri): boolean\l}"color = black
+    label="{FieldPrototype|+sig: String \l+symbol: String \l+name: String \l+type: String \l+listType: String \l | +checkDecorator(Stri): boolean\l+checkAdapter(): boolean\l+prepareUML(): String\l+\<init\>(String,String,String,String,Stri): void\l+getSingleton(String,Stri): boolean\l}"color = black
 style = filled 
  fillcolor = white
 ]
@@ -74,9 +74,9 @@ style = filled
 ]
 MethodVisitor [ 
 center=true
-    label="{MethodVisitor\n\<\<target\>\> \n\<\component\>\> \n\<\<decorator\>\>|#mv: MethodVisitor \l#api: int \l | +visitTypeAnnotation(int,TypePath,String,boole): AnnotationVisitor\l+visitJumpInsn(int,Lab): void\l+visitAttribute(Attribu): void\l+visitMethodInsn(int,String,String,String,boole): void\l+visitTryCatchBlock(Label,Label,Label,Stri): void\l+visitTableSwitchInsn(int,int,Label,Label): void\l+visitAnnotation(String,boole): AnnotationVisitor\l+visitParameterAnnotation(int,String,boole): AnnotationVisitor\l+visitParameter(String,i): void\l+visitInsnAnnotation(int,TypePath,String,boole): AnnotationVisitor\l+visitMultiANewArrayInsn(String,i): void\l+visitCode(): void\l+visitLdcInsn(Obje): void\l+visitTypeInsn(int,Stri): void\l+visitFrame(int,int,Object[],int,Object): void\l+visitLocalVariable(String,String,String,Label,Label,i): void\l+visitEnd(): void\l+visitLabel(Lab): void\l+visitLookupSwitchInsn(Label,int[],Label): void\l+visitLocalVariableAnnotation(int,TypePath,Label[],Label[],int[],String,boole): AnnotationVisitor\l+\<init\>(int,MethodVisit): void\l+visitIntInsn(int,i): void\l+visitInsn(i): void\l+visitIincInsn(int,i): void\l+visitLineNumber(int,Lab): void\l+visitVarInsn(int,i): void\l+visitInvokeDynamicInsn(String,String,Handle,Object): void\l+visitTryCatchAnnotation(int,TypePath,String,boole): AnnotationVisitor\l+visitAnnotationDefault(): AnnotationVisitor\l+visitMaxs(int,i): void\l+visitFieldInsn(int,String,String,Stri): void\l}"color = black
+    label="{MethodVisitor\n\<\<target\>\> \n\<\<decorator component\>\> \n\<\<decorator\>\>|#mv: MethodVisitor \l#api: int \l | +visitTypeAnnotation(int,TypePath,String,boole): AnnotationVisitor\l+visitJumpInsn(int,Lab): void\l+visitAttribute(Attribu): void\l+visitMethodInsn(int,String,String,String,boole): void\l+visitTryCatchBlock(Label,Label,Label,Stri): void\l+visitTableSwitchInsn(int,int,Label,Label): void\l+visitAnnotation(String,boole): AnnotationVisitor\l+visitParameterAnnotation(int,String,boole): AnnotationVisitor\l+visitParameter(String,i): void\l+visitInsnAnnotation(int,TypePath,String,boole): AnnotationVisitor\l+visitMultiANewArrayInsn(String,i): void\l+visitCode(): void\l+visitLdcInsn(Obje): void\l+visitTypeInsn(int,Stri): void\l+visitFrame(int,int,Object[],int,Object): void\l+visitLocalVariable(String,String,String,Label,Label,i): void\l+visitEnd(): void\l+visitLabel(Lab): void\l+visitLookupSwitchInsn(Label,int[],Label): void\l+visitLocalVariableAnnotation(int,TypePath,Label[],Label[],int[],String,boole): AnnotationVisitor\l+\<init\>(int,MethodVisit): void\l+visitIntInsn(int,i): void\l+visitInsn(i): void\l+visitIincInsn(int,i): void\l+visitLineNumber(int,Lab): void\l+visitVarInsn(int,i): void\l+visitInvokeDynamicInsn(String,String,Handle,Object): void\l+visitTryCatchAnnotation(int,TypePath,String,boole): AnnotationVisitor\l+visitAnnotationDefault(): AnnotationVisitor\l+visitMaxs(int,i): void\l+visitFieldInsn(int,String,String,Stri): void\l}"color = black
 style = filled 
- fillcolor = chartreuse2
+ fillcolor = yellow3
 ]
 NameDecorator [ 
 center=true
@@ -86,7 +86,7 @@ style = filled
 ]
 AbstractMap [ 
 center=true
-    label="{AbstractMap|values: Collection \lkeySet: Set \l | +abstract entrySet(): Set\l+containsKey(Obje): boolean\l+values(): Collection\lstatic access$000(Object,Obje): boolean\l+isEmpty(): boolean\l+clear(): void\l#\<init\>(): void\l-static eq(Object,Obje): boolean\l+containsValue(Obje): boolean\l+put(Object,Obje): Object\l+remove(Obje): Object\l+size(): int\l+hashCode(): int\l+get(Obje): Object\l+putAll(M): void\l+equals(Obje): boolean\l#clone(): Object\l+toString(): String\l+keySet(): Set\l}"color = black
+    label="{AbstractMap|values: Collection \lkeySet: Set \l | +abstract entrySet(): Set\l+containsKey(Obje): boolean\l+values(): Collection\lstatic access000(Object,Obje): boolean\l+isEmpty(): boolean\l+clear(): void\l#\<init\>(): void\l-static eq(Object,Obje): boolean\l+containsValue(Obje): boolean\l+put(Object,Obje): Object\l+remove(Obje): Object\l+size(): int\l+hashCode(): int\l+get(Obje): Object\l+putAll(M): void\l+equals(Obje): boolean\l#clone(): Object\l+toString(): String\l+keySet(): Set\l}"color = black
 style = filled 
  fillcolor = white
 ]
@@ -94,19 +94,19 @@ ClassFieldVisitor [
 center=true
     label="{ClassFieldVisitor\n\<\<adapter\>\>|+buf: StringBuffer \l#cv: ClassVisitor \l+name: String \l+className: String \l+ark: NoahsArk \l#api: int \l | +visitField(int,String,String,String,Obje): FieldVisitor\l+\<init\>(int,ClassVisitorBuffered,NoahsArk,Stri): void\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = firebrick1
 ]
 FirstASM [ 
 center=true
-    label="{FirstASM|-static associationTypes: String[] \l-static lab2one: String \l+static listOfClasses: HashMap \l-static isJava: boolean \l-static classEndString2: String \l+static temps: ArrayList \l-static classEndString1: String \l-static ourPKG: String \l-static single: String \l-static ourPK: String \l-static t: String \l-static testerino2: String \l-static testerino: String \l-static testerino3: String \l-static lab5one: String \l-static methodSeparatorString: String \l-static font: String \l | +static umlHandler(String,String,String,StringBuffer,NoahsA): void\l+static generateSequence(String,String,String,String,StringBuffer,NoahsA): StringBuffer\l+static main(String): void\l+static getClassDetails(String,String,NoahsA): void\l+\<init\>(): void\l+static listClasses(File,Stri): HashMap\l+static getAssociation(String,String,String,NoahsA): ArrayList\l+static dotAssociationHandler(String,StringBuffer,NoahsA): ArrayList\l+static visualize(String,Stri): void\l+static getArrows(NoahsA): void\l+static generateDotUML(String,StringBuffer,NoahsA): StringBuffer\l+static sequenceHandler(String,String,String,StringBuffer,NoahsArk,String,String,String,i): void\l+static dotInheritanceHandler(StringBuffer,NoahsA): ArrayList\l+static methodEval(String,String,String,String,NoahsA): void\l+static dotUsesHandler(String,StringBuffer,NoahsA): ArrayList\l+static pairToViz(String,NoahsA): String\lstatic \<clinit\>(): void\l}"color = black
+    label="{FirstASM|-static container: String \l-static comp: String \l-static associationTypes: String[] \l-static lab2one: String \l+static listOfClasses: HashMap \l-static isJava: boolean \l-static classEndString2: String \l+static temps: ArrayList \l-static classEndString1: String \l-static ourPKG: String \l-static single: String \l-static ourPK: String \l-static t: String \l-static testerino2: String \l-static testerino: String \l-static testerino3: String \l-static lab5one: String \l-static methodSeparatorString: String \l-static font: String \l | +static umlHandler(String,String,String,StringBuffer,NoahsA): void\l+static generateSequence(String,String,String,String,StringBuffer,NoahsA): StringBuffer\l+static main(String): void\l+static getClassDetails(String,String,NoahsA): void\l+\<init\>(): void\l+static listClasses(File,Stri): HashMap\l+static getAssociation(String,String,String,NoahsA): ArrayList\l+static dotAssociationHandler(String,StringBuffer,NoahsA): ArrayList\l+static visualize(String,Stri): void\l+static getArrows(NoahsA): void\l+static generateDotUML(String,StringBuffer,NoahsA): StringBuffer\l+static sequenceHandler(String,String,String,StringBuffer,NoahsArk,String,String,String,i): void\l+static dotInheritanceHandler(StringBuffer,NoahsA): ArrayList\l+static methodEval(String,String,String,String,NoahsA): void\l+static dotUsesHandler(String,StringBuffer,NoahsA): ArrayList\l+static pairToViz(String,NoahsA): String\lstatic \<clinit\>(): void\l}"color = black
 style = filled 
  fillcolor = white
 ]
 TypeDetector [ 
 center=true
-    label="{TypeDetector\n\<\<target\>\> \n\<\component\>\>|+cName: String \l+detectors: ArrayList \l+ark: NoahsArk \l | +getType(): HashSet\l+\<init\>(String,NoahsA): void\l}"color = black
+    label="{TypeDetector\n\<\<target\>\> \n\<\<decorator component\>\>|+cName: String \l+detectors: ArrayList \l+ark: NoahsArk \l | +getType(): HashSet\l+\<init\>(String,NoahsA): void\l}"color = black
 style = filled 
- fillcolor = chartreuse2
+ fillcolor = yellow3
 ]
 HashSet [ 
 center=true
@@ -118,17 +118,17 @@ DecoratorDetector [
 center=true
     label="{DecoratorDetector\n\<\<adapter\>\>|+ark: NoahsArk \l | +getType(Stri): HashSet\l+\<init\>(NoahsA): void\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = firebrick1
 ]
 AbstractDetector [ 
 center=true
     label="{AbstractDetector\n\<\<target\>\>|+ark: NoahsArk \l | +abstract getType(Stri): HashSet\l+\<init\>(NoahsA): void\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = firebrick1
 ]
 CompositeDetector [ 
 center=true
-    label="{CompositeDetector| | +getType(Stri): HashSet\l+\<init\>(NoahsA): void\l}"color = black
+    label="{CompositeDetector| | +getType(Stri): HashSet\l+checkIsComposite(ClassPrototype,ClassPrototy): boolean\l+\<init\>(NoahsA): void\l}"color = black
 style = filled 
  fillcolor = white
 ]
@@ -136,25 +136,25 @@ ClassVisitorBuffered [
 center=true
     label="{ClassVisitorBuffered\n\<\<target\>\> \n\<\<decorator\>\> \n\<\<adapter\>\>|+buf: StringBuffer \l#cv: ClassVisitor \l+name: String \l+className: String \l+ark: NoahsArk \l#api: int \l | +getAccessModifier(i): String\l+getName(): String\l+\<init\>(int,ClassVisit): void\l}"color = black
 style = filled 
- fillcolor = chartreuse2
+ fillcolor = yellow3
 ]
 DotMethodVisitor [ 
 center=true
     label="{DotMethodVisitor\n\<\<adapter\>\>|+inputMethodName: String \l+inputArgs: String \l+buf: StringBuffer \l#cv: ClassVisitor \l+arg0: int \l+name: String \l+className: String \l+ark: NoahsArk \l#api: int \l | +\<init\>(int,NoahsArk,String,String,Stri): void\l+visitMethod(int,String,String,String,String): MethodVisitor\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = firebrick1
 ]
 TypeDecorator [ 
 center=true
     label="{TypeDecorator\n\<\<decorator\>\> \n\<\<adapter\>\>|-typeToName: HashMap \l-typeToFill: HashMap \l-typeToColor: HashMap \l+cName: String \l+detectors: ArrayList \l+ark: NoahsArk \l-typeDetector: TypeDetector \l | +getType(): HashSet\l+getFillColor(): String\l+getColor(): String\l+\<init\>(TypeDetect): void\l}"color = black
 style = filled 
- fillcolor = chartreuse2
+ fillcolor = yellow3
 ]
 SingletonDetector [ 
 center=true
     label="{SingletonDetector\n\<\<adapter\>\>|+ark: NoahsArk \l | +getType(Stri): HashSet\l+\<init\>(NoahsA): void\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = firebrick1
 ]
 CallNode [ 
 center=true
@@ -172,7 +172,7 @@ AdapterDetector [
 center=true
     label="{AdapterDetector\n\<\<adapter\>\>|+ark: NoahsArk \l | +getType(Stri): HashSet\l+\<init\>(NoahsA): void\l+checkMethods(ClassPrototype,ClassPrototy): boolean\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = firebrick1
 ]
 ClassPrototype [ 
 center=true
@@ -261,6 +261,7 @@ FirstASM -> HashMap[arrowhead = vee, style = dotted]
 TypeDetector -> NoahsArk[arrowhead = vee]
 TypeDetector -> ArrayList[arrowhead = vee]
 TypeDetector -> SingletonDetector[arrowhead = vee, style = dotted]
+TypeDetector -> AbstractDetector[arrowhead = vee]
 TypeDetector -> AdapterDetector[arrowhead = vee, style = dotted]
 TypeDetector -> HashSet[arrowhead = vee, style = dotted]
 TypeDetector -> AbstractDetector[arrowhead = vee, style = dotted]
@@ -282,6 +283,7 @@ CompositeDetector -> ClassPrototype[arrowhead = vee, style = dotted]
 CompositeDetector -> HashSet[arrowhead = vee, style = dotted]
 CompositeDetector -> AbstractDetector[arrowhead = vee, style = dotted]
 CompositeDetector -> AbstractDetector [arrowhead = onormal]
+CompositeDetector -> CompositeDetector[arrowhead = vee, style = dotted]
 CompositeDetector -> NoahsArk[arrowhead = vee, style = dotted]
 CompositeDetector -> HashMap[arrowhead = vee, style = dotted]
 AbstractDetector -> NoahsArk[arrowhead = vee]

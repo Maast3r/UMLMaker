@@ -1,0 +1,345 @@
+digraph G{
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+
+node [
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+
+ shape = "record"
+]
+edge [
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+]
+IdentityArrayList [ 
+center=true
+    label="{IdentityArrayList\n\<\<adaptee\>\>|-size: int \l-elementData: Object[] \l | +add(int,Obje): void\l+trimToSize(): void\l+set(int,Obje): Object\l+isEmpty(): boolean\l+clear(): void\l-outOfBoundsMsg(i): String\l+\<init\>(Collecti): void\l+remove(Obje): boolean\l+lastIndexOf(Obje): int\l+contains(Obje): boolean\l+size(): int\l-rangeCheck(i): void\l+addAll(int,Collecti): boolean\l-rangeCheckForAdd(i): void\l+get(i): Object\l+toArray(Object): Object[]\l#removeRange(int,i): void\l+ensureCapacity(i): void\l-fastRemove(i): void\l+indexOf(Obje): int\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+Serializable [ 
+center=true
+    label="{Serializable| | }"color = black
+style = filled 
+ fillcolor = white
+]
+Shape [ 
+center=true
+    label="{Shape\n\<\<adaptee\>\>| | +abstract contains(Rectangle): boolean\l+abstract getPathIterator(AffineTransform,doub): PathIterator\l+abstract intersects(Rectangle): boolean\l+abstract getBounds2D(): Rectangle2D\l+abstract getBounds(): Rectangle\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+Set [ 
+center=true
+    label="{Set| | +abstract add(Obje): boolean\l+spliterator(): Spliterator\l+abstract containsAll(Collecti): boolean\l+abstract isEmpty(): boolean\l+abstract clear(): void\l+abstract remove(Obje): boolean\l+abstract contains(Obje): boolean\l+abstract iterator(): Iterator\l+abstract removeAll(Collecti): boolean\l+abstract size(): int\l+abstract addAll(Collecti): boolean\l+abstract hashCode(): int\l+abstract equals(Obje): boolean\l+abstract toArray(Object): Object[]\l+abstract retainAll(Collecti): boolean\l}"color = black
+style = filled 
+ fillcolor = white
+]
+WindowStateListener [ 
+center=true
+    label="{WindowStateListener\n\<\<adaptee\>\>| | +abstract windowStateChanged(WindowEve): void\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+FocusManager [ 
+center=true
+    label="{FocusManager\n\<\<adaptee\>\>|focusOwner: Component \lstatic serialVersionUID: long \lfocusRoot: Container \l | \<init\>(): void\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+Unsafe [ 
+center=true
+    label="{Unsafe\n\<\<Singleton\>\>|+static ARRAY_BOOLEAN_BASE_OFFSET: int \l+static ARRAY_CHAR_BASE_OFFSET: int \l+static ARRAY_SHORT_BASE_OFFSET: int \l+static ARRAY_INT_BASE_OFFSET: int \l+static INVALID_FIELD_OFFSET: int \l+static ARRAY_OBJECT_INDEX_SCALE: int \l+static ADDRESS_SIZE: int \l+static ARRAY_LONG_INDEX_SCALE: int \l+static ARRAY_FLOAT_INDEX_SCALE: int \l+static ARRAY_DOUBLE_INDEX_SCALE: int \l+static ARRAY_FLOAT_BASE_OFFSET: int \l+static ARRAY_DOUBLE_BASE_OFFSET: int \l-static theUnsafe: Unsafe \l+static ARRAY_BOOLEAN_INDEX_SCALE: int \l+static ARRAY_CHAR_INDEX_SCALE: int \l+static ARRAY_INT_INDEX_SCALE: int \l+static ARRAY_BYTE_INDEX_SCALE: int \l+static ARRAY_LONG_BASE_OFFSET: int \l+static ARRAY_OBJECT_BASE_OFFSET: int \l+static ARRAY_SHORT_INDEX_SCALE: int \l+static ARRAY_BYTE_BASE_OFFSET: int \l | +arrayIndexScale(Cla): int\l+putCharVolatile(Object,long,ch): void\l+getByte(lo): byte\l+getLoadAverage(double[],i): int\l+putShortVolatile(Object,long,sho): void\l+monitorExit(Obje): void\l+putBooleanVolatile(Object,long,boole): void\l+loadFence(): void\l+pageSize(): int\l+setMemory(long,long,by): void\l+getDoubleVolatile(Object,lo): double\l+getShortVolatile(Object,lo): short\l+static getUnsafe(): Unsafe\l+putBoolean(Object,int,boole): void\l+freeMemory(lo): void\l+defineAnonymousClass(Class,byte[],Object): Class\l+putIntVolatile(Object,long,i): void\l+getByteVolatile(Object,lo): byte\l+getObjectVolatile(Object,lo): Object\l+getObject(Object,i): Object\l+getCharVolatile(Object,lo): char\l+putInt(long,i): void\l+putAddress(long,lo): void\l+staticFieldBase(Fie): Object\l+getAndAddInt(Object,long,i): int\l+putOrderedObject(Object,long,Obje): void\l-\<init\>(): void\l+getInt(lo): int\l+getChar(lo): char\l+putFloat(long,flo): void\l+getFloatVolatile(Object,lo): float\l+shouldBeInitialized(Cla): boolean\l+allocateInstance(Cla): Object\l+putObject(Object,int,Obje): void\l+getBooleanVolatile(Object,lo): boolean\l+putOrderedLong(Object,long,lo): void\lstatic \<clinit\>(): void\l+tryMonitorEnter(Obje): boolean\l+copyMemory(long,long,lo): void\l+fullFence(): void\l+getDouble(lo): double\l+putDouble(long,doub): void\l-static registerNatives(): void\l+getFloat(lo): float\l+putByteVolatile(Object,long,by): void\l+putLong(long,lo): void\l+monitorEnter(Obje): void\l+putByte(long,by): void\l+putDoubleVolatile(Object,long,doub): void\l+getAndSetObject(Object,long,Obje): Object\l+getLongVolatile(Object,lo): long\l-static throwIllegalAccessError(): void\l+getBoolean(Object,i): boolean\l+getAddress(lo): long\l+reallocateMemory(long,lo): long\l+compareAndSwapLong(Object,long,long,lo): boolean\l+allocateMemory(lo): long\l+objectFieldOffset(Fie): long\l+compareAndSwapObject(Object,long,Object,Obje): boolean\l+putShort(long,sho): void\l+storeFence(): void\l+getAndSetInt(Object,long,i): int\l+park(boolean,lo): void\l+arrayBaseOffset(Cla): int\l+getShort(lo): short\l+fieldOffset(Fie): int\l+defineClass(String,byte[],int,int,ClassLoader,ProtectionDoma): Class\l+putChar(long,ch): void\l+putFloatVolatile(Object,long,flo): void\l+compareAndSwapInt(Object,long,int,i): boolean\l+putOrderedInt(Object,long,i): void\l+unpark(Obje): void\l+getAndSetLong(Object,long,lo): long\l+ensureClassInitialized(Cla): void\l+getAndAddLong(Object,long,lo): long\l+throwException(Throwab): void\l+putObjectVolatile(Object,long,Obje): void\l+putLongVolatile(Object,long,lo): void\l+getLong(lo): long\l+getIntVolatile(Object,lo): int\l+addressSize(): int\l+staticFieldOffset(Fie): long\l}"style = filled 
+ color = blue
+style = filled 
+ fillcolor = white
+]
+FocusTraversalPolicy [ 
+center=true
+    label="{FocusTraversalPolicy\n\<\<adaptee\>\>| | +getInitialComponent(Wind): Component\l+abstract getComponentBefore(Container,Compone): Component\l+abstract getFirstComponent(Contain): Component\l+abstract getLastComponent(Contain): Component\l+\<init\>(): void\l+abstract getComponentAfter(Container,Compone): Component\l+abstract getDefaultComponent(Contain): Component\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+LightweightDispatcher [ 
+center=true
+    label="{LightweightDispatcher\n\<\<adaptee\>\>|-targetLastEntered: WeakReference \l-mouseEventTarget: WeakReference \l-isMouseDTInNativeContainer: boolean \l-static LWD_MOUSE_DRAGGED_OVER: int \l-focus: Component \lstatic assertionsDisabled: boolean \l-static PROXY_EVENT_MASK: long \l-nativeContainer: Container \l-targetLastEnteredDT: WeakReference \l-isMouseInNativeContainer: boolean \l-static serialVersionUID: long \l-static eventLog: PlatformLogger \l-eventMask: long \l-static BUTTONS_DOWN_MASK: int \l-nativeCursor: Cursor \l-static MOUSE_MASK: long \l | dispatchEvent(AWTEve): boolean\l-trackMouseEnterExit(Component,MouseEve): void\lretargetMouseEvent(Component,int,MouseEve): void\lstatic access100(LightweightDispatcher,Component,MouseEve): void\lstatic access000(LightweightDispatch): Container\l-processDropTargetEvent(SunDropTargetEve): boolean\l\<init\>(Contain): void\l+eventDispatched(AWTEve): void\l-isMouseGrab(MouseEve): boolean\l-retargetMouseEnterExit(Component,MouseEvent,Component,boole): Component\l-stopListeningForOtherDrags(): void\ldispose(): void\l-processMouseEvent(MouseEve): boolean\l-trackDropTargetEnterExit(Component,MouseEve): void\lenableEvents(lo): void\l-startListeningForOtherDrags(): void\lstatic \<clinit\>(): void\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+Container [ 
+center=true
+    label="{Container\n\<\<composite\>\> \n\<\<target\>\> \n\<\<decorator\>\> \n\<\<adapter\>\>|parent: Container \lstatic mouseListenerK: String \l-coalescingEnabled: boolean \lstatic LOCK: Object \ldropTarget: DropTarget \l-mixingCutoutRegion: Region \lforeground: Color \l-static FOCUS_TRAVERSABLE_DEFAULT: int \l-static FOCUS_TRAVERSABLE_SET: int \lmodalComp: Component \leventCache: EventQueueItem[] \lmouseListener: MouseListener \lminSize: Dimension \lnewEventsOnly: boolean \l-dispatcher: LightweightDispatcher \lheight: int \lmouseMotionListener: MouseMotionListener \l-static FOCUS_TRAVERSABLE_UNKNOWN: int \l-numOfLWComponents: int \lpopups: Vector \l-focusable: boolean \lstatic actionListenerK: String \lstatic focusListenerK: String \l-static serialPersistentFields: ObjectStreamField[] \l-focusCycleRoot: boolean \l-focusTraversalPolicyProvider: boolean \l+static TOP_ALIGNMENT: float \lstatic mouseWheelListenerK: String \lminSizeSet: boolean \l-isAddNotifyComplete: boolean \lwindowClosingException: RuntimeException \l#accessibleContext: AccessibleContext \lmodalAppContext: AppContext \l-static log: PlatformLogger \l-static EMPTY_ARRAY: Component[] \lstatic INCLUDE_SELF: boolean \lenabled: boolean \l-valid: boolean \l-static serialVersionUID: long \l-graphicsConfig: GraphicsConfiguration \lpeer: ComponentPeer \lcontainerListener: ContainerListener \lbufferStrategy: BufferStrategy \lstatic incRate: int \l-nameExplicitlySet: boolean \lstatic assertionsDisabled: boolean \l-static coalesceEventsParams: Class[] \l-static focusLog: PlatformLogger \linputMethodListener: InputMethodListener \l-printing: boolean \llisteningBoundsChildren: int \l-component: List \lpreserveBackgroundColor: Color \l-isFocusTraversableOverridden: int \lstatic ownedWindowK: String \lx: int \lwidth: int \lappContext: AppContext \ly: int \leventMask: long \l-containerSerializedDataVersion: int \lfont: Font \l-acc: AccessControlContext \lstatic keyListenerK: String \lstatic componentListenerK: String \l-static mixingLog: PlatformLogger \l-numOfHWComponents: int \lhierarchyBoundsListener: HierarchyBoundsListener \lstatic containerListenerK: String \lstatic hierarchyBoundsListenerK: String \lisPacked: boolean \l-objectLock: Object \llayoutMgr: LayoutManager \l-boundsOp: int \ldescendantsCount: int \lvisible: boolean \lstatic mouseMotionListenerK: String \lstatic isInc: boolean \lhierarchyListener: HierarchyListener \l-compoundShape: Region \l-focusTraversalKeysEnabled: boolean \l-focusTraversalPolicy: FocusTraversalPolicy \lbackground: Color \l-name: String \lcomponentListener: ComponentListener \lfocusListener: FocusListener \l-static requestFocusController: RequestFocusController \lcursor: Cursor \lstatic windowListenerK: String \l+static BOTTOM_ALIGNMENT: float \lcomponentOrientation: ComponentOrientation \l-autoFocusTransferOnDisposal: boolean \lmaxSize: Dimension \lpeerFont: Font \llocale: Locale \lprefSizeSet: boolean \lkeyListener: KeyListener \l-static isJavaAwtSmartInvalidate: boolean \lignoreRepaint: boolean \lstatic itemListenerK: String \lstatic textListenerK: String \lmouseWheelListener: MouseWheelListener \lstatic hierarchyListenerK: String \l+static RIGHT_ALIGNMENT: float \lfocusTraversalKeys: Set[] \l-static eventLog: PlatformLogger \lstatic inputMethodListenerK: String \l-printingThreads: Set \l-static coalesceMap: Map \l-componentSerializedDataVersion: int \l+static CENTER_ALIGNMENT: float \lmaxSizeSet: boolean \llisteningChildren: int \l-changeSupport: PropertyChangeSupport \lprefSize: Dimension \l-static focusTraversalKeyPropertyNames: String[] \lstatic windowFocusListenerK: String \lbackgroundEraseDisabled: boolean \lstatic SEARCH_HEAVYWEIGHTS: boolean \l+static LEFT_ALIGNMENT: float \lstatic windowStateListenerK: String \l-static descendUnconditionallyWhenValidating: boolean \lstatic adjustmentListenerK: String \l | getOpaqueShape(): Region\lpostProcessKeyEvent(KeyEve): void\l#processEvent(AWTEve): void\l+paint(Graphi): void\l+setLayout(LayoutManag): void\l-addDelicately(Component,Container,i): void\lmixOnValidating(): void\l#paramString(): String\l+removeAll(): void\l-static isRemoveNotifyNeeded(Component,Container,Contain): boolean\l+getMinimumSize(): Dimension\l+getMousePosition(boole): Point\lpostsOldMouseEvents(): boolean\l+getAlignmentY(): float\lcountHierarchyMembers(): int\l+addContainerListener(ContainerListen): void\l-reparentChild(Compone): void\l+getAlignmentX(): float\l-getBottommostComponentIndex(): int\l+setComponentZOrder(Component,i): void\ldecreaseComponentCount(Compone): void\l+\<init\>(): void\l+findComponentAt(Poi): Component\l-readObject(ObjectInputStre): void\l-getListenersCount(int,boole): int\l+minimumSize(): Dimension\lnumListening(lo): int\l+removeContainerListener(ContainerListen): void\lcontainsFocus(): boolean\lisSameOrAncestorOf(Component,boole): boolean\lclearCurrentFocusCycleRootOnHide(): void\l+printComponents(Graphi): void\l+getListeners(Cla): EventListener[]\lupdateGraphicsData(GraphicsConfigurati): boolean\l+getMaximumSize(): Dimension\l-startLWModal(): void\lcanContainFocusOwner(Compone): boolean\l+setFocusTraversalPolicy(FocusTraversalPoli): void\lcreateHierarchyEvents(int,Component,Container,long,boole): int\lfindComponentAtImpl(int,int,boole): Component\lpaintHeavyweightComponents(Graphi): void\l+setFocusTraversalKeys(int,S): void\l-checkAddToSelf(Compone): void\lgetDropTargetEventTarget(int,int,boole): Component\l+applyComponentOrientation(ComponentOrientati): void\l+validate(): void\lvalidateUnconditionally(): void\lmixOnZOrderChanging(int,i): void\l-recursiveShowHeavyweightChildren(): void\l+getInsets(): Insets\lmixOnHiding(boole): void\l-getMouseEventTargetImpl(int,int,boolean,ContainerEventTargetFilter,boolean,boole): Component\l-checkNotAWindow(Compone): void\llightweightPaint(Graphi): void\l-static getChildAt(Component,int,int,boole): Component\l+isValidateRoot(): boolean\l+getPreferredSize(): Dimension\leventEnabled(AWTEve): boolean\l+addNotify(): void\l-recursiveHideHeavyweightChildren(): void\l+setFocusTraversalPolicyProvider(boole): void\linvalidateParent(): void\l+insets(): Insets\l+countComponents(): int\l-getMouseEventTarget(int,int,boolean,ContainerEventTargetFilter,boole): Component\lincreaseComponentCount(Compone): void\l-static initIDs(): void\l-recursiveRelocateHeavyweightChildren(Poi): void\lgetAccessibleAt(Poi): Accessible\ladjustDecendantsOnParent(i): void\l+getFocusTraversalKeys(i): Set\lgetComponentsSync(): Component[]\l-reparentTraverse(ContainerPeer,Contain): void\l+preferredSize(): Dimension\l+getComponents(): Component[]\lgetHeavyweightContainer(): Container\l+setFont(Fo): void\l+doLayout(): void\l+add(Component,Object,i): void\lclearMostRecentFocusOwnerOnHide(): void\l#validateTree(): void\l+setFocusCycleRoot(boole): void\l-writeObject(ObjectOutputStre): void\lgetTraversalRoot(): Container\l-isParentOf(Compone): boolean\ladjustDescendants(i): void\l+list(PrintWriter,i): void\l+deliverEvent(Eve): void\lhasHeavyweightDescendants(): boolean\l+getComponentCount(): int\l+isAncestorOf(Compone): boolean\lproxyEnableEvents(lo): void\l-removeDelicately(Component,Container,i): boolean\l-getTopmostComponentIndex(): int\lgetAccessibleChild(i): Accessible\lmixOnReshaping(): void\llightweightPrint(Graphi): void\l+removeNotify(): void\lisRecursivelyVisibleUpToHeavyweightContainer(): boolean\l+getComponent(i): Component\lgetComponents_NoClientCode(): Component[]\lstatic \<clinit\>(): void\l+locate(int,i): Component\lmixOnShowing(): void\linitializeFocusTraversalKeys(): void\l+getComponentAt(Poi): Component\l+update(Graphi): void\l+isFocusTraversalPolicySet(): boolean\l+isFocusCycleRoot(): boolean\l+getComponentZOrder(Compone): int\l+remove(Compone): void\linvalidateTree(): void\lprintHeavyweightComponents(Graphi): void\lrecursiveSubtractAndApplyShape(Region,int,i): void\l+getLayout(): LayoutManager\l-stopLWModal(): void\l+getContainerListeners(): ContainerListener[]\lrecursiveApplyCurrentShape(int,i): void\l#processContainerEvent(ContainerEve): void\l+isFocusTraversalPolicyProvider(): boolean\lcheckGD(Stri): void\l+addPropertyChangeListener(String,PropertyChangeListen): void\lgetAccessibleChildrenCount(): int\l-findTraversalRoot(): Container\l+transferFocusDownCycle(): void\l#addImpl(Component,Object,i): void\l+areFocusTraversalKeysSet(i): boolean\l+invalidate(): void\ldispatchEventToSelf(AWTEve): void\l+layout(): void\ladjustListeningChildren(long,i): void\l+print(Graphi): void\lcreateChildHierarchyEvents(int,long,boole): void\l+paintComponents(Graphi): void\l-checkAdding(Component,i): void\l+getFocusTraversalPolicy(): FocusTraversalPolicy\lpreProcessKeyEvent(KeyEve): void\lhasLightweightDescendants(): boolean\ldispatchEventImpl(AWTEve): void\l}"color = black
+style = filled 
+ fillcolor = chartreuse2
+]
+Dialog [ 
+center=true
+    label="{Dialog\n\<\<adaptee\>\> \n\<\<composite\>\> \n\<\<adapter\>\>|-focusMgr: FocusManager \lparent: Container \lstatic mouseListenerK: String \l-coalescingEnabled: boolean \lblockedWindows: IdentityArrayList \lisInShow: boolean \linputContext: InputContext \lstatic LOCK: Object \ldropTarget: DropTarget \l-mixingCutoutRegion: Region \lforeground: Color \l-type: WindowType \l-static FOCUS_TRAVERSABLE_DEFAULT: int \l-static FOCUS_TRAVERSABLE_SET: int \lmodalComp: Component \leventCache: EventQueueItem[] \l-secondaryLoop: SecondaryLoop \lmouseListener: MouseListener \lminSize: Dimension \lstate: int \lnewEventsOnly: boolean \l-dispatcher: LightweightDispatcher \lheight: int \lmodalityType: DialogModalityType \lmouseMotionListener: MouseMotionListener \l-weakThis: WeakReference \l-shape: Shape \l-static FOCUS_TRAVERSABLE_UNKNOWN: int \l-numOfLWComponents: int \lpopups: Vector \l-autoRequestFocus: boolean \l-focusable: boolean \lstatic actionListenerK: String \lstatic focusListenerK: String \l-static serialPersistentFields: ObjectStreamField[] \lshowWithParent: boolean \l-focusCycleRoot: boolean \l-focusTraversalPolicyProvider: boolean \l+static TOP_ALIGNMENT: float \lstatic mouseWheelListenerK: String \lisTrayIconWindow: boolean \lstatic OPENED: int \lminSizeSet: boolean \l-isAddNotifyComplete: boolean \lwindowClosingException: RuntimeException \l#accessibleContext: AccessibleContext \lmodalAppContext: AppContext \l-static log: PlatformLogger \l-static EMPTY_ARRAY: Component[] \l-alwaysOnTop: boolean \lstatic INCLUDE_SELF: boolean \lenabled: boolean \l-valid: boolean \l-modalFilter: ModalEventFilter \l-static serialVersionUID: long \l-graphicsConfig: GraphicsConfiguration \lpeer: ComponentPeer \l-initialized: boolean \l-windowSerializedDataVersion: int \l-locationByPlatform: boolean \lisInHide: boolean \lcontainerListener: ContainerListener \lbufferStrategy: BufferStrategy \l-temporaryLostComponent: Component \lstatic incRate: int \lresizable: boolean \lwindowStateListener: WindowStateListener \l-securityWarningWidth: int \l-nameExplicitlySet: boolean \lstatic assertionsDisabled: boolean \l-static coalesceEventsParams: Class[] \l-static beforeFirstWindowShown: AtomicBoolean \l-static focusLog: PlatformLogger \linputMethodListener: InputMethodListener \l-printing: boolean \llisteningBoundsChildren: int \lwindowFocusListener: WindowFocusListener \l-component: List \lpreserveBackgroundColor: Color \l-isFocusTraversableOverridden: int \lanchor: Object \lstatic ownedWindowK: String \l-securityWarningPointX: double \lx: int \lwidth: int \l-securityWarningPointY: double \lappContext: AppContext \ly: int \leventMask: long \l-containerSerializedDataVersion: int \l-opacity: float \lfont: Font \l-acc: AccessControlContext \lwarningString: String \lsyncLWRequests: boolean \lwindowListener: WindowListener \lstatic keyListenerK: String \lmodalExclusionType: DialogModalExclusionType \lstatic componentListenerK: String \l-static mixingLog: PlatformLogger \l-numOfHWComponents: int \lhierarchyBoundsListener: HierarchyBoundsListener \lstatic systemSyncLWRequests: boolean \lstatic containerListenerK: String \l-static nameCounter: int \lstatic hierarchyBoundsListenerK: String \lisPacked: boolean \l-inputContextLock: Object \l-objectLock: Object \llayoutMgr: LayoutManager \l-boundsOp: int \lmodal: boolean \ldescendantsCount: int \lvisible: boolean \lstatic mouseMotionListenerK: String \lstatic isInc: boolean \l-securityWarningHeight: int \lhierarchyListener: HierarchyListener \l-compoundShape: Region \l-focusTraversalKeysEnabled: boolean \l-focusTraversalPolicy: FocusTraversalPolicy \lbackground: Color \l-name: String \lcomponentListener: ComponentListener \ldisposerRecord: WindowWindowDisposerRecord \lfocusListener: FocusListener \l-static requestFocusController: RequestFocusController \lcursor: Cursor \lstatic windowListenerK: String \l+static BOTTOM_ALIGNMENT: float \lcomponentOrientation: ComponentOrientation \l-autoFocusTransferOnDisposal: boolean \lmaxSize: Dimension \lpeerFont: Font \ltitle: String \llocale: Locale \lprefSizeSet: boolean \lkeyListener: KeyListener \l-static isJavaAwtSmartInvalidate: boolean \lignoreRepaint: boolean \lstatic itemListenerK: String \lstatic textListenerK: String \lmodalBlocker: Dialog \lmouseWheelListener: MouseWheelListener \lstatic hierarchyListenerK: String \l-focusableWindowState: boolean \l+static RIGHT_ALIGNMENT: float \l-static locationByPlatformProp: boolean \lfocusTraversalKeys: Set[] \l-static eventLog: PlatformLogger \lstatic inputMethodListenerK: String \l-printingThreads: Set \lisInDispose: boolean \l-static coalesceMap: Map \l-componentSerializedDataVersion: int \l+static CENTER_ALIGNMENT: float \lbeforeFirstShow: boolean \lmaxSizeSet: boolean \llisteningChildren: int \l-disposing: boolean \l-changeSupport: PropertyChangeSupport \l+static DEFAULT_MODALITY_TYPE: DialogModalityType \licons: List \lprefSize: Dimension \l-static focusTraversalKeyPropertyNames: String[] \l-securityWarningAlignmentX: float \lstatic windowFocusListenerK: String \lbackgroundEraseDisabled: boolean \lundecorated: boolean \l-securityWarningAlignmentY: float \lownedWindowList: Vector \lstatic SEARCH_HEAVYWEIGHTS: boolean \l+static LEFT_ALIGNMENT: float \lstatic windowStateListenerK: String \lstatic modalDialogs: IdentityArrayList \l-static allWindows: IdentityArrayList \l-static descendUnconditionallyWhenValidating: boolean \l-static base: String \lstatic adjustmentListenerK: String \l | modalHide(): void\l+show(): void\l-static initIDs(): void\l+setBackground(Col): void\lunblockWindow(Wind): void\l#paramString(): String\l+getTitle(): String\l-checkModalityPermission(DialogModalityTy): void\lstatic checkShouldBeBlocked(Wind): void\lmodalityPopped(): void\l-hideAndDisposeHandler(): void\lshouldBlock(Wind): boolean\linterruptBlocking(): void\lmodalShow(): void\l+setVisible(boole): void\lconstructComponentName(): String\lmodalityPushed(): void\l+setResizable(boole): void\lblockWindows(Li): void\l-conditionalShow(Component,AtomicLo): boolean\l+setTitle(Stri): void\lblockWindow(Wind): void\l+setModalityType(DialogModalityTy): void\l+isResizable(): boolean\l+\<init\>(Window,String,DialogModalityType,GraphicsConfigurati): void\l+getAccessibleContext(): AccessibleContext\l+setShape(Sha): void\ldoDispose(): void\l+toBack(): void\l-readObject(ObjectInputStre): void\l+hide(): void\l+setModal(boole): void\l+addNotify(): void\l-hideAndDisposePreHandler(): void\l+setUndecorated(boole): void\l+isUndecorated(): boolean\lisModal_NoClientCode(): boolean\l+isModal(): boolean\l+getModalityType(): DialogModalityType\l+setOpacity(flo): void\lstatic \<clinit\>(): void\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+WeakReference [ 
+center=true
+    label="{WeakReference\n\<\<adaptee\>\>| | +\<init\>(Object,ReferenceQue): void\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+List [ 
+center=true
+    label="{List\n\<\<adaptee\>\>| | +abstract add(int,Obje): void\l+abstract subList(int,i): List\l+abstract set(int,Obje): Object\l+spliterator(): Spliterator\l+abstract containsAll(Collecti): boolean\l+abstract isEmpty(): boolean\l+abstract clear(): void\l+sort(Comparat): void\l+replaceAll(UnaryOperat): void\l+abstract remove(i): Object\l+abstract lastIndexOf(Obje): int\l+abstract contains(Obje): boolean\l+abstract iterator(): Iterator\l+abstract removeAll(Collecti): boolean\l+abstract size(): int\l+abstract addAll(int,Collecti): boolean\l+abstract hashCode(): int\l+abstract equals(Obje): boolean\l+abstract get(i): Object\l+abstract toArray(Object): Object[]\l+abstract listIterator(i): ListIterator\l+abstract indexOf(Obje): int\l+abstract retainAll(Collecti): boolean\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+EventListener [ 
+center=true
+    label="{EventListener| | }"color = black
+style = filled 
+ fillcolor = white
+]
+Component [ 
+center=true
+    label="{Component\n\<\<adaptee\>\> \n\<\<target\>\> \n\<\<component\>\> \n\<\<composite component\>\>|parent: Container \lstatic mouseListenerK: String \l-coalescingEnabled: boolean \lstatic LOCK: Object \ldropTarget: DropTarget \l-mixingCutoutRegion: Region \lforeground: Color \l-static FOCUS_TRAVERSABLE_DEFAULT: int \l-static FOCUS_TRAVERSABLE_SET: int \leventCache: EventQueueItem[] \lmouseListener: MouseListener \lminSize: Dimension \lnewEventsOnly: boolean \lheight: int \lmouseMotionListener: MouseMotionListener \l-static FOCUS_TRAVERSABLE_UNKNOWN: int \lpopups: Vector \l-focusable: boolean \lstatic actionListenerK: String \lstatic focusListenerK: String \l+static TOP_ALIGNMENT: float \lstatic mouseWheelListenerK: String \lminSizeSet: boolean \l-isAddNotifyComplete: boolean \lwindowClosingException: RuntimeException \l#accessibleContext: AccessibleContext \l-static log: PlatformLogger \lenabled: boolean \l-valid: boolean \l-graphicsConfig: GraphicsConfiguration \l-static serialVersionUID: long \lpeer: ComponentPeer \lbufferStrategy: BufferStrategy \lstatic incRate: int \l-nameExplicitlySet: boolean \lstatic assertionsDisabled: boolean \l-static coalesceEventsParams: Class[] \l-static focusLog: PlatformLogger \linputMethodListener: InputMethodListener \l-isFocusTraversableOverridden: int \lstatic ownedWindowK: String \lx: int \lwidth: int \lappContext: AppContext \ly: int \leventMask: long \lfont: Font \l-acc: AccessControlContext \lstatic keyListenerK: String \lstatic componentListenerK: String \l-static mixingLog: PlatformLogger \lhierarchyBoundsListener: HierarchyBoundsListener \lstatic containerListenerK: String \lstatic hierarchyBoundsListenerK: String \lisPacked: boolean \l-objectLock: Object \l-boundsOp: int \lvisible: boolean \lstatic mouseMotionListenerK: String \lstatic isInc: boolean \lhierarchyListener: HierarchyListener \l-compoundShape: Region \l-focusTraversalKeysEnabled: boolean \lbackground: Color \l-name: String \lcomponentListener: ComponentListener \lfocusListener: FocusListener \l-static requestFocusController: RequestFocusController \lcursor: Cursor \lstatic windowListenerK: String \l+static BOTTOM_ALIGNMENT: float \lcomponentOrientation: ComponentOrientation \l-autoFocusTransferOnDisposal: boolean \lmaxSize: Dimension \lpeerFont: Font \llocale: Locale \lprefSizeSet: boolean \lkeyListener: KeyListener \lignoreRepaint: boolean \lstatic itemListenerK: String \lstatic textListenerK: String \lmouseWheelListener: MouseWheelListener \lstatic hierarchyListenerK: String \l+static RIGHT_ALIGNMENT: float \lfocusTraversalKeys: Set[] \l-static eventLog: PlatformLogger \lstatic inputMethodListenerK: String \l-static coalesceMap: Map \l-componentSerializedDataVersion: int \l+static CENTER_ALIGNMENT: float \lmaxSizeSet: boolean \l-changeSupport: PropertyChangeSupport \lprefSize: Dimension \l-static focusTraversalKeyPropertyNames: String[] \lstatic windowFocusListenerK: String \lbackgroundEraseDisabled: boolean \l+static LEFT_ALIGNMENT: float \lstatic windowStateListenerK: String \lstatic adjustmentListenerK: String \l | -notifyNewBounds(boolean,boole): void\lgetFont_NoClientCode(): Font\l+getLocation(Poi): Point\lrequestFocusInWindow(boolean,CausedFocusEventCau): boolean\l+isOpaque(): boolean\l#processComponentEvent(ComponentEve): void\l#processEvent(AWTEve): void\lisNonOpaqueForMixing(): boolean\l+paint(Graphi): void\l+getInputMethodListeners(): InputMethodListener[]\l+mouseDown(Event,int,i): boolean\l+getInputMethodRequests(): InputMethodRequests\lmixOnValidating(): void\l#paramString(): String\l+addHierarchyBoundsListener(HierarchyBoundsListen): void\l+getMinimumSize(): Dimension\l+getAlignmentY(): float\l#processMouseEvent(MouseEve): void\l+getAlignmentX(): float\lgetNextFocusCandidate(): Component\l+dispatchEvent(AWTEve): void\lstatic access400(Compone): Insets\lgetBackBuffer(): Image\l+reshape(int,int,int,i): void\l#\<init\>(): void\l#disableEvents(lo): void\l+postEvent(Eve): boolean\l-readObject(ObjectInputStre): void\lcreateBufferStrategy(int,BufferCapabiliti): void\l+contains(Poi): boolean\l+size(): Dimension\lgetContainingWindow(): Window\l+enableInputMethods(boole): void\l+mouseUp(Event,int,i): boolean\l#processMouseMotionEvent(MouseEve): void\lgetParent_NoClientCode(): Container\lclearCurrentFocusCycleRootOnHide(): void\l+addComponentListener(ComponentListen): void\lgetSiblingIndexAbove(): int\l+setName(Stri): void\l+removeInputMethodListener(InputMethodListen): void\l+removeHierarchyListener(HierarchyListen): void\lsubtractAndApplyShapeBelowMe(): void\l+getFontMetrics(Fo): FontMetrics\lcreateHierarchyEvents(int,Component,Container,long,boole): int\l+getHeight(): int\lgetNormalShape(): Region\l+getBaselineResizeBehavior(): ComponentBaselineResizeBehavior\l+getIgnoreRepaint(): boolean\l+removeMouseWheelListener(MouseWheelListen): void\lcanBeFocusOwner(): boolean\l+getPeer(): ComponentPeer\l-isRequestFocusAccepted(boolean,boolean,CausedFocusEventCau): boolean\l+applyComponentOrientation(ComponentOrientati): void\l+validate(): void\lapplyCurrentShape(): void\leventTypeEnabled(i): boolean\l+getParent(): Container\lstatic access500(Cla): boolean\l+isMinimumSizeSet(): boolean\lapplyCompoundShape(Regi): void\l+setComponentOrientation(ComponentOrientati): void\l-getRecursivelyVisibleBounds(): Rectangle\lautoProcessMouseWheel(MouseWheelEve): void\l+setBounds(Rectang): void\lisRecursivelyVisible(): boolean\lisMixingNeeded(): boolean\llightweightPaint(Graphi): void\l-applyCurrentShapeBelowMe(): void\ldispatchMouseWheelToAncestor(MouseWheelEve): boolean\l-getAppliedShape(): Region\l+addNotify(): void\l+addInputMethodListener(InputMethodListen): void\l+getFocusCycleRootAncestor(): Container\l+toString(): String\linvalidateParent(): void\l+getName(): String\lgetFocusTraversalKeys_NoIDCheck(i): Set\lareInputMethodsEnabled(): boolean\l+isFocusTraversable(): boolean\l+inside(int,i): boolean\l#processKeyEvent(KeyEve): void\l+getInputContext(): InputContext\l+getFocusTraversalKeys(i): Set\l+nextFocus(): void\l+isCursorSet(): boolean\l+getMouseWheelListeners(): MouseWheelListener[]\l+doLayout(): void\l+removeMouseMotionListener(MouseMotionListen): void\l+setVisible(boole): void\l+add(PopupMe): void\lconstructComponentName(): String\lclearMostRecentFocusOwnerOnHide(): void\l+removeKeyListener(KeyListen): void\l#processInputMethodEvent(InputMethodEve): void\lgetAccessibleIndexInParent(): int\l+isVisible(): boolean\l+setDropTarget(DropTarg): void\l+list(PrintWriter,i): void\l+removePropertyChangeListener(String,PropertyChangeListen): void\l-static isCoalesceEventsOverriden(Cla): boolean\l+revalidate(): void\l+removeNotify(): void\lsetAutoFocusTransferOnDisposal(boole): void\lrelocateComponent(): void\lstatic \<clinit\>(): void\lupdateZOrder(): void\l+gotFocus(Event,Obje): boolean\lmixOnShowing(): void\l+handleEvent(Eve): boolean\l+isForegroundSet(): boolean\l+show(boole): void\l+update(Graphi): void\l#processFocusEvent(FocusEve): void\l+setMaximumSize(Dimensi): void\l#coalesceEvents(AWTEvent,AWTEve): AWTEvent\l+remove(MenuCompone): void\l+imageUpdate(Image,int,int,int,int,i): boolean\l+addMouseWheelListener(MouseWheelListen): void\lprintHeavyweightComponents(Graphi): void\l+checkImage(Image,int,int,ImageObserv): int\lgetObjectLock(): Object\l+addKeyListener(KeyListen): void\l+getComponentListeners(): ComponentListener[]\l+isMaximumSizeSet(): boolean\l+addPropertyChangeListener(String,PropertyChangeListen): void\l-location_NoClientCode(): Point\l+getCursor(): Cursor\ladjustListeningChildrenOnParent(long,i): void\l+createImage(int,i): Image\l+mouseMove(Event,int,i): boolean\l+areFocusTraversalKeysSet(i): boolean\l+getKeyListeners(): KeyListener[]\lcheckWindowClosingException(): boolean\l+layout(): void\l+getBaseline(int,i): int\l+print(Graphi): void\l+getFocusListeners(): FocusListener[]\l+resize(Dimensi): void\l+createVolatileImage(int,int,ImageCapabiliti): VolatileImage\l+location(): Point\l+lostFocus(Event,Obje): boolean\l+getDropTarget(): DropTarget\l+keyDown(Event,i): boolean\l+getLocale(): Locale\lsubtractAndApplyShape(Regi): void\l+getHierarchyBoundsListeners(): HierarchyBoundsListener[]\lgetOpaqueShape(): Region\lsetGraphicsConfiguration(GraphicsConfigurati): void\l+getBounds(Rectang): Rectangle\l+setPreferredSize(Dimensi): void\l+enable(boole): void\lgetCursor_NoClientCode(): Cursor\l+getMousePosition(): Point\lpostsOldMouseEvents(): boolean\l+action(Event,Obje): boolean\lcountHierarchyMembers(): int\l+firePropertyChange(String,double,doub): void\lgetAccessControlContext(): AccessControlContext\lgetContainer(): Container\lstatic access002(Component,Regi): Region\l+addMouseMotionListener(MouseMotionListen): void\lgetBoundsOp(): int\l+setFocusable(boole): void\l+getComponentOrientation(): ComponentOrientation\l+getTreeLock(): Object\l+isBackgroundSet(): boolean\l+addHierarchyListener(HierarchyListen): void\l-doSwingSerialization(): void\l+setEnabled(boole): void\lrevalidateSynchronously(): void\l+isLightweight(): boolean\l+isEnabled(): boolean\l+minimumSize(): Dimension\lareBoundsValid(): boolean\l+bounds(): Rectangle\lnumListening(lo): int\lstatic isInstanceOf(Object,Stri): boolean\lcontainsFocus(): boolean\lisSameOrAncestorOf(Component,boole): boolean\l+repaint(long,int,int,int,i): void\l+getMouseMotionListeners(): MouseMotionListener[]\l+setMinimumSize(Dimensi): void\ltransferFocus(boole): boolean\l+getListeners(Cla): EventListener[]\lgetAccessibleStateSet(): AccessibleStateSet\lupdateGraphicsData(GraphicsConfigurati): boolean\l+getMaximumSize(): Dimension\lisVisible_NoClientCode(): boolean\l+getLocationOnScreen(): Point\l+keyUp(Event,i): boolean\l+getWidth(): int\lpointRelativeToComponent(Poi): Point\l-reshapeNativePeer(int,int,int,int,i): void\l+paintAll(Graphi): void\lpaintHeavyweightComponents(Graphi): void\l+setFocusTraversalKeys(int,S): void\l+hasFocus(): boolean\l+isPreferredSizeSet(): boolean\l+isDoubleBuffered(): boolean\l+getColorModel(): ColorModel\l#processHierarchyEvent(HierarchyEve): void\l+getPropertyChangeListeners(Stri): PropertyChangeListener[]\lstatic access100(Compone): Point\l+isValid(): boolean\lmixOnZOrderChanging(int,i): void\lmixOnHiding(boole): void\l+getFocusTraversalKeysEnabled(): boolean\linvalidateIfValid(): void\lsetFocusTraversalKeys_NoIDCheck(int,S): void\l+hide(): void\l+getPreferredSize(): Dimension\leventEnabled(AWTEve): boolean\l+disable(): void\lisFocusTraversableOverridden(): boolean\l+prepareImage(Image,int,int,ImageObserv): boolean\lupdateCursorImmediately(): void\l+isFocusable(): boolean\lgetLocationOnScreen_NoTreeLock(): Point\lsetBoundsOp(i): void\l-static initIDs(): void\lisEnabledImpl(): boolean\l+mouseExit(Event,int,i): boolean\l+getHierarchyListeners(): HierarchyListener[]\l+isShowing(): boolean\l+mouseEnter(Event,int,i): boolean\lgetSiblingIndexBelow(): int\l+mouseDrag(Event,int,i): boolean\l+preferredSize(): Dimension\lcheckTreeLock(): void\l+getMouseListeners(): MouseListener[]\lgetHWPeerAboveMe(): ComponentPeer\l+setFont(Fo): void\l-getInsets_NoClientCode(): Insets\l-writeObject(ObjectOutputStre): void\lgetTraversalRoot(): Container\lisAutoFocusTransferOnDisposal(): boolean\lgetLocationOnWindow(): Point\l+deliverEvent(Eve): void\lgetToolkitImpl(): Toolkit\l+getForeground(): Color\lgetNativeContainer(): Container\lmixOnReshaping(): void\llightweightPrint(Graphi): void\lfindUnderMouseInWindow(PointerIn): Component\l+getFont(): Font\l+setCursor(Curs): void\l+getGraphicsConfiguration(): GraphicsConfiguration\l+isDisplayable(): boolean\l+setLocale(Loca): void\l+removeComponentListener(ComponentListen): void\l-calculateCurrentShape(): Region\lrequestFocus(boolean,CausedFocusEventCau): boolean\l+locate(int,i): Component\l+addFocusListener(FocusListen): void\linitializeFocusTraversalKeys(): void\l+getComponentAt(Poi): Component\l#processHierarchyBoundsEvent(HierarchyEve): void\lstatic setRequestFocusController(RequestFocusControll): void\l+isFocusCycleRoot(Contain): boolean\l+setFocusTraversalKeysEnabled(boole): void\l+setBackground(Col): void\l+printAll(Graphi): void\l+getToolkit(): Toolkit\l+transferFocusUpCycle(): void\l+isFontSet(): boolean\l+setSize(Dimensi): void\l-repaintParentIfNeeded(int,int,int,i): void\l+setLocation(Poi): void\lisCoalescingEnabled(): boolean\lrequestFocusHelper(boolean,boolean,CausedFocusEventCau): boolean\lcheckGD(Stri): void\l+getGraphics(): Graphics\l+setIgnoreRepaint(boole): void\l+removeFocusListener(FocusListen): void\l#enableEvents(lo): void\ltransferFocusBackward(boole): boolean\lgetGraphicsConfiguration_NoClientCode(): GraphicsConfiguration\l+move(int,i): void\l+setForeground(Col): void\l+invalidate(): void\lgetBufferStrategy(): BufferStrategy\l+getAccessibleContext(): AccessibleContext\l-checkCoalescing(): boolean\l+isFocusOwner(): boolean\l+getSize(Dimensi): Dimension\l+getX(): int\lgetGraphics_NoClientCode(): Graphics\l+getY(): int\l+removeHierarchyBoundsListener(HierarchyBoundsListen): void\l#processMouseWheelEvent(MouseWheelEve): void\lcanBeFocusOwnerRecursively(): boolean\l+removeMouseListener(MouseListen): void\l+getBackground(): Color\ldispatchEventImpl(AWTEve): void\l+addMouseListener(MouseListen): void\l}"color = black
+style = filled 
+ fillcolor = chartreuse2
+]
+Vector [ 
+center=true
+    label="{Vector\n\<\<adaptee\>\>|-static serialVersionUID: long \l#capacityIncrement: int \l-static MAX_ARRAY_SIZE: int \l#elementData: Object[] \l#elementCount: int \l | +firstElement(): Object\l-static hugeCapacity(i): int\l+removeAll(Collecti): boolean\l+iterator(): Iterator\l+toArray(Object): Object[]\l+indexOf(Object,i): int\l+removeAllElements(): void\l+add(int,Obje): void\l-grow(i): void\l-ensureCapacityHelper(i): void\l+spliterator(): Spliterator\l-writeObject(ObjectOutputStre): void\l+copyInto(Object): void\l+sort(Comparat): void\l+\<init\>(Collecti): void\l+removeIf(Predica): boolean\l+contains(Obje): boolean\l+size(): int\l+lastElement(): Object\l+listIterator(): ListIterator\l+ensureCapacity(i): void\l+addElement(Obje): void\l+replaceAll(UnaryOperat): void\l+remove(i): Object\l+capacity(): int\l+setSize(i): void\l+setElementAt(Object,i): void\l+hashCode(): int\l+get(i): Object\l+elementAt(i): Object\l+removeElementAt(i): void\l#removeRange(int,i): void\l+subList(int,i): List\l+trimToSize(): void\l+set(int,Obje): Object\lelementData(i): Object\l+forEach(Consum): void\l+containsAll(Collecti): boolean\l+isEmpty(): boolean\l+clear(): void\l+lastIndexOf(Object,i): int\l+insertElementAt(Object,i): void\l+addAll(int,Collecti): boolean\l+elements(): Enumeration\l+equals(Obje): boolean\l+clone(): Object\l+toString(): String\l+removeElement(Obje): boolean\l+retainAll(Collecti): boolean\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+WindowFocusListener [ 
+center=true
+    label="{WindowFocusListener\n\<\<adaptee\>\>| | +abstract windowLostFocus(WindowEve): void\l+abstract windowGainedFocus(WindowEve): void\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+Accessible [ 
+center=true
+    label="{Accessible\n\<\<target\>\>| | +abstract getAccessibleContext(): AccessibleContext\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+Window [ 
+center=true
+    label="{Window\n\<\<composite\>\> \n\<\<target\>\> \n\<\<decorator\>\> \n\<\<adapter\>\>|-focusMgr: FocusManager \lparent: Container \lstatic mouseListenerK: String \l-coalescingEnabled: boolean \lisInShow: boolean \linputContext: InputContext \lstatic LOCK: Object \ldropTarget: DropTarget \l-mixingCutoutRegion: Region \lforeground: Color \l-type: WindowType \l-static FOCUS_TRAVERSABLE_DEFAULT: int \l-static FOCUS_TRAVERSABLE_SET: int \lmodalComp: Component \leventCache: EventQueueItem[] \lmouseListener: MouseListener \lminSize: Dimension \lstate: int \lnewEventsOnly: boolean \l-dispatcher: LightweightDispatcher \lheight: int \lmouseMotionListener: MouseMotionListener \l-weakThis: WeakReference \l-shape: Shape \l-static FOCUS_TRAVERSABLE_UNKNOWN: int \l-numOfLWComponents: int \lpopups: Vector \l-autoRequestFocus: boolean \l-focusable: boolean \lstatic actionListenerK: String \lstatic focusListenerK: String \l-static serialPersistentFields: ObjectStreamField[] \lshowWithParent: boolean \l-focusCycleRoot: boolean \l-focusTraversalPolicyProvider: boolean \l+static TOP_ALIGNMENT: float \lstatic mouseWheelListenerK: String \lisTrayIconWindow: boolean \lstatic OPENED: int \lminSizeSet: boolean \l-isAddNotifyComplete: boolean \lwindowClosingException: RuntimeException \l#accessibleContext: AccessibleContext \lmodalAppContext: AppContext \l-static log: PlatformLogger \l-static EMPTY_ARRAY: Component[] \l-alwaysOnTop: boolean \lstatic INCLUDE_SELF: boolean \lenabled: boolean \l-valid: boolean \l-static serialVersionUID: long \l-graphicsConfig: GraphicsConfiguration \lpeer: ComponentPeer \l-windowSerializedDataVersion: int \l-locationByPlatform: boolean \lcontainerListener: ContainerListener \lbufferStrategy: BufferStrategy \l-temporaryLostComponent: Component \lstatic incRate: int \lwindowStateListener: WindowStateListener \l-securityWarningWidth: int \l-nameExplicitlySet: boolean \lstatic assertionsDisabled: boolean \l-static coalesceEventsParams: Class[] \l-static beforeFirstWindowShown: AtomicBoolean \l-static focusLog: PlatformLogger \linputMethodListener: InputMethodListener \l-printing: boolean \llisteningBoundsChildren: int \lwindowFocusListener: WindowFocusListener \l-component: List \lpreserveBackgroundColor: Color \l-isFocusTraversableOverridden: int \lanchor: Object \lstatic ownedWindowK: String \l-securityWarningPointX: double \lx: int \lwidth: int \l-securityWarningPointY: double \lappContext: AppContext \ly: int \leventMask: long \l-containerSerializedDataVersion: int \l-opacity: float \lfont: Font \l-acc: AccessControlContext \lwarningString: String \lsyncLWRequests: boolean \lwindowListener: WindowListener \lstatic keyListenerK: String \lmodalExclusionType: DialogModalExclusionType \lstatic componentListenerK: String \l-static mixingLog: PlatformLogger \l-numOfHWComponents: int \lhierarchyBoundsListener: HierarchyBoundsListener \lstatic systemSyncLWRequests: boolean \lstatic containerListenerK: String \l-static nameCounter: int \lstatic hierarchyBoundsListenerK: String \lisPacked: boolean \l-inputContextLock: Object \l-objectLock: Object \llayoutMgr: LayoutManager \l-boundsOp: int \ldescendantsCount: int \lvisible: boolean \lstatic mouseMotionListenerK: String \lstatic isInc: boolean \l-securityWarningHeight: int \lhierarchyListener: HierarchyListener \l-compoundShape: Region \l-focusTraversalKeysEnabled: boolean \l-focusTraversalPolicy: FocusTraversalPolicy \lbackground: Color \l-name: String \lcomponentListener: ComponentListener \ldisposerRecord: WindowWindowDisposerRecord \lfocusListener: FocusListener \l-static requestFocusController: RequestFocusController \lcursor: Cursor \lstatic windowListenerK: String \l+static BOTTOM_ALIGNMENT: float \lcomponentOrientation: ComponentOrientation \l-autoFocusTransferOnDisposal: boolean \lmaxSize: Dimension \lpeerFont: Font \llocale: Locale \lprefSizeSet: boolean \lkeyListener: KeyListener \l-static isJavaAwtSmartInvalidate: boolean \lignoreRepaint: boolean \lstatic itemListenerK: String \lstatic textListenerK: String \lmodalBlocker: Dialog \lmouseWheelListener: MouseWheelListener \lstatic hierarchyListenerK: String \l-focusableWindowState: boolean \l+static RIGHT_ALIGNMENT: float \l-static locationByPlatformProp: boolean \lfocusTraversalKeys: Set[] \l-static eventLog: PlatformLogger \lstatic inputMethodListenerK: String \l-printingThreads: Set \l-static coalesceMap: Map \l-componentSerializedDataVersion: int \l+static CENTER_ALIGNMENT: float \lbeforeFirstShow: boolean \lmaxSizeSet: boolean \llisteningChildren: int \l-disposing: boolean \l-changeSupport: PropertyChangeSupport \licons: List \lprefSize: Dimension \l-static focusTraversalKeyPropertyNames: String[] \l-securityWarningAlignmentX: float \lstatic windowFocusListenerK: String \lbackgroundEraseDisabled: boolean \l-securityWarningAlignmentY: float \lownedWindowList: Vector \lstatic SEARCH_HEAVYWEIGHTS: boolean \l+static LEFT_ALIGNMENT: float \lstatic windowStateListenerK: String \l-static allWindows: IdentityArrayList \l-static descendUnconditionallyWhenValidating: boolean \l-static base: String \lstatic adjustmentListenerK: String \l | static getAllWindows(): IdentityArrayList\l+isOpaque(): boolean\lpostProcessKeyEvent(KeyEve): void\l-initDeserializedWindow(): void\l+setModalExclusionType(DialogModalExclusionTy): void\l#processEvent(AWTEve): void\lsetGraphicsConfiguration(GraphicsConfigurati): void\l-setWarningString(): void\l+paint(Graphi): void\l+removeWindowListener(WindowListen): void\l+getOwner(): Window\l-ownedInit(Wind): void\l+setIconImages(Li): void\l+getWindowStateListeners(): WindowStateListener[]\l-init(GraphicsConfigurati): void\lisDisposing(): boolean\lstatic access400(Wind): float\lgetContainer(): Container\l+setFocusableWindowState(boole): void\l+getMostRecentFocusOwner(): Component\lstatic access000(Wind): WeakReference\l+reshape(int,int,int,i): void\l+\<init\>(Window,GraphicsConfigurati): void\l+pack(): void\lstatic access802(Window,doub): double\l-setOwnedWindowsAlwaysOnTop(boole): void\ldoDispose(): void\l+toBack(): void\l+postEvent(Eve): boolean\l-readObject(ObjectInputStre): void\l+setLocationByPlatform(boole): void\lgetDocumentRoot(): Window\l+createBufferStrategy(int,BufferCapabiliti): void\l-updateWindow(): void\lisModalBlocked(): boolean\l+getType(): WindowType\l-deserializeResources(ObjectInputStre): void\lstatic access1200(Window,double,double,double,doub): Point2D\l+setMinimumSize(Dimensi): void\l+getModalExclusionType(): DialogModalExclusionType\lisModalExcluded(DialogModalExclusionTy): boolean\l+getListeners(Cla): EventListener[]\l#processWindowEvent(WindowEve): void\l#processWindowStateEvent(WindowEve): void\lremoveOwnedWindow(WeakReferen): void\ldeliverMouseWheelToAncestor(MouseWheelEve): void\ltoBack_NoClientCode(): void\lcanContainFocusOwner(Compone): boolean\lgetModalBlocker(): Dialog\l+removeWindowFocusListener(WindowFocusListen): void\l+addWindowListener(WindowListen): void\l+isAlwaysOnTopSupported(): boolean\l+addWindowStateListener(WindowStateListen): void\lapplyCurrentShape(): void\l+getIconImages(): List\l+getFocusableWindowState(): boolean\l-calculateSecurityWarningPosition(double,double,double,doub): Point2D\lstatic access500(Wind): void\lapplyCompoundShape(Regi): void\lupdateChildrenBlocking(): void\l+getWindowFocusListeners(): WindowFocusListener[]\laddOwnedWindow(WeakReferen): void\lstatic access100(AppContext,WeakReferen): void\ltoFront_NoClientCode(): void\lpostWindowEvent(i): void\lstatic access902(Window,doub): double\l+setBounds(Rectang): void\lisRecursivelyVisible(): boolean\l+static getWindows(): Window[]\l+hide(): void\l+isValidateRoot(): boolean\ldispatchMouseWheelToAncestor(MouseWheelEve): boolean\lsetClientSize(int,i): void\l+addNotify(): void\leventEnabled(AWTEve): boolean\lsetTemporaryLostComponent(Compone): Component\l+isFocusableWindow(): boolean\l+getFocusCycleRootAncestor(): Container\lstatic access1102(Window,flo): float\l+addWindowFocusListener(WindowFocusListen): void\l+setLocationRelativeTo(Compone): void\l-initGC(GraphicsConfigurati): GraphicsConfiguration\lgetTemporaryLostComponent(): Component\l+setIconImage(Ima): void\l-static initIDs(): void\l+isActive(): boolean\ladjustDecendantsOnParent(i): void\l-removeFromWindowList(): void\l+getInputContext(): InputContext\l+getFocusTraversalKeys(i): Set\l+getOpacity(): float\l+isShowing(): boolean\lsetModalBlocked(Dialog,boolean,boole): void\l-static limit(double,double,doub): double\l+isLocationByPlatform(): boolean\l+setAutoRequestFocus(boole): void\l+setVisible(boole): void\lstatic access600(Wind): int\lconstructComponentName(): String\lclearMostRecentFocusOwnerOnHide(): void\l+toFront(): void\lstatic access202(Window,boole): boolean\ldisposeImpl(): void\l+setFocusCycleRoot(boole): void\l-writeObject(ObjectOutputStre): void\l#processWindowFocusEvent(WindowEve): void\lgetLocationOnWindow(): Point\l+isFocused(): boolean\lconnectOwnedWindow(Wind): void\lstatic access602(Window,i): int\l+removeWindowStateListener(WindowStateListen): void\lmixOnReshaping(): void\l+removeNotify(): void\lstatic access1002(Window,flo): float\l+dispose(): void\l+setCursor(Curs): void\l+getWarningString(): String\l+static getOwnerlessWindows(): Window[]\lstatic \<clinit\>(): void\lupdateZOrder(): void\lstatic getAllUnblockedWindows(): IdentityArrayList\l+show(): void\l+isAlwaysOnTop(): boolean\l+getShape(): Shape\l+isFocusCycleRoot(): boolean\l+setBackground(Col): void\l+getToolkit(): Toolkit\l+setSize(int,i): void\lgetOwnedWindows_NoClientCode(): Window[]\l+setLocation(Poi): void\l+addPropertyChangeListener(String,PropertyChangeListen): void\l+getWindowListeners(): WindowListener[]\l+getOwnedWindows(): Window[]\lstatic access700(Wind): int\ladjustListeningChildrenOnParent(long,i): void\l-static setLayersOpaque(Component,boole): void\l+applyResourceBundle(Stri): void\lgetOwner_NoClientCode(): Window\lstatic access300(Wind): Object\l+setType(WindowTy): void\l+getBufferStrategy(): BufferStrategy\l+getAccessibleContext(): AccessibleContext\l+setShape(Sha): void\lstatic access702(Window,i): int\lcloseSplashScreen(): void\l-addToWindowList(): void\lstatic updateChildFocusableWindowState(Wind): void\l+setAlwaysOnTop(boole): void\l+isAutoRequestFocus(): boolean\lpreProcessKeyEvent(KeyEve): void\l+getFocusOwner(): Component\lstatic access1300(Wind): boolean\l+getLocale(): Locale\l+getBackground(): Color\ldispatchEventImpl(AWTEve): void\l+setOpacity(flo): void\l}"color = black
+style = filled 
+ fillcolor = chartreuse2
+]
+AbstractList [ 
+center=true
+    label="{AbstractList|#modCount: int \l | +add(int,Obje): void\l+subList(int,i): List\l+set(int,Obje): Object\l+clear(): void\l-outOfBoundsMsg(i): String\l#\<init\>(): void\l+remove(i): Object\l+lastIndexOf(Obje): int\l+iterator(): Iterator\l+addAll(int,Collecti): boolean\l-rangeCheckForAdd(i): void\l+hashCode(): int\l+abstract get(i): Object\l+equals(Obje): boolean\l#removeRange(int,i): void\l+listIterator(i): ListIterator\l+indexOf(Obje): int\l}"color = black
+style = filled 
+ fillcolor = white
+]
+WindowListener [ 
+center=true
+    label="{WindowListener\n\<\<adaptee\>\>| | +abstract windowDeactivated(WindowEve): void\l+abstract windowClosed(WindowEve): void\l+abstract windowOpened(WindowEve): void\l+abstract windowActivated(WindowEve): void\l+abstract windowClosing(WindowEve): void\l+abstract windowDeiconified(WindowEve): void\l+abstract windowIconified(WindowEve): void\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+Color [ 
+center=true
+    label="{Color\n\<\<Singleton\>\> \n\<\<adaptee\>\>|+static lightGray: Color \l+static magenta: Color \l+static GRAY: Color \l+static pink: Color \l+static BLUE: Color \l+static yellow: Color \l+static cyan: Color \l+static red: Color \l-static serialVersionUID: long \l+static gray: Color \l+static PINK: Color \l+static white: Color \l+static BLACK: Color \lvalue: int \l+static ORANGE: Color \l-falpha: float \l+static WHITE: Color \l+static green: Color \l+static black: Color \l-static FACTOR: double \l+static GREEN: Color \l+static RED: Color \l+static orange: Color \l-cs: ColorSpace \l-fvalue: float[] \l+static LIGHT_GRAY: Color \l+static blue: Color \l+static darkGray: Color \l-frgbvalue: float[] \l+static MAGENTA: Color \l+static YELLOW: Color \l+static DARK_GRAY: Color \l+static CYAN: Color \l | -static initIDs(): void\l+static decode(Stri): Color\l+createContext(ColorModel,Rectangle,Rectangle2D,AffineTransform,RenderingHin): PaintContext\l+getAlpha(): int\l+getColorComponents(ColorSpace,float): float[]\l+getRed(): int\l+darker(): Color\l+getRGBComponents(float): float[]\l+hashCode(): int\l+getComponents(ColorSpace,float): float[]\l-static testColorValueRange(float,float,float,flo): void\l+getRGB(): int\l+static RGBtoHSB(int,int,int,float): float[]\l+static getHSBColor(float,float,flo): Color\l+brighter(): Color\l+static getColor(String,i): Color\l+static HSBtoRGB(float,float,flo): int\l+\<init\>(ColorSpace,float[],flo): void\l+getBlue(): int\l+getColorSpace(): ColorSpace\l+getRGBColorComponents(float): float[]\l+getTransparency(): int\l+getGreen(): int\l+equals(Obje): boolean\l+toString(): String\lstatic \<clinit\>(): void\l}"style = filled 
+ color = blue
+style = filled 
+ fillcolor = white
+]
+AppContext [ 
+center=true
+    label="{AppContext\n\<\<Singleton\>\> \n\<\<adaptee\>\>|-static numAppContexts: AtomicInteger \l-static log: PlatformLogger \l-changeSupport: PropertyChangeSupport \l+static DISPOSED_PROPERTY_NAME: String \l-DISPOSAL_TIMEOUT: long \l+static EVENT_QUEUE_LOCK_KEY: Object \l+static EVENT_QUEUE_COND_KEY: Object \l-static threadGroup2appContext: Map \l+static EVENT_QUEUE_KEY: Object \l-threadGroup: ThreadGroup \l-mostRecentKeyValue: MostRecentKeyValue \l-contextClassLoader: ClassLoader \l-static mainAppContext: AppContext \l-static threadAppContext: ThreadLocal \l+static GUI_DISPOSED: String \l-state: AppContextState \l-THREAD_INTERRUPT_TIMEOUT: long \l-shadowMostRecentKeyValue: MostRecentKeyValue \l-static getAppContextLock: Object \l-table: Map \l | -static getExecutionAppContext(): AppContext\l+getThreadGroup(): ThreadGroup\l+static isMainContext(AppConte): boolean\l-static initMainAppContext(): void\l+put(Object,Obje): Object\l+remove(Obje): Object\l+get(Obje): Object\l+isDisposed(): boolean\l+addPropertyChangeListener(String,PropertyChangeListen): void\lstatic access700(): PlatformLogger\lstatic access600(): ThreadLocal\lstatic access500(): Map\l+getPropertyChangeListeners(Stri): PropertyChangeListener[]\lstatic access400(): void\lstatic access102(AppConte): AppContext\lstatic access300(): AtomicInteger\lstatic access200(): Object\lstatic access100(): AppContext\l\<init\>(ThreadGro): void\l+removePropertyChangeListener(String,PropertyChangeListen): void\lstatic access900(): AppContext\lstatic access800(AppConte): ThreadGroup\l+static getSoftReferenceValue(Object,Suppli): Object\l+static getAppContexts(): Set\l+getContextClassLoader(): ClassLoader\l+dispose(): void\lstatic stopEventDispatchThreads(): void\l+toString(): String\l+static getAppContext(): AppContext\lstatic \<clinit\>(): void\l}"style = filled 
+ color = blue
+style = filled 
+ fillcolor = white
+]
+InputContext [ 
+center=true
+    label="{InputContext\n\<\<adaptee\>\>| | +dispatchEvent(AWTEve): void\l+reconvert(): void\l+getInputMethodControlObject(): Object\l#\<init\>(): void\l+setCharacterSubsets(CharacterSubset): void\l+isCompositionEnabled(): boolean\l+setCompositionEnabled(boole): void\l+endComposition(): void\l+removeNotify(Compone): void\l+dispose(): void\l+static getInstance(): InputContext\l+selectInputMethod(Loca): boolean\l+getLocale(): Locale\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+RandomAccess [ 
+center=true
+    label="{RandomAccess| | }"color = black
+style = filled 
+ fillcolor = white
+]
+AtomicBoolean [ 
+center=true
+    label="{AtomicBoolean\n\<\<adaptee\>\>|-static serialVersionUID: long \l-static unsafe: Unsafe \l-static valueOffset: long \l-value: int \l | +set(boole): void\l+compareAndSet(boolean,boole): boolean\l+weakCompareAndSet(boolean,boole): boolean\l+get(): boolean\l+lazySet(boole): void\l+toString(): String\l+getAndSet(boole): boolean\l+\<init\>(): void\lstatic \<clinit\>(): void\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+LayoutManager [ 
+center=true
+    label="{LayoutManager| | +abstract preferredLayoutSize(Contain): Dimension\l+abstract removeLayoutComponent(Compone): void\l+abstract minimumLayoutSize(Contain): Dimension\l+abstract layoutContainer(Contain): void\l+abstract addLayoutComponent(String,Compone): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+ObjectStreamField [ 
+center=true
+    label="{ObjectStreamField|-field: Field \l-offset: int \l-signature: String \l-unshared: boolean \l-name: String \l-type: Class \l | +getName(): String\l+getOffset(): int\lgetField(): Field\lgetSignature(): String\l+compareTo(Obje): int\l-static getClassSignature(Cla): String\l\<init\>(Field,boolean,boole): void\l+getTypeString(): String\l+getType(): Class\l#setOffset(i): void\l+toString(): String\l+isUnshared(): boolean\l+isPrimitive(): boolean\l+getTypeCode(): char\l}"color = black
+style = filled 
+ fillcolor = white
+]
+ContainerListener [ 
+center=true
+    label="{ContainerListener| | +abstract componentAdded(ContainerEve): void\l+abstract componentRemoved(ContainerEve): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+PlatformLogger [ 
+center=true
+    label="{PlatformLogger\n\<\<adaptee\>\>|-static ALL: int \l-static DEFAULT_LEVEL: PlatformLoggerLevel \l-static SEVERE: int \l-static FINER: int \l-static loggingEnabled: boolean \l-static loggers: Map \l-static FINEST: int \l-static INFO: int \l-static WARNING: int \l-javaLoggerProxy: PlatformLoggerJavaLoggerProxy \l-static OFF: int \l-static CONFIG: int \l-loggerProxy: PlatformLoggerLoggerProxy \l-static FINE: int \l | +isLoggable(PlatformLoggerLev): boolean\l+getName(): String\l+level(): PlatformLoggerLevel\lstatic access000(): PlatformLoggerLevel\l+static getLogger(Stri): PlatformLogger\l-redirectToJavaLoggerProxy(): void\l-\<init\>(Stri): void\l+setLevel(PlatformLoggerLev): void\l+finest(String,Object): void\l+static redirectPlatformLoggers(): void\l+fine(String,Object): void\l+finer(String,Object): void\l+isEnabled(): boolean\l+severe(String,Object): void\l+warning(String,Object): void\l+config(String,Object): void\l+info(String,Object): void\lstatic \<clinit\>(): void\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+Window -> WindowListener[arrowhead = vee, style = dotted]
+Window -> FocusTraversalPolicy[arrowhead = vee, style = dotted]
+Window -> FocusManager[arrowhead = vee, style = dotted]
+Window -> WindowFocusListener [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> WeakReference[arrowhead = vee, style = dotted]
+Window -> Container [arrowhead = onormal]
+Window -> PlatformLogger [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> Component[arrowhead = vee, style = dotted]
+Window -> Vector [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> AtomicBoolean [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> Shape [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> List [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> Window[arrowhead = vee, style = dotted]
+Window -> PlatformLogger[arrowhead = vee, style = dotted]
+Window -> IdentityArrayList[arrowhead = vee, style = dotted]
+Window -> WeakReference [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> Color[arrowhead = vee, style = dotted]
+Window -> AppContext[arrowhead = vee, style = dotted]
+Window -> FocusManager [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> InputContext [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> Accessible[arrowhead = onormal,style = dotted]
+Window -> WindowStateListener [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> Container[arrowhead = vee, style = dotted]
+Window -> WindowStateListener[arrowhead = vee, style = dotted]
+Window -> AtomicBoolean[arrowhead = vee, style = dotted]
+Window -> Window[arrowhead = vee]
+Window -> Dialog [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> IdentityArrayList [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> WindowListener [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> Component [arrowhead = vee,label="\<\<Adapts\>\>"]
+Window -> List[arrowhead = vee, style = dotted]
+Window -> Dialog[arrowhead = vee, style = dotted]
+Window -> WindowFocusListener[arrowhead = vee, style = dotted]
+Window -> Vector[arrowhead = vee, style = dotted]
+Window -> InputContext[arrowhead = vee, style = dotted]
+AbstractList -> List[arrowhead = vee, style = dotted]
+AbstractList -> List[arrowhead = onormal,style = dotted]
+AbstractList -> AbstractList[arrowhead = vee, style = dotted]
+IdentityArrayList -> List[arrowhead = onormal,style = dotted]
+IdentityArrayList -> AbstractList [arrowhead = onormal]
+IdentityArrayList -> RandomAccess[arrowhead = onormal,style = dotted]
+IdentityArrayList -> AbstractList[arrowhead = vee, style = dotted]
+IdentityArrayList -> IdentityArrayList[arrowhead = vee, style = dotted]
+WindowListener -> EventListener[arrowhead = onormal,style = dotted]
+WindowStateListener -> EventListener[arrowhead = onormal,style = dotted]
+FocusManager -> Serializable[arrowhead = onormal,style = dotted]
+FocusManager -> Container[arrowhead = vee]
+FocusManager -> Component[arrowhead = vee]
+Color -> Serializable[arrowhead = onormal,style = dotted]
+Color -> Color[arrowhead = vee, style = dotted]
+Color -> Color[arrowhead = vee]
+AppContext -> AppContext[arrowhead = vee]
+AppContext -> PlatformLogger[arrowhead = vee, style = dotted]
+AppContext -> PlatformLogger[arrowhead = vee]
+AppContext -> Set[arrowhead = vee, style = dotted]
+AppContext -> AppContext[arrowhead = vee, style = dotted]
+Unsafe -> Unsafe[arrowhead = vee, style = dotted]
+Unsafe -> Unsafe[arrowhead = vee]
+FocusTraversalPolicy -> FocusTraversalPolicy[arrowhead = vee, style = dotted]
+FocusTraversalPolicy -> Window[arrowhead = vee, style = dotted]
+LightweightDispatcher -> LightweightDispatcher[arrowhead = vee, style = dotted]
+LightweightDispatcher -> Serializable[arrowhead = onormal,style = dotted]
+LightweightDispatcher -> Component[arrowhead = vee, style = dotted]
+LightweightDispatcher -> Container[arrowhead = vee, style = dotted]
+LightweightDispatcher -> WeakReference[arrowhead = vee, style = dotted]
+LightweightDispatcher -> PlatformLogger[arrowhead = vee, style = dotted]
+LightweightDispatcher -> Window[arrowhead = vee, style = dotted]
+LightweightDispatcher -> Container[arrowhead = vee]
+LightweightDispatcher -> WeakReference[arrowhead = vee]
+LightweightDispatcher -> Component[arrowhead = vee]
+LightweightDispatcher -> PlatformLogger[arrowhead = vee]
+LightweightDispatcher -> AppContext[arrowhead = vee, style = dotted]
+AtomicBoolean -> Unsafe[arrowhead = vee, style = dotted]
+AtomicBoolean -> Serializable[arrowhead = onormal,style = dotted]
+AtomicBoolean -> AtomicBoolean[arrowhead = vee, style = dotted]
+AtomicBoolean -> Unsafe[arrowhead = vee]
+Container -> FocusTraversalPolicy[arrowhead = vee, style = dotted]
+Container -> ContainerListener[arrowhead = vee]
+Container -> AppContext [arrowhead = vee,label="\<\<Adapts\>\>"]
+Container -> Container[arrowhead = vee, style = dotted]
+Container -> Component [arrowhead = onormal]
+Container -> ObjectStreamField[arrowhead = vee, style = dotted]
+Container -> LightweightDispatcher [arrowhead = vee,label="\<\<Adapts\>\>"]
+Container -> LayoutManager[arrowhead = vee, style = dotted]
+Container -> ContainerListener[arrowhead = vee, style = dotted]
+Container -> PlatformLogger [arrowhead = vee,label="\<\<Adapts\>\>"]
+Container -> Set[arrowhead = vee, style = dotted]
+Container -> Set[arrowhead = vee]
+Container -> List[arrowhead = vee, style = dotted]
+Container -> LightweightDispatcher[arrowhead = vee, style = dotted]
+Container -> Component[arrowhead = vee, style = dotted]
+Container -> Accessible[arrowhead = vee, style = dotted]
+Container -> LayoutManager[arrowhead = vee]
+Container -> PlatformLogger[arrowhead = vee, style = dotted]
+Container -> Window[arrowhead = vee, style = dotted]
+Container -> FocusTraversalPolicy [arrowhead = vee,label="\<\<Adapts\>\>"]
+Container -> List[arrowhead = vee]
+Container -> Component [arrowhead = vee,label="\<\<Decorates\>\>"]
+Container -> AppContext[arrowhead = vee, style = dotted]
+Container -> Color [arrowhead = vee,label="\<\<Adapts\>\>"]
+Dialog -> Container[arrowhead = vee, style = dotted]
+Dialog -> Window[arrowhead = vee]
+Dialog -> WeakReference[arrowhead = vee, style = dotted]
+Dialog -> Dialog [arrowhead = vee,label="\<\<Adapts\>\>"]
+Dialog -> IdentityArrayList [arrowhead = vee,label="\<\<Adapts\>\>"]
+Dialog -> Set[arrowhead = vee, style = dotted]
+Dialog -> Window [arrowhead = onormal]
+Dialog -> List[arrowhead = vee, style = dotted]
+Dialog -> Component[arrowhead = vee, style = dotted]
+Dialog -> Dialog[arrowhead = vee, style = dotted]
+Dialog -> Window[arrowhead = vee, style = dotted]
+Dialog -> IdentityArrayList[arrowhead = vee, style = dotted]
+Dialog -> Color[arrowhead = vee, style = dotted]
+Dialog -> Vector[arrowhead = vee, style = dotted]
+Dialog -> AppContext[arrowhead = vee, style = dotted]
+ObjectStreamField -> ObjectStreamField[arrowhead = vee, style = dotted]
+ContainerListener -> EventListener[arrowhead = onormal,style = dotted]
+List -> List[arrowhead = vee, style = dotted]
+Component -> Serializable[arrowhead = onormal,style = dotted]
+Component -> AppContext[arrowhead = vee]
+Component -> FocusTraversalPolicy[arrowhead = vee, style = dotted]
+Component -> Container[arrowhead = vee, style = dotted]
+Component -> Color[arrowhead = vee]
+Component -> Set[arrowhead = vee, style = dotted]
+Component -> Component[arrowhead = vee, style = dotted]
+Component -> Dialog[arrowhead = vee, style = dotted]
+Component -> Accessible[arrowhead = vee, style = dotted]
+Component -> Vector[arrowhead = vee]
+Component -> Window[arrowhead = vee, style = dotted]
+Component -> PlatformLogger[arrowhead = vee, style = dotted]
+Component -> Container[arrowhead = vee]
+Component -> PlatformLogger[arrowhead = vee]
+Component -> Vector[arrowhead = vee, style = dotted]
+Component -> AppContext[arrowhead = vee, style = dotted]
+Component -> InputContext[arrowhead = vee, style = dotted]
+PlatformLogger -> WeakReference[arrowhead = vee, style = dotted]
+PlatformLogger -> PlatformLogger[arrowhead = vee, style = dotted]
+PlatformLogger -> Set[arrowhead = vee, style = dotted]
+Vector -> Serializable[arrowhead = onormal,style = dotted]
+Vector -> List[arrowhead = onormal,style = dotted]
+Vector -> AbstractList [arrowhead = onormal]
+Vector -> RandomAccess[arrowhead = onormal,style = dotted]
+Vector -> AbstractList[arrowhead = vee, style = dotted]
+Vector -> Vector[arrowhead = vee, style = dotted]
+WindowFocusListener -> EventListener[arrowhead = onormal,style = dotted]
+
+
+}
