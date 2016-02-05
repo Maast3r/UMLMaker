@@ -41,8 +41,8 @@ public class FirstASM {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String line = "";
 		System.out.print("UMLMaker>");
-//		line = in.readLine();
-		line  = comp;
+		line = in.readLine();
+//		line  = comp;
 		if (line == null || line.length() == 0 || !line.contains(" "))
 			throw new IOException("FORMAT ERROR: Empty command is not supported!");
 		String command = line.split(" ")[0];
