@@ -14,12 +14,13 @@ public class TypeDetector {
 		this.detectors.add(new SingletonDetector(this.ark));
 		this.detectors.add(new DecoratorDetector(this.ark));
 		this.detectors.add(new AdapterDetector(this.ark));
+		this.detectors.add(new CompositeDetector(this.ark));
 	}
 	
 	public HashSet<String> getType(){
 		HashSet<String> result = new HashSet<String>();
 		for(AbstractDetector ad : this.detectors){
-				result.addAll(ad.getType(this.cName));
+			result.addAll(ad.getType(this.cName));
 		}
 		return result;
 	}

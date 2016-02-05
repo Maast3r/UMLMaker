@@ -1,6 +1,8 @@
 package src;
 
 
+import java.util.Arrays;
+
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Type;
 
@@ -20,6 +22,11 @@ public class ClassFieldVisitor extends ClassVisitorBuffered {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		String type = Type.getType(desc).getClassName();
 		String pkg = "";
+		String sig = "";
+		if(Type.getType(signature).getClassName().contains(".")){
+			String sign[] = Type.getType(signature).getClassName().split("\\.");
+			sig = sign[sign.length-1];
+		}
 		if(type.contains(".")){
 			String[] temparray = type.split("\\.");
 			type = temparray[temparray.length - 1];
@@ -42,7 +49,7 @@ public class ClassFieldVisitor extends ClassVisitorBuffered {
 		}
 		String symbol= getAccessModifier(access);
 		
-		this.ark.getBoat().get(this.className).addField(name, new FieldPrototype(symbol, name, type));
+		this.ark.getBoat().get(this.className).addField(name, new FieldPrototype(symbol, name, type, sig));
 		return toDecorate;
 	}
 }

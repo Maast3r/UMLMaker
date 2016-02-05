@@ -1,0 +1,81 @@
+digraph G{
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+
+node [
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+
+ shape = "record"
+]
+edge [
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+]
+Ellipse [ 
+center=true
+    label="{Ellipse\n\<\<leaf\>\>| | +print(): void\l+\<init\>(): void\l}"color = black
+style = filled 
+ fillcolor = yellow
+]
+GraphicExtendsLeaf [ 
+center=true
+    label="{GraphicExtendsLeaf\n\<\<leaf\>\>| | +\<init\>(): void\l}"color = black
+style = filled 
+ fillcolor = yellow
+]
+Program [ 
+center=true
+    label="{Program| | +static main(String): void\l+\<init\>(): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+Graphic [ 
+center=true
+    label="{Graphic\n\<\<target\>\> \n\<\<composite component\>\>| | +abstract print(): void\l}"color = black
+style = filled 
+ fillcolor = yellow
+]
+AbstractGraphic [ 
+center=true
+    label="{AbstractGraphic\n\<\<composite component\>\>| | +\<init\>(): void\l}"color = black
+style = filled 
+ fillcolor = yellow
+]
+Collection [ 
+center=true
+    label="{Collection| | +abstract add(Obje): boolean\l+spliterator(): Spliterator\l+abstract containsAll(Collecti): boolean\l+abstract isEmpty(): boolean\l+abstract clear(): void\l+abstract remove(Obje): boolean\l+removeIf(Predica): boolean\l+abstract contains(Obje): boolean\l+abstract iterator(): Iterator\l+abstract removeAll(Collecti): boolean\l+abstract size(): int\l+abstract addAll(Collecti): boolean\l+stream(): Stream\l+abstract hashCode(): int\l+abstract equals(Obje): boolean\l+abstract toArray(Object): Object[]\l+parallelStream(): Stream\l+abstract retainAll(Collecti): boolean\l}"color = black
+style = filled 
+ fillcolor = white
+]
+CompositeGraphic [ 
+center=true
+    label="{CompositeGraphic\n\<\<composite\>\> \n\<\<adapter\>\>|-childGraphics: List \l-c: List \l | +add(Graph): void\l+print(): void\l\<init\>(): void\l+remove(Graph): void\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+List [ 
+center=true
+    label="{List\n\<\<adaptee\>\>| | +abstract add(int,Obje): void\l+abstract subList(int,i): List\l+abstract set(int,Obje): Object\l+spliterator(): Spliterator\l+abstract containsAll(Collecti): boolean\l+abstract isEmpty(): boolean\l+abstract clear(): void\l+sort(Comparat): void\l+replaceAll(UnaryOperat): void\l+abstract remove(i): Object\l+abstract lastIndexOf(Obje): int\l+abstract contains(Obje): boolean\l+abstract iterator(): Iterator\l+abstract removeAll(Collecti): boolean\l+abstract size(): int\l+abstract addAll(int,Collecti): boolean\l+abstract hashCode(): int\l+abstract equals(Obje): boolean\l+abstract get(i): Object\l+abstract toArray(Object): Object[]\l+abstract listIterator(i): ListIterator\l+abstract indexOf(Obje): int\l+abstract retainAll(Collecti): boolean\l}"color = black
+style = filled 
+ fillcolor = firebrick
+]
+GraphicExtendsLeaf -> AbstractGraphic[arrowhead = vee, style = dotted]
+GraphicExtendsLeaf -> AbstractGraphic [arrowhead = onormal]
+Ellipse -> Graphic[arrowhead = onormal,style = dotted]
+Program -> CompositeGraphic[arrowhead = vee, style = dotted]
+Program -> Ellipse[arrowhead = vee, style = dotted]
+Collection -> Collection[arrowhead = vee, style = dotted]
+CompositeGraphic -> List[arrowhead = vee, style = dotted]
+CompositeGraphic -> AbstractGraphic[arrowhead = vee, style = dotted]
+CompositeGraphic -> Graphic[arrowhead = onormal,style = dotted]
+CompositeGraphic -> Graphic[arrowhead = vee, style = dotted]
+CompositeGraphic -> AbstractGraphic[arrowhead = vee]
+CompositeGraphic -> List [arrowhead = vee,label="\<\<Adapts\>\>"]
+CompositeGraphic -> AbstractGraphic [arrowhead = onormal]
+CompositeGraphic -> Graphic[arrowhead = vee]
+List -> List[arrowhead = vee, style = dotted]
+List -> Collection[arrowhead = onormal,style = dotted]
+
+
+}

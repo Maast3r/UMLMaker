@@ -22,6 +22,9 @@ public class TypeDecorator extends TypeDetector{
 		this.typeToFill.put("adapter", "firebrick");
 		this.typeToFill.put("adaptee", "firebrick");
 		this.typeToFill.put("target", "firebrick");
+		this.typeToFill.put("composite component", "yellow");
+		this.typeToFill.put("composite", "yellow");
+		this.typeToFill.put("leaf", "yellow");
 		
 		this.typeToName.put("", "");
 		this.typeToName.put("singleton", "\\n\\<\\<Singleton\\>\\>");
@@ -30,6 +33,9 @@ public class TypeDecorator extends TypeDetector{
 		this.typeToName.put("adapter", "\\n\\<\\<adapter\\>\\>");
 		this.typeToName.put("adaptee", "\\n\\<\\<adaptee\\>\\>");
 		this.typeToName.put("target", "\\n\\<\\<target\\>\\>");
+		this.typeToName.put("composite component",  "\\n\\<\\<composite component\\>\\>");
+		this.typeToName.put("composite", "\\n\\<\\<composite\\>\\>");
+		this.typeToName.put("leaf", "\\n\\<\\<leaf\\>\\>");
 	}
 	
 	public String getColor(){
@@ -48,7 +54,10 @@ public class TypeDecorator extends TypeDetector{
 	
 	public HashSet<String> getType(){
 		HashSet<String> result = new HashSet<String>();
+//		System.out.println("asdlfja;lsdfjk " + this.typeDetector.getType());
 		for(String s : this.typeDetector.getType()){
+//			System.out.println("get type " + s);
+			if(s.equals("composite component")) System.out.println("wtf?!?!?!!??!?!?!?!?!?!?!?!?!?");
 			result.add(this.typeToName.get(s));
 			
 		}

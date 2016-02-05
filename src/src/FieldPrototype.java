@@ -4,11 +4,13 @@ public class FieldPrototype {
 	public String symbol;
 	public String name;
 	public String type;
+	public String sig;
 	
-	public FieldPrototype(String symbol, String name, String type) {
+	public FieldPrototype(String symbol, String name, String type, String sig) {
 		this.symbol = symbol;
 		this.name = name;
 		this.type = type;
+		this.sig = sig;
 	}
 	
 	public String prepareUML(){

@@ -23,12 +23,20 @@ public class DotAssociationVisitor extends ClassVisitorBuffered {
 			Object value){
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		String type = Type.getType(desc).getClassName();
+		
 		if(type.contains(".")){
 			String[] temparray = type.split("\\.");
 			type = temparray[temparray.length - 1];
 		}
 		String symbol= getAccessModifier(access);
+		String sig = "";
+		if(Type.getType(signature).getClassName().contains(".")){
+			String sign[] = Type.getType(signature).getClassName().split("\\.");
+			sig = sign[sign.length-1];
+		}
 		
+		// need to return inside type
+		buf.append(sig + "\n");
 		buf.append(type + "\n");
 		return toDecorate;
 	}

@@ -28,6 +28,7 @@ public class FirstASM {
 	private static String single = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\singletons";
 	private static String lab2one = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab2one";
 	private static String lab5one = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab5one";
+	private static String comp = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\composite";
 	private static String testerino = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
 	private static String testerino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 5";
 	private static String testerino3 = "sequence java.util Collections shuffle List 5";
@@ -40,8 +41,8 @@ public class FirstASM {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String line = "";
 		System.out.print("UMLMaker>");
-		line = in.readLine();
-//		line  = single;
+//		line = in.readLine();
+		line  = comp;
 		if (line == null || line.length() == 0 || !line.contains(" "))
 			throw new IOException("FORMAT ERROR: Empty command is not supported!");
 		String command = line.split(" ")[0];
@@ -386,12 +387,14 @@ public class FirstASM {
 		String name = className;
 		String[] lines = buf.toString().split("\n");
 
+		
 		if (name.contains("/")) {
 			int len = name.split("/").length;
 			name = name.split("/")[len - 1];
 		}
 
 		for (String s : lines) {
+			System.out.println("Checking for association: " + s);
 			if (s.contains("/")) {
 				int len = s.split("/").length;
 				s = s.split("/")[len - 1];
