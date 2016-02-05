@@ -29,6 +29,14 @@ Milestone 4
 After our Milestone 3 meeting with Dr. Hays, we realized that we still had a lot of work to accomplish. We started this milestone by cleaning up, fixing, and enhancing the capabilities of our UMLMaker. We finally got sequence diagrams to come out 100% correctly by 1/20.
 <br /><br />
 Adding Singleton detection was fairly easy. The two key identifiers in a Singleton class are that it has itself has a static field, and has a method which returns itself. If a class meets these two requirements, it is a Singleton and we color it blue and add a \<Singleton\> marker. We made sure to test both the lazy and eager singleton initializations.
+<br /><br />
+Milestone 5
+<br /><br />
+We refactored our code in order to add Pattern Detectors and Pattern Decorators.
+<br /><br />
+Milestone 6
+<br /><br />
+We added multiple color functionality (for multiple patterns) and added a composite pattern detector.
 
 #Who Did What
 Andrew:
