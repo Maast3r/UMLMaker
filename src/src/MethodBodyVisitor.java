@@ -14,17 +14,19 @@ public class MethodBodyVisitor extends MethodVisitor{
 	public NoahsArk ark;
 	public String inputMethodName;
 	public String inputArgs;
+	public String methodName;
 	
 	public MethodBodyVisitor(int arg0){
 		super(arg0);
 	}
 
-	public MethodBodyVisitor(int arg0, MethodVisitor arg1, String className, NoahsArk ark, String inputMethodName, String inputArgs) {
+	public MethodBodyVisitor(int arg0, MethodVisitor arg1, String className, NoahsArk ark, String inputMethodName, String inputArgs, String methodName) {
 		super(arg0, arg1);
 		this.className = className;
 		this.ark = ark;
 		this.inputMethodName = inputMethodName;
 		this.inputArgs = inputArgs;
+		this.methodName = methodName;
 	}
 	
 	public MethodBodyVisitor(int asm5, MethodVisitor toDecorate) {
@@ -40,9 +42,9 @@ public class MethodBodyVisitor extends MethodVisitor{
 		}
 		this.owner = owner;
 		if(this.ark.getCmd().equals(("uml")))this.ark.addPair(this.className, "#" + this.owner);
-		if(name.equals("toArray")){
-
-		}
+		
+		ark.getBoat().get(this.className).methods.get(methodName).typesSeen.add(owner);
+		
 		if(this.ark.getCmd().equals(("sequence"))){
 			ark.newNodes.add("/" + className + "#" + owner);
 			if(name.equals("<init>")){

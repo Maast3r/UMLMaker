@@ -61,7 +61,7 @@ public class DotMethodVisitor extends ClassVisitorBuffered {
 		MethodVisitor test = null;
 		if((this.ark.getCmd().equals("sequence") && this.inputMethodName.equals(name) && this.inputArgs.equals(args))
 				|| this.ark.getCmd().equals("uml")){
-			test = new MethodBodyVisitor(Opcodes.ASM5, toDecorate, this.className, this.ark, this.inputMethodName, this.inputArgs);
+			test = new MethodBodyVisitor(Opcodes.ASM5, toDecorate, this.className, this.ark, this.inputMethodName, this.inputArgs, name);
 		}
 		
 		
@@ -76,6 +76,13 @@ public class DotMethodVisitor extends ClassVisitorBuffered {
 		}
 		if(this.ark.getBoat().get(this.className) != null)this.ark.getBoat().get(this.className).addMethod(name, new MethodPrototype(symbol, name, args, returnName));
 		
+		for(String s : classNames){
+			System.out.println("arg s " + s);
+			if(s.contains(".")) s = s.split("\\.")[s.split("\\.").length-1];
+			if(s.contains("[")) s = s.replace("[", "");
+			if(s.contains("]")) s = s.replace("]", "");
+			this.ark.getBoat().get(this.className).methods.get(name).typesSeen.add(s);
+		}
 		return test;
 	}
 	

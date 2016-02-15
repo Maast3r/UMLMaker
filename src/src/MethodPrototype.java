@@ -1,13 +1,14 @@
 package src;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
+
 
 public class MethodPrototype {
 	public String access;
 	public String name;
 	public String args;
 	public String returnType;
+	public HashSet<String> typesSeen;
 	
 	public MethodPrototype(String access, String name, String args,
 			String returnType){
@@ -15,6 +16,7 @@ public class MethodPrototype {
 		this.name = name;
 		this.args = args;
 		this.returnType = returnType;
+		this.typesSeen = new HashSet<String>();
 	}
 	
 	public String prepareUML(){
@@ -24,5 +26,6 @@ public class MethodPrototype {
 	public boolean getIsStaticAndSame(String whateverYouWant){
 		return this.access.contains("static") && this.returnType.equals(whateverYouWant);
 	}
+	
 	
 }

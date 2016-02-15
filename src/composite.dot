@@ -34,7 +34,7 @@ Graphic [
 center=true
     label="{Graphic\n\<\<target\>\> \n\<\<composite component\>\>| | +abstract print(): void\l}"color = black
 style = filled 
- fillcolor = yellow
+ fillcolor = orange
 ]
 AbstractGraphic [ 
 center=true
@@ -52,13 +52,13 @@ CompositeGraphic [
 center=true
     label="{CompositeGraphic\n\<\<composite\>\> \n\<\<adapter\>\>|-childGraphics: List \l-c: List \l | +add(Graph): void\l+print(): void\l\<init\>(): void\l+remove(Graph): void\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = orange
 ]
 List [ 
 center=true
     label="{List\n\<\<adaptee\>\>| | +abstract add(int,Obje): void\l+abstract subList(int,i): List\l+abstract set(int,Obje): Object\l+spliterator(): Spliterator\l+abstract containsAll(Collecti): boolean\l+abstract isEmpty(): boolean\l+abstract clear(): void\l+sort(Comparat): void\l+replaceAll(UnaryOperat): void\l+abstract remove(i): Object\l+abstract lastIndexOf(Obje): int\l+abstract contains(Obje): boolean\l+abstract iterator(): Iterator\l+abstract removeAll(Collecti): boolean\l+abstract size(): int\l+abstract addAll(int,Collecti): boolean\l+abstract hashCode(): int\l+abstract equals(Obje): boolean\l+abstract get(i): Object\l+abstract toArray(Object): Object[]\l+abstract listIterator(i): ListIterator\l+abstract indexOf(Obje): int\l+abstract retainAll(Collecti): boolean\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = firebrick1
 ]
 GraphicExtendsLeaf -> AbstractGraphic[arrowhead = vee, style = dotted]
 GraphicExtendsLeaf -> AbstractGraphic [arrowhead = onormal]

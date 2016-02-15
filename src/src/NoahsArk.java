@@ -19,7 +19,7 @@ public class NoahsArk {
 	public String mainNode;
 	public CallNode noe;
 	public HashMap<String, String> seenClass;
-	public int umlNodes = 30;
+	public int umlNodes = 0;
 
 	public NoahsArk(HashMap<String, String> listOfClasses) {
 		this.boat = new HashMap<String, ClassPrototype>();

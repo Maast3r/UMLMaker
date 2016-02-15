@@ -15,35 +15,52 @@ import java.util.regex.Pattern;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
-
+/*
+ * We can do +
+ * Maybe ?
+ *	+1. Find classes with high LCOM (where LCOM is one of five cohesion metrics that you aren’t expected to know how to compute).
+ *	+2. Find classes containing fields that do not match camel case.
+ *	?3. Find classes that violate Hollywood principle.
+ *	+4. Find cycles in the class diagram and color their arrows.
+ *	+5. Find classes with a method that makes more than X method calls.
+ *	+6. Find classes with a method that implements recursion.
+ *	7. Find classes that violate the principle of least surprise.
+ *	+8. Find all classes that implement a specific interface and color the interface and the implements arrows.
+ *	?9. Find all classes that construct a given class or one of its subtypes (e.g. Graphics2D).
+ *	+10. Find all classes in the same package as a given class and color them the same.
+ *	+11. Find 'SingleGod' classes that have tons of fields and methods.
+ *	+12. Find classes with fields that have no corresponding getters and setters.
+ *	+13. Find all classes that start with a lower case letter.
+ *	+14. Find all classes that have only non-public constructors.
+ *	+15. (Related to #3) Find pairs of classes that are directly coupled to each other.
+ *	+16. Find all classes that have static initializers.
+ *	+17. Find all classes that have public static fields.
+ *	+18. Find all classes that are the declared generic types of instances of List, Set, Map, but do not implement hashCode() and equals(). For example, if Foo is used in a list of type List<Foo>, then check whether it implements hashCode() and equals().
+ *	+19. Find all Singletons that extends Serializable but do not define the private Object readResolve() method.
+ *	+20. Annotate all classes with a simple “HelloWorld” annotation.
+ */
 public class FirstASM {
 	private static String font = "\tfontname = \"Bitstream Vera Sans\"\n" + "\tfontsize = 16\n";
 	private static String[] associationTypes = { "Inheritance", "Association", "Uses" };
-	// uml java.awt Container, uml javax.swing JFrame
 	private static String methodSeparatorString = " | ";
 	private static String classEndString1 = "}\"";
 	private static String classEndString2 = "]\n";
 	private static String container = "uml java.awt Container";
 	private static String ourPK = "uml C:\\Users\\Maast3r\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
 	private static String ourPKG = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
-	private static String single = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\singletons";
-	private static String lab2one = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab2one";
-	private static String lab5one = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab5one";
-	private static String comp = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\composite";
-	private static String testerino = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pizzaf";
-	private static String testerino2 = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab22 DataLine take char[] 5";
 	private static String testerino3 = "sequence java.util Collections shuffle List 5";
 	private static String t = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src FirstASM sequenceHandler String,String,String,StringBuffer,NoahsArk,String,String,String,int 2";
 	private static boolean isJava = false;
 	public static HashMap<String, String> listOfClasses;
 	public static ArrayList<String> temps = new ArrayList<String>();
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, NoSuchMethodException, SecurityException, ClassNotFoundException,
+													InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String line = "";
 		System.out.print("UMLMaker>");
-		line = in.readLine();
-//		line  = container;
+//		line = in.readLine();
+		line  = ourPK;
 		if (line == null || line.length() == 0 || !line.contains(" "))
 			throw new IOException("FORMAT ERROR: Empty command is not supported!");
 		String command = line.split(" ")[0];
@@ -81,6 +98,29 @@ public class FirstASM {
 			ark.setPackage(pkg);
 			ark.setCmd(command);
 			umlHandler(command, pkg, path, buf, ark);
+		} else if(command.equals("2")){
+			if(pkg.contains(".")){
+				String test = pkg.split("\\.")[0];
+				if(test.equals("java") || test.equals("org") || test.equals("javax")){
+					inputClass = line.split(" ")[2];
+					String pkg2 = line.split(" ")[3] + ".";
+					String className2 = line.split(" ")[4];
+					listOfClasses = new HashMap<String, String>();
+					listOfClasses.put(inputClass, pkg);
+					listOfClasses.put(className2, pkg2);
+					isJava = true;
+				} else {
+					File packageToUML = new File(path);
+					listOfClasses = listClasses(packageToUML, pkg);
+				}
+			}
+			NoahsArk ark = new NoahsArk(listOfClasses);
+			for(String s : temps){
+				ark.seenClass.put(s, pkg);
+			}
+			ark.setPackage(pkg);
+			ark.setCmd(command);
+			umlHandler(command, pkg, path, buf, ark);
 		} else if (command.equals("sequence")) {
 			listOfClasses = null;
 			NoahsArk ark = new NoahsArk(listOfClasses);
@@ -98,7 +138,8 @@ public class FirstASM {
 	}
 
 	public static void umlHandler(String command, String pkg, String path, StringBuffer buf, NoahsArk ark)
-			throws IOException {
+			throws IOException, NoSuchMethodException, SecurityException, ClassNotFoundException,
+					InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		while(ark.getListOfClass().size() > 0){
 			for(String key : ark.getListOfClass().keySet()){
 				getClassDetails(ark.getListOfClass().get(key), key, ark);
@@ -118,7 +159,6 @@ public class FirstASM {
 		FileOutputStream output = new FileOutputStream(path);
 		String bufCleaner = buf.toString();
 		bufCleaner = bufCleaner.replace("$", "").replace("@", "");
-//		output.write(buf.toString().getBytes());
 		output.write(bufCleaner.getBytes());
 		output.close();
 
@@ -193,7 +233,9 @@ public class FirstASM {
 		}
 	}
 
-	public static StringBuffer generateDotUML(String pkg, StringBuffer buf, NoahsArk ark) throws IOException {
+	public static StringBuffer generateDotUML(String pkg, StringBuffer buf, NoahsArk ark) throws IOException, NoSuchMethodException, SecurityException,
+														ClassNotFoundException, InstantiationException, IllegalAccessException, 
+														IllegalArgumentException, InvocationTargetException {
 		buf.append("digraph G{\n" + font + "\n" + "node [\n" + font + "\n" + 
 				" shape = \"record\"\n" + "]\n"
 				+ "edge [\n" + font + "]\n");
@@ -220,11 +262,13 @@ public class FirstASM {
 				result += method.prepareUML();
 			}	
 			
+			String[] titleArgs = new String[]{ "InterfaceTitleDecorator", "AbstrTitleDecorator" };
+			new NodeTitleDecorator(c, titleArgs).decorate();;
 			result += classEndString1;
-
-			result += new ColorDecorator(new TypeDetector(cName, ark)).getColor();
-			result += new ColorDecorator(new TypeDetector(cName, ark)).getFillColor();
-			result = c.prepareUML() + new NameDecorator(new TypeDetector(cName, ark)).getType().toString().replace("]", "")
+			String[] args = new String[]{ "DecoratorDetector", "AdapterDetector", "CompositeDetector" };
+			result += new ColorDecorator(new TypeDetector(cName, ark, args)).getColor();
+			result += new ColorDecorator(new TypeDetector(cName, ark, args)).getFillColor();
+			result = c.prepareUML() + new NameDecorator(new TypeDetector(cName, ark, args)).getType().toString().replace("]", "")
 																										.replace(",","")
 																										.replace("[","" )
 					+ "|" + result;
@@ -288,7 +332,6 @@ public class FirstASM {
 			}
 		}
 
-		int currentLevel = 0;
 		CallNode callNode = ark.getActiveNode();
 		while (!ark.sequenceNodes.isEmpty()) {
 			String temp = ark.sequenceNodes.get(0);
@@ -303,12 +346,10 @@ public class FirstASM {
 				}
 				callNode.parent = ark.getActiveNode();
 				ark.setActiveNode(callNode);
-				currentLevel++;
 			} else if (temp.equals("GO UPPER")) {
 				callNode = ark.getActiveNode().getParent();
 				ark.setActiveNode(callNode);
 
-				currentLevel--;
 			} else {
 				// Creating a new object
 				if (temp.contains("#")) {
@@ -419,7 +460,8 @@ public class FirstASM {
 		return result;
 	}
 
-	public static String pairToViz(String pair, NoahsArk ark) {
+	public static String pairToViz(String pair, NoahsArk ark) throws InstantiationException, IllegalAccessException,
+							IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		String result = "";
 		if (pair.equals(""))
 			return result;
@@ -434,18 +476,12 @@ public class FirstASM {
 			result = pair.split("#")[0] + " -> " + pair.split("#")[1] + "[arrowhead = vee, style = dotted";
 		// Association
 		if (pair.contains("$")){
-			result = pair.split("\\$")[0] + " -> " + pair.split("\\$")[1] + "[arrowhead = vee" ;//+ ark.getBoat().get(pair.split("\\$")[0]).arrowDesc;
+			result = pair.split("\\$")[0] + " -> " + pair.split("\\$")[1] + "[arrowhead = vee" ;
 			
 		}
 		
-		if(pair.contains(";")){
-			result += ",label=\"\\<\\<Adapts\\>\\>\"";
-			result = result.replace(";", " ");
-		}
-		if(pair.contains("+")){
-			result += ",label=\"\\<\\<Decorates\\>\\>\"";
-			result = result.replace("+", " ");
-		}
+		String args[]= new String[] { "PairLabelDecorator" };
+		result = new PairDecorator(result, args).toDecorate();
 		
 		result += "]\n";
 		return result;
@@ -473,7 +509,7 @@ public class FirstASM {
 		try {
 			path = path.substring(0, path.length() - 1);
 			Process pr = null;
-			if (command.equals("uml")) {
+			if (command.equals("uml") || command.equals("2")) {
 				if(path.contains(".")) path = path.replace(".", "t");
 				System.out.println("uml diagram " + path);
 				if(!isJava) pr = rt.exec("dot -T png -o src/" + path + ".png src/" + path + ".dot");

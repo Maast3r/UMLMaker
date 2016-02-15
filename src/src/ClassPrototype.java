@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class ClassPrototype {
+	public String preName = "";
 	public String name;
 	public HashMap<String, FieldPrototype> fields;
 	public HashMap<String, MethodPrototype> methods;
@@ -54,7 +55,7 @@ public class ClassPrototype {
 	}
 	
 	public String prepareUML(){
-		return this.name + " [ \ncenter=true\n    label=\"{" + this.name;
+		return this.name + " [ \ncenter=true\n    label=\"{" + this.preName + "\n" + this.name;
 	}
 	
 	public String[] getInterfaces(){

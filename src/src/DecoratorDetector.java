@@ -15,7 +15,6 @@ public class DecoratorDetector extends AbstractDetector {
 	public HashSet<String> getType(String cName) {
 		ArrayList<String> classNames = new ArrayList<String>();
 		ArrayList<String> targetNames = new ArrayList<String>();
-		
 		for(ClassPrototype cl : this.ark.getBoat().values()){
 			String className = cl.getName();
 			String superName = cl.getSuperName();
@@ -69,7 +68,7 @@ public class DecoratorDetector extends AbstractDetector {
 							for(FieldPrototype f : cl.fields.values()){
 								if(f.type.equals(intfc)){
 									cl.type.add("decorator");
-									ark.getBoat().get(intfc).type.add("component");
+									if(ark.getBoat().containsKey(intfc))ark.getBoat().get(intfc).type.add("component");
 									for (ClassPrototype cp : ark.getBoat().values()) {
 										if(cp.superName != null){	
 											if (cp.superName.equals(className))

@@ -14,40 +14,45 @@ edge [
 ]
 App [ 
 center=true
-    label="{App| | +static main(String): void\l+\<init\>(): void\l}"color = black
+    label="{
+App| | +static main(String): void\l+\<init\>(): void\l}"color = black
 style = filled 
  fillcolor = white
 ]
 LinearTransformer [ 
 center=true
-    label="{LinearTransformer|-enumTion: Enumeration \l | +transform(OutputStre): void\l+\<init\>(Enumerati): void\l}"color = black
+    label="{
+LinearTransformer|-enumTion: Enumeration \l | +transform(OutputStre): void\l+\<init\>(Enumerati): void\l}"color = black
 style = filled 
  fillcolor = white
 ]
 Enumeration [ 
 center=true
-    label="{Enumeration\n\<\<target\>\>| | +abstract hasMoreElements(): boolean\l+abstract nextElement(): Object\l}"color = black
+    label="{\<\<Interface\>\>\n
+Enumeration| | +abstract hasMoreElements(): boolean\l+abstract nextElement(): Object\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = white
 ]
 Iterator [ 
 center=true
-    label="{Iterator\n\<\<adaptee\>\>| | +abstract next(): Object\l+abstract hasNext(): boolean\l+abstract remove(): void\l}"color = black
+    label="{\<\<Interface\>\>\n
+Iterator| | +abstract next(): Object\l+abstract hasNext(): boolean\l+abstract remove(): void\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = white
 ]
 IteratorToEnumerationAdapter [ 
 center=true
-    label="{IteratorToEnumerationAdapter\n\<\<adapter\>\>|-itr: Iterator \l | +hasMoreElements(): boolean\l+\<init\>(Iterat): void\l+nextElement(): Object\l}"color = black
+    label="{
+IteratorToEnumerationAdapter|-itr: Iterator \l | +hasMoreElements(): boolean\l+\<init\>(Iterat): void\l+nextElement(): Object\l}"color = black
 style = filled 
- fillcolor = firebrick
+ fillcolor = white
 ]
 App -> LinearTransformer[arrowhead = vee, style = dotted]
 App -> IteratorToEnumerationAdapter[arrowhead = vee, style = dotted]
 LinearTransformer -> Enumeration[arrowhead = vee, style = dotted]
 LinearTransformer -> Enumeration[arrowhead = vee]
 IteratorToEnumerationAdapter -> Iterator[arrowhead = vee, style = dotted]
-IteratorToEnumerationAdapter -> Iterator [arrowhead = vee,label="\<\<Adapts\>\>"]
+IteratorToEnumerationAdapter -> Iterator[arrowhead = vee]
 IteratorToEnumerationAdapter -> Enumeration[arrowhead = onormal,style = dotted]
 
 

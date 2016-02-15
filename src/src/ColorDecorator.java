@@ -1,6 +1,7 @@
 package src;
 
-import java.util.HashMap;
+import java.lang.reflect.InvocationTargetException;
+
 
 public class ColorDecorator extends TypeDecorator{
 	
@@ -8,11 +9,13 @@ public class ColorDecorator extends TypeDecorator{
 		super(t);
 	}
 	
-	public String getColor(){
+	public String getColor() throws NoSuchMethodException, SecurityException, ClassNotFoundException,
+							InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		return super.getColor();
 	}
 	
-	public String getFillColor(){
+	public String getFillColor() throws NoSuchMethodException, SecurityException, ClassNotFoundException,
+								InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		return super.getFillColor();
 	}
 }

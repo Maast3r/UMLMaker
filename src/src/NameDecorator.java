@@ -1,5 +1,6 @@
 package src;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 
 public class NameDecorator extends TypeDecorator{
@@ -8,7 +9,8 @@ public class NameDecorator extends TypeDecorator{
 		super(t);
 	}
 	
-	public HashSet<String> getType(){
+	public HashSet<String> getType() throws NoSuchMethodException, SecurityException, ClassNotFoundException,
+											InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		return super.getType();
 	}
 }

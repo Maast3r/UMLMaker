@@ -1,6 +1,6 @@
 package src;
 
-import java.util.ArrayList;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -11,7 +11,7 @@ public class TypeDecorator extends TypeDetector{
 	private TypeDetector typeDetector;
 	
 	public TypeDecorator(TypeDetector t){
-		super(t.cName, t.ark);
+		super(t.cName, t.ark, t.args);
 		this.typeDetector = t;
 		this.typeToColor.put("", "black");
 		this.typeToColor.put("singleton", "blue");
@@ -39,14 +39,16 @@ public class TypeDecorator extends TypeDetector{
 		this.typeToName.put("leaf", "\\n\\<\\<leaf\\>\\>");
 	}
 	
-	public String getColor(){
+	public String getColor() throws NoSuchMethodException, SecurityException, ClassNotFoundException,
+									InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		if(this.typeDetector.getType().contains("singleton")){
 			return "style = filled \n color = " + this.typeToColor.get("singleton") + "\n";
 		}
 		return "color = black\n";
 	}
 	
-	public String getFillColor(){
+	public String getFillColor() throws NoSuchMethodException, SecurityException, ClassNotFoundException,
+										InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		if(this.typeDetector.getType().size() > 0){
 			HashSet<String> colors = new HashSet<String>();
 			for(String color : this.typeDetector.getType()){
@@ -77,7 +79,8 @@ public class TypeDecorator extends TypeDetector{
 		return "style = filled \n fillcolor = white\n";
 	}
 	
-	public HashSet<String> getType(){
+	public HashSet<String> getType() throws NoSuchMethodException, SecurityException, ClassNotFoundException,
+											InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		HashSet<String> result = new HashSet<String>();
 		for(String s : this.typeDetector.getType()){
 			result.add(this.typeToName.get(s));
