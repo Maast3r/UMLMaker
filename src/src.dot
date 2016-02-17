@@ -22,7 +22,7 @@ style = filled
 MethodPrototype [ 
 center=true
     label="{
-MethodPrototype|+args: String \l+access: String \l+name: String \l+typesSeen: HashSet \l+returnType: String \l | +prepareUML(): String\l+\<init\>(String,String,String,Stri): void\l+getIsStaticAndSame(Stri): boolean\l}"color = black
+MethodPrototype|+args: String \l+access: String \l+calls: ArrayList \l+name: String \l+typesSeen: HashSet \l+returnType: String \l | +prepareUML(): String\l+\<init\>(String,String,String,Stri): void\l+getIsStaticAndSame(Stri): boolean\l}"color = black
 style = filled 
  fillcolor = white
 ]
@@ -36,7 +36,7 @@ style = filled
 MethodBodyVisitor [ 
 center=true
     label="{
-MethodBodyVisitor|+owner: String \l+inputMethodName: String \l+inputArgs: String \l+className: String \l+ark: NoahsArk \l | +visitMethodInsn(int,String,String,String,boole): void\l+repeat(String,Stri): void\l+\<init\>(int,MethodVisit): void\l}"color = black
+MethodBodyVisitor|+owner: String \l+inputMethodName: String \l+inputArgs: String \l+methodName: String \l+className: String \l+ark: NoahsArk \l | +visitMethodInsn(int,String,String,String,boole): void\l+repeat(String,Stri): void\l+\<init\>(int,MethodVisit): void\l}"color = black
 style = filled 
  fillcolor = white
 ]

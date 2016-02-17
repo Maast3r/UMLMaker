@@ -1,7 +1,7 @@
 package src;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.MethodVisitor;
@@ -44,6 +44,7 @@ public class MethodBodyVisitor extends MethodVisitor{
 		if(this.ark.getCmd().equals(("uml")))this.ark.addPair(this.className, "#" + this.owner);
 		
 		ark.getBoat().get(this.className).methods.get(methodName).typesSeen.add(owner);
+		ark.getBoat().get(this.className).methods.get(methodName).calls.add(owner+"."+name);
 		
 		if(this.ark.getCmd().equals(("sequence"))){
 			ark.newNodes.add("/" + className + "#" + owner);
@@ -87,6 +88,7 @@ public class MethodBodyVisitor extends MethodVisitor{
 			}
 		}
 	}
+	
 	
 	public void repeat(String targetMethod, String targetArgs) throws IOException{
 		this.ark.deeper();
