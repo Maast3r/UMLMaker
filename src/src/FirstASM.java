@@ -13,6 +13,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
+import javax.swing.JFrame;
+
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 /*
@@ -53,14 +55,17 @@ public class FirstASM {
 	private static boolean isJava = false;
 	public static HashMap<String, String> listOfClasses;
 	public static ArrayList<String> temps = new ArrayList<String>();
+//	public Configuration Config
 
 	public static void main(String[] args) throws IOException, NoSuchMethodException, SecurityException, ClassNotFoundException,
 													InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String line = "";
+		UI ui = new UI();
+		
 		System.out.print("UMLMaker>");
-//		line = in.readLine();
-		line  = ourPK;
+		line = in.readLine();
+//		line  = ourPK;
 		if (line == null || line.length() == 0 || !line.contains(" "))
 			throw new IOException("FORMAT ERROR: Empty command is not supported!");
 		String command = line.split(" ")[0];
