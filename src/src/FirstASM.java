@@ -17,8 +17,7 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 /*
  * We can do +
- * Maybe ?
- *	+1. Find classes with high LCOM (where LCOM is one of five cohesion metrics that you aren’t expected to know how to compute).
+ *	+1. Find classes with high LCOM (where LCOM is one of five cohesion metrics that you aren’t expected to know how to compute).	 
  *	+2. Find classes containing fields that do not match camel case.
  *	+3. Find classes that violate Hollywood principle.
  *	+4. Find cycles in the class diagram and color their arrows.
@@ -62,7 +61,7 @@ public class FirstASM {
 		String line = "";
 		System.out.print("UMLMaker>");
 //		line = in.readLine();
-		line  = pls2;
+		line  = ourPKG;
 		if (line == null || line.length() == 0 || !line.contains(" "))
 			throw new IOException("FORMAT ERROR: Empty command is not supported!");
 		String command = line.split(" ")[0];
@@ -76,7 +75,6 @@ public class FirstASM {
 		String maxDepth = "";
 
 		StringBuffer buf = new StringBuffer();
-		
 
 		if (command.equals("uml")) {
 			if(pkg.contains(".")){
@@ -202,7 +200,6 @@ public class FirstASM {
 	public static void getClassDetails(String pkg, String className, NoahsArk ark) throws IOException, InstantiationException, IllegalAccessException,
 													IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		ClassReader reader = new ClassReader(pkg + className);
-		// REFLECTIVE VISITORS
 		String[] args = new String[]{ "ClassMethodFieldVisitor" };
 		
 		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, ark);
@@ -216,7 +213,6 @@ public class FirstASM {
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		
 		for(String s : args){
-			System.out.println(s);
 			Class[] cArg = new Class[4];
 			cArg[0] = int.class;
 			cArg[1] = ClassVisitorBuffered.class;

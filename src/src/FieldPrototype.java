@@ -27,8 +27,23 @@ public class FieldPrototype {
 		return this.type.equals(superName);
 	}
 	
-	public boolean checkAdapter(){
-		return true;
+	public String getSymbol(){
+		return this.symbol;
 	}
 
+	public String getName(){
+		return this.name;
+	}
+	
+	public String getType(){
+		return this.type;
+	}
+	
+	public String getSignature(){
+		return this.sig;
+	}
+	
+	public String getListTYpe(){
+		return this.listType;
+	}
 }

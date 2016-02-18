@@ -8,7 +8,7 @@ public class ClassPrototype {
 	public HashMap<String, FieldPrototype> fields;
 	public HashMap<String, MethodPrototype> methods;
 	public String superName;
-	public String interfaces[];
+	public String[] interfaces;
 	public String arrowDesc;
 	public HashSet<String> type = new HashSet<String>();
 	public boolean isAbstract = false;
@@ -30,6 +30,14 @@ public class ClassPrototype {
 		this.interfaces = interfaces;
 	}
 	
+	public String getPreName(){
+		return this.preName;
+	}
+	
+	public String getName(){
+		return this.name;
+	}
+	
 	public HashMap<String, FieldPrototype> getFields(){
 		return this.fields;
 	}
@@ -46,9 +54,6 @@ public class ClassPrototype {
 		this.methods.put(key, value);
 	}
 	
-	public String getName(){
-		return this.name;
-	}
 	
 	public String getSuperName(){
 		return this.superName;
@@ -60,5 +65,17 @@ public class ClassPrototype {
 	
 	public String[] getInterfaces(){
 		return this.interfaces;
+	}
+	
+	public String getArrowDesc(){
+		return this.arrowDesc;
+	}
+	
+	public HashSet<String> getTypes(){
+		return this.type;
+	}
+	
+	public String getPkg(){
+		return this.pkg;
 	}
 }

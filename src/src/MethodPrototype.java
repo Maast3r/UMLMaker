@@ -33,5 +33,31 @@ public class MethodPrototype {
 		return this.access.contains("static") && this.returnType.equals(whateverYouWant);
 	}
 	
+	public String getAccess(){
+		return this.access;
+	}
 	
+	public String getName(){
+		return this.name;
+	}
+	
+	public String getArgs(){
+		return this.args;
+	}
+	
+	public String returnType(){
+		return this.returnType;
+	}
+	
+	public HashSet<String> getTypesSeen(){
+		return this.typesSeen;
+	}
+	
+	public ArrayList<String> getCalls(){
+		return this.calls;
+	}
+	
+	public HashMap<String, HashSet<String>> getFieldInsn(){
+		return this.fieldInsn;
+	}
 }

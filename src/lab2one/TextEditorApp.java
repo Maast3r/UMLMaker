@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import edu.roshulman.csse374.editor.TextEditor;
 
 public class TextEditorApp {
 	public static void main(String[] args) throws Exception {
@@ -15,7 +14,5 @@ public class TextEditorApp {
 		InputStream in = new DecryptionInputStream(fIn, cipher);
 		OutputStream out = new EncryptionOutputStream(fOut, cipher);
 		
-		TextEditor editor = new TextEditor(in, out);
-		editor.execute();
 	}	
 }
