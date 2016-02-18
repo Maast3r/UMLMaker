@@ -60,10 +60,15 @@ public class FirstASM {
 //	public Configuration Config
 
 	public static void main(String[] args) throws IOException, NoSuchMethodException, SecurityException, ClassNotFoundException,
+	InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		UI ui = new UI();
+	}
+	
+	public static void oldmain(String[] args) throws IOException, NoSuchMethodException, SecurityException, ClassNotFoundException,
 													InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String line = "";
-		UI ui = new UI();
+//		UI ui = new UI();
 		
 		System.out.print("UMLMaker>");
 		line = in.readLine();
@@ -140,6 +145,10 @@ public class FirstASM {
 		} else {
 			System.out.println("THIS COMMMAND IS NOT SUPPORTED");
 		}
+		
+		
+		
+		
 	}
 
 	public static void umlHandler(String command, String pkg, String path, StringBuffer buf, NoahsArk ark)

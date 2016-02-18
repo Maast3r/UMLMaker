@@ -18,16 +18,25 @@ public class ConfigurationManager {
       return singleton;
    }
 	
-	public HashMap<String, Boolean> getCurrentConfiguration(){
+	public HashMap<String, Boolean> getDrawConfiguration(){
 		return configuration;
 		
 	}
 	
-	public void setDefaultConfiguration(String filepath) throws IOException{
+	public boolean setDefaultConfiguration(String filepath) throws IOException{
 		System.out.println(filepath);
 		defaultProps = new Properties();
 		FileInputStream in = new FileInputStream(filepath);
 		defaultProps.load(in);
 		in.close();
+		return true;
 	}
+	
+	public void setDrawConfiguration(HashMap<String,Boolean> toDraw){
+		configuration = toDraw;
+	}
+	
+	public void instantiateArk
+	
+	
 }

@@ -1,0 +1,80 @@
+digraph G{
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+
+node [
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+
+ shape = "record"
+]
+edge [
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+]
+TooFarState [ 
+center=true
+    label="{TooFarState| | +far(): void\lreadIR(Que): void\l+near(): void\l+\<init\>(IRob): void\l+steady(): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+RobotState [ 
+center=true
+    label="{RobotState|robot: IRobot \lHIGH: int \lLOW: int \lDELTA: int \l | correctRight(i): void\lcorrectLeft(i): void\lfar(): void\lreadIR(Que): void\lnear(): void\l+\<init\>(): void\lsteady(i): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+IRobot [ 
+center=true
+    label="{IRobot|currentReading: int \lHIGH: int \lLOW: int \lDELTA: int \l+tooNearState: RobotState \l+steadyState: RobotState \l+tooFarState: RobotState \l+state: RobotState \l | +getTooFarState(): RobotState\l+setTooFarState(RobotSta): void\l+getState(): RobotState\l+getSteadyState(): RobotState\l+setState(RobotSta): void\lreadIR(Que): void\l+getTooNearState(): RobotState\l+\<init\>(): void\l+setTooNearState(RobotSta): void\l+setSteadyState(RobotSta): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+RobotRunner [ 
+center=true
+    label="{RobotRunner| | +static main(String): void\l+\<init\>(): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+TooNearState [ 
+center=true
+    label="{TooNearState| | +far(): void\lreadIR(Que): void\l+near(): void\l+\<init\>(IRob): void\l+steady(): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+lang [ 
+center=true
+    label="{lang| | +getClass(): Class\l+wait(): void\l+hashCode(): int\l+equals(Obje): boolean\l+notifyAll(): void\l#clone(): Object\l-static registerNatives(): void\l+toString(): String\l#finalize(): void\l+\<init\>(): void\l+notify(): void\lstatic \<clinit\>(): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+SteadyState [ 
+center=true
+    label="{SteadyState| | +far(): void\lreadIR(Que): void\l+near(): void\l+\<init\>(IRob): void\l+steady(): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+TooFarState -> RobotState [arrowhead = onormal]
+TooFarState -> IRobot[arrowhead = vee, style = dotted]
+TooFarState -> TooFarState[arrowhead = vee, style = dotted]
+TooFarState -> RobotState[arrowhead = vee, style = dotted]
+RobotState -> IRobot[arrowhead = veenull]
+RobotState -> RobotState[arrowhead = vee, style = dotted]
+RobotState -> Object[arrowhead = vee, style = dotted]
+IRobot -> SteadyState[arrowhead = vee, style = dotted]
+IRobot -> RobotState[arrowhead = veenull]
+IRobot -> TooNearState[arrowhead = vee, style = dotted]
+IRobot -> TooFarState[arrowhead = vee, style = dotted]
+IRobot -> RobotState[arrowhead = vee, style = dotted]
+RobotRunner -> IRobot[arrowhead = vee, style = dotted]
+TooNearState -> RobotState [arrowhead = onormal]
+TooNearState -> IRobot[arrowhead = vee, style = dotted]
+TooNearState -> TooNearState[arrowhead = vee, style = dotted]
+TooNearState -> RobotState[arrowhead = vee, style = dotted]
+SteadyState -> SteadyState[arrowhead = vee, style = dotted]
+SteadyState -> RobotState [arrowhead = onormal]
+SteadyState -> IRobot[arrowhead = vee, style = dotted]
+SteadyState -> RobotState[arrowhead = vee, style = dotted]
+
+
+}

@@ -30,6 +30,7 @@ import org.scijava.swing.checkboxtree.CheckBoxNodeRenderer;
 
 public class UI extends JFrame{
 	JPanel panel;
+	boolean validConfiguration = false;
 	public static void main(String[] args){
 		
 
@@ -38,30 +39,23 @@ public class UI extends JFrame{
 	public UI(){
 		panel = new JPanel();
 		
-		JButton fileChooserButton = new JButton();
+		final JButton fileChooserButton = new JButton();
 		fileChooserButton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Properties Filter", "properties"));
-				fileChooser.setCurrentDirectory(new File("configurations"));
+//				fileChooser.setCurrentDirectory(new File("configurations"));
 				int result = fileChooser.showOpenDialog(null);
 				if(result == JFileChooser.APPROVE_OPTION) {
 				    String filepath = fileChooser.getSelectedFile().getPath();
 				    try {
-						ConfigurationManager.getInstance().setDefaultConfiguration(filepath);
+						validConfiguration = ConfigurationManager.getInstance().setDefaultConfiguration(filepath);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-//				    Config.newInstance(filepath);
-//				    try {
-////				        this.fileGenerator.setVisitor(new OutputDotFile(new FileOutputStream(Config.getInstance().getDotFileOutputLocation()), this.fileGenerator));
-//				    } catch (FileNotFoundException e) {
-//				        e.printStackTrace();
-//				    }
-//				    this.label.setText(filepath);
+				    if(validConfiguration) fileChooserButton.setText(filepath);
 				}
 			}
 		});
@@ -73,9 +67,12 @@ public class UI extends JFrame{
 		analyze.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("do cool stuff");
-				UI.this.mainScreen();
+				if(validConfiguration){
+					System.out.println("do cool stuff");
+					UI.this.mainScreen();
+				} else {
+					System.out.println("Not a valid configuration");
+				}
 			}
 			
 		});
