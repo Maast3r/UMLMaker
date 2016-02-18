@@ -22,13 +22,13 @@ import org.objectweb.asm.Opcodes;
  * Maybe ?
  *	+1. Find classes with high LCOM (where LCOM is one of five cohesion metrics that you aren’t expected to know how to compute).
  *	+2. Find classes containing fields that do not match camel case.
- *	?3. Find classes that violate Hollywood principle.
+ *	+3. Find classes that violate Hollywood principle.
  *	+4. Find cycles in the class diagram and color their arrows.
  *	+5. Find classes with a method that makes more than X method calls.
  *	+6. Find classes with a method that implements recursion.
- *	7. Find classes that violate the principle of least surprise.
+ *	+7. Find classes that violate the principle of least surprise.
  *	+8. Find all classes that implement a specific interface and color the interface and the implements arrows.
- *	?9. Find all classes that construct a given class or one of its subtypes (e.g. Graphics2D).
+ *	+9. Find all classes that construct a given class or one of its subtypes (e.g. Graphics2D).
  *	+10. Find all classes in the same package as a given class and color them the same.
  *	+11. Find 'SingleGod' classes that have tons of fields and methods.
  *	+12. Find classes with fields that have no corresponding getters and setters.
@@ -50,6 +50,8 @@ public class FirstASM {
 	private static String container = "uml java.awt Container";
 	private static String ourPK = "uml C:\\Users\\Maast3r\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
 	private static String ourPKG = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src";
+	private static String pls = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pls";
+	private static String pls2 = "uml C:\\Users\\Maast3r\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\pls";
 	private static String testerino3 = "sequence java.util Collections shuffle List 5";
 	private static String t = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src FirstASM sequenceHandler String,String,String,StringBuffer,NoahsArk,String,String,String,int 2";
 	private static boolean isJava = false;
@@ -70,8 +72,6 @@ public class FirstASM {
 			throw new IOException("FORMAT ERROR: Empty command is not supported!");
 		String command = line.split(" ")[0];
 		String path = line.split(" ")[1];
-		// if(!path.contains("\\\\"))throw new IOException("FORMAT ERROR: Empty
-		// command is not supported!");
 		String[] pathParts = path.split("\\\\");
 		String pkg = pathParts[pathParts.length - 1] + ".";
 		path = path.replace("\\\\", "\\");
@@ -204,9 +204,12 @@ public class FirstASM {
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 	}
 
-	public static void getClassDetails(String pkg, String className, NoahsArk ark) throws IOException {
+	public static void getClassDetails(String pkg, String className, NoahsArk ark) throws IOException, InstantiationException, IllegalAccessException,
+													IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		ClassReader reader = new ClassReader(pkg + className);
-
+		// REFLECTIVE VISITORS
+		String[] args = new String[]{ "ClassMethodFieldVisitor" };
+		
 		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, ark);
 		reader.accept(declVisitor, ClassReader.EXPAND_FRAMES);
 		ClassVisitorBuffered fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, ark,
@@ -215,8 +218,23 @@ public class FirstASM {
 
 		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(Opcodes.ASM5, fieldVisitor, ark,
 				declVisitor.getName());
-
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+		
+		for(String s : args){
+			System.out.println(s);
+			Class[] cArg = new Class[4];
+			cArg[0] = int.class;
+			cArg[1] = ClassVisitorBuffered.class;
+			cArg[2] = NoahsArk.class;
+			cArg[3] = String.class;
+			Constructor constr = Class.forName(
+					"src." + s)
+					.getConstructor(cArg);
+
+			ClassVisitorBuffered visitor = (ClassVisitorBuffered) constr.newInstance(Opcodes.ASM5,
+							methodVisitor, ark, declVisitor.getName());
+			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
+		}
 	}
 	
 	public static void getArrows(NoahsArk ark) throws IOException{
@@ -270,7 +288,7 @@ public class FirstASM {
 			String[] titleArgs = new String[]{ "InterfaceTitleDecorator", "AbstrTitleDecorator" };
 			new NodeTitleDecorator(c, titleArgs).decorate();;
 			result += classEndString1;
-			String[] args = new String[]{ "DecoratorDetector", "AdapterDetector", "CompositeDetector" };
+			String[] args = new String[]{ "DecoratorDetector", "AdapterDetector", "CompositeDetector", "SingletonDetector" };
 			result += new ColorDecorator(new TypeDetector(cName, ark, args)).getColor();
 			result += new ColorDecorator(new TypeDetector(cName, ark, args)).getFillColor();
 			result = c.prepareUML() + new NameDecorator(new TypeDetector(cName, ark, args)).getType().toString().replace("]", "")
@@ -531,7 +549,6 @@ public class FirstASM {
 			while ((line = reader.readLine()) != null) {
 				sb.append(line + "\n");
 			}
-			System.out.println(sb.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Could not visualize!");

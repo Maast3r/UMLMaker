@@ -1,0 +1,24 @@
+digraph G{
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+
+node [
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+
+ shape = "record"
+]
+edge [
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+]
+Herp [ 
+center=true
+    label="{
+Herp|+q: String \l+test: ArrayList \l | +get(): ArrayList\l+\<init\>(): void\l}"color = black
+style = filled 
+ fillcolor = white
+]
+
+
+}

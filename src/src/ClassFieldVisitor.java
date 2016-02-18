@@ -1,8 +1,6 @@
 package src;
 
 
-import java.util.Arrays;
-
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Type;
 
@@ -26,7 +24,6 @@ public class ClassFieldVisitor extends ClassVisitorBuffered {
 		String temp = "";
 		
 		if(signature != null && !signature.equals("")){
-//			System.out.println(signature.toString());
 			// find if it is a type of list, and store it
 			if(Type.getType(signature).getClassName().contains("<")){
 				temp = Type.getType(signature).getClassName().split("<")[0];
