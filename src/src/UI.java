@@ -304,12 +304,12 @@ public class UI extends JFrame{
 		this.add(panel, BorderLayout.WEST);
 		
 		this.pack();
-		this.setSize(2300, 1080);
+		this.setSize(1820, 1080);
 		this.setTitle("Make it stop...");
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-		this.setSize(2300, 1200);
+		this.setSize(1820, 1080);
 		this.validate();
 		this.revalidate();
 		this.repaint();

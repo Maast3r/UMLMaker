@@ -91,8 +91,8 @@ public class RenderedImageProxy extends JPanel{
 				            	
 				            	RenderedImageProxy.this.image = new ImageIcon(URI).getImage();
 	//				              Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-					              Dimension size = new Dimension(1920, 1080);
-					              RenderedImageProxy.this.image=image.getScaledInstance(1920, 1080, Image.SCALE_DEFAULT);
+					              Dimension size = new Dimension(1500, 1080);
+					              RenderedImageProxy.this.image=image.getScaledInstance(1500, 1080, Image.SCALE_DEFAULT);
 					              setPreferredSize(size);
 					              setMinimumSize(size);
 					              setMaximumSize(size);
@@ -108,7 +108,7 @@ public class RenderedImageProxy extends JPanel{
 					              RenderedImageProxy.this.parent.getContentPane().revalidate();
 					              RenderedImageProxy.this.parent.getContentPane().repaint();
 					              RenderedImageProxy.this.parent.pack();
-					              RenderedImageProxy.this.parent.setSize(2300, 1200);
+					              RenderedImageProxy.this.parent.setSize(1820, 1080);
 				            	
 				            }
 				        } catch (IOException x) {
@@ -144,8 +144,8 @@ public class RenderedImageProxy extends JPanel{
       public RenderedImageProxy(Image img) {
         this.image = img;
 //        Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-        Dimension size = new Dimension(1920, 1080);
-        this.image=image.getScaledInstance(1920, 1080, Image.SCALE_DEFAULT);
+        Dimension size = new Dimension(1500, 1080);
+        this.image=image.getScaledInstance(1500, 1080, Image.SCALE_DEFAULT);
         setPreferredSize(size);
         setMinimumSize(size);
         setMaximumSize(size);
@@ -185,8 +185,8 @@ public class RenderedImageProxy extends JPanel{
     	
     	RenderedImageProxy.this.image = new ImageIcon(this.URI).getImage();
 //				              Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-          Dimension size = new Dimension(1920, 1080);
-          RenderedImageProxy.this.image=image.getScaledInstance(1920, 1080, Image.SCALE_DEFAULT);
+          Dimension size = new Dimension(1500, 1080);
+          RenderedImageProxy.this.image=image.getScaledInstance(1500, 1080, Image.SCALE_DEFAULT);
           setPreferredSize(size);
           setMinimumSize(size);
           setMaximumSize(size);
@@ -202,8 +202,8 @@ public class RenderedImageProxy extends JPanel{
           this.parent.getContentPane().revalidate();
           this.parent.getContentPane().repaint();
           this.parent.pack();
-          this.parent.setSize(2300, 1200);
-          this.parent.setBounds(0, 0, 2300, 1200);
+          this.parent.setSize(1820, 1080);
+          this.parent.setBounds(0, 0, 1820, 1080);
           this.parent.getContentPane().repaint();
 		
 	}
