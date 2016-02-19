@@ -520,9 +520,9 @@ public class FirstASM {
 			}
 		}
 			// Association
-		else if(ConfigurationManager.getInstance().configuration.get(pair.split("\\$")[0]) != null && ConfigurationManager.getInstance().configuration.get(pair.split("\\$")[1].replace(";","").replace("+", "")) != null){
+		else if(ConfigurationManager.getInstance().configuration.get(pair.split("\\$")[0]) != null && ConfigurationManager.getInstance().configuration.get(pair.split("\\$")[1].replace(";","").replace("+", "").replace("?", "")) != null){
 			if (pair.contains("$")){
-				if(!ConfigurationManager.getInstance().configuration.get(pair.split("\\$")[0]) || !ConfigurationManager.getInstance().configuration.get(pair.split("\\$")[1].replace(";","").replace("+", "")))return "";
+				if(!ConfigurationManager.getInstance().configuration.get(pair.split("\\$")[0]) || !ConfigurationManager.getInstance().configuration.get(pair.split("\\$")[1].replace(";","").replace("+", "").replace("?", "")))return "";
 				result = pair.split("\\$")[0] + " -> " + pair.split("\\$")[1] + "[arrowhead = vee" ;
 			}else{
 				return "";

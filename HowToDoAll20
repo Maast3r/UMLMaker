@@ -6,3 +6,15 @@
 6. New Detector that finds a method in ClassPrototype which makes a call to itself.
 7. New Visitor that detects when a field is set and get in the same method. (ClassMethodFieldVisitor as an example)
 8. New Detector that implements the given interface. Detector adds new color to TypeDecorator.
+9. New Detector that checks methods which have an init.
+10. New Detector that checks classprototype pkg and compares it against the given.
+11. Define god class, but then yes.
+12. Yes. Make a new visit visitor that extends classVisitorBuffered, and another visitor that visits the method fieldinisn.
+13. Uh. pls.
+14. Yes?
+15. New Detecotr that combs every fields,method, and instruction in a method to see if it is coupled with the given class.
+16. Of course.
+17. Easy?
+18. New Detector  that checks type of class. If class equals one of the given classes, check methods to ensure accuracy.
+19. In my sleep.
+20. DONE.

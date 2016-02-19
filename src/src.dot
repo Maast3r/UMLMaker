@@ -295,7 +295,7 @@ style = filled
 RenderedImageProxy [ 
 center=true
     label="{
-RenderedImageProxy|-isLoading: boolean \l-image: Image \lloading: JProgressBar \l | #paintComponent(Graphi): void\l+\<init\>(Ima): void\l+loading(): void\lstatic access2(RenderedImagePro): Image\lstatic access1(RenderedImageProxy,Ima): void\lstatic access0(RenderedImageProxy,boole): void\l}"
+RenderedImageProxy|-isLoading: boolean \l-image: Image \l-parent: UI \lloading: JProgressBar \l-URI: String \l | +loaded(): void\l#paintComponent(Graphi): void\lstatic access4(RenderedImagePro): UI\l+\<init\>(Ima): void\l+loading(): void\lstatic access3(RenderedImagePro): Image\lstatic access2(RenderedImageProxy,Ima): void\lstatic access1(RenderedImagePro): String\lstatic access0(RenderedImageProxy,boole): void\l}"
 color = black
 style = filled 
  fillcolor = white
@@ -500,6 +500,8 @@ CallNode -> CallNode[arrowhead = vee]
 CallNode -> CallNode[arrowhead = vee, style = dotted]
 ColorDecorator -> TypeDecorator[arrowhead = vee, style = dotted]
 ColorDecorator -> TypeDecorator [arrowhead = onormal]
+RenderedImageProxy -> UI[arrowhead = vee, style = dotted]
+RenderedImageProxy -> UI[arrowhead = vee]
 RenderedImageProxy -> ConfigurationManager[arrowhead = vee, style = dotted]
 RenderedImageProxy -> RenderedImageProxy[arrowhead = vee, style = dotted]
 AbstractPhase -> TypeDetector[arrowhead = vee, style = dotted]

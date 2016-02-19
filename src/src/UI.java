@@ -234,7 +234,7 @@ public class UI extends JFrame{
  	   imagepath = ConfigurationManager.getInstance().defaultProps.getProperty("Output-Directory") +"\\"+ imagepath;
  	   
  	   
- 	   diagram = new RenderedImageProxy(imagepath);
+ 	   diagram = new RenderedImageProxy(imagepath, this);
  	  final JScrollPane scrollPane2 = new JScrollPane(diagram);
 		panel.add(scrollPane2, BorderLayout.EAST);
 		
@@ -364,8 +364,8 @@ public class UI extends JFrame{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("------- " + pkg);
 				FirstASM.getInstance().visualize(command, pkg+".");
+				diagram.loaded();
 			}
 			
 		});

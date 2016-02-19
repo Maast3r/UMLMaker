@@ -7,6 +7,7 @@ import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.io.IOException;
@@ -27,10 +28,13 @@ public class RenderedImageProxy extends JPanel{
     private Image image;
 	private boolean isLoading = false;
 	JProgressBar loading;
+	private UI parent;
+	private String URI;
 
-    public RenderedImageProxy(String s) throws IOException {
+    public RenderedImageProxy(String s, UI parent) throws IOException {
     	   this(new ImageIcon(s).getImage());
-    	   final String URI = s;
+    	   this.parent = parent;
+    	   URI = s;
     	   final WatchService watcher = FileSystems.getDefault().newWatchService();
     	   final Path dir = Paths.get(ConfigurationManager.getInstance().defaultProps.getProperty("Output-Directory"));
     	   try {
@@ -80,6 +84,7 @@ public class RenderedImageProxy extends JPanel{
 				            // the resolved name is "test/foo".
 				            Path child = dir.resolve(filename);
 				            if (Files.probeContentType(child).equals("image/png")) {
+				            	Thread.sleep(3000);
 				            	System.out.println("Reloading UI");
 				            	isLoading  = false;
 				            	RenderedImageProxy.this.remove(loading);
@@ -97,13 +102,22 @@ public class RenderedImageProxy extends JPanel{
 					              RenderedImageProxy.this.validate();
 					              RenderedImageProxy.this.revalidate();
 					              RenderedImageProxy.this.repaint();
-				            	
+					              RenderedImageProxy.this.parent.validate();
+					              RenderedImageProxy.this.parent.revalidate();
+					              RenderedImageProxy.this.parent.repaint();
+					              RenderedImageProxy.this.parent.getContentPane().revalidate();
+					              RenderedImageProxy.this.parent.getContentPane().repaint();
+					              RenderedImageProxy.this.parent.pack();
+					              RenderedImageProxy.this.parent.setSize(2300, 1200);
 				            	
 				            }
 				        } catch (IOException x) {
 				            System.err.println(x);
 				            continue;
-				        }
+				        } catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 				        
 
 				        // Email the file to the
@@ -124,7 +138,7 @@ public class RenderedImageProxy extends JPanel{
     		   
     	   });
     	   
-    	   R.start();
+//    	   R.start();
     }
     
       public RenderedImageProxy(Image img) {
@@ -147,9 +161,10 @@ public class RenderedImageProxy extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
         if(!isLoading){
+        	g2.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters            
         	this.revalidate(); 
-        	g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters            
         }
     }
     
@@ -161,4 +176,35 @@ public class RenderedImageProxy extends JPanel{
 
     	// change to JProgresBullshit
     }
+
+	public void loaded() {
+		// TODO Auto-generated method stub
+		System.out.println("Reloading UI");
+    	isLoading  = false;
+    	RenderedImageProxy.this.remove(loading);
+    	
+    	RenderedImageProxy.this.image = new ImageIcon(this.URI).getImage();
+//				              Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+          Dimension size = new Dimension(1920, 1080);
+          RenderedImageProxy.this.image=image.getScaledInstance(1920, 1080, Image.SCALE_DEFAULT);
+          setPreferredSize(size);
+          setMinimumSize(size);
+          setMaximumSize(size);
+          setSize(size);
+          setLayout(new GridBagLayout());
+          this.setVisible(true);
+          this.validate();
+          this.revalidate();
+          this.repaint();
+          this.parent.validate();
+          this.parent.revalidate();
+          this.parent.repaint();
+          this.parent.getContentPane().revalidate();
+          this.parent.getContentPane().repaint();
+          this.parent.pack();
+          this.parent.setSize(2300, 1200);
+          this.parent.setBounds(0, 0, 2300, 1200);
+          this.parent.getContentPane().repaint();
+		
+	}
 }
