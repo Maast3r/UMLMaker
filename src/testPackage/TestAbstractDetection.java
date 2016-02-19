@@ -2,6 +2,7 @@ package testPackage;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -16,7 +17,7 @@ public class TestAbstractDetection {
 	private String dotCode;
 	
 	@Before
-	public void setup() throws IOException {
+	public void setup() throws IOException, NoSuchMethodException, SecurityException, ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String[] args = {"10"};
 //		String data = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab5one";
 		String data = "uml C:\\Users\\Administrator\\CSSE374-201620\\UMLMaker\\src\\lab5one";
@@ -34,7 +35,10 @@ public class TestAbstractDetection {
 	
 	@Test
 	public void testDetection() {
-		Assert.assertTrue(this.dotCode.contains("IteratorToEnumerationAdapter -> Iterator [arrowhead = vee,label=\"\\<\\<Adapts\\>\\>"));
+		Assert.assertTrue(this.dotCode.contains("IteratorToEnumerationAdapter -> Iterator[arrowhead = vee, style = dotted]"));
+		Assert.assertTrue(this.dotCode.contains("IteratorToEnumerationAdapter -> Iterator[arrowhead = vee]"));
+		Assert.assertTrue(this.dotCode.contains("IteratorToEnumerationAdapter -> Enumeration[arrowhead = onormal,style = dotted]"));
+		Assert.assertTrue(this.dotCode.contains("App -> IteratorToEnumerationAdapter[arrowhead = vee, style = dotted]"));
 	}
 
 }

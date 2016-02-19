@@ -11,7 +11,7 @@ public class ConfigurationManager {
 	public HashMap<String, Boolean> configuration;
 	Properties defaultProps;
 	
-	public static ConfigurationManager getInstance( ) {
+	public static ConfigurationManager getInstance() {
 	   if(singleton == null){
 		   singleton = new ConfigurationManager();
 	   }
@@ -36,7 +36,7 @@ public class ConfigurationManager {
 		configuration = toDraw;
 	}
 	
-	public void instantiateArk
+//	public void instantiateArk
 	
 	
 }
