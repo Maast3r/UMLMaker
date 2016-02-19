@@ -11,7 +11,7 @@ public class ConfigurationManager {
 	public HashMap<String, Boolean> configuration;
 	Properties defaultProps;
 	
-	public static ConfigurationManager getInstance( ) {
+	public static ConfigurationManager getInstance() {
 	   if(singleton == null){
 		   singleton = new ConfigurationManager();
 		   singleton.configuration = new HashMap<String, Boolean>();

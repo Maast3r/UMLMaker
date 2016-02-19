@@ -3,6 +3,7 @@ package testPackage;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.regex.Pattern;
@@ -20,33 +21,22 @@ import src.NoahsArk;
 
 public class TestClassFieldVisitor {
 
-	public static HashMap<String, Boolean> listOfClasses; 
+	public static HashMap<String, String> listOfClasses; 
 	@Test
-	public void test() throws IOException {
+	public void test() throws IOException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		String path = "src\\src";
+		String pkg = "";
 		File packageToUML = new File(path);
 		
-		this.listOfClasses = listClasses(packageToUML);
+		this.listOfClasses = FirstASM.listClasses(packageToUML, pkg);
 		NoahsArk ark = new NoahsArk(listOfClasses);
-		String pkg = "src.";
+		pkg = "src.";
 		StringBuffer expected = new StringBuffer();
 		StringBuffer buf = new StringBuffer();
-		expected.append("ClassPrototype [ \n"
-				+ "    label=\"{ClassPrototype|ClassPrototype [ \n"
-				+ "    label=\"{ClassPrototype|+name: String \\l+fields: HashMap \\l+methods: HashMap \\l}\" ]");
-		
-		ClassReader reader = new ClassReader(pkg + "ClassPrototype");
+		expected.append("+superName: String ");
 
-		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(
-				Opcodes.ASM5, buf, ark);
-		
-		reader.accept(declVisitor, ClassReader.EXPAND_FRAMES);
-
-		ClassVisitorBuffered fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
-				declVisitor, ark, declVisitor.getName());
-		
-		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
-		buf.append("}\" ]");
+		ark.setCmd("uml");
+		FirstASM.getClassDetails(pkg, "ClassVisitorBuffered", ark);
 		FirstASM.listOfClasses = listOfClasses;
 		buf = this.umlHandler(pkg, path, buf, ark);
 		System.out.println(expected.toString());
@@ -54,24 +44,10 @@ public class TestClassFieldVisitor {
 		Assert.assertTrue(buf.toString().contains(expected.toString()));
 		
 	}
-	
-	public HashMap<String, Boolean> listClasses(final File folder) {
-		HashMap<String, Boolean> listOfJavaFiles = new HashMap<String, Boolean>();
-		for (final File fileEntry : folder.listFiles()) {
-			if (fileEntry.getName().contains(".")) {
-				String ext = fileEntry.getName().split(Pattern.quote("."))[1];
-				if (ext.equals("java")) {
-					listOfJavaFiles.put(
-							fileEntry.getName().split(Pattern.quote("."))[0],
-							true); 
-				}
-			}
-		}
-		return listOfJavaFiles;
-	}
+
 
 	public StringBuffer umlHandler(String pkg, String path, StringBuffer buf, 
-			NoahsArk ark) throws IOException{
+			NoahsArk ark) throws IOException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException{
 		Iterator iter = this.listOfClasses.entrySet().iterator();
 		while (iter.hasNext()) {
 			String temp = iter.next().toString().split("=")[0];

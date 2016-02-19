@@ -1,6 +1,11 @@
 package testPackage;
 
+import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,28 +16,35 @@ import src.ClassDeclarationVisitor;
 import src.ClassFieldVisitor;
 import src.ClassVisitorBuffered;
 import src.DotMethodVisitor;
+import src.FirstASM;
+import src.NoahsArk;
 
 public class TestDotMethodVisitor {
 
 	@Test
-	public void testDotMethodVisitorOne() throws IOException {
-		StringBuffer expected = new StringBuffer();
-		expected.append("\\<init\\>(Path): void\\l+run(): void\\l#clearEverything(): void\\l+stopGracefully(): void\\l+isRunning(): boolean\\l+getApplicationsCount(): int\\l+handleDirectoryEvent(String, Path): void\\l+main(String[]): void\\l+notifyChanges(FileLauncher, String): void\\l+getProcesses(): List\\l+setProcesses(List): void\\l}\" ]");
+	public void testDotMethodVisitorOne() throws IOException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+		String type = "Uses";
+		String expected = "";
 		
-		String pkg = "target.";
+		String path = "./src/src";
+		String pkg = "src.";
+		File packageToUML = new File(path);
 		StringBuffer buf = new StringBuffer();
-		ClassReader reader = new ClassReader(pkg + "AppLauncher");
+		HashMap<String, String> listOfClasses = FirstASM.listClasses(packageToUML,"");
+		NoahsArk ark = new NoahsArk(listOfClasses);
+		ArrayList<String> inheritancePairs = new ArrayList<String>();
+		Iterator iter = listOfClasses.entrySet().iterator();
+		while (iter.hasNext()) {
+			String temp = iter.next().toString().split("=")[0];
+//			FirstASM.getClassDetails(pkg, temp, buf);
+			inheritancePairs.addAll(FirstASM.getAssociation(pkg, temp, type, ark));
+		}
 
-		ClassVisitorBuffered methodVisitor = new DotMethodVisitor(
-				Opcodes.ASM5, buf);
-
-		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
-		buf.append("}\" ]");
-		System.out.println(expected.toString());
-		System.out.println(buf.toString());
-		
-		Assert.assertTrue(buf.toString().equals(expected.toString()));
-	
+		for (int i = 0; i < inheritancePairs.size(); i++) {
+			buf.append(FirstASM.pairToViz(inheritancePairs.get(i), ark));
+		}
+			
+		Assert.assertEquals(buf.toString(), expected.toString());
 	}
 
 }

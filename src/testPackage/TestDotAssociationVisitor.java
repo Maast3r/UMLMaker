@@ -17,21 +17,26 @@ import org.objectweb.asm.Opcodes;
 
 import src.ClassVisitorBuffered;
 import src.FirstASM;
+import src.NoahsArk;
 
 public class TestDotAssociationVisitor {
-	static String path = "./src/target";
+	static String path = "./src/composite";
 	static File packageToUML = new File(path);
-	private static HashMap<String, Boolean> listOfClasses = FirstASM.listClasses(packageToUML);
+	static String p = "";
+	private static HashMap<String, String> listOfClasses = FirstASM.listClasses(packageToUML, p);
 	@Test
-	public void test() throws IOException {
+	public void test() throws IOException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		String[] associationTypes = {"Association"};
-		String expected = "";
+		String expected = "CompositeGraphic -> Graphic[arrowhead = vee]\n"
+				+ "CompositeGraphic -> AbstractGraphic[arrowhead = vee]\n";
 		
-		String path = "./src/target";
-		String pkg = "target.";
+		String path = "./src/composite";
+		String pkg = "composite.";
+		
 		File packageToUML = new File(path);
 		StringBuffer buf = new StringBuffer();
-		HashMap<String, Boolean> listOfClasses = FirstASM.listClasses(packageToUML);
+		HashMap<String, String> listOfClasses = FirstASM.listClasses(packageToUML, p);
+		NoahsArk ark = new NoahsArk(listOfClasses);
 		ArrayList<String> inheritancePairs = new ArrayList<String>();
 		Iterator iter = listOfClasses.entrySet().iterator();
 		while (iter.hasNext()) {
@@ -43,11 +48,11 @@ public class TestDotAssociationVisitor {
 		}
 
 		for (int i = 0; i < inheritancePairs.size(); i++) {
-			buf.append(FirstASM.pairToViz(inheritancePairs.get(i)));
+			buf.append(FirstASM.pairToViz(inheritancePairs.get(i), ark));
 		}
 		
-//		System.out.println(buf.toString());
-//		System.out.println(expected.toString());	
+		System.out.println(buf.toString());
+		System.out.println(expected.toString());	
 		
 		Assert.assertEquals(buf.toString(), expected.toString());
 	}

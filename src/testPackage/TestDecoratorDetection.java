@@ -2,6 +2,7 @@ package testPackage;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -16,7 +17,7 @@ public class TestDecoratorDetection {
 	private String dotCode;
 	
 	@Before
-	public void setup() throws IOException {
+	public void setup() throws IOException, NoSuchMethodException, SecurityException, ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String[] args = {"10"};
 //		String data = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\lab2one";
 		String data = "uml C:\\Users\\Administrator\\CSSE374-201620\\UMLMaker\\src\\lab2one";
@@ -34,8 +35,10 @@ public class TestDecoratorDetection {
 	
 	@Test
 	public void testDetection() {
-		Assert.assertTrue(this.dotCode.contains("Encrypt -> OutputStream[arrowhead = vee,label=\"\\<\\<Decorates\\>\\>\"]"));
-		Assert.assertTrue(this.dotCode.contains("Decrypt -> InputStream[arrowhead = vee,label=\"\\<\\<Decorates\\>\\>\"]"));
+		Assert.assertTrue(this.dotCode.contains("EncryptionOutputStream -> IEncryption[arrowhead = vee, style = dotted]"));
+		Assert.assertTrue(this.dotCode.contains("EncryptionOutputStream -> IEncryption[arrowhead = vee]"));
+		Assert.assertTrue(this.dotCode.contains("DecryptionInputStream -> IDecryption[arrowhead = vee, style = dotted]"));
+		Assert.assertTrue(this.dotCode.contains("DecryptionInputStream -> IDecryption[arrowhead = vee]"));
 	}
 
 }

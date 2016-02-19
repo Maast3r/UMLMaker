@@ -2,6 +2,7 @@ package testPackage;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -16,7 +17,7 @@ public class TestSingletonDetection {
 	private String dotCode;
 	
 	@Before
-	public void setup() throws IOException {
+	public void setup() throws IOException, NoSuchMethodException, SecurityException, ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String[] args = {"10"};
 //		String data = "uml C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\singletons";
 		String data = "uml C:\\Users\\Administrator\\CSSE374-201620\\UMLMaker\\src\\singletons";
