@@ -37,6 +37,22 @@ We refactored our code in order to add Pattern Detectors and Pattern Decorators.
 Milestone 6
 <br /><br />
 We added multiple color functionality (for multiple patterns) and added a composite pattern detector.
+<br/><br/>
+Milestone7
+<br/><br/>
+We added a GUI to our UMLMaker. This allows users to use a confinguration .properties file to specify all parameters for our program. You can specify which diagram you would like to create, what folder you would like to read from, what classes you would like to read from, which folder you would like to putput to, the dot file path for GraphViz, each phase of the program, additional visitors, node title decorators, node decorators, and arrow decorators.
+<br/><br/>
+Config File Explanation
+<br/><br/>
+Each phase determines which pattern detectors you would like to identify in the project. If you omit a phase, you omit the resulting pattern detection and the node will not be labeled/colored in any special way. We chose to only create phases for pattern detectors and not input/ouput because we believe that if you use the GUI, you should use all of the GUI's functionality in terms of reading and writing. There isn't an instance where you would like to create the .png file and not view it with the GUI. You can also add a new Detection phase by creating a class, extending TypeDetector, and then creating a new class that extends Phase. The class name should then be added to the Phases list of the configuration file. We use reflection so that we can find all the necessary detectors.
+<br /><br />
+Each Visitor is an additional visitor that will visit all the class nodes at runtime. This way, if you want to add a new visitor, you can do so without changing any pre-exisiting code. Simply create a new class that extends ClassVisitorBuffered and add the classname to Visitors. We use reflection so that we can find all the necessary visitors.
+<br/><br/>
+Node Title Decorators decorate the name of the node. To add a new Node Title Decorator, simply create a class that extends AbstractTitleDecorator and add the class name to the configuration file. We use reflection so that we can find all the necessary Node Title Detectors and that we can do so without modifying our existing code.
+<br/><br/>
+Node Decorators decorate the internal of the node. To add a new Node Decorator, simply create a class that extends TypeDecorator and add the class name to the configuration file. We use reflection so that we can find all the necessary Node Decorators and that we can do so without modifying our existing code. 
+<br/><br/>
+Arrow Decorators decorate arrows in the UML diagram. To add a new arrow decorator, you must first create a class which extends AbstractPairDetector. Add the class name into the configuration file. We use reflection so that we can find all the necessary Arrow Decorators and so that we can do so without modifying our existing code.
 
 #Who Did What
 Andrew:
@@ -72,19 +88,3 @@ Sean:
 - Updated README for Milestone 1 and 2
 - Created unit tests for uses, inheritance, and associations visitors
 
-
-#INSTRUCTIONS:
-FirstASM.java is the main class, so to use our UMLMaker, you need to set the path and package of your code in main(String[] args). Once the path and package variables are set, simply just run our project.
-<br /><br />
-INSTRUCTIONS TO CREATE A UML DIAGRAM
-- Add package that you would like to analyze into the src package.
-- Copy and Paste all files you want a UML Diagram of into the "target" package
-- Run the Java Project
-- Open target.png that was generated
-<br /><br />
-
-INSTRUCTIONS TO CREATE A SEQUENCE DIAGRAM
-- Add package that you would like to analyze into the src package.
-- Copy and Paste all files you want a Sequence Diagram of into the "target" package
-- Run the Java Project
-- Open target.png that was generated
