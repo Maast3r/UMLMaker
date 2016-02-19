@@ -35,7 +35,6 @@ public class MethodBodyFieldVisitor extends MethodVisitor{
 	
 	@Override
 	public void visitFieldInsn(int opcode, String owner, String name, String desc){
-		System.out.println("fieldinsn - " + opcode + " " + owner + " " + name + " " + Type.getReturnType(desc));
 		if(opcode == 180){
 			//get field
 			if(ark.getBoat().get(this.className).methods

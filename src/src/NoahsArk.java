@@ -32,6 +32,10 @@ public class NoahsArk {
 		this.graphRoot = null;
 		this.seenClass = new HashMap<String, String>();
 	}
+	
+	public void addnewClass(String pkg, String className){
+		this.listOfClasses.put(className, pkg);
+	}
 
 	public String getCmd() {
 		return this.cmd;

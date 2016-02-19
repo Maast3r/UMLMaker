@@ -22,6 +22,7 @@ public class PairDecorator {
 		HashSet<AbstractPairDecorator> temp = populate();
 		for(AbstractPairDecorator atd : temp){
 			String loopTemp = "";
+//			System.out.println("___________________ _ " + this.pair);
 			loopTemp = atd.decorate(this.pair);
 			this.pair = loopTemp;
 		}

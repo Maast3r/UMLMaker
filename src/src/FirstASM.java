@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -54,99 +55,67 @@ public class FirstASM {
 	private static String testerino3 = "sequence java.util Collections shuffle List 5";
 	private static String t = "sequence C:\\Users\\Maaster\\Dropbox\\Class\\CSSE374\\UMLMaker\\src\\src FirstASM sequenceHandler String,String,String,StringBuffer,NoahsArk,String,String,String,int 2";
 	private static boolean isJava = false;
+	public static NoahsArk ark;
 	public static HashMap<String, String> listOfClasses;
 	public static ArrayList<String> temps = new ArrayList<String>();
+	private static FirstASM singleton;
+	private static UI ui;
 //	public Configuration Config
 
 	public static void main(String[] args) throws IOException, NoSuchMethodException, SecurityException, ClassNotFoundException,
 	InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		UI ui = new UI();
+		ui = new UI();
 	}
+	public static FirstASM getInstance( ) {
+		   if(singleton == null){
+			   singleton = new FirstASM();
+		   }
+	      return singleton;
+	   }
 	
-	public static void oldmain(String[] args) throws IOException, NoSuchMethodException, SecurityException, ClassNotFoundException,
+	public static void oldmain() throws IOException, NoSuchMethodException, SecurityException, ClassNotFoundException,
 													InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		String line = "";
-//		UI ui = new UI();
-		
-		System.out.print("UMLMaker>");
-//		line = in.readLine();
-		line  = ourPKG;
-		if (line == null || line.length() == 0 || !line.contains(" "))
-			throw new IOException("FORMAT ERROR: Empty command is not supported!");
-		String command = line.split(" ")[0];
-		String path = line.split(" ")[1];
-		String[] pathParts = path.split("\\\\");
-		String pkg = pathParts[pathParts.length - 1] + ".";
-		path = path.replace("\\\\", "\\");
+		String folder = ConfigurationManager.getInstance().defaultProps.getProperty("Input-Folder");
+		String[] classes = ConfigurationManager.getInstance().defaultProps.getProperty("Input-Classes").split(",");
+		String command = ConfigurationManager.getInstance().defaultProps.getProperty("Diagram");;
+		String pkg = "";
 		String inputClass = "";
 		String inputMethod = "";
 		String inputArgs = "";
 		String maxDepth = "";
-
 		StringBuffer buf = new StringBuffer();
 
 		if (command.equals("uml")) {
-			if(pkg.contains(".")){
-				String test = pkg.split("\\.")[0];
-				if(test.equals("java") || test.equals("org") || test.equals("javax")){
-					inputClass = line.split(" ")[2];
-					listOfClasses = new HashMap<String, String>();
-					listOfClasses.put(inputClass, pkg);
-					isJava = true;
-				} else {
-					File packageToUML = new File(path);
-					listOfClasses = listClasses(packageToUML, pkg);
+			pkg = folder.split("\\\\")[folder.split("\\\\").length-1] + ".";
+			File pkgToUML = new File(folder);
+			listOfClasses = listClasses(pkgToUML, pkg);
+			ark = new NoahsArk(listOfClasses);
+			for(String s : classes){
+				String[] temp = s.split("\\.");
+				String tempPkg = "";
+				for(int i=0; i<temp.length-1; i++){
+					tempPkg += temp[i] + ".";
 				}
-			}
-			NoahsArk ark = new NoahsArk(listOfClasses);
-			for(String s : temps){
-				ark.seenClass.put(s, pkg);
+				String tempClass = temp[temp.length - 1];
+				ark.addnewClass(tempPkg, tempClass);
 			}
 			ark.setPackage(pkg);
 			ark.setCmd(command);
-			umlHandler(command, pkg, path, buf, ark);
-		} else if(command.equals("2")){
-			if(pkg.contains(".")){
-				String test = pkg.split("\\.")[0];
-				if(test.equals("java") || test.equals("org") || test.equals("javax")){
-					inputClass = line.split(" ")[2];
-					String pkg2 = line.split(" ")[3] + ".";
-					String className2 = line.split(" ")[4];
-					listOfClasses = new HashMap<String, String>();
-					listOfClasses.put(inputClass, pkg);
-					listOfClasses.put(className2, pkg2);
-					isJava = true;
-				} else {
-					File packageToUML = new File(path);
-					listOfClasses = listClasses(packageToUML, pkg);
-				}
-			}
-			NoahsArk ark = new NoahsArk(listOfClasses);
-			for(String s : temps){
-				ark.seenClass.put(s, pkg);
-			}
-			ark.setPackage(pkg);
-			ark.setCmd(command);
-			umlHandler(command, pkg, path, buf, ark);
+			umlHandler(command, pkg, folder, buf, ark);
 		} else if (command.equals("sequence")) {
 			listOfClasses = null;
-			NoahsArk ark = new NoahsArk(listOfClasses);
+			ark = new NoahsArk(listOfClasses);
 			ark.setPackage(pkg);
 			ark.setCmd(command);
-			inputClass = line.split(" ")[2];
-			inputMethod = line.split(" ")[3];
-			inputArgs = line.split(" ")[4];
-			maxDepth = line.split(" ")[5];
-			sequenceHandler(command, pkg, path, buf, ark, inputClass, inputMethod, inputArgs,
+//			inputClass = line.split(" ")[2];
+//			inputMethod = line.split(" ")[3];
+//			inputArgs = line.split(" ")[4];
+//			maxDepth = line.split(" ")[5];
+			sequenceHandler(command, pkg, folder, buf, ark, inputClass, inputMethod, inputArgs,
 					Integer.parseInt(maxDepth));
 		} else {
 			System.out.println("THIS COMMMAND IS NOT SUPPORTED");
 		}
-		
-		
-		
-		
 	}
 
 	public static void umlHandler(String command, String pkg, String path, StringBuffer buf, NoahsArk ark)
@@ -175,7 +144,7 @@ public class FirstASM {
 		output.close();
 
 		System.out.println("trying to run program");
-		visualize(command, pkg);
+//		visualize(command, pkg);
 	}
 
 	public static void sequenceHandler(String command, String pkg, String path, StringBuffer buf, NoahsArk ark,
@@ -214,7 +183,8 @@ public class FirstASM {
 	public static void getClassDetails(String pkg, String className, NoahsArk ark) throws IOException, InstantiationException, IllegalAccessException,
 													IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		ClassReader reader = new ClassReader(pkg + className);
-		String[] args = new String[]{ "ClassMethodFieldVisitor" };
+//		String[] classVisitorArgs = new String[]{ "ClassMethodFieldVisitor" };
+		String[] classVisitorArgs = ConfigurationManager.getInstance().defaultProps.getProperty("Visitors").split(",");
 		
 		ClassVisitorBuffered declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, ark);
 		reader.accept(declVisitor, ClassReader.EXPAND_FRAMES);
@@ -226,19 +196,23 @@ public class FirstASM {
 				declVisitor.getName());
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		
-		for(String s : args){
-			Class[] cArg = new Class[4];
-			cArg[0] = int.class;
-			cArg[1] = ClassVisitorBuffered.class;
-			cArg[2] = NoahsArk.class;
-			cArg[3] = String.class;
-			Constructor constr = Class.forName(
-					"src." + s)
-					.getConstructor(cArg);
-
-			ClassVisitorBuffered visitor = (ClassVisitorBuffered) constr.newInstance(Opcodes.ASM5,
-							methodVisitor, ark, declVisitor.getName());
-			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
+		if(classVisitorArgs.length != 0){
+			for(String s : classVisitorArgs){
+				if(!s.equals("")){
+					Class[] cArg = new Class[4];
+					cArg[0] = int.class;
+					cArg[1] = ClassVisitorBuffered.class;
+					cArg[2] = NoahsArk.class;
+					cArg[3] = String.class;
+					Constructor constr = Class.forName(
+							"src." + s)
+							.getConstructor(cArg);
+		
+					ClassVisitorBuffered visitor = (ClassVisitorBuffered) constr.newInstance(Opcodes.ASM5,
+									methodVisitor, ark, declVisitor.getName());
+					reader.accept(visitor, ClassReader.EXPAND_FRAMES);
+				}
+			}
 		}
 	}
 	
@@ -273,35 +247,57 @@ public class FirstASM {
 		HashMap<String, ClassPrototype> boat = ark.getBoat();
 		
 		for (ClassPrototype c : boat.values()) {
+			DotNode tempNode = new DotNode();
 			result = "";
 			String cName = c.getName();
+			tempNode.title = c.getName();
 			Iterator fIterator = c.getFields().keySet().iterator();
 			FieldPrototype field;
 			while (fIterator.hasNext()) {
 				field = c.getFields().get(fIterator.next());
-				result += field.prepareUML();
+				tempNode.fields.add(field.prepareUML());
 			}
 
-			result += methodSeparatorString;
 			Iterator mIterator = c.getMethods().keySet().iterator();
 			MethodPrototype method;
 			while (mIterator.hasNext()) {
 				method = c.getMethods().get(mIterator.next());
-				result += method.prepareUML();
+				tempNode.methods.add(method.prepareUML());
 			}	
 			
-			String[] titleArgs = new String[]{ "InterfaceTitleDecorator", "AbstrTitleDecorator" };
+//			String[] titleArgs = new String[]{ "InterfaceTitleDecorator", "AbstrTitleDecorator" };
+			String[] titleArgs = ConfigurationManager.getInstance().defaultProps.getProperty("NodeTitleDecorators").split(",");
 			new NodeTitleDecorator(c, titleArgs).decorate();;
-			result += classEndString1;
-			String[] args = new String[]{ "DecoratorDetector", "AdapterDetector", "CompositeDetector", "SingletonDetector" };
-			result += new ColorDecorator(new TypeDetector(cName, ark, args)).getColor();
-			result += new ColorDecorator(new TypeDetector(cName, ark, args)).getFillColor();
-			result = c.prepareUML() + new NameDecorator(new TypeDetector(cName, ark, args)).getType().toString().replace("]", "")
-																										.replace(",","")
-																										.replace("[","" )
-					+ "|" + result;
-			result += classEndString2;
-			buf.append(result);
+			String[] args = ConfigurationManager.getInstance().defaultProps.getProperty("Phases").split(",");
+
+			if(args.length != 0){
+				for(String s : args){
+					// Check for disabled phase
+//					if(){
+//						
+//					}
+					if(!s.equals("")){
+						Class[] cArg = new Class[5];
+						cArg[0] = String[].class;
+						cArg[1] = DotNode.class;
+						cArg[2] = String.class;
+						cArg[3] = NoahsArk.class;
+						cArg[4] = ClassPrototype.class;
+						Constructor constr = Class.forName(
+								"src." + s +"Phase")
+								.getConstructor(cArg);
+						AbstractPhase visitor = (AbstractPhase) constr.newInstance(new String[]{s},
+								tempNode, cName, ark, c);
+						tempNode = visitor.executePhase();
+					}
+				}
+			}
+			result = tempNode.dotNodePrepareUML();
+			if(ConfigurationManager.getInstance().configuration.get(c.getName()) != null ){				
+				if(ConfigurationManager.getInstance().configuration.get(c.getName())){
+					buf.append(result);
+				}
+			}
 		}
 
 		for (String origin : ark.pairs.keySet()) {
@@ -491,31 +487,57 @@ public class FirstASM {
 	public static String pairToViz(String pair, NoahsArk ark) throws InstantiationException, IllegalAccessException,
 							IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		String result = "";
+		boolean fuckeverything = false;
 		if (pair.equals(""))
 			return result;
+		
+//		System.out.println(pair.split("\\$")[0]);
 		// extends
-		if (pair.contains("!"))
-			result = pair.split("!")[0] + " -> " + pair.split("!")[1] + " [arrowhead = onormal";
-		// implements
-		if (pair.contains("@"))
-			result = pair.split("@")[0] + " -> " + pair.split("@")[1] + "[arrowhead = onormal,style = dotted";
-		// Uses
-		if (pair.contains("#"))
-			result = pair.split("#")[0] + " -> " + pair.split("#")[1] + "[arrowhead = vee, style = dotted";
-		// Association
-		if (pair.contains("$")){
-			result = pair.split("\\$")[0] + " -> " + pair.split("\\$")[1] + "[arrowhead = vee" ;
-			
+		if(ConfigurationManager.getInstance().configuration.get(pair.split("!")[0]) != null ){
+			if (pair.contains("!")){
+				if(!ConfigurationManager.getInstance().configuration.get(pair.split("!")[0]) || !ConfigurationManager.getInstance().configuration.get(pair.split("!")[1]))return "";
+					result = pair.split("!")[0] + " -> " + pair.split("!")[1] + " [arrowhead = onormal";
+			} else{
+				return "";
+			}
 		}
-		
-		String args[]= new String[] { "PairLabelDecorator" };
+		else if(ConfigurationManager.getInstance().configuration.get(pair.split("@")[0]) != null ){
+			// implements
+			if (pair.contains("@")){
+				if(!ConfigurationManager.getInstance().configuration.get(pair.split("@")[0]) || !ConfigurationManager.getInstance().configuration.get(pair.split("@")[1]))return "";
+				result = pair.split("@")[0] + " -> " + pair.split("@")[1] + "[arrowhead = onormal,style = dotted";
+			} else{
+				return "";
+			}
+		}
+			// Uses
+		else if(ConfigurationManager.getInstance().configuration.get(pair.split("#")[0]) != null ){
+			if (pair.contains("#")){
+				if(!ConfigurationManager.getInstance().configuration.get(pair.split("#")[0]) || !ConfigurationManager.getInstance().configuration.get(pair.split("#")[1]))return "";
+				result = pair.split("#")[0] + " -> " + pair.split("#")[1] + "[arrowhead = vee, style = dotted";
+			}else{
+				return "";
+			}
+		}
+			// Association
+		else if(ConfigurationManager.getInstance().configuration.get(pair.split("\\$")[0]) != null && ConfigurationManager.getInstance().configuration.get(pair.split("\\$")[1].replace(";","").replace("+", "")) != null){
+			if (pair.contains("$")){
+				if(!ConfigurationManager.getInstance().configuration.get(pair.split("\\$")[0]) || !ConfigurationManager.getInstance().configuration.get(pair.split("\\$")[1].replace(";","").replace("+", "")))return "";
+				result = pair.split("\\$")[0] + " -> " + pair.split("\\$")[1] + "[arrowhead = vee" ;
+			}else{
+				return "";
+			}
+		} else{
+			return "";
+		}
+//		String args[]= new String[] { "PairLabelDecorator" };\
+		String args[] = ConfigurationManager.getInstance().defaultProps.getProperty("ArrowDecorators").split(",");
 		result = new PairDecorator(result, args).toDecorate();
-		
+//		if(!fuckeverything)return "";
 		result += "]\n";
 		return result;
 
 	}
-
 	public static HashMap<String, String> listClasses(final File folder, String pkg) {
 		HashMap<String, String> listOfJavaFiles = new HashMap<String, String>();
 		for (final File fileEntry : folder.listFiles()) {
@@ -525,6 +547,9 @@ public class FirstASM {
 					listOfJavaFiles.put(fileEntry.getName().split(Pattern.quote("."))[0], pkg);
 //					temps.add(fileEntry.getName().split(Pattern.quote("."))[0]);
 				}
+			} else if(fileEntry.isDirectory()){
+				String pkgName = pkg+"."+fileEntry.getName();
+				listOfJavaFiles.putAll(listClasses(fileEntry, pkgName));
 			}
 		}
 		return listOfJavaFiles;
@@ -540,7 +565,7 @@ public class FirstASM {
 			if (command.equals("uml") || command.equals("2")) {
 				if(path.contains(".")) path = path.replace(".", "t");
 				System.out.println("uml diagram " + path);
-				if(!isJava) pr = rt.exec("dot -T png -o src/" + path + ".png src/" + path + ".dot");
+				if(!isJava) pr = rt.exec("dot -T png -o " + path + ".png " + path + ".dot");
 				else pr = rt.exec("dot -T png -o " + path + ".png " + path + ".dot");
 			} else if (command.equals("sequence")) {
 				System.out.println("sequence");

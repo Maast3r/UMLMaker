@@ -11,6 +11,7 @@ public class ClassPrototype {
 	public String[] interfaces;
 	public String arrowDesc;
 	public HashSet<String> type = new HashSet<String>();
+	public HashSet<String> phases = new HashSet<String>();
 	public boolean isAbstract = false;
 	public boolean isInterface = false;
 	public String pkg = "";

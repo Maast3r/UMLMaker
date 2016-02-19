@@ -35,7 +35,10 @@ public class SingletonDetector extends AbstractDetector{
 				
 			}	
 		
-		if(flag[0] && flag[1]) c.type.add("singleton");
+		if(flag[0] && flag[1]) {
+			c.type.add("singleton");
+			c.phases.add("singleton");
+		}
 		return c.type;
 	}
 }

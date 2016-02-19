@@ -11,6 +11,7 @@ public class PairLabelDecorator extends AbstractPairDecorator {
 	@Override
 	public String decorate(String s) {
 		if(s.contains(";")){
+			System.out.println("HELLOE!@?!?");
 			s += ",label=\"\\<\\<Adapts\\>\\>\"";
 			s = s.replace(";", " ");
 		}

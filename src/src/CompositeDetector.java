@@ -25,10 +25,18 @@ public class CompositeDetector extends AbstractDetector{
 							for(FieldPrototype f : c.fields.values()){
 								if(f.type.equals("List") && f.sig.equals(thisSuperName)){
 									c.type.add("composite");
+									c.phases.add("composite");
 									ark.getBoat().get(thisSuperName).type.add("composite component");
+									ark.getBoat().get(thisSuperName).phases.add("composite");
 									for (ClassPrototype cp : super.ark.getBoat().values()) {
-										if(cp.superName.equals(thisSuperName) && !cp.name.equals(c.name)) cp.type.add("leaf");
-										if(checkIsComposite(c, cp)) cp.type.add("composite");
+										if(cp.superName.equals(thisSuperName) && !cp.name.equals(c.name)){
+											cp.type.add("leaf");
+											cp.phases.add("composite");
+										}
+										if(checkIsComposite(c, cp)){
+											cp.type.add("composite");
+											cp.phases.add("composite");
+										}
 									}
 								}
 							}
@@ -48,7 +56,9 @@ public class CompositeDetector extends AbstractDetector{
 						for(FieldPrototype f : c.fields.values()){
 							if(f.type.equals("List") && f.sig.equals(iface)){
 								c.type.add("composite");
+								c.phases.add("composite");
 								ark.getBoat().get(iface).type.add("composite component");
+								ark.getBoat().get(iface).phases.add("composite");
 								for (ClassPrototype cp : super.ark.getBoat().values()) {
 									for(String i : cp.getInterfaces()){
 										if(i.contains("/")){
@@ -56,8 +66,14 @@ public class CompositeDetector extends AbstractDetector{
 											i = temp[temp.length-1];
 										}
 										if(i.equals(iface)){
-											if(!cp.name.equals(c.name))cp.type.add("leaf");
-											if(checkIsComposite(c, cp)) cp.type.add("composite");
+											if(!cp.name.equals(c.name)){
+												cp.type.add("leaf");
+												cp.phases.add("composite");
+											}
+											if(checkIsComposite(c, cp)){
+												cp.type.add("composite");
+												cp.phases.add("composite");
+											}
 										}
 									}
 								}

@@ -1,0 +1,8 @@
+1. Do whatever they tell you
+2. New Detector that searches ClassPrototype fields and checks their name.
+3. New Detector that checks all methods in a ClassPrototype and check to see if it calls a super's method.
+4. New Detector that follows the arrows
+5. New Detector that checks all methods in a ClassPrototype and count the amount of method calls
+6. New Detector that finds a method in ClassPrototype which makes a call to itself.
+7. New Visitor that detects when a field is set and get in the same method. (ClassMethodFieldVisitor as an example)
+8. New Detector that implements the given interface. Detector adds new color to TypeDecorator.

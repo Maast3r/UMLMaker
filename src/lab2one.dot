@@ -14,8 +14,8 @@ edge [
 ]
 IEncryption [ 
 center=true
-    label="{\<\<Interface\>\>\n\<\<Abstract\>\>\n
-IEncryption| | +abstract encrypt(ch): char\l}"color = black
+    label="{\<\<Abstract\>\>\n\<\<Interface\>\>\n
+IEncryptionnull| | +abstract encrypt(ch): char\l}"color = black
 style = filled 
  fillcolor = white
 ]
@@ -24,42 +24,50 @@ center=true
     label="{
 EncryptionOutputStream|-encryptor: IEncryption \l | +\<init\>(OutputStream,IEncrypti): void\l+write(i): void\l}"color = black
 style = filled 
- fillcolor = white
-]
+ fillcolor = white]
 SubstitutionCipher [ 
 center=true
     label="{
 SubstitutionCipher|-decryptionKey: char[] \l-encryptionKey: char[] \l | +encrypt(ch): char\l+\<init\>(): void\l+decrypt(ch): char\l}"color = black
 style = filled 
- fillcolor = white
-]
+ fillcolor = white]
 DecryptionInputStream [ 
 center=true
     label="{
 DecryptionInputStream|-decryptor: IDecryption \l | +read(byte[],int,i): int\l+\<init\>(InputStream,IDecrypti): void\l}"color = black
 style = filled 
- fillcolor = white
-]
+ fillcolor = white]
 IDecryption [ 
 center=true
-    label="{\<\<Interface\>\>\n\<\<Abstract\>\>\n
-IDecryption| | +abstract decrypt(ch): char\l}"color = black
+    label="{\<\<Abstract\>\>\n\<\<Interface\>\>\n
+IDecryptionnull| | +abstract decrypt(ch): char\l}"color = black
 style = filled 
  fillcolor = white
+]
+ClassVisitor [ 
+center=true
+    label="{\<\<Abstract\>\>\n
+ClassVisitor\n\<\<decorator component\>\> \n\<\<decorator\>\>|#cv: ClassVisitor \l#api: int \l | +visitField(int,String,String,String,Obje): FieldVisitor\l+visitTypeAnnotation(int,TypePath,String,boole): AnnotationVisitor\l+visitInnerClass(String,String,String,i): void\l+visitEnd(): void\l+visitOuterClass(String,String,Stri): void\l+visitAttribute(Attribu): void\l+visit(int,int,String,String,String,String): void\l+\<init\>(int,ClassVisit): void\l+visitAnnotation(String,boole): AnnotationVisitor\l+visitMethod(int,String,String,String,String): MethodVisitor\l+visitSource(String,Stri): void\l}"color = black
+style = filled 
+ fillcolor = chartreuse2
 ]
 TextEditorApp [ 
 center=true
     label="{
 TextEditorApp| | +static main(String): void\l+\<init\>(): void\l}"color = black
 style = filled 
- fillcolor = white
-]
+ fillcolor = white]
 EncryptionOutputStream -> IEncryption[arrowhead = vee, style = dotted]
 EncryptionOutputStream -> IEncryption[arrowhead = vee]
 SubstitutionCipher -> IDecryption[arrowhead = onormal,style = dotted]
 SubstitutionCipher -> IEncryption[arrowhead = onormal,style = dotted]
 DecryptionInputStream -> IDecryption[arrowhead = vee, style = dotted]
 DecryptionInputStream -> IDecryption[arrowhead = vee]
+ClassVisitor -> ClassVisitor[arrowhead = vee, style = dotted]
+ClassVisitor -> ClassVisitor [arrowhead = vee,label="\<\<Decorates\>\>"]
+TextEditorApp -> DecryptionInputStream[arrowhead = vee, style = dotted]
+TextEditorApp -> SubstitutionCipher[arrowhead = vee, style = dotted]
+TextEditorApp -> EncryptionOutputStream[arrowhead = vee, style = dotted]
 
 
 }

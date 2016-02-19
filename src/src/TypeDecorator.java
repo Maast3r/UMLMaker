@@ -4,12 +4,44 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class TypeDecorator extends TypeDetector{
-	private HashMap<String, String> typeToColor = new HashMap<String, String>();
-	private HashMap<String, String> typeToFill = new HashMap<String, String>();
-	private HashMap<String, String> typeToName = new HashMap<String, String>();
+public abstract class TypeDecorator extends TypeDetector{
+	protected HashMap<String, String> typeToColor = new HashMap<String, String>();
+	protected HashMap<String, String> typeToFill = new HashMap<String, String>();
+	protected HashMap<String, String> typeToName = new HashMap<String, String>();
 	private TypeDetector typeDetector;
 	
+	public HashMap<String, String> getTypeToColor() {
+		return typeToColor;
+	}
+
+	public void setTypeToColor(HashMap<String, String> typeToColor) {
+		this.typeToColor = typeToColor;
+	}
+
+	public HashMap<String, String> getTypeToFill() {
+		return typeToFill;
+	}
+
+	public void setTypeToFill(HashMap<String, String> typeToFill) {
+		this.typeToFill = typeToFill;
+	}
+
+	public HashMap<String, String> getTypeToName() {
+		return typeToName;
+	}
+
+	public void setTypeToName(HashMap<String, String> typeToName) {
+		this.typeToName = typeToName;
+	}
+
+	public TypeDetector getTypeDetector() {
+		return typeDetector;
+	}
+
+	public void setTypeDetector(TypeDetector typeDetector) {
+		this.typeDetector = typeDetector;
+	}
+
 	public TypeDecorator(TypeDetector t){
 		super(t.cName, t.ark, t.args);
 		this.typeDetector = t;
@@ -42,9 +74,11 @@ public class TypeDecorator extends TypeDetector{
 	public String getColor() throws NoSuchMethodException, SecurityException, ClassNotFoundException,
 									InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		if(this.typeDetector.getType().contains("singleton")){
-			return "style = filled \n color = " + this.typeToColor.get("singleton") + "\n";
+//			return "style = filled \n color = " + this.typeToColor.get("singleton") + "\n";
+			return this.typeToColor.get("singleton")+"\n";
 		}
-		return "color = black\n";
+//		return "color = black\n";
+		return "black\n";
 	}
 	
 	public String getFillColor() throws NoSuchMethodException, SecurityException, ClassNotFoundException,
@@ -54,7 +88,7 @@ public class TypeDecorator extends TypeDetector{
 			for(String color : this.typeDetector.getType()){
 				colors.add(this.typeToFill.get(color));
 			}
-			String totalColor = "";
+			String totalColor = "white";
 			if(colors.contains("yellow")){
 				totalColor = "yellow";
 				if(colors.contains("firebrick1")){
@@ -71,12 +105,28 @@ public class TypeDecorator extends TypeDetector{
 						totalColor = "yellow3";
 					}
 				}else {
-					totalColor = "chartreuse2";
+					if(colors.contains("chartreuse2")){
+						totalColor = "chartreuse2";
+					}
 				}
 			}
-			return "style = filled \n fillcolor = " + totalColor + "\n";
+//			return "style = filled \n fillcolor = " + totalColor + "\n";
+			return totalColor+"\n";
 		}
-		return "style = filled \n fillcolor = white\n";
+//		return "style = filled \n fillcolor = white\n";
+		return "white\n";
+	}
+	
+	public void addColor(String type, String color){
+		this.typeToColor.put(type, color+"\n");
+	}
+	
+	public void addFill(String type, String color){
+		this.typeToFill.put(type, color+"\n");
+	}
+	
+	public void addTypeToName(String type, String name){
+		this.typeToName.put(type, "\\n\\<\\<"+name+"\\>\\>");
 	}
 	
 	public HashSet<String> getType() throws NoSuchMethodException, SecurityException, ClassNotFoundException,
@@ -89,4 +139,5 @@ public class TypeDecorator extends TypeDetector{
 		return result;
 	}
 	
+	 
 }

@@ -1,0 +1,31 @@
+digraph G{
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+
+node [
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+
+ shape = "record"
+]
+edge [
+	fontname = "Bitstream Vera Sans"
+	fontsize = 16
+]
+what [ 
+center=true
+    label="{\<\<Interface\>\>\n\<\<Abstract\>\>\n
+whatnull| | }"color = blackstyle = filled 
+ fillcolor = purple
+]
+ClassVisitor [ 
+center=true
+    label="{\<\<Abstract\>\>\n
+ClassVisitor\n\<\<decorator component\>\> \n\<\<decorator\>\>|#cv: ClassVisitor \l#api: int \l | +visitField(int,String,String,String,Obje): FieldVisitor\l+visitTypeAnnotation(int,TypePath,String,boole): AnnotationVisitor\l+visitInnerClass(String,String,String,i): void\l+visitEnd(): void\l+visitOuterClass(String,String,Stri): void\l+visitAttribute(Attribu): void\l+visit(int,int,String,String,String,String): void\l+\<init\>(int,ClassVisit): void\l+visitAnnotation(String,boole): AnnotationVisitor\l+visitMethod(int,String,String,String,String): MethodVisitor\l+visitSource(String,Stri): void\l}"color = blackstyle = filled 
+ fillcolor = purple
+]
+ClassVisitor -> ClassVisitor[arrowhead = vee, style = dotted]
+ClassVisitor -> ClassVisitor [arrowhead = vee,label="\<\<Decorates\>\>"]
+
+
+}

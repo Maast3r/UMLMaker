@@ -9,6 +9,7 @@ public class NameDecorator extends TypeDecorator{
 		super(t);
 	}
 	
+	@Override
 	public HashSet<String> getType() throws NoSuchMethodException, SecurityException, ClassNotFoundException,
 											InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		return super.getType();

@@ -16,6 +16,9 @@ public class DecoratorDetector extends AbstractDetector {
 		ArrayList<String> classNames = new ArrayList<String>();
 		ArrayList<String> targetNames = new ArrayList<String>();
 		for(ClassPrototype cl : this.ark.getBoat().values()){
+			if(cl.isInterface){
+				cl.type.add("interface");
+			}
 			String className = cl.getName();
 			String superName = cl.getSuperName();
 			String[] interfaces = cl.getInterfaces();
@@ -31,10 +34,13 @@ public class DecoratorDetector extends AbstractDetector {
 									if (f.type.equals(className)) {
 										cl.type.add("decorator");
 										ark.getBoat().get(targetName).type.add("component");
+										ark.getBoat().get(targetName).phases.add("decorator");
 										for (ClassPrototype cp : ark.getBoat().values()) {
 											if(cp.superName != null){	
-												if (cp.superName.equals(className))
+												if (cp.superName.equals(className)){
 													cp.type.add("decorator");
+													cp.phases.add("decorator");
+												}
 											}
 										}
 										classNames.add(className);
@@ -50,11 +56,15 @@ public class DecoratorDetector extends AbstractDetector {
 							for (FieldPrototype f : cl.fields.values()) {
 								if (f.type.equals(superName)) {
 									cl.type.add("decorator");
+									cl.phases.add("decorator");
 									ark.getBoat().get(targetName).type.add("component");
+									ark.getBoat().get(targetName).phases.add("decorator");
 									for (ClassPrototype cp : ark.getBoat().values()) {
 										if(cp.superName != null){	
-											if (cp.superName.equals(className))
+											if (cp.superName.equals(className)){
 												cp.type.add("decorator");
+												cp.phases.add("decorator");
+											}
 										}
 									}
 									classNames.add(className);
@@ -68,11 +78,15 @@ public class DecoratorDetector extends AbstractDetector {
 							for(FieldPrototype f : cl.fields.values()){
 								if(f.type.equals(intfc)){
 									cl.type.add("decorator");
+									cl.phases.add("decorator");
 									if(ark.getBoat().containsKey(intfc))ark.getBoat().get(intfc).type.add("component");
+									if(ark.getBoat().containsKey(intfc))ark.getBoat().get(intfc).phases.add("decorator");
 									for (ClassPrototype cp : ark.getBoat().values()) {
 										if(cp.superName != null){	
-											if (cp.superName.equals(className))
+											if (cp.superName.equals(className)){
 												cp.type.add("decorator");
+												cp.phases.add("decorator");
+											}
 										}
 									}
 									classNames.add(className);

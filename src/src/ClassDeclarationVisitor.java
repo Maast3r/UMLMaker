@@ -35,9 +35,6 @@ public class ClassDeclarationVisitor extends ClassVisitorBuffered {
 			this.name = this.name.split("/")[name.split("/").length-1];
 		}
 		String[] pkgSplit = null;
-		if(realname.equals("Object")){
-//			System.out.println(superName);
-		}
 		String pkg = "";
 		if(superName != null){
 			if(superName.contains("/")){

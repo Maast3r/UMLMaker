@@ -14,13 +14,13 @@ public class ConfigurationManager {
 	public static ConfigurationManager getInstance( ) {
 	   if(singleton == null){
 		   singleton = new ConfigurationManager();
+		   singleton.configuration = new HashMap<String, Boolean>();
 	   }
       return singleton;
    }
 	
 	public HashMap<String, Boolean> getDrawConfiguration(){
 		return configuration;
-		
 	}
 	
 	public boolean setDefaultConfiguration(String filepath) throws IOException{
@@ -36,7 +36,11 @@ public class ConfigurationManager {
 		configuration = toDraw;
 	}
 	
-	public void instantiateArk
+	public void initDrawConfiguration(HashMap<String, String> seenClasses){
+		for(String s: seenClasses.keySet()){
+			configuration.put(s, true);
+		}
+	}
 	
 	
 }

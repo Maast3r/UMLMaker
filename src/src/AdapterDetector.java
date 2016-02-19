@@ -40,11 +40,13 @@ public class AdapterDetector extends AbstractDetector{
 									for (FieldPrototype f : cl.fields.values()) {
 										if (f.type.equals(targetName) && !f.type.equals(superName) && !superName.equals(targetName) && !ark.getBoat().get(targetName).isInterface) {
 											cl.type.add("adapter");
-											
+											cl.phases.add("adapter");
 											// target
 											if(ark.getBoat().containsKey(superName))ark.getBoat().get(superName).type.add("target");
+											if(ark.getBoat().containsKey(superName))ark.getBoat().get(superName).phases.add("adapter");
 											// adaptee
 											ark.getBoat().get(targetName).type.add("adaptee");
+											ark.getBoat().get(targetName).phases.add("adapter");
 											classNames.add(className);
 											targetNames.add(targetName);
 											break;
@@ -60,10 +62,13 @@ public class AdapterDetector extends AbstractDetector{
 							for(FieldPrototype f : cl.fields.values()){
 								if(f.type.equals(targetName) && checkMethods(cl, ark.getBoat().get(intfc)) && ark.getBoat().get(targetName).isInterface){
 									cl.type.add("adapter");
+									cl.phases.add("adapter");
 									// target
 									if(ark.getBoat().containsKey(intfc))ark.getBoat().get(intfc).type.add("target");
+									if(ark.getBoat().containsKey(intfc))ark.getBoat().get(intfc).phases.add("adapter");
 									// adaptee
 									ark.getBoat().get(targetName).type.add("adaptee");
+									ark.getBoat().get(targetName).phases.add("adapter");
 									classNames.add(className);
 									targetNames.add(targetName);
 									break;

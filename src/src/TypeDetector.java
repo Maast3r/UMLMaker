@@ -17,10 +17,10 @@ public class TypeDetector {
 		this.ark = ark;
 		this.args = args;
 		
-		this.totalDetectors.put("SingletonDetector", new SingletonDetector(this.ark));
-		this.totalDetectors.put("DecoratorDetector", new DecoratorDetector(this.ark));
-		this.totalDetectors.put("AdapterDetector", new AdapterDetector(this.ark));
-		this.totalDetectors.put("CompositeDetector", new AdapterDetector(this.ark));
+//		this.totalDetectors.put("SingletonDetector", new SingletonDetector(this.ark));
+//		this.totalDetectors.put("DecoratorDetector", new DecoratorDetector(this.ark));
+//		this.totalDetectors.put("AdapterDetector", new AdapterDetector(this.ark));
+//		this.totalDetectors.put("CompositeDetector", new AdapterDetector(this.ark));
 	}
 	
 	public HashSet<String> getType() throws NoSuchMethodException, SecurityException, ClassNotFoundException,
